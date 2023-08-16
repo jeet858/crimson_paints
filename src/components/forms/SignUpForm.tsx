@@ -1,11 +1,20 @@
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 interface IProps {
   csrfToken?: string;
   children?: never[];
 }
 
 const SignUpForm: React.FunctionComponent<IProps> = (props) => {
+  const router = useRouter();
+
+  const navigate = () => {
+    router.push({
+      pathname: "/WelcomePage",
+      query: { userType: "admin" },
+    });
+  };
   return (
     <div className="flex h-screen w-96 items-center justify-center">
       <div className="flex w-full max-w-md flex-col space-y-4 rounded-lg bg-white p-6 shadow-2xl">
@@ -130,14 +139,13 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
               </label>
             </div>
             <div className="grid justify-items-center">
-              <Link href="/WelcomePage">
-                <button
-                  type="submit"
-                  className="w-32 rounded rounded-full bg-indigo-700 px-4 py-2 font-semibold text-white hover:bg-indigo-800 focus:bg-indigo-800 focus:outline-none"
-                >
-                  Sign Up
-                </button>
-              </Link>
+              <button
+                type="submit"
+                className="w-32 rounded rounded-full bg-indigo-700 px-4 py-2 font-semibold text-white hover:bg-indigo-800 focus:bg-indigo-800 focus:outline-none"
+                onClick={navigate}
+              >
+                Sign Up
+              </button>
             </div>
             <div className="grid justify-items-center">
               <div>

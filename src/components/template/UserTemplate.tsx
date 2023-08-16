@@ -1,8 +1,13 @@
 import * as React from "react";
-import { FaUserCircle, FaArrowDown, FaPowerOff } from "react-icons/fa";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { FaUserCircle, FaPowerOff } from "react-icons/fa";
+import { MdKeyboardArrowDown, MdDashboard } from "react-icons/md";
 interface IProps {
-  templateParams: { title: string; userID: number; userImage: string };
+  templateParams: {
+    title: string;
+    userID: number;
+    userImage: string;
+    userType: string;
+  };
   children?: JSX.Element | JSX.Element[];
 }
 
@@ -51,6 +56,14 @@ const UserTemplate: React.FunctionComponent<IProps> = (props) => {
                   Master <MdKeyboardArrowDown />
                 </span>
               </div>
+              {props.templateParams.userType === "admin" ? (
+                <div className="mb-20 flex flex-col items-center justify-center">
+                  <MdDashboard className="h-10 w-10 cursor-pointer text-white" />
+                  <p className="cursor-pointer text-2xl font-bold text-white">
+                    Dashboard
+                  </p>
+                </div>
+              ) : null}
               <div className="mb-20 flex flex-col items-center justify-center">
                 <FaPowerOff className="h-10 w-10 cursor-pointer text-white" />
                 <p className="cursor-pointer text-2xl font-bold">Log Out</p>

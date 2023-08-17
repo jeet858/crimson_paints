@@ -76,7 +76,7 @@ const Salesman = () => {
                 Execution
               </div>
             </div>
-            <div className="" style={{ width: "470px" }}></div>
+            <div className="" style={{ width: "558px" }}></div>
             <h3
               className=" pt-8 text-2xl font-medium"
               style={{ color: "rgba(0, 0, 0, 1)" }}
@@ -168,7 +168,7 @@ const Salesman = () => {
                 {clientNames.map((clientName, index) => (
                   <div
                     key={index}
-                    className=" cursor-pointer overflow-auto overscroll-contain border-b p-2 hover:bg-violet-300"
+                    className=" cursor-pointer overflow-auto overscroll-contain border-b p-2 hover:bg-violet-300 hover:text-lg hover:font-normal hover:text-blue-800"
                   >
                     {clientName}
                   </div>

@@ -28,14 +28,19 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "#",
     },
   ];
-
+  const masterElement = [
+    {
+      name: "Master",
+      href: "/Master",
+    },
+  ];
   return (
     <div className="flex w-full justify-center pt-5">
       <SideNavElement elementHeader="Order" element={OrderElements} />
       <SideNavElement elementHeader="Stock" />
       <SideNavElement elementHeader="Reports" />
       <SideNavElement elementHeader="Uploads" />
-      <SideNavElement elementHeader="Master" />
+      <SideNavElement elementHeader="Master" element={masterElement} />
     </div>
   );
 };

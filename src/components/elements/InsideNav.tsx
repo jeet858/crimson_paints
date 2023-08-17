@@ -5,7 +5,7 @@ const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {
       name: "By Salesman",
-      href: "#",
+      href: "/Salesman",
     },
     {
       name: "By Client",

@@ -14,13 +14,19 @@ const SideNav: React.FunctionComponent<SideNavProps> = (props) => {
       <div>
         <span
           className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center text-2xl font-bold"
-          style={{ backgroundColor: "rgba(231, 224, 255, 0.47)" }}
+          style={{
+            backgroundColor: "rgba(231, 224, 255, 0.47)",
+            color: "rgba(120, 120, 120, 1)",
+          }}
         >
           Costing <MdKeyboardArrowDown />
         </span>
         <span
           className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center text-2xl font-bold"
-          style={{ backgroundColor: "rgba(231, 224, 255, 0.47)" }}
+          style={{
+            backgroundColor: "rgba(231, 224, 255, 0.47)",
+            color: "rgba(120, 120, 120, 1)",
+          }}
         >
           Master <MdKeyboardArrowDown />
         </span>

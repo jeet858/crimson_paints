@@ -7,7 +7,7 @@ interface SideNavElementProps {
   element?: { name: string; href: string }[];
 }
 
-const SideNavElement: React.FunctionComponent<SideNavElementProps> = (
+const InsideNavElement: React.FunctionComponent<SideNavElementProps> = (
   props
 ) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -75,4 +75,4 @@ const SideNavElement: React.FunctionComponent<SideNavElementProps> = (
   );
 };
 
-export default SideNavElement;
+export default InsideNavElement;

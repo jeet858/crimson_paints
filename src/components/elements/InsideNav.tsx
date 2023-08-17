@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import SideNavElement from "./SideNavElement";
+import SideNavElement from "./InsideNavElement";
 const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {

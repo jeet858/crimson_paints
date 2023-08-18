@@ -10,7 +10,6 @@ interface IProps {
 const WelcomePage: React.FunctionComponent<IProps> = (props) => {
   const router = useRouter();
   const { userType } = router.query;
-  console.log(userType);
   const templateParams = {
     title: "User Profile",
     userID: 123,

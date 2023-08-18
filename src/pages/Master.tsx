@@ -1,8 +1,19 @@
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import UserTemplate from "~/components/template/UserTemplate";
-import InsideNav from "~/components/elements/InsideNav";
-const Master = () => {
+import {UserTemplate, InsideNav} from "@/components";
+import { getSession } from 'next-auth/react';
+
+export const getServerSideProps:GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+  return {
+      props: {
+          userInfo: null
+      },
+  }
+}
+
+function Master({ userInfo }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [selectedSection, setSelectedSection] = useState("pending");
   const [rowCount, setRowCount] = useState(0);
   const router = useRouter();
@@ -13,7 +24,7 @@ const Master = () => {
     userImage: "user.jpg",
     userType: userType as string,
   };
-  const handleSectionChange = (section) => {
+  const handleSectionChange = (section:any) => {
     setSelectedSection(section);
   };
 

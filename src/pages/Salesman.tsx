@@ -1,10 +1,20 @@
 import React, { useState } from "react";
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
-import UserTemplate from "~/components/template/UserTemplate";
-import InsideNav from "~/components/elements/InsideNav";
+import {UserTemplate, InsideNav} from "@/components";
+import { getSession } from 'next-auth/react';
 
-const Salesman = () => {
+export const getServerSideProps:GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+  return {
+      props: {
+          userInfo: null
+      },
+  }
+}
+
+function Salesman({ userInfo }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [selectedSection, setSelectedSection] = useState("pending");
   const router = useRouter();
   const { userType } = router.query;
@@ -14,7 +24,7 @@ const Salesman = () => {
     userImage: "user.jpg",
     userType: userType as string,
   };
-  const handleSectionChange = (section) => {
+  const handleSectionChange = (section:any) => {
     setSelectedSection(section);
   };
   const clientNames = [

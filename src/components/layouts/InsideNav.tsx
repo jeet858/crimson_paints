@@ -5,7 +5,7 @@ const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {
       name: "By Salesman",
-      href: "#",
+      href: "/Salesman",
     },
     {
       name: "By Client",
@@ -28,7 +28,12 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "#",
     },
   ];
-
+  const masterElement = [
+    {
+      name: "Master",
+      href: "/Master",
+    },
+  ];
   return (
     <div className="flex w-full justify-center pt-5">
       <InsideNavElement elementHeader="Order" element={OrderElements} />

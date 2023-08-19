@@ -30,7 +30,7 @@ const InsideNav: React.FunctionComponent = (props) => {
   ];
 
   return (
-    <div className="flex w-full justify-center pt-5">
+    <div className="pr- flex w-full flex-wrap justify-center pt-5">
       <SideNavElement elementHeader="Order" element={OrderElements} />
       <SideNavElement elementHeader="Stock" />
       <SideNavElement elementHeader="Reports" />

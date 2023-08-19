@@ -4,3 +4,64 @@
 .mainPagesBackground {
   background-image: url("../images/mainback.jpg");
 }
+
+@media (min-width: 1581px) {
+  /* Your desktop-specific styles here */
+  .inside-nav-text-size {
+    font-size: 28px;
+  }
+  .top-bar-text-size {
+    font-size: 2.5rem;
+  }
+  .top-bar-text-size2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1580) {
+  /* Your standard desktop-specific styles here */
+  .inside-nav-text-size {
+    font-size: 24px;
+  }
+  .top-bar-text-size {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+  .top-bar-text-size2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* For screens between 768px and 1199px (Tablet) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  /* Your tablet-specific styles here */
+  .inside-nav-text-size {
+    font-size: 16px;
+  }
+  .top-bar-text-size {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+  .top-bar-text-size2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* For screens up to 767px (Phone) */
+@media (max-width: 767px) {
+  /* Your phone-specific styles here */
+  .inside-nav-text-size {
+    font-size: 12px;
+  }
+  .top-bar-text-size {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  .top-bar-text-size2 {
+    font-size: 0.8rem;
+  }
+  .user-icon {
+    height: 20px !important;
+    width: 50px !important;
+  }
+}

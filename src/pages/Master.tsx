@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import UserTemplate from "~/components/template/UserTemplate";
 import InsideNav from "~/components/elements/InsideNav";
 const Master = () => {
   const [selectedSection, setSelectedSection] = useState("pending");
   const [rowCount, setRowCount] = useState(0);
+  const [totalRowCount, setTotalRowCount] = useState(0);
   const router = useRouter();
   const { userType } = router.query;
   const templateParams = {
@@ -13,14 +14,16 @@ const Master = () => {
     userImage: "user.jpg",
     userType: userType as string,
   };
+
   const handleSectionChange = (section) => {
     setSelectedSection(section);
   };
-
+  useEffect(() => {
+    setTotalRowCount(rowCount);
+  }, [rowCount]);
   const generateRows = () => {
     const rows = [];
-
-    for (let i = 0; i < rowCount; i++) {
+    for (let i = 0; i < totalRowCount; i++) {
       rows.push(<div key={i} className="flex bg-purple-50"></div>);
     }
 
@@ -56,7 +59,7 @@ const Master = () => {
         </div>
 
         <div className="text-xs text-black" style={{ marginLeft: "750px" }}>
-          {rowCount} to {28}
+          {totalRowCount} to {28}
         </div>
         <div className="mt-2 flex w-full space-x-4">
           <div className="w-3/4">

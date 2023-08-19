@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import SideNavElement from "./InsideNavElement";
+import { InsideNavElement } from "@/components";
 const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {
@@ -36,11 +36,11 @@ const InsideNav: React.FunctionComponent = (props) => {
   ];
   return (
     <div className="flex w-full justify-center pt-5">
-      <SideNavElement elementHeader="Order" element={OrderElements} />
-      <SideNavElement elementHeader="Stock" />
-      <SideNavElement elementHeader="Reports" />
-      <SideNavElement elementHeader="Uploads" />
-      <SideNavElement elementHeader="Master" element={masterElement} />
+      <InsideNavElement elementHeader="Order" element={OrderElements} />
+      <InsideNavElement elementHeader="Stock" />
+      <InsideNavElement elementHeader="Reports" />
+      <InsideNavElement elementHeader="Uploads" />
+      <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>
   );
 };

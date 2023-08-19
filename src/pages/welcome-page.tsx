@@ -2,7 +2,7 @@ import React from "react";
 import UserTemplate from "../components/template/UserTemplate";
 import { title } from "process";
 import { useRouter } from "next/router";
-import InsideNav from "~/components/elements/InsideNav";
+import {InsideNav} from "@/components";
 interface IProps {
   csrfToken?: string;
   children?: JSX.Element | JSX.Element[];

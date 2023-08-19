@@ -20,7 +20,7 @@ const UserTemplate: React.FunctionComponent<IProps> = (props) => {
           <OuterNav />
           <div className="flex h-full w-full flex-row flex-nowrap">
             <SideNav userType={props.templateParams.userType} />
-            <div className="h-full w-full  rounded-br-3xl bg-white">
+            <div className="h-full w-full rounded-br-3xl bg-white">
               {props.children}
             </div>
           </div>

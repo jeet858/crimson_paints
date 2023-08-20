@@ -46,18 +46,23 @@ function Salesman({
 
   return (
     <UserTemplate templateParams={templateParams}>
-      <InsideNav />
+      <div>
+        <InsideNav />
+      </div>
       <div className="ml-11">
         <div className="max-w-7xl  p-4">
-          <legend className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium text-[#11009E]">
+          <h1
+            className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium text-[#11009E]"
+            style={{ color: "rgba(17, 0, 158, 1)" }}
+          >
             By Salesman
-          </legend>
+          </h1>
           <div className="flex space-x-4">
             <div className="mt-4 flex max-w-xs space-x-4 border-b-2 border-blue-900 text-xl">
               <div
                 className={`cursor-pointer ${
                   selectedSection === "pending"
-                    ? "rounded-t-lg border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
+                    ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
                     : "text-blue-900"
                 }`}
                 onClick={() => handleSectionChange("pending")}
@@ -67,7 +72,7 @@ function Salesman({
               <div
                 className={`cursor-pointer ${
                   selectedSection === "cancelled"
-                    ? "rounded-t-lg border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
+                    ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
                     : "text-blue-900"
                 }`}
                 onClick={() => handleSectionChange("cancelled")}
@@ -77,7 +82,7 @@ function Salesman({
               <div
                 className={`cursor-pointer ${
                   selectedSection === "execution"
-                    ? "rounded-t-lg border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
+                    ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
                     : "text-blue-900"
                 }`}
                 onClick={() => handleSectionChange("execution")}
@@ -88,6 +93,7 @@ function Salesman({
             <div className="w-[558px]"></div>
             <h3 className="pt-8 text-2xl font-medium">Client Name</h3>
           </div>
+
           <div className="mt-2 flex w-full space-x-4">
             <div className="w-3/4">
               <div className="h-3/6 overflow-x-hidden">

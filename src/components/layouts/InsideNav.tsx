@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {InsideNavElement} from "@/components";
+import { InsideNavElement } from "@/components";
 const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {
@@ -40,7 +40,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       <InsideNavElement elementHeader="Stock" />
       <InsideNavElement elementHeader="Reports" />
       <InsideNavElement elementHeader="Uploads" />
-      <InsideNavElement elementHeader="Master" />
+      <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>
   );
 };

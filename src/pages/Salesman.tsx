@@ -51,14 +51,10 @@ function Salesman({
       </div>
       <div className="ml-11">
         <div className="max-w-7xl  p-4">
-
           <h1
-            className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium"
+            className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium text-[#11009E]"
             style={{ color: "rgba(17, 0, 158, 1)" }}
           >
-
-          <legend className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium text-[#11009E]">
-
             By Salesman
           </h1>
           <div className="flex space-x-4">

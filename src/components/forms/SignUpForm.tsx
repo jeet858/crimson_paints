@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
 interface IProps {
   csrfToken?: string;
   children?: never[];
@@ -9,21 +10,20 @@ interface IProps {
 const SignUpForm: React.FunctionComponent<IProps> = (props) => {
   const router = useRouter();
 
-  const navigate = () => {
+
+  const navigate = async () => {
+    return await router.push({
+      pathname: "/WelcomePage",)};
+  }
+                             
+const navigate = () => {
     router.push({
       pathname: "/welcome-page",
       query: { userType: "admin" },
     });
-  };
+}
   return (
-    <div className="flex h-screen w-96 items-center justify-center">
-      <div className="flex w-full max-w-md flex-col space-y-4 rounded-lg bg-white p-6 shadow-2xl">
-        <div className="grid justify-items-center">
-          <span className="mb-6 text-2xl font-semibold">Sign-Up</span>
-        </div>
-        <div className="grid justify-items-center text-center text-xs">
-          Hey, Enter your details to get sign up to your account
-        </div>
+      <div className="w-full">
         <form>
           <div className="mb-4">
             <input
@@ -130,7 +130,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
             </div>
           </div>
           <div className="grid justify-items-center">
-            <div>
+            <div className="my-6">
               <input type="checkbox" id="agreed" name="agreed" value="agreed" />
               <label htmlFor="agreed" className="text-xs">
                 {" "}
@@ -138,6 +138,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
                 <span className="font-semibold">Terms & Conditions</span>
               </label>
             </div>
+
             <div className="grid justify-items-center">
               <button
                 type="submit"
@@ -153,10 +154,10 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
                 <span className="font-semibold text-violet-950">Log In</span>
               </div>
             </div>
+
           </div>
         </form>
       </div>
-    </div>
   );
 };
 

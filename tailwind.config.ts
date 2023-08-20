@@ -6,8 +6,9 @@ export default {
     extend: {
       colors: {
         primary: "#23B196",
-        tabColor: "#4186E3"
-      }
+        tabColor: "#4186E3",
+        navColor: "#C4B0FF",
+      },
     },
   },
   plugins: [],

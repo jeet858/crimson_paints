@@ -51,10 +51,14 @@ function Salesman({
       </div>
       <div className="ml-11">
         <div className="max-w-7xl  p-4">
+
           <h1
             className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium"
             style={{ color: "rgba(17, 0, 158, 1)" }}
           >
+
+          <legend className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium text-[#11009E]">
+
             By Salesman
           </h1>
           <div className="flex space-x-4">
@@ -90,13 +94,8 @@ function Salesman({
                 Execution
               </div>
             </div>
-            <div className="" style={{ width: "558px" }}></div>
-            <h3
-              className=" pt-8 text-2xl font-medium"
-              style={{ color: "rgba(0, 0, 0, 1)" }}
-            >
-              Client Name
-            </h3>
+            <div className="w-[558px]"></div>
+            <h3 className="pt-8 text-2xl font-medium">Client Name</h3>
           </div>
 
           <div className="mt-2 flex w-full space-x-4">
@@ -173,13 +172,7 @@ function Salesman({
             </div>
 
             <div className="top-lg">
-              <div
-                className="h-3/6  w-36 overflow-auto overscroll-contain "
-                style={{
-                  backgroundColor: "rgba(120, 106, 222, 1)",
-                  color: "rgba(255, 255, 255, 1)",
-                }}
-              >
+              <div className="h-3/6  w-36 overflow-auto overscroll-contain bg-[#786ADE] text-white">
                 {clientNames.map((clientName, index) => (
                   <div
                     key={index}

@@ -7,27 +7,12 @@ interface SideNavProps {
 }
 const SideNav: React.FunctionComponent<SideNavProps> = (props) => {
   return (
-    <div
-      className="flex h-full w-44 flex-col justify-between rounded-bl-3xl"
-      style={{ backgroundColor: "rgba(196, 176, 255, 1)" }}
-    >
+    <div className="flex h-full w-44 flex-col justify-between rounded-bl-3xl bg-navColor">
       <div>
-        <span
-          className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center text-2xl font-bold"
-          style={{
-            backgroundColor: "rgba(231, 224, 255, 0.47)",
-            color: "rgba(120, 120, 120, 1)",
-          }}
-        >
+        <span className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center bg-[#E7E0FF78] text-2xl font-bold text-[#999691]">
           Costing <MdKeyboardArrowDown />
         </span>
-        <span
-          className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center text-2xl font-bold"
-          style={{
-            backgroundColor: "rgba(231, 224, 255, 0.47)",
-            color: "rgba(120, 120, 120, 1)",
-          }}
-        >
+        <span className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center bg-[#E7E0FF78] text-2xl font-bold text-[#999691]">
           Master <MdKeyboardArrowDown />
         </span>
       </div>

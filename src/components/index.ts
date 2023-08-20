@@ -4,7 +4,16 @@ import FileInput from "./elements/FileInput";
 import HelpText from "./elements/HelpText";
 import InputField from "./elements/InputField";
 import TextInput from "./elements/InputTextField";
+
 import Login from "./forms/Login";
+
+import UserTemplate from "./template/UserTemplate";
+
+import InsideNav from "./layouts/InsideNav";
+import InsideNavElement from "./layouts/InsideNavElement";
+import OuterNav from "./layouts/OuterNav";
+import SideNav from "./layouts/SideNav";
+
 
 export {
     SignUpForm,
@@ -13,5 +22,10 @@ export {
     FileInput,
     HelpText,
     InputField,
-    TextInput
+    TextInput,
+    UserTemplate,
+    InsideNav,
+    InsideNavElement,
+    OuterNav,
+    SideNav
 }

@@ -1,6 +1,5 @@
 import * as React from "react";
-import OuterNav from "../elements/OuterNav";
-import SideNav from "../elements/SideNav";
+import { OuterNav, SideNav } from "@/components";
 interface IProps {
   templateParams: {
     title: string;

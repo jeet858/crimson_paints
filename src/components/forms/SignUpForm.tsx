@@ -10,12 +10,18 @@ interface IProps {
 const SignUpForm: React.FunctionComponent<IProps> = (props) => {
   const router = useRouter();
 
+
   const navigate = async () => {
     return await router.push({
-      pathname: "/WelcomePage",
+      pathname: "/WelcomePage",)};
+  }
+                             
+const navigate = () => {
+    router.push({
+      pathname: "/welcome-page",
       query: { userType: "admin" },
     });
-  };
+}
   return (
       <div className="w-full">
         <form>
@@ -26,7 +32,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
               name="name"
               placeholder="Enter your name"
               required
-              className="w-full rounded rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
+              className="w-full rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div className="mb-4">
@@ -36,7 +42,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
               name="email"
               placeholder="Enter your email"
               required
-              className="w-full rounded rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
+              className="w-full rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div className="mb-4">
@@ -46,7 +52,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
               name="phone"
               placeholder="Enter your phone number"
               required
-              className="w-full rounded rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
+              className="w-full rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div className="mb-4">
@@ -57,7 +63,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
                 name="password"
                 placeholder="Enter your password"
                 required
-                className="w-full rounded rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
+                className="w-full rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
               />
               <button
                 type="button"
@@ -94,7 +100,7 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
                 name="reenter-password"
                 placeholder="Re-enter your password"
                 required
-                className="w-full rounded rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
+                className="w-full rounded-lg border px-3 py-2 transition duration-300 hover:shadow-lg focus:border-blue-500 focus:outline-none"
               />
               <button
                 type="button"
@@ -132,6 +138,23 @@ const SignUpForm: React.FunctionComponent<IProps> = (props) => {
                 <span className="font-semibold">Terms & Conditions</span>
               </label>
             </div>
+
+            <div className="grid justify-items-center">
+              <button
+                type="submit"
+                className="w-32 rounded-full bg-indigo-700 px-4 py-2 font-semibold text-white hover:bg-indigo-800 focus:bg-indigo-800 focus:outline-none"
+                onClick={navigate}
+              >
+                Sign Up
+              </button>
+            </div>
+            <div className="grid justify-items-center">
+              <div>
+                Already have an account?{" "}
+                <span className="font-semibold text-violet-950">Log In</span>
+              </div>
+            </div>
+
           </div>
         </form>
       </div>

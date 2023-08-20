@@ -5,7 +5,8 @@ import { SignUpForm } from "@/components";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
+  const brand = api.brand.return_all.useQuery({ query: "select * from brand" });
+  console.log(brand.data?.result);
   return (
     <>
       <Head>

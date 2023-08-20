@@ -54,8 +54,7 @@ const InsideNavElement: React.FunctionComponent<SideNavElementProps> = (
       {showDropdown && (
         <div
           ref={dropdownRef}
-          className="absolute z-10 w-44 flex-col items-center rounded-lg"
-          style={{ backgroundColor: "rgba(196, 176, 255,1)" }}
+          className="absolute z-10 w-44 flex-col items-center rounded-lg bg-[#c4b0ff]"
         >
           {Array.isArray(props.element) && props.element.length > 0 ? (
             <div>

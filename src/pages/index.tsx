@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { api } from "~/utils/api";
 import { SignUpForm } from "@/components";
+import { LoginContainer } from "../components/forms/LoginContainer";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -14,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="signUpBackground flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat">
-        <SignUpForm />
+        <LoginContainer />
       </main>
     </>
   );

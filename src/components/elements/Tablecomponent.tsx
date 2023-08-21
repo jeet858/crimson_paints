@@ -8,23 +8,31 @@ import {
   TableContainer,
 } from "@mui/material";
 
-const Tablecomponent = ({ columns, data }) => {
+interface TableProps {
+  columns: {
+    header: string;
+    field: string;
+  }[];
+  data: {}[];
+}
+
+const Tablecomponent: React.FunctionComponent<TableProps> = (props) => {
   const tableCellStyle = {
     width: "4rem",
     padding: "0.25rem",
   };
-  const tstyle = {
+  const tstyle: {} = {
     width: "100%",
-    maxHeight: "400px",
     overflowY: "auto",
+    height: "50vh",
   };
   return (
-    <div className=" w-[81%] p-4">
+    <div className=" flex h-full w-[79%] flex-col p-4">
       <TableContainer style={tstyle}>
-        <Table>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
-              {columns.map((column, index) => (
+              {props.columns.map((column, index) => (
                 <TableCell
                   key={index}
                   style={{
@@ -40,12 +48,12 @@ const Tablecomponent = ({ columns, data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, rowIndex) => (
+            {props.data.map((row: any, rowIndex) => (
               <TableRow
                 key={rowIndex}
                 style={{ borderBottom: "1px solid black" }}
               >
-                {columns.map((column, colIndex) => (
+                {props.columns.map((column, colIndex) => (
                   <TableCell
                     key={colIndex}
                     style={{

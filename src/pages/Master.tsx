@@ -4,7 +4,7 @@ import { UserTemplate, InsideNav } from "@/components";
 import { getSession } from "next-auth/react";
 import Unitmastertable from "~/components/elements/Unitmastertable";
 import Complextypetable from "~/components/elements/Complextypetable";
-
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
   return {
@@ -27,14 +27,14 @@ function Master({
     userImage: "user.jpg",
     userType: userType as string,
   };
-  const handleSectionChange = (section) => {
+  const handleSectionChange = (section: string) => {
     setSelectedSection(section);
   };
 
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
-      <div className="ml-11 mt-4">
+      <div className="ml-11 mt-4 w-full">
         <div className="flex space-x-4">
           <div className="mt-4 flex w-56 space-x-4 border-b-2  border-blue-900">
             <div

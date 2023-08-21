@@ -41,8 +41,8 @@ const InsideNavElement: React.FunctionComponent<SideNavElementProps> = (
     <div className="group relative w-fit justify-center">
       <button
         onClick={toggleDropdown}
-        className="dropdown-button relative flex h-20 w-44 items-center justify-center text-2xl font-semibold text-black
-         hover:border-y-2 hover:border-violet-500 hover:text-violet-500"
+        className="dropdown-button 2xl:44 relative flex h-20 items-center justify-center text-2xl font-semibold text-black hover:border-y-2 hover:border-violet-500
+         hover:text-violet-500 sm:w-24  md:w-36 lg:w-36 xl:w-44 "
       >
         {props.elementHeader}
         {showDropdown ? (

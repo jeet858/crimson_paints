@@ -3,11 +3,12 @@ import UserTemplate from "../components/template/UserTemplate";
 import { title } from "process";
 import { useRouter } from "next/router";
 import { InsideNav } from "@/components";
+import LoginTemplate from "~/components/template/LoginTemplate";
 interface IProps {
   csrfToken?: string;
   children?: JSX.Element | JSX.Element[];
 }
-const WelcomePage: React.FunctionComponent<IProps> = (props) => {
+const LoginPage: React.FunctionComponent<IProps> = (props) => {
   const router = useRouter();
   const { userType } = router.query;
   const templateParams = {
@@ -17,11 +18,7 @@ const WelcomePage: React.FunctionComponent<IProps> = (props) => {
     userType: userType as string,
   };
 
-  return (
-    <UserTemplate templateParams={templateParams}>
-      <InsideNav />
-    </UserTemplate>
-  );
+  return <LoginTemplate templateParams={templateParams}></LoginTemplate>;
 };
 
-export default WelcomePage;
+export default LoginPage;

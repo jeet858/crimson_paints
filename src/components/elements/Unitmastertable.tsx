@@ -1,5 +1,7 @@
 import React from "react";
-import Tablecomponent from "./Tablecomponent";
+import TableComponent from "./TableComponent";
+import { CiEdit } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
 const columns = [
   { header: "S", field: "s" },
   { header: "Qty / Unit", field: "qntUnit" },
@@ -7,7 +9,7 @@ const columns = [
   { header: "Short Code", field: "shortCode" },
   { header: "Name", field: "name" },
 ];
-const Unitmastertable = () => {
+const UnitMasterTable: React.FunctionComponent = () => {
   const tableData = [
     {
       s: 1,
@@ -460,10 +462,16 @@ const Unitmastertable = () => {
   return (
     <div>
       <div>
-        <Tablecomponent columns={columns} data={tableData} />
+        <TableComponent
+          columns={columns}
+          data={tableData}
+          deleteIcon={<MdDeleteOutline className="h-7 w-7 text-violet-600" />}
+          editIcon={<CiEdit className="h-7 w-7 text-violet-600" />}
+          userType="admin"
+        />
       </div>
     </div>
   );
 };
 
-export default Unitmastertable;
+export default UnitMasterTable;

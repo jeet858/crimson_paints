@@ -34,7 +34,7 @@ function Master({
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
-      <div className="ml-11 mt-4">
+      <div className="ml-11 mt-4 w-full">
         <div className="flex space-x-4">
           <div className="mt-4 flex w-56 space-x-4 border-b-2  border-blue-900">
             <div

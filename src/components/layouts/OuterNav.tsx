@@ -2,7 +2,7 @@ import * as React from "react";
 import { FaUserCircle } from "react-icons/fa";
 const OuterNav: React.FunctionComponent = () => {
   return (
-    <div className="flex h-36 w-full flex-row items-center justify-between rounded-t-3xl bg-navColor px-10">
+    <div className="flex min-h-[10%] w-full flex-row items-center justify-between rounded-t-3xl bg-navColor px-10">
       <p className="text-2xl font-semibold text-slate-600">Hi, User Name</p>
       <h1 className="text-center text-4xl font-bold text-[#11009E]">
         Crimson Paints Private Ltd.

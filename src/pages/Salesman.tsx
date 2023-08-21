@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
 import { UserTemplate, InsideNav } from "@/components";
 import { getSession } from "next-auth/react";
+import Tablecomponent from "~/components/elements/Tablecomponent";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -14,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-function Salesman({
+function salesman({
   userInfo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [selectedSection, setSelectedSection] = useState("pending");
@@ -44,141 +45,340 @@ function Salesman({
     "Client C",
   ];
 
+  const columns = [
+    { header: "Order", field: "order" },
+    { header: "Date", field: "date" },
+    { header: "Order Location", field: "orderLocation" },
+    { header: "Client", field: "client" },
+  ];
+  const tableData = [
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+    {
+      order: 123,
+      date: "2023-08-16",
+      orderLocation: "Location A",
+      client: "Client A",
+    },
+  ];
   return (
     <UserTemplate templateParams={templateParams}>
-      <div>
-        <InsideNav />
-      </div>
-      <div className="ml-11">
-        <div className="max-w-7xl  p-4">
-          <h1
-            className="max-w-2xl space-x-4 border-b-2 border-blue-900 p-1 text-xl font-medium text-[#11009E]"
-            style={{ color: "rgba(17, 0, 158, 1)" }}
-          >
-            By Salesman
-          </h1>
-          <div className="flex space-x-4">
-            <div className="mt-4 flex max-w-xs space-x-4 border-b-2 border-blue-900 text-xl">
-              <div
-                className={`cursor-pointer ${
-                  selectedSection === "pending"
-                    ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
-                    : "text-blue-900"
-                }`}
-                onClick={() => handleSectionChange("pending")}
-              >
-                Pending
-              </div>
-              <div
-                className={`cursor-pointer ${
-                  selectedSection === "cancelled"
-                    ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
-                    : "text-blue-900"
-                }`}
-                onClick={() => handleSectionChange("cancelled")}
-              >
-                Cancelled
-              </div>
-              <div
-                className={`cursor-pointer ${
-                  selectedSection === "execution"
-                    ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
-                    : "text-blue-900"
-                }`}
-                onClick={() => handleSectionChange("execution")}
-              >
-                Execution
-              </div>
+      <InsideNav />
+      <div className="flex h-5/6 w-full overflow-scroll pl-[10%]">
+        <div className="flex w-[80%] flex-col gap-y-4 overflow-hidden">
+          <div className="mt-4 flex max-w-xs space-x-4 border-b-2 border-blue-900 text-xl">
+            <div
+              className={`cursor-pointer ${
+                selectedSection === "pending"
+                  ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
+                  : "text-blue-900"
+              }`}
+              onClick={() => handleSectionChange("pending")}
+            >
+              Pending
             </div>
-            <div className="w-[558px]"></div>
-            <h3 className="pt-8 text-2xl font-medium">Client Name</h3>
+            <div
+              className={`cursor-pointer ${
+                selectedSection === "cancelled"
+                  ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
+                  : "text-blue-900"
+              }`}
+              onClick={() => handleSectionChange("cancelled")}
+            >
+              Cancelled
+            </div>
+            <div
+              className={`cursor-pointer ${
+                selectedSection === "execution"
+                  ? "rounded border-x-8 border-y-8 border-blue-800 bg-blue-800 text-white"
+                  : "text-blue-900"
+              }`}
+              onClick={() => handleSectionChange("execution")}
+            >
+              Execution
+            </div>
           </div>
-
-          <div className="mt-2 flex w-full space-x-4">
-            <div className="w-3/4">
-              <div className="h-3/6 overflow-x-hidden">
-                <div className="flex bg-purple-300">
-                  <div className="w-24 p-2 text-xs font-semibold">Order</div>
-                  <div className="w-24 p-2 text-center text-xs font-semibold">
-                    Date
-                  </div>
-                  <div className="w-28 p-2 text-center text-xs font-semibold">
-                    Order Location
-                  </div>
-                  <div className="w-24 p-2 text-center text-xs font-semibold">
-                    Client
-                  </div>
-                </div>
-
-                <div className="flex bg-purple-200">
-                  <div className="w-24 p-2 text-xs font-semibold">123</div>
-                  <div className="w-24 p-2 text-center text-xs font-semibold">
-                    2023-08-16
-                  </div>
-                  <div className="w-28 p-2 text-center text-xs font-semibold">
-                    Location A
-                  </div>
-                  <div className="w-24 p-2 text-center text-xs font-semibold">
-                    Client A
-                  </div>
-                </div>
-
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2 text-xs font-semibold">Notes:</div>
-                </div>
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2  text-xs">123</div>
-                  <div className="w-24 p-2 text-center  text-xs">
-                    2023-08-16
-                  </div>
-                  <div className="w-28 p-2 text-center text-xs">Location A</div>
-                  <div className="w-24 p-2 text-center text-xs">Client A</div>
-                </div>
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2  text-xs">123</div>
-                  <div className="w-24 p-2 text-center text-xs">2023-08-16</div>
-                  <div className="w-28 p-2 text-center text-xs">Location A</div>
-                  <div className="w-24 p-2 text-center text-xs">Client A</div>
-                </div>
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2  text-xs">123</div>
-                  <div className="w-24 p-2 text-center text-xs">2023-08-16</div>
-                  <div className="w-28 p-2 text-center text-xs">Location A</div>
-                  <div className="w-24 p-2 text-center text-xs">Client A</div>
-                </div>
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2  text-xs">123</div>
-                  <div className="w-24 p-2 text-center text-xs">2023-08-16</div>
-                  <div className="w-28 p-2 text-center text-xs">Location A</div>
-                  <div className="w-24 p-2 text-center text-xs">Client A</div>
-                </div>
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2  text-xs">123</div>
-                  <div className="w-24 p-2 text-center text-xs">2023-08-16</div>
-                  <div className="w-28 p-2 text-center text-xs">Location A</div>
-                  <div className="w-24 p-2 text-center text-xs">Client A</div>
-                </div>
-                <div className="flex bg-purple-100">
-                  <div className="w-24 p-2  text-xs">123</div>
-                  <div className="w-24 p-2 text-center text-xs">2023-08-16</div>
-                  <div className="w-28 p-2 text-center text-xs">Location A</div>
-                  <div className="w-24 p-2 text-center text-xs">Client A</div>
-                </div>
+          <Tablecomponent columns={columns} data={tableData} />
+        </div>
+        <div className="flex h-full w-[20%] flex-col gap-y-4 pt-4">
+          <div className="text-3xl font-semibold">Client</div>
+          <div className="w-4/5 overflow-auto overscroll-contain bg-[#786ADE] text-white">
+            {clientNames.map((clientName, index) => (
+              <div
+                key={index}
+                className=" cursor-pointer overflow-auto overscroll-contain border-b p-2 hover:bg-violet-300 hover:text-lg hover:font-normal hover:text-blue-800"
+              >
+                {clientName}
               </div>
-            </div>
-
-            <div className="top-lg">
-              <div className="h-3/6  w-36 overflow-auto overscroll-contain bg-[#786ADE] text-white">
-                {clientNames.map((clientName, index) => (
-                  <div
-                    key={index}
-                    className=" cursor-pointer overflow-auto overscroll-contain border-b p-2 hover:bg-violet-300 hover:text-lg hover:font-normal hover:text-blue-800"
-                  >
-                    {clientName}
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -186,4 +386,4 @@ function Salesman({
   );
 }
 
-export default Salesman;
+export default salesman;

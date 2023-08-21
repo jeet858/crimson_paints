@@ -23,13 +23,13 @@ const Tablecomponent: React.FunctionComponent<TableProps> = (props) => {
   };
   const tstyle: {} = {
     width: "100%",
-    maxHeight: "400px",
     overflowY: "auto",
+    height: "50vh",
   };
   return (
-    <div className=" w-[81%] p-4">
+    <div className=" flex h-full w-[79%] flex-col p-4">
       <TableContainer style={tstyle}>
-        <Table>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               {props.columns.map((column, index) => (

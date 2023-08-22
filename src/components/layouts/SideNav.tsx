@@ -7,7 +7,7 @@ interface SideNavProps {
 }
 const SideNav: React.FunctionComponent<SideNavProps> = (props) => {
   return (
-    <div className="flex h-full w-44 flex-col justify-between rounded-bl-3xl bg-navColor">
+    <div className="flex h-full w-1/12 flex-col justify-between rounded-bl-3xl bg-navColor">
       <div>
         <span className="mb-4 flex h-24 w-full cursor-pointer content-center items-center justify-center bg-[#E7E0FF78] text-2xl font-bold text-[#999691]">
           Costing <MdKeyboardArrowDown />

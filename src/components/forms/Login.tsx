@@ -1,16 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
 
 const Login = () => {
-  const router = useRouter();
-
-  const navigate = async () => {
-    await router.push({
-      pathname: "/WelcomePage",
-      query: { userType: "admin" },
-    });
-  };
   return (
     <form className="grid justify-items-center">
       <div className="mb-4">

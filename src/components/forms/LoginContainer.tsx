@@ -1,42 +1,54 @@
-import React, { useState } from "react";
-import Login from './Login';
-import SignUpForm from './SignUpForm';
-import AddUser from "./AddUser";
+import React from "react";
+import Login from "./Login";
+import { useRouter } from "next/router";
 
 export const LoginContainer = () => {
+  const handleSubmit = () => {
+    //  if(!addUser){
+    //     if(isLogin){
+    //         //write login functionality
+    //     }else{
+    //         //write signup functionality
+    //     }
+    //  }
+    //  else{
+    //       //add user functinoality
+    //  }
+  };
 
-    const [isLogin,setIsLogin] = useState<boolean>(true)
+  const router = useRouter();
 
-    const handleSubmit =()=>{
-
-//  if(!addUser){
-//     if(isLogin){ 
-//         //write login functionality
-//     }else{
-//         //write signup functionality
-//     }
-    
-//  }
-//  else{
-//       //add user functinoality   
-//  }
-    }
-
+  const navigate = async () => {
+    await router.push({
+      pathname: "/welcome-page",
+      query: { userType: "admin" },
+    });
+  };
   return (
     <div className="flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat ">
       <div className="grid w-full max-w-md justify-items-center rounded-lg border-2 bg-white p-6 drop-shadow-2xl">
-        <h2 className="text-2xl font-semibold ">{isLogin ? 'Login' : 'Sign up'} </h2>
-        <span className="my-6">{`Hey, Enter your details to get ${isLogin ? 'sign in':'Sign Up'} to your account`} </span>
-         {isLogin ? <Login /> : <SignUpForm />}
+        <h2 className="font-[sans-serif] text-2xl font-semibold text-[#07096E]">
+          Login
+        </h2>
+        <span className="my-6 font-[open-sans]">
+          Hey, Enter your details to get sign in to your account
+        </span>
+        <Login />
         <button
           type="button"
           className="w-24 rounded-full bg-indigo-700 px-4 py-2 font-semibold text-white hover:bg-indigo-800 focus:bg-indigo-800 focus:outline-none"
-          onClick={handleSubmit}
+          onClick={navigate}
         >
-          {isLogin ? 'Login' : 'Sign up' } 
+          Login
         </button>
-         <br />
-        <span>{isLogin ? 'Don’t':'Already'} have an account? <span onClick={()=>setIsLogin(!isLogin)} style={{"cursor":'pointer',"textDecoration":'underline', 'color':'#c49cf4'}}>{isLogin ? 'Sign up':'Log in'}</span> now</span>
+        <br />
+        <span>
+          Don’t have an account?{" "}
+          <span className="cursor-pointer text-[#786ADE] underline">
+            Connect
+          </span>{" "}
+          With Admin
+        </span>
       </div>
     </div>
   );

@@ -333,7 +333,7 @@ function salesman({
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
       <div className="flex h-5/6 w-full overflow-scroll pl-[10%]">
-        <div className="flex w-[80%] flex-col gap-y-4 overflow-hidden">
+        <div className="flex w-[72%] flex-col gap-y-4 overflow-hidden">
           <div className="mt-4 flex max-w-xs space-x-4 border-b-2 border-blue-900 text-xl">
             <div
               className={`cursor-pointer ${
@@ -368,9 +368,9 @@ function salesman({
           </div>
           <Tablecomponent columns={columns} data={tableData} />
         </div>
-        <div className="flex h-full w-[20%] flex-col gap-y-4 pt-4">
+        <div className="flex h-[92%] w-[16%] flex-col gap-y-4 pt-4">
           <div className="text-3xl font-semibold">Client</div>
-          <div className="w-4/5 overflow-auto overscroll-contain bg-[#786ADE] text-white">
+          <div className="mt-7 w-4/5 overflow-auto overscroll-contain bg-[#786ADE] text-white">
             {clientNames.map((clientName, index) => (
               <div
                 key={index}

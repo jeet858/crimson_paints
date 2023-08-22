@@ -27,7 +27,7 @@ const Tablecomponent: React.FunctionComponent<TableProps> = (props) => {
     height: "50vh",
   };
   return (
-    <div className=" flex h-full w-[79%] flex-col p-4">
+    <div className=" flex h-full w-[96%] flex-col p-4">
       <TableContainer style={tstyle}>
         <Table stickyHeader>
           <TableHead>

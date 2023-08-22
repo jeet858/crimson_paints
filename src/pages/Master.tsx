@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { UserTemplate, InsideNav } from "@/components";
 import { getSession } from "next-auth/react";
-import Unitmastertable from "~/components/elements/Unitmastertable";
-import Complextypetable from "~/components/elements/Complextypetable";
+import { UnitMasterTable } from "@/components";
+import { ComplexTypeTable } from "@/components";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -60,9 +60,9 @@ function Master({
           </div>
         </div>
         {selectedSection === "pending" ? (
-          <Unitmastertable />
+          <UnitMasterTable />
         ) : (
-          <Complextypetable />
+          <ComplexTypeTable />
         )}
       </div>
     </UserTemplate>

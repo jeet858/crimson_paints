@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
 import { UserTemplate, InsideNav } from "@/components";
 import { getSession } from "next-auth/react";
-import Tablecomponent from "~/components/elements/Tablecomponent";
-
+import Tablecomponent from "~/components/elements/TableComponent";
+import { CiEdit } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
   return {
@@ -366,7 +367,13 @@ function salesman({
               Execution
             </div>
           </div>
-          <Tablecomponent columns={columns} data={tableData} />
+          <Tablecomponent
+            columns={columns}
+            data={tableData}
+            deleteIcon={<MdDeleteOutline className="h-7 w-7 text-violet-600" />}
+            editIcon={<CiEdit className="h-7 w-7 text-violet-600" />}
+            userType="admin"
+          />
         </div>
         <div className="flex h-[92%] w-[16%] flex-col gap-y-4 pt-4">
           <div className="text-3xl font-semibold">Client</div>

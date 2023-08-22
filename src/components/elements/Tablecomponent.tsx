@@ -7,6 +7,7 @@ import {
   TableCell,
   TableContainer,
 } from "@mui/material";
+import { jsx } from "@emotion/react";
 
 interface TableProps {
   columns: {
@@ -14,9 +15,12 @@ interface TableProps {
     field: string;
   }[];
   data: {}[];
+  userType?: string;
+  editIcon?: JSX.Element;
+  deleteIcon?: JSX.Element;
 }
 
-const Tablecomponent: React.FunctionComponent<TableProps> = (props) => {
+const TableComponent: React.FunctionComponent<TableProps> = (props) => {
   const tableCellStyle = {
     width: "4rem",
     padding: "0.25rem",
@@ -27,45 +31,55 @@ const Tablecomponent: React.FunctionComponent<TableProps> = (props) => {
     height: "50vh",
   };
   return (
-    <div className=" flex h-full w-[96%] flex-col p-4">
-      <TableContainer style={tstyle}>
+    <div className=" flex h-full w-full flex-col p-4">
+      <TableContainer className="h-[50vh] w-full overscroll-y-auto">
         <Table stickyHeader>
           <TableHead>
             <TableRow>
               {props.columns.map((column, index) => (
                 <TableCell
                   key={index}
-                  style={{
-                    backgroundColor: "rgba(196, 176, 255, 1)",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    ...tableCellStyle,
-                  }}
+                  className="w-16 bg-[#c4b0ff] p-1 text-[15px] font-semibold"
                 >
                   {column.header}
                 </TableCell>
               ))}
+              {props.userType === "admin" ? (
+                <>
+                  <TableCell className="w-16 bg-[#c4b0ff] p-1 text-[15px] font-semibold">
+                    Edit
+                  </TableCell>
+                  <TableCell className="w-16 bg-[#c4b0ff] p-1 text-[15px] font-semibold">
+                    Delete
+                  </TableCell>
+                </>
+              ) : null}
             </TableRow>
           </TableHead>
           <TableBody>
             {props.data.map((row: any, rowIndex) => (
               <TableRow
+                className="borderb- border-b-[1px] border-solid border-b-black"
                 key={rowIndex}
-                style={{ borderBottom: "1px solid black" }}
               >
                 {props.columns.map((column, colIndex) => (
                   <TableCell
                     key={colIndex}
-                    style={{
-                      backgroundColor: "rgba(231, 224, 255, 0.47)",
-                      borderBottom: "1px solid rgba(231, 224, 255, 0.47)",
-                      fontSize: "14px",
-                      ...tableCellStyle,
-                    }}
+                    className="w-16 border-b-[1px] border-solid border-[#e7e0ff78] bg-[#e7e0ff78] p-1 text-[14px]"
                   >
                     {row[column.field]}
                   </TableCell>
                 ))}
+                {props.userType === "admin" ? (
+                  <>
+                    <TableCell className="w-16 border-b-[1px] border-solid border-[#e7e0ff78] bg-[#e7e0ff78] p-1 text-[14px]">
+                      {props.editIcon}
+                    </TableCell>
+                    <TableCell className="w-16 border-b-[1px] border-solid border-[#e7e0ff78] bg-[#e7e0ff78] p-1 text-[14px]">
+                      {props.deleteIcon}
+                    </TableCell>
+                  </>
+                ) : null}
               </TableRow>
             ))}
           </TableBody>
@@ -75,4 +89,4 @@ const Tablecomponent: React.FunctionComponent<TableProps> = (props) => {
   );
 };
 
-export default Tablecomponent;
+export default TableComponent;

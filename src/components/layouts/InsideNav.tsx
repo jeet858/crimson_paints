@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import {InsideNavElement} from "@/components";
+import { InsideNavElement } from "@/components";
 const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {
       name: "By Salesman",
-      href: "/Salesman",
+      href: "/salesman",
     },
     {
       name: "By Client",
@@ -31,7 +31,7 @@ const InsideNav: React.FunctionComponent = (props) => {
   const masterElement = [
     {
       name: "Master",
-      href: "/Master",
+      href: "/master",
     },
   ];
   return (
@@ -40,7 +40,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       <InsideNavElement elementHeader="Stock" />
       <InsideNavElement elementHeader="Reports" />
       <InsideNavElement elementHeader="Uploads" />
-      <InsideNavElement elementHeader="Master" />
+      <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>
   );
 };

@@ -17,9 +17,9 @@ const UserTemplate: React.FunctionComponent<IProps> = (props) => {
       <main className="mainPagesBackground flex h-screen flex-col flex-nowrap items-center justify-center bg-cover bg-center bg-no-repeat">
         <div className="flex h-5/6 w-11/12 flex-col flex-nowrap rounded-3xl shadow-2xl">
           <OuterNav />
-          <div className="flex h-full w-full flex-row flex-nowrap">
+          <div className="flex h-full w-full flex-row flex-wrap">
             <SideNav userType={props.templateParams.userType} />
-            <div className="h-full w-full rounded-br-3xl bg-white">
+            <div className="flex h-full w-11/12 flex-wrap overflow-x-hidden overflow-y-scroll rounded-br-3xl bg-white">
               {props.children}
             </div>
           </div>

@@ -8,7 +8,7 @@ import {
   TableContainer,
 } from "@mui/material";
 import { jsx } from "@emotion/react";
-
+import "tailwindcss";
 interface TableProps {
   columns: {
     header: string;

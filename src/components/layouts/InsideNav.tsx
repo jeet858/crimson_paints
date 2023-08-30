@@ -33,6 +33,66 @@ const InsideNav: React.FunctionComponent = (props) => {
       name: "Master",
       href: "/master",
     },
+    {
+      name: "Packaging Type",
+      href: "",
+    },
+    {
+      name: "Colours",
+      href: "",
+    },
+    {
+      name: "Packaging Unit",
+      href: "",
+    },
+    {
+      name: "Client Companies",
+      href: "",
+    },
+    {
+      name: "Product Categories",
+      href: "",
+    },
+    {
+      name: "HSN Code",
+      href: "",
+    },
+    {
+      name: "Product Brand",
+      href: "",
+    },
+    {
+      name: "Brand and Packaging Type",
+      href: "",
+    },
+    {
+      name: "Group for Pricing",
+      href: "",
+    },
+    {
+      name: "Oderable Units",
+      href: "",
+    },
+    {
+      name: "Branch",
+      href: "",
+    },
+    {
+      name: "Customers",
+      href: "",
+    },
+    {
+      name: "user Type",
+      href: "",
+    },
+    {
+      name: "Discounts",
+      href: "",
+    },
+    {
+      name: "Schemes",
+      href: "",
+    },
   ];
   return (
     <div className="flex w-full justify-center pt-5">

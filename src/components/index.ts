@@ -13,7 +13,7 @@ import InsideNavElement from "./layouts/InsideNavElement";
 import OuterNav from "./layouts/OuterNav";
 import SideNav from "./layouts/SideNav";
 import DashboardTile from "./elements/DashboardTile";
-import LoginForm from "./forms/LoginFrom";
+import LoginForm from "./forms/LoginForm";
 
 export {
   LoginForm,

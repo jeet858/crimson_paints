@@ -7,7 +7,6 @@ import {
   TableCell,
   TableContainer,
 } from "@mui/material";
-import { jsx } from "@emotion/react";
 
 interface TableProps {
   columns: {

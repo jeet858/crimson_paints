@@ -5,7 +5,6 @@ import HelpText from "./elements/HelpText";
 import InputField from "./elements/InputField";
 import TextInput from "./elements/InputTextField";
 import TableComponent from "./elements/TableComponent";
-import Login from "./forms/Login";
 import ComplexTypeTable from "./elements/ComplexTypeTable";
 import UserTemplate from "./template/UserTemplate";
 import UnitMasterTable from "./elements/UnitMasterTable";
@@ -13,10 +12,12 @@ import InsideNav from "./layouts/InsideNav";
 import InsideNavElement from "./layouts/InsideNavElement";
 import OuterNav from "./layouts/OuterNav";
 import SideNav from "./layouts/SideNav";
+import DashboardTile from "./elements/DashboardTile";
+import LoginForm from "./forms/LoginForm";
 
 export {
+  LoginForm,
   SignUpForm,
-  Login,
   Button,
   FileInput,
   HelpText,
@@ -30,4 +31,5 @@ export {
   UnitMasterTable,
   ComplexTypeTable,
   TableComponent,
+  DashboardTile,
 };

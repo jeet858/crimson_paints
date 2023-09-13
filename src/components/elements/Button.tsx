@@ -16,7 +16,7 @@ interface BtnProps {
 }
 
 const Button: React.FunctionComponent<BtnProps> = (props) => {
-  let defaultClass = `inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-primary ${props.widthClass} ${props.heightClass} ${props.othersClass}`;
+  const defaultClass = `inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-primary ${props.widthClass} ${props.heightClass} ${props.othersClass}`;
   return (
     <button
       type={props.type ? props.type : "button"}

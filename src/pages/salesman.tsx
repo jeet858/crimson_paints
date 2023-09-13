@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-function salesman({
+function Salesman({
   userInfo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [selectedSection, setSelectedSection] = useState("pending");
@@ -393,4 +393,4 @@ function salesman({
   );
 }
 
-export default salesman;
+export default Salesman;

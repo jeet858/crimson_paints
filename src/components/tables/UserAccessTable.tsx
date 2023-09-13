@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FaCheck, FaPencilAlt } from "react-icons/fa";
-import CheckBox from "./CheckBox";
+import CheckBox from "../elements/CheckBox";
 interface UserAccessTableProps {
   title: string;
   data: {

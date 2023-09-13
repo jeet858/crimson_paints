@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { InsideNav, UserTemplate } from "@/components";
-import UserAccessTable from "~/components/elements/UserAccessTable";
-import OrderTable from "~/components/elements/OrderTable";
-import StockTable from "~/components/elements/StockTable";
-import ReportsTable from "~/components/elements/ReportsTable";
-import UploadsTable from "~/components/elements/UploadsTable";
-import MasterTable from "~/components/elements/MasterTable";
+import UserAccessTable from "~/components/tables/UserAccessTable";
+import OrderTable from "~/components/tables/OrderTable";
+import StockTable from "~/components/tables/StockTable";
+import ReportsTable from "~/components/tables/ReportsTable";
+import UploadsTable from "~/components/tables/UploadsTable";
+import MasterTable from "~/components/tables/MasterTable";
 
 const Useraccess = () => {
   const router = useRouter();

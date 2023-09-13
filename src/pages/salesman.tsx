@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
 import { UserTemplate, InsideNav } from "@/components";
 import { getSession } from "next-auth/react";
-import Tablecomponent from "~/components/elements/TableComponent";
+import Tablecomponent from "~/components/tables/TableComponent";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 export const getServerSideProps: GetServerSideProps = async (context) => {

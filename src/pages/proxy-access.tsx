@@ -1,7 +1,7 @@
 import { InsideNav, UserTemplate } from "@/components";
 import { useRouter } from "next/router";
 import React from "react";
-import TableComponentProxyAccess from "~/components/elements/TableComponentProxyAccess";
+import TableComponentProxyAccess from "~/components/tables/TableComponentProxyAccess";
 interface TableRow {
   username: string;
   type: string;

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
 import { UserTemplate, InsideNav } from "@/components";
 import { getSession } from "next-auth/react";
-import Tablecomponent from "~/components/elements/TableComponent";
+import Tablecomponent from "~/components/tables/TableComponent";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-function salesman({
+function Salesman({
   userInfo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [selectedSection, setSelectedSection] = useState("pending");
@@ -334,7 +334,7 @@ function salesman({
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
       <div className="flex h-5/6 w-full overflow-scroll pl-[10%]">
-        <div className="flex w-[80%] flex-col gap-y-4 overflow-hidden">
+        <div className="flex w-[72%] flex-col gap-y-4 overflow-hidden">
           <div className="mt-4 flex max-w-xs space-x-4 border-b-2 border-blue-900 text-xl">
             <div
               className={`cursor-pointer ${
@@ -375,9 +375,9 @@ function salesman({
             userType="admin"
           />
         </div>
-        <div className="flex h-full w-[20%] flex-col gap-y-4 pt-4">
+        <div className="flex h-[92%] w-[16%] flex-col gap-y-4 pt-4">
           <div className="text-3xl font-semibold">Client</div>
-          <div className="w-4/5 overflow-auto overscroll-contain bg-[#786ADE] text-white">
+          <div className="mt-7 w-4/5 overflow-auto overscroll-contain bg-[#786ADE] text-white">
             {clientNames.map((clientName, index) => (
               <div
                 key={index}
@@ -393,4 +393,4 @@ function salesman({
   );
 }
 
-export default salesman;
+export default Salesman;

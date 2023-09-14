@@ -16,7 +16,7 @@ const WelcomePage: React.FunctionComponent<IProps> = (props) => {
     userImage: "user.jpg",
     userType: userType as string,
   };
-
+  console.log(userType);
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />

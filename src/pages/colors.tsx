@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { UserTemplate } from "@/components";
-import BasicUnitTable from "~/components/elements/BasicUnitTable";
+import { InsideNav, TableComponent, UserTemplate } from "@/components";
+import ColorTable from "~/components/tables/ColorTable";
 
 const colors = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ const colors = () => {
     {
       header: "Color",
       field: "color",
-      render: (color) => (
+      render: (color: string) => (
         <div
           style={{ backgroundColor: color, width: "149px", height: "41px" }}
         ></div>
@@ -71,27 +71,17 @@ const colors = () => {
   ];
   return (
     <UserTemplate templateParams={templateParams}>
-      <div className="w-full p-4">
-        <div className="flex items-center justify-center">
-          <div className="text-center text-xl font-semibold text-[#11009E]">
+      <InsideNav />
+      <div className="h-fit w-full p-4">
+        <div className="flex items-end justify-center ">
+          <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+          <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
             Colors
-            <svg
-              width="150"
-              height="30"
-              viewBox="0 0 426 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 8C3.86258e-07 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 -3.86258e-07 8 0C3.58172 3.86258e-07 -3.86258e-07 3.58172 0 8ZM410 7.99996C410 12.4182 413.582 16 418 16C422.418 16 426 12.4182 426 7.99996C426 3.58169 422.418 -3.62296e-05 418 -3.58433e-05C413.582 -3.54571e-05 410 3.58169 410 7.99996ZM8 9.5L418 9.49996L418 6.49996L8 6.5L8 9.5Z"
-                fill="#C4B0FF"
-              />
-            </svg>
           </div>
+          <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
         </div>
       </div>
-
-      <BasicUnitTable columns={columns} data={data} />
+      <ColorTable columns={columns} data={data} />
     </UserTemplate>
   );
 };

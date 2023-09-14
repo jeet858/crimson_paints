@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
 
-const productpackaginglist = () => {
+const masterbasicunit = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -42,19 +42,19 @@ const productpackaginglist = () => {
   ];
   return (
     <UserTemplate templateParams={templateParams}>
-      <InsideNav />
-      <div className="w-full p-4">
-        <div className="flex items-end justify-center ">
+      <div className="w-full">
+        <InsideNav />
+        <div className="flex items-end justify-center py-8">
           <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-            Product Packaging List
+            Basic Units
           </div>
           <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
         </div>
+        <TableComponent columns={columns} data={data} />
       </div>
-      <TableComponent columns={columns} data={data} />
     </UserTemplate>
   );
 };
 
-export default productpackaginglist;
+export default masterbasicunit;

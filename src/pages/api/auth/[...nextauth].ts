@@ -1,33 +1,67 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import Credentials, {
-  CredentialsProvider,
-} from "next-auth/providers/credentials";
-import { api } from "~/utils/api";
-const authOptions: NextAuthOptions = {
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+import NextAuth from "next-auth";
+import { AuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { z } from "zod";
+import bcrypt from "bcryptjs";
+const prisma = new PrismaClient();
+
+const loginUserSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
+const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
   providers: [
-    Credentials({
+    CredentialsProvider({
       type: "credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "me@email.com" },
+        email: { type: "text", placeholder: "me@email.com" },
         password: { label: "password", type: "password" },
       },
-      authorize(credentials, req) {
-        const { email, password } = credentials as {
-          email: string;
-          password: string;
-        };
+      async authorize(credentials, req) {
+        const { email, password } = loginUserSchema.parse(credentials);
+        // const { id, password } = credentials as {
+        //   id: string;
+        //   password: string;
+        // };
 
-        if (email !== "admin" || password !== "admin") {
-          throw new Error("Invalid Credentials");
-        } else {
-          return { id: "admin", password: "admin" };
-        }
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) return null;
+
+        const isPasswordCorrect = password === user.password;
+        // var isPasswordCorrect: boolean = await bcrypt.compare(
+        //   password,
+        //   user.password
+        // );
+
+        if (!isPasswordCorrect) return null;
+
+        return user;
       },
     }),
   ],
+  callbacks: {
+    session({ session, token }) {
+      session.user.id = token.id as string;
+      return session;
+    },
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user.email;
+        token.username = user.id;
+        console.log({ user });
+      }
+      return token;
+    },
+  },
+
   pages: {
     signIn: "/welcome-page",
   },

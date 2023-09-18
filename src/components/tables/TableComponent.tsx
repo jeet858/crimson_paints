@@ -7,13 +7,14 @@ import {
   TableCell,
   TableContainer,
 } from "@mui/material";
+import { UseTRPCQueryResult } from "@trpc/react-query/shared";
 
 interface TableProps {
   columns: {
     header: string;
     field: string;
   }[];
-  data: {}[];
+  data: {}[] | any;
   userType?: string;
   editIcon?: JSX.Element;
   deleteIcon?: JSX.Element;

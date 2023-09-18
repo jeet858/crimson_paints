@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
+import { api } from "~/utils/api";
 
 const productpackaginglist = () => {
   const router = useRouter();
@@ -14,9 +15,8 @@ const productpackaginglist = () => {
   };
 
   const columns = [
-    { header: "Symbol", field: "symbol" },
     { header: "Name", field: "name" },
-    { header: "Short Code", field: "shortcode" },
+    { header: "Short Code", field: "short_code" },
   ];
   const data = [
     {
@@ -40,6 +40,43 @@ const productpackaginglist = () => {
       shortcode: "ML.",
     },
   ];
+  const {
+    data: packagingType,
+    isLoading,
+    isError,
+  } = api.packagingType.all.useQuery();
+  if (isLoading)
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <div className="w-full">
+          <InsideNav />
+          <div className="flex items-end justify-center py-8">
+            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+              Basic Units
+            </div>
+            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+          </div>
+          <p>Loading Basic Units</p>
+        </div>
+      </UserTemplate>
+    );
+  if (isError)
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <div className="w-full">
+          <InsideNav />
+          <div className="flex items-end justify-center py-8">
+            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+              Basic Units
+            </div>
+            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+          </div>
+          <p>Error fetching Basic Units ❌</p>
+        </div>
+      </UserTemplate>
+    );
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -52,7 +89,7 @@ const productpackaginglist = () => {
           <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
         </div>
       </div>
-      <TableComponent columns={columns} data={data} />
+      <TableComponent columns={columns} data={packagingType} />
     </UserTemplate>
   );
 };

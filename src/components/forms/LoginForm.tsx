@@ -4,6 +4,7 @@ import LoginTemplate from "../template/LoginTemplate";
 import { FaEye } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { api } from "~/utils/api";
+import bcrypt from "bcryptjs";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -18,13 +19,14 @@ const LoginForm = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    console.log(userInfo);
     const res = await signIn("credentials", {
-      email: userInfo.email,
-      password: userInfo.password,
+      email: userInfo.email as string,
+      password: userInfo.password as string,
       redirect: false,
       callbackUrl: "/welcome-page",
     });
-
+    console.log(res);
     if (res?.ok) {
       navigate();
     }
@@ -32,7 +34,6 @@ const LoginForm = () => {
       // Authentication error occurred
       alert("Incorrect username or password. Please try again.");
     }
-    console.log(res);
   };
   return (
     <LoginTemplate templateParams={templateParams}>

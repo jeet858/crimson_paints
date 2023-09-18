@@ -6,7 +6,7 @@ import {
 } from "~/server/api/trpc";
 
 export const packagingTypeRouter = createTRPCRouter({
-  all: publicProcedure.query(async ({ ctx }) => {
+  all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.packaging_type.findMany({
       orderBy: [{ name: "asc" }],
     });

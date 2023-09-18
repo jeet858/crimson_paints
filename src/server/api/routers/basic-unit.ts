@@ -7,7 +7,7 @@ import {
 } from "~/server/api/trpc";
 
 export const basicUnitsRouter = createTRPCRouter({
-  all: publicProcedure.query(async ({ ctx }) => {
+  all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.basic_units.findMany();
     return units.map(({ name, symbol, short_code }) => ({
       name,

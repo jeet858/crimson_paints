@@ -34,12 +34,16 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/master",
     },
     {
+      name: "Basic Units",
+      href: "/basic-unit",
+    },
+    {
       name: "Packaging Type",
-      href: "",
+      href: "/product-packaging-list",
     },
     {
       name: "Colours",
-      href: "",
+      href: "/colors",
     },
     {
       name: "Packaging Unit",

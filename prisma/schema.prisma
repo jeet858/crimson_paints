@@ -72,3 +72,7 @@ model packaging_type{
   name String @unique
   short_code String @unique
 }
+model colors{
+  color_name String @unique
+  rgb_code String
+}

@@ -15,24 +15,24 @@ export const basicUnitsRouter = createTRPCRouter({
       short_code,
     }));
   }),
-  create: protectedProcedure
-    .input(basicUnitsInput)
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.basic_units.create({
-        data: {
-          name: input.name,
-          symbol: input.symbol,
-          short_code: input.short_code,
-        },
-      });
-    }),
-  delete: protectedProcedure
-    .input(basicUnitsInput)
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.basic_units.delete({
-        where: {
-          name: input.name,
-        },
-      });
-    }),
+  // create: protectedProcedure
+  //   .input(basicUnitsInput)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.db.basic_units.create({
+  //       data: {
+  //         name: input.name,
+  //         symbol: input.symbol,
+  //         short_code: input.short_code,
+  //       },
+  //     });
+  //   }),
+  // delete: protectedProcedure
+  //   .input(basicUnitsInput)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.db.basic_units.delete({
+  //       where: {
+  //         name: input.name,
+  //       },
+  //     });
+  //   }),
 });

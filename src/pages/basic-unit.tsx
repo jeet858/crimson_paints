@@ -19,28 +19,7 @@ const masterbasicunit = () => {
     { header: "Name", field: "name" },
     { header: "Short Code", field: "short_code" },
   ];
-  const data = [
-    {
-      symbol: "Gm",
-      name: "Gram",
-      shortcode: "Gram",
-    },
-    {
-      symbol: "Kg",
-      name: "Kilogram",
-      shortcode: "Kg",
-    },
-    {
-      symbol: "Lit",
-      name: "Liter",
-      shortcode: "Lit",
-    },
-    {
-      symbol: "ML.",
-      name: "Milliliter",
-      shortcode: "ML.",
-    },
-  ];
+
   const { data: basicUnits, isLoading, isError } = api.basicUnit.all.useQuery();
 
   if (isLoading)

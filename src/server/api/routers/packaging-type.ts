@@ -15,23 +15,23 @@ export const packagingTypeRouter = createTRPCRouter({
       short_code,
     }));
   }),
-  create: protectedProcedure
-    .input(packagingTypeInput)
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.packaging_type.create({
-        data: {
-          name: input.name,
-          short_code: input.short_code,
-        },
-      });
-    }),
-  delete: protectedProcedure
-    .input(packagingTypeInput)
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.basic_units.delete({
-        where: {
-          name: input.name,
-        },
-      });
-    }),
+  // create: protectedProcedure
+  //   .input(packagingTypeInput)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.db.packaging_type.create({
+  //       data: {
+  //         name: input.name,
+  //         short_code: input.short_code,
+  //       },
+  //     });
+  //   }),
+  // delete: protectedProcedure
+  //   .input(packagingTypeInput)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.db.basic_units.delete({
+  //       where: {
+  //         name: input.name,
+  //       },
+  //     });
+  //   }),
 });

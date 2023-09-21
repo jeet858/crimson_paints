@@ -55,11 +55,11 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "Product Categories",
-      href: "",
+      href: "/product-categories",
     },
     {
       name: "HSN Code",
-      href: "",
+      href: "/hsn-code",
     },
     {
       name: "Product Brand",

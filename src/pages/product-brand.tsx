@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
-import { api } from "~/utils/api";
+// import { api } from "~/utils/api";
 import BrandTable from "~/components/tables/BrandTable";
 
 const productbrand = () => {
@@ -20,6 +20,22 @@ const productbrand = () => {
     { header: "HSN Code", field: "hsncode" },
   ];
   const data = [
+    {
+      brandname: "AD Base",
+      hsncode: "3209",
+    },
+    {
+      brandname: "EZ Base",
+      hsncode: "3209",
+    },
+    {
+      brandname: "RB Base",
+      hsncode: "3209",
+    },
+    {
+      brandname: "RU Base",
+      hsncode: "3209",
+    },
     {
       brandname: "AD Base",
       hsncode: "3209",
@@ -68,60 +84,60 @@ const productbrand = () => {
       </button>
     ));
   };
-  const {
-    data: catrgories,
-    isLoading,
-    isError,
-  } = api.categories.with_brand.useQuery();
-  console.log(catrgories);
-  if (isLoading) {
-    return (
-      <UserTemplate templateParams={templateParams}>
-        <InsideNav />
-        <div className="h-fit w-full p-4">
-          <div className="flex items-center justify-center">
-            <div className="flex w-full items-end justify-center ">
-              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                HSN Codes
-              </div>
-              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-            </div>
-            <div className="flex items-end justify-end">
-              <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-        <div>Still loading</div>
-      </UserTemplate>
-    );
-  }
-  if (isError) {
-    return (
-      <UserTemplate templateParams={templateParams}>
-        <InsideNav />
-        <div className="h-fit w-full p-4">
-          <div className="flex items-center justify-center">
-            <div className="flex w-full items-end justify-center ">
-              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                HSN Codes
-              </div>
-              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-            </div>
-            <div className="flex items-end justify-end">
-              <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-        <div>Error</div>
-      </UserTemplate>
-    );
-  }
+  // const {
+  //   data: catrgories,
+  //   isLoading,
+  //   isError,
+  // } = api.categories.with_brand.useQuery();
+  // console.log(catrgories);
+  // if (isLoading) {
+  //   return (
+  //     <UserTemplate templateParams={templateParams}>
+  //       <InsideNav />
+  //       <div className="h-fit w-full p-4">
+  //         <div className="flex items-center justify-center">
+  //           <div className="flex w-full items-end justify-center ">
+  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+  //             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+  //               HSN Codes
+  //             </div>
+  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+  //           </div>
+  //           <div className="flex items-end justify-end">
+  //             <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+  //               Add
+  //             </button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       <div>Still loading</div>
+  //     </UserTemplate>
+  //   );
+  // }
+  // if (isError) {
+  //   return (
+  //     <UserTemplate templateParams={templateParams}>
+  //       <InsideNav />
+  //       <div className="h-fit w-full p-4">
+  //         <div className="flex items-center justify-center">
+  //           <div className="flex w-full items-end justify-center ">
+  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+  //             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+  //               HSN Codes
+  //             </div>
+  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+  //           </div>
+  //           <div className="flex items-end justify-end">
+  //             <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+  //               Add
+  //             </button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       <div>Error</div>
+  //     </UserTemplate>
+  //   );
+  // }
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -150,9 +166,7 @@ const productbrand = () => {
         </div>
       </div>
       <div>
-        {catrgories.map((category, index) => {
-          return <BrandTable category={category.name} />;
-        })}
+        <BrandTable columns={columns} data={data} />
       </div>
     </UserTemplate>
   );

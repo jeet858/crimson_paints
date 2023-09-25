@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
+import { api } from "~/utils/api";
 
 const packagingunit = () => {
   const router = useRouter();
@@ -14,47 +15,63 @@ const packagingunit = () => {
   };
 
   const columns = [
-    { header: "Qty / Unit", field: "qtyunit" },
+    { header: "Qty / Unit", field: "name" },
     { header: "Packaging", field: "packaging" },
-    { header: "Name", field: "Name" },
+    { header: "Name", field: "unit" },
   ];
-  const data = [
-    {
-      qtyunit: "0.20 Kilogram",
-      packaging: "Container",
-      Name: "0.2 Kg Con.",
-    },
-    {
-      qtyunit: "0.25 Kilogram",
-      packaging: "Container",
-      Name: "0.2 Kg Con.",
-    },
-    {
-      qtyunit: "0.50 Kilogram",
-      packaging: "Container",
-      Name: "0.5 Kg Con.",
-    },
-    {
-      qtyunit: "0.20 Kilogram",
-      packaging: "Pouch.",
-      Name: "0.2 Kg Con.",
-    },
-    {
-      qtyunit: "0.20 Kilogram",
-      packaging: "Container",
-      Name: "0.2 Kg pou.",
-    },
-    {
-      qtyunit: "0.50 Liter",
-      packaging: "Container",
-      Name: "0.2 ltr Con.",
-    },
-    {
-      qtyunit: "1.00 Kilogram",
-      packaging: "Container",
-      Name: "1 Kg Con.",
-    },
-  ];
+  const {
+    data: packagingUnit,
+    isLoading,
+    isError,
+  } = api.packagingUnit.all.useQuery();
+  if (isLoading) {
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <InsideNav />
+        <div className="h-fit w-full p-4">
+          <div className="flex items-center justify-center">
+            <div className="flex w-full items-end justify-center ">
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+                Packaging Units
+              </div>
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            </div>
+            <div className="flex items-end justify-end">
+              <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>Still Loading</div>
+      </UserTemplate>
+    );
+  }
+  if (isError) {
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <InsideNav />
+        <div className="h-fit w-full p-4">
+          <div className="flex items-center justify-center">
+            <div className="flex w-full items-end justify-center ">
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+                Packaging Units
+              </div>
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            </div>
+            <div className="flex items-end justify-end">
+              <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>Error</div>
+      </UserTemplate>
+    );
+  }
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -74,7 +91,7 @@ const packagingunit = () => {
           </div>
         </div>
       </div>
-      <TableComponent columns={columns} data={data} />
+      <TableComponent columns={columns} data={packagingUnit} />
     </UserTemplate>
   );
 };

@@ -6,13 +6,16 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 
-export const basicUnitsRouter = createTRPCRouter({
+export const packagingUnitRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
-    const units = await ctx.db.basicUnits.findMany();
-    return units.map(({ name, symbol, short_code }) => ({
+    const packagingUnit = await ctx.db.packagingUnits.findMany({
+      orderBy: [{ unit_value: "asc" }],
+    });
+    return packagingUnit.map(({ name, packaging, unit, unit_value }) => ({
       name,
-      symbol,
-      short_code,
+      packaging,
+      unit,
+      unit_value,
     }));
   }),
   // create: protectedProcedure

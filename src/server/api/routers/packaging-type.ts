@@ -7,10 +7,10 @@ import {
 
 export const packagingTypeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
-    const units = await ctx.db.packaging_type.findMany({
+    const packagingType = await ctx.db.packagingType.findMany({
       orderBy: [{ name: "asc" }],
     });
-    return units.map(({ name, short_code }) => ({
+    return packagingType.map(({ name, short_code }) => ({
       name,
       short_code,
     }));

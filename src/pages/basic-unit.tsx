@@ -54,6 +54,9 @@ const masterbasicunit = () => {
         </div>
       </UserTemplate>
     );
+  {
+    console.log(basicUnits);
+  }
 
   return (
     <UserTemplate templateParams={templateParams}>

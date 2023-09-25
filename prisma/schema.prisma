@@ -9,66 +9,102 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model Example {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 
-    @@index([name])
+model Example {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String  @id 
-    name          String
-    email         String  @unique
-    password      String
-    user_type     String 
-    accounts      Account[]
-    sessions      Session[]
-
+  id        String    @id
+  name      String
+  email     String    @unique
+  password  String
+  user_type String
+  accounts  Account[]
+  sessions  Session[]
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
-model basic_units {
-  symbol String @unique 
-  name String @unique
+
+model BasicUnits {
+  symbol     String @unique
+  name       String @unique
   short_code String @unique
 }
-model packaging_type{
-  name String @unique
+
+model PackagingType {
+  name       String @unique
   short_code String @unique
+}
+
+model Colors {
+  color_name String @unique @id
+  rgb_code   String
+  brand Brand[]
+}
+
+model PackagingUnits {
+  name       String  @unique
+  packaging  String
+  unit       String
+  unit_value Decimal
+}
+
+model HsnCode {
+  code        Int     @id @unique
+  description String
+  brand       Brand[]
+}
+
+model Categories {
+  name  String  @unique @id
+  code  String @unique
+  brand Brand[]
+}
+
+model Brand {
+  brand_name     String     @unique @id
+  hsn_code       HsnCode    @relation(fields: [hsnCode_id], references: [code])
+  hsnCode_id     Int
+  categories     Categories @relation(fields: [categoriesName], references: [name])
+  categoriesName String
+  color Colors[]
 }

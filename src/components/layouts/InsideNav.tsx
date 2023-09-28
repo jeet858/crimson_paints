@@ -30,10 +30,6 @@ const InsideNav: React.FunctionComponent = (props) => {
   ];
   const masterElement = [
     {
-      name: "Master",
-      href: "/master",
-    },
-    {
       name: "Basic Units",
       href: "/basic-unit",
     },
@@ -42,12 +38,12 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/product-packaging-list",
     },
     {
-      name: "Colours",
+      name: "Colors",
       href: "/colors",
     },
     {
       name: "Packaging Unit",
-      href: "",
+      href: "/packaging-unit",
     },
     {
       name: "Client Companies",
@@ -55,27 +51,27 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "Product Categories",
-      href: "",
+      href: "/product-categories",
     },
     {
       name: "HSN Code",
-      href: "",
+      href: "/hsn-code",
     },
     {
       name: "Product Brand",
-      href: "",
+      href: "/product-brand",
     },
     {
       name: "Brand and Packaging Type",
-      href: "",
+      href: "/brand-and-packaging-type",
     },
     {
       name: "Group for Pricing",
-      href: "",
+      href: "/group-for-pricing",
     },
     {
       name: "Oderable Units",
-      href: "",
+      href: "/orderable-unit",
     },
     {
       name: "Branch",

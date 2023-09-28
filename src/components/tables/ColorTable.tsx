@@ -15,7 +15,7 @@ interface Column {
 
 interface TableProps {
   columns: Column[];
-  data: any[];
+  data: {}[] | any;
 }
 
 const tstyle: {} = {

@@ -86,6 +86,18 @@ model PackagingUnits {
   packaging  String
   unit       String
   unit_value Decimal
+  brand PuBrand[]
+  @@id([name, packaging])
+}
+
+model ComplexPackagingUnits{
+  name String @unique @id
+  packaging_name String
+  unit_id String
+  unit_value Decimal
+  packaging_qty Decimal
+  packaging_type String
+  brand ComplexPUBrand[]
 }
 
 model HsnCode {
@@ -107,4 +119,22 @@ model Brand {
   categories     Categories @relation(fields: [categoriesName], references: [name])
   categoriesName String
   color Colors[]
+  complex_packaging ComplexPUBrand[]
+  simple_packaging PuBrand[]
+}
+
+model ComplexPUBrand{
+  brandId String 
+  brand Brand @relation(fields: [brandId], references: [brand_name])
+  complexPuId String
+  complex ComplexPackagingUnits @relation(fields: [complexPuId], references: [name])
+  @@id([brandId,complexPuId])
+}
+
+model PuBrand{
+  brandId String 
+  brand Brand @relation(fields: [brandId], references: [brand_name])
+  packagint_unit_id String
+  packaging_unit PackagingUnits @relation(fields: [packagint_unit_id], references: [name])
+  @@id([brandId,packagint_unit_id])
 }

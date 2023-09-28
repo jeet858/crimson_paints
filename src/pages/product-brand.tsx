@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
-// import { api } from "~/utils/api";
+import { api } from "~/utils/api";
 import BrandTable from "~/components/tables/BrandTable";
 
 const productbrand = () => {
@@ -16,43 +16,10 @@ const productbrand = () => {
   };
 
   const columns = [
-    { header: "Brand Name", field: "brandname" },
-    { header: "HSN Code", field: "hsncode" },
+    { header: "Brand Name", field: "brand_name" },
+    { header: "HSN Code", field: "hsnCode_id" },
   ];
-  const data = [
-    {
-      brandname: "AD Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "EZ Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "RB Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "RU Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "AD Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "EZ Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "RB Base",
-      hsncode: "3209",
-    },
-    {
-      brandname: "RU Base",
-      hsncode: "3209",
-    },
-  ];
+
   const handleButtonClick = (categoryName: string) => {
     setSelectedCategory(categoryName);
   };
@@ -84,60 +51,60 @@ const productbrand = () => {
       </button>
     ));
   };
-  // const {
-  //   data: catrgories,
-  //   isLoading,
-  //   isError,
-  // } = api.categories.with_brand.useQuery();
-  // console.log(catrgories);
-  // if (isLoading) {
-  //   return (
-  //     <UserTemplate templateParams={templateParams}>
-  //       <InsideNav />
-  //       <div className="h-fit w-full p-4">
-  //         <div className="flex items-center justify-center">
-  //           <div className="flex w-full items-end justify-center ">
-  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-  //             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-  //               HSN Codes
-  //             </div>
-  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-  //           </div>
-  //           <div className="flex items-end justify-end">
-  //             <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
-  //               Add
-  //             </button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <div>Still loading</div>
-  //     </UserTemplate>
-  //   );
-  // }
-  // if (isError) {
-  //   return (
-  //     <UserTemplate templateParams={templateParams}>
-  //       <InsideNav />
-  //       <div className="h-fit w-full p-4">
-  //         <div className="flex items-center justify-center">
-  //           <div className="flex w-full items-end justify-center ">
-  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-  //             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-  //               HSN Codes
-  //             </div>
-  //             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-  //           </div>
-  //           <div className="flex items-end justify-end">
-  //             <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
-  //               Add
-  //             </button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <div>Error</div>
-  //     </UserTemplate>
-  //   );
-  // }
+  const {
+    data: catrgories,
+    isLoading,
+    isError,
+  } = api.categories.with_brand.useQuery();
+  console.log(catrgories);
+  if (isLoading) {
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <InsideNav />
+        <div className="h-fit w-full p-4">
+          <div className="flex items-center justify-center">
+            <div className="flex w-full items-end justify-center ">
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+                HSN Codes
+              </div>
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            </div>
+            <div className="flex items-end justify-end">
+              <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>Still loading</div>
+      </UserTemplate>
+    );
+  }
+  if (isError) {
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <InsideNav />
+        <div className="h-fit w-full p-4">
+          <div className="flex items-center justify-center">
+            <div className="flex w-full items-end justify-center ">
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+                HSN Codes
+              </div>
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            </div>
+            <div className="flex items-end justify-end">
+              <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>Error</div>
+      </UserTemplate>
+    );
+  }
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -160,13 +127,13 @@ const productbrand = () => {
         <div className="border-1 h-fit w-full   rounded-lg bg-[#C4B0FF] p-4">
           {generateButtons()}
         </div>
-        <div className="flex h-[3rem] items-end text-lg">
-          Categories:{" "}
-          <span className="ml-2 text-lg font-semibold">{selectedCategory}</span>
-        </div>
       </div>
       <div>
-        <BrandTable columns={columns} data={data} />
+        {catrgories.map((category, index) => (
+          <div>
+            <BrandTable columns={columns} category={category.name} />
+          </div>
+        ))}
       </div>
     </UserTemplate>
   );

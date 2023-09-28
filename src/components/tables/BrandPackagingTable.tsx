@@ -18,7 +18,7 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({ data }) => {
         {data.map((item, index) => (
           <div key={index} id={item.id} className="flex flex-col p-1 ">
             <div className="text-md  p-2 font-semibold">{item.name}:</div>
-            <div className="text-md h-12 overflow-auto">
+            <div className="text-md">
               <ul className="flex flex-wrap  p-2">
                 {item.packaging.map((packageItem, i) => (
                   <li

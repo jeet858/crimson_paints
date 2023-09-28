@@ -29,7 +29,7 @@ const GroupForProcingTable: React.FC<GroupForProcingTableProps> = ({
                   </div>
                 ))}
               </div>
-              <div className=" h-20 w-full overflow-auto  text-lg ">
+              <div className="w-full text-lg ">
                 {item.bodyData.map((rowData, bodyIndex) => (
                   <div
                     key={bodyIndex}

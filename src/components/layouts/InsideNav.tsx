@@ -67,7 +67,7 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "Group for Pricing",
-      href: "",
+      href: "/group-for-pricing",
     },
     {
       name: "Oderable Units",

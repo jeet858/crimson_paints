@@ -63,11 +63,11 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "Brand and Packaging Type",
-      href: "",
+      href: "/brand-and-packaging-type",
     },
     {
       name: "Group for Pricing",
-      href: "",
+      href: "/group-for-pricing",
     },
     {
       name: "Oderable Units",

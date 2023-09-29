@@ -1,0 +1,141 @@
+insert into BasicUnits(symbol,name,short_code) values
+('Gm','Gram','Gram'),
+('Kg','Kilogram','Kg'),
+('Lit','Liter','Lit'),
+('ML','Mililiter','ML')
+
+
+
+INSERT INTO PackagingType (name, short_code) VALUES
+('Jar', 'Jar'),
+('Bag', 'Bag'),
+('Container', 'Con.'),
+('Pouch', 'Pou.'),
+('Cartoon', 'Car.'),
+('Can be deleted', 'P for Jr');
+
+
+INSERT INTO Categories (name, code) VALUES
+('Putty', 'Putty'),
+('Cement Paints', 'Cem. Paint'),
+('Water Primer', 'Wtr.Primer'),
+('Tilo Items', 'Tilo Items'),
+('Exterior Finish', 'Exterior'),
+('Interior Finish', 'Interior'),
+('Base', 'Base'),
+('Oxide Colour', 'Oxide'),
+('Synthetic Primer', 'Syn Primer'),
+('Synthetic Enamel', 'Syn Enamel'),
+('Metallics', 'Metallics'),
+('Floor Coat Emulsion', 'Floor Coat'),
+('Construction Chemical', 'Cons Chem'),
+('Machine Colorant', 'Colorant');
+
+
+INSERT INTO HsnCode (code, description) VALUES
+('3209', ''),
+('3208', ''),
+('3210', ''),
+('3214', ''),
+('3824', ''),
+('3206', ''),
+('3506', ''),
+('3814', ''),
+('3213', '');
+
+
+INSERT INTO Brand (brand_name, categoriesName, hsnCode_id) VALUES
+('Crimocem Super', 'Cement Paints', '3210'),
+('Double Plus', 'Cement Paints', '3210'),
+('Eko Plus', 'Cement Paints', '3210'),
+('Prime Care Putty (No Coupon)', 'Putty', '3214'),
+('Weather Seald', 'Putty', '3214'),
+('SB Base', 'Base', '3209'),
+('RB Base', 'Base', '3209'),
+('AD Base', 'Base', '3209'),
+('ST Base', 'Base', '3209'),
+('WM Base', 'Base', '3209'),
+('EZ Base', 'Base', '3209'),
+('Safe Guard', 'Exterior Finish', '3209'),
+('Royal Coat', 'Exterior Finish', '3209'),
+('Silk Touch', 'Interior Finish', '3209'),
+('Velvet', 'Interior Finish', '3210'),
+('Suprimo', 'Water Primer', '3209'),
+('Prime Guard', 'Water Primer', '3209'),
+('Super Guard', 'Water Primer', '3209'),
+('Tilo Fixer', 'Tilo Items', '3506'),
+('Tilo Fill', 'Tilo Items', '3506'),
+('Classic Oxide', 'Oxide Colour', '3206'),
+('Gulf Oxide', 'Oxide Colour', '3206'),
+('ARF Oxide', 'Oxide Colour', '3206'),
+('Velvet Acrylic Wall Putty', 'Interior Finish', '3214'),
+('Prime Coat', 'Synthetic Primer', '3208'),
+('Crimolite', 'Synthetic Enamel', '3208'),
+('Metallics', 'Metallics', '3209'),
+('Synthetic Oxide', 'Oxide Colour', '3206'),
+('Deco Floor', 'Floor Coat Emulsion', '3209'),
+('Crimson Super IWC', 'Construction Chemical', '3824'),
+('Crimson Bond SBR', 'Construction Chemical', '3824'),
+('Crimson CRETE', 'Construction Chemical', '3824'),
+('Colour Universe', 'Machine Colorant', '3213'),
+('A-1 Oxide', 'Oxide Colour', '3206'),
+('Prime Care Putty (With Coupon)', 'Putty', '3214'),
+('Damp Seald', 'Water Primer', '3209'),
+('Silk Touch Premium', 'Interior Finish', '3209'),
+('RU Base', 'Base', '3209'),
+('Crimo Coat', 'Synthetic Enamel', '3208');
+
+
+INSERT INTO Colors (color_name, rgb_code) VALUES
+('White', '#ffffff'),
+('Spl. Brick Red', '#800000'),
+('Brick Red', '#800000'),
+('Aquamarine', '#7dc8c5'),
+('Lime', '#919100'),
+('Light Olive', '#808000'),
+('Off White', '#ffe4ae'),
+('Ivory', '#fad669'),
+('Mid Cream', '#f9c455'),
+('Light Biscuit', '#c88f6a'),
+('Rose White', '#fac2a0'),
+('Blush Pink', '#f5b381'),
+('Pink', '#f5998b'),
+('Candy', '#e86a0d'),
+('Pale Rose', '#c6593e'),
+('Peach', '#c04729'),
+('Apricot', '#f3c878'),
+('Apple White', '#bfddd5'),
+('Spring Green', '#e2f5a0'),
+('Water Green', '#8beb93');
+
+
+INSERT INTO PackagingUnits (name,unit_value,unit,packaging) VALUES
+('40 Kg Bag', 40.00, 'Kg', 'Bag'),
+('25 Kg Bag', 25.00, 'Kg', 'Bag'),
+('25 Kg Jar', 25.00, 'Kg', 'Jar'),
+('20 Kg Bag', 20.00, 'Kg', 'Bag'),
+('10 Kg Jar', 10.00, 'Kg', 'Jar'),
+('5 Kg Con.', 5.00, 'Kg', 'Con'),
+('5 Kg Bag', 5.00, 'Kg', 'Bag'),
+('5 Kg Pou.', 5.00, 'Kg', 'Pou'),
+('1 Kg Pou.', 1.00, 'Kg', 'Pou'),
+('20 Lit Jar', 20.00, 'Lit', 'Jar'),
+('10 Lit Jar', 10.00, 'Lit', 'Jar'),
+('4 Lit Con.', 4.00, 'Lit', 'Con'),
+('1 Lit Con.', 1.00, 'Lit', 'Con'),
+('0.5 Lit Con.', 0.50, 'Lit', 'Con'),
+('200 ML. Con.', 200.00, 'ML', 'Con'),
+('100 ML. Con.', 100.00, 'ML', 'Con'),
+('50 ML. Con.', 50.00, 'ML', 'Con'),
+('18 Lit Jar', 18.00, 'Lit', 'Jar'),
+('9 Lit Jar', 9.00, 'Lit', 'Jar'),
+('3.6 Lit Con.', 3.60, 'Lit', 'Con'),
+('900 ML. Con.', 900.00, 'ML', 'Con'),
+('20 Kg Jar', 20.00, 'Kg', 'Jar'),
+('1 Kg Con.', 1.00, 'Kg', 'Con'),
+('0.2 Kg Con.', 0.20, 'Kg', 'Con'),
+('0.5 Kg Con.', 0.50, 'Kg', 'Con'),
+('0.25 Kg Con.', 0.25, 'Kg', 'Con'),
+('30 Kg Jar', 30.00, 'Kg', 'Jar'),
+('0.5 Kg Pou.', 0.50, 'Kg', 'Pou');
+

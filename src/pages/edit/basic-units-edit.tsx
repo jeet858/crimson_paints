@@ -31,14 +31,14 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Symbol
             <input
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] outline-none"
+              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
               value={editData.Symbol}
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
             <input
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] outline-none"
+              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
               value={editData.Name}
             />
           </div>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FaUserCircle } from "react-icons/fa";
 interface OuterNavProps {
-  userName: string;
+  userName: string | number;
 }
 const OuterNav: React.FunctionComponent<OuterNavProps> = (props) => {
   return (

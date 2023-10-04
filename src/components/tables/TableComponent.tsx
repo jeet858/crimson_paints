@@ -7,13 +7,14 @@ import {
   TableCell,
   TableContainer,
 } from "@mui/material";
+import { UseTRPCQueryResult } from "@trpc/react-query/shared";
 
 interface TableProps {
   columns: {
     header: string;
     field: string;
   }[];
-  data: {}[];
+  data: {}[] | any;
   userType?: string;
   editIcon?: JSX.Element;
   deleteIcon?: JSX.Element;
@@ -21,34 +22,63 @@ interface TableProps {
 
 const TableComponent: React.FunctionComponent<TableProps> = (props) => {
   const tableCellStyle = {
-    width: "4rem",
-    padding: "0.25rem",
+    width: 64,
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#e7e0ff78",
+    backgroundColor: "#e7e0ff78",
+    padding: 4,
+    fontSize: 14,
+    justifyContent: "center",
   };
   const tstyle: {} = {
     width: "100%",
     overflowY: "auto",
     height: "50vh",
+    overscrollBehaviorY: "auto",
+  };
+  const headerCellStyle: {} = {
+    width: "4rem",
+    backgroundColor: "#c4b0ff",
+    padding: "4px",
+    fontSize: "15px",
+    fontWeight: 600,
+  };
+  const headerIconStyle: {} = {
+    width: "64px",
+    backgroundColor: "#c4b0ff",
+    padding: "4px",
+    fontSize: "15px",
+    fontWeight: 600,
+  };
+  const tableRowStyle: {} = {
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    borderColor: "black",
   };
   return (
     <div className=" flex h-full w-full flex-col p-4">
-      <TableContainer className="h-[50vh] w-full overscroll-y-auto">
+      <TableContainer style={{ ...tstyle }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
               {props.columns.map((column, index) => (
                 <TableCell
                   key={index}
-                  className="w-16 bg-[#c4b0ff] p-1 text-[15px] font-semibold"
+                  style={{
+                    backgroundColor: "#c4b0ff",
+                    textAlign: "center",
+                  }}
                 >
                   {column.header}
                 </TableCell>
               ))}
               {props.userType === "admin" ? (
                 <>
-                  <TableCell className="w-16 bg-[#c4b0ff] p-1 text-[15px] font-semibold">
+                  <TableCell style={{ backgroundColor: "#c4b0ff" }}>
                     Edit
                   </TableCell>
-                  <TableCell className="w-16 bg-[#c4b0ff] p-1 text-[15px] font-semibold">
+                  <TableCell style={{ backgroundColor: "#c4b0ff" }}>
                     Delete
                   </TableCell>
                 </>
@@ -57,24 +87,32 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
           </TableHead>
           <TableBody>
             {props.data.map((row: any, rowIndex) => (
-              <TableRow
-                className="borderb- border-b-[1px] border-solid border-b-black"
-                key={rowIndex}
-              >
+              <TableRow key={rowIndex} style={{ ...tableRowStyle }}>
                 {props.columns.map((column, colIndex) => (
                   <TableCell
                     key={colIndex}
-                    className="w-16 border-b-[1px] border-solid border-[#e7e0ff78] bg-[#e7e0ff78] p-1 text-[14px]"
+                    style={{
+                      backgroundColor: "rgba(196, 176, 255, 0.25)",
+                      textAlign: "center",
+                    }}
                   >
                     {row[column.field]}
                   </TableCell>
                 ))}
                 {props.userType === "admin" ? (
                   <>
-                    <TableCell className="w-16 border-b-[1px] border-solid border-[#e7e0ff78] bg-[#e7e0ff78] p-1 text-[14px]">
+                    <TableCell
+                      style={{
+                        backgroundColor: "rgba(196, 176, 255, 0.25)",
+                      }}
+                    >
                       {props.editIcon}
                     </TableCell>
-                    <TableCell className="w-16 border-b-[1px] border-solid border-[#e7e0ff78] bg-[#e7e0ff78] p-1 text-[14px]">
+                    <TableCell
+                      style={{
+                        backgroundColor: "rgba(196, 176, 255, 0.25)",
+                      }}
+                    >
                       {props.deleteIcon}
                     </TableCell>
                   </>

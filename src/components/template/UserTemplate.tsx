@@ -19,7 +19,7 @@ const UserTemplate: React.FunctionComponent<IProps> = (props) => {
           <OuterNav />
           <div className="flex h-[90%] w-full flex-row flex-wrap overflow-auto">
             <SideNav userType={props.templateParams.userType} />
-            <div className="flex h-full w-11/12 flex-wrap overflow-x-hidden overflow-y-scroll rounded-br-3xl bg-white">
+            <div className="flex h-full w-11/12 flex-initial flex-col overflow-x-hidden overflow-y-scroll rounded-br-3xl bg-white">
               {props.children}
             </div>
           </div>

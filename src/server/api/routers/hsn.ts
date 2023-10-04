@@ -5,33 +5,15 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
-import { db } from "~/server/db";
-const inputSchema = z.string({
-  required_error: "This is a required field",
-});
-export const brandRouter = createTRPCRouter({
+
+export const hsnCodeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
-    const brands = await ctx.db.brand.findMany();
-    return brands.map(({ brand_name, categoriesName, hsnCode_id }) => ({
-      brand_name,
-      categoriesName,
-      hsnCode_id,
+    const hsn = await ctx.db.hsnCode.findMany();
+    return hsn.map(({ code, description }) => ({
+      code,
+      description,
     }));
   }),
-  where_categories: protectedProcedure
-    .input(inputSchema)
-    .query(async ({ input, ctx }) => {
-      const brands = await ctx.db.brand.findMany({
-        where: {
-          categoriesName: input,
-        },
-      });
-      return brands.map(({ brand_name, categoriesName, hsnCode_id }) => ({
-        brand_name,
-        categoriesName,
-        hsnCode_id,
-      }));
-    }),
   // create: protectedProcedure
   //   .input(basicUnitsInput)
   //   .mutation(async ({ ctx, input }) => {

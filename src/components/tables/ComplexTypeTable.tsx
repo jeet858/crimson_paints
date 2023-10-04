@@ -1,5 +1,5 @@
 import React from "react";
-import Tablecomponent from "../tables/TableComponent";
+import Tablecomponent from "./TableComponent";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 const columns = [

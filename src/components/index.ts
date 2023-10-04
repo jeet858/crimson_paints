@@ -5,7 +5,7 @@ import HelpText from "./elements/HelpText";
 import InputField from "./elements/InputField";
 import TextInput from "./elements/InputTextField";
 import TableComponent from "./tables/TableComponent";
-import ComplexTypeTable from "./elements/ComplexTypeTable";
+import ComplexTypeTable from "./tables/ComplexTypeTable";
 import UserTemplate from "./template/UserTemplate";
 import UnitMasterTable from "./tables/UnitMasterTable";
 import InsideNav from "./layouts/InsideNav";

@@ -19,11 +19,11 @@ const BasicUnitsAdd: React.FunctionComponent = () => {
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Symbol
-            <input className="rounded-md border border-[#11009E] bg-[#C4B0FF45] outline-none" />
+            <input className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
-            <input className="rounded-md border border-[#11009E] bg-[#C4B0FF45] outline-none" />
+            <input className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
             <button className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">

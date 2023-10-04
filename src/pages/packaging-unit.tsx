@@ -17,7 +17,7 @@ const packagingunit = () => {
   const columns = [
     { header: "Qty / Unit", field: "name" },
     { header: "Packaging", field: "packaging" },
-    { header: "Name", field: "unit" },
+    { header: "Unit", field: "unit" },
   ];
   const {
     data: packagingUnit,

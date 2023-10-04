@@ -32,7 +32,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
               </div>
             ))}
           </div>
-          <div className="h-[40vh] overflow-auto">
+          <div className="overflow-auto">
             {brands.map((brand, rowIndex) => (
               <div
                 key={rowIndex}

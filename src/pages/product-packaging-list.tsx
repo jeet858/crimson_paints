@@ -40,6 +40,12 @@ const productpackaginglist = () => {
       shortcode: "ML.",
     },
   ];
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   const {
     data: packagingType,
     isLoading,
@@ -89,7 +95,14 @@ const productpackaginglist = () => {
           <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
         </div>
       </div>
-      <TableComponent columns={columns} data={packagingType} />
+      <TableComponent
+        columns={columns}
+        data={packagingType}
+        onDeleteClick={handleDeleteClick}
+        onEditClick={handleEditClick}
+        editUrl=""
+        deleteUrl=""
+      />
     </UserTemplate>
   );
 };

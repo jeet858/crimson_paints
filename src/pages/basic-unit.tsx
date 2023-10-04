@@ -19,7 +19,12 @@ const masterbasicunit = () => {
     { header: "Name", field: "name" },
     { header: "Short Code", field: "short_code" },
   ];
-
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delete");
+  };
   const { data: basicUnits, isLoading, isError } = api.basicUnit.all.useQuery();
 
   if (isLoading)
@@ -69,7 +74,14 @@ const masterbasicunit = () => {
           </div>
           <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
         </div>
-        <TableComponent columns={columns} data={basicUnits} />
+        <TableComponent
+          columns={columns}
+          data={basicUnits}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
+          editUrl="edit/basic-units-edit"
+          deleteUrl="delete/basic-units-delete"
+        />
       </div>
     </UserTemplate>
   );

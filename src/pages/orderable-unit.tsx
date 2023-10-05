@@ -87,7 +87,12 @@ const orderableunit = () => {
       ],
     },
   ];
-
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -108,7 +113,13 @@ const orderableunit = () => {
         </div>
       </div>
       <div className="h-fit">
-        <OrderableUnitTable data={data} />
+        <OrderableUnitTable
+          data={data}
+          onDeleteClick={handleDeleteClick}
+          onEditClick={handleEditClick}
+          editUrl=""
+          deleteUrl=""
+        />
       </div>
     </UserTemplate>
   );

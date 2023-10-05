@@ -87,10 +87,10 @@ const orderableunit = () => {
       ],
     },
   ];
-  const handleEditClick = (row) => {
+  const handleEditClick = () => {
     console.log("edit");
   };
-  const handleDeleteClick = (row) => {
+  const handleDeleteClick = () => {
     console.log("delet");
   };
   return (

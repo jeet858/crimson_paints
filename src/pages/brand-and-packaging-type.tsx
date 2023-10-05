@@ -149,7 +149,12 @@ function brandandpackagingtype() {
       ],
     },
   ];
-
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -173,7 +178,13 @@ function brandandpackagingtype() {
           {generateButtons()}
         </div>
         <div ref={tableRef}>
-          <BrandPackagingTable data={data} />
+          <BrandPackagingTable
+            data={data}
+            onDeleteClick={handleDeleteClick}
+            onEditClick={handleEditClick}
+            editUrl=""
+            deleteUrl=""
+          />
         </div>
       </div>
     </UserTemplate>

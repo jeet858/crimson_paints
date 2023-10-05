@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { InsideNav, TableComponent, UserTemplate } from "@/components";
+import { InsideNav, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
 import BrandTable from "~/components/tables/BrandTable";
 
@@ -50,6 +50,12 @@ const productbrand = () => {
         {buttonName}
       </button>
     ));
+  };
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
   };
   const {
     data: catrgories,
@@ -131,7 +137,14 @@ const productbrand = () => {
       <div>
         {catrgories.map((category, index) => (
           <div>
-            <BrandTable columns={columns} category={category.name} />
+            <BrandTable
+              columns={columns}
+              category={category.name}
+              onDeleteClick={handleDeleteClick}
+              onEditClick={handleEditClick}
+              editUrl=""
+              deleteUrl=""
+            />
           </div>
         ))}
       </div>

@@ -1,9 +1,18 @@
+import Link from "next/link";
 import React from "react";
 import { api } from "~/utils/api";
-
+interface BrandItem {
+  brand_name: string;
+  categoriesName: string;
+  hsnCode_id: number;
+}
 interface BrandTableProps {
   category: string;
   columns: { header: string; field: string }[];
+  onEditClick: (rowData: BrandItem) => void;
+  onDeleteClick: (rowData: BrandItem) => void;
+  editUrl: string;
+  deleteUrl: string;
 }
 const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
   const {
@@ -31,6 +40,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
                 {column.header}
               </div>
             ))}
+            <div className="w-[33.3%] py-2 text-center">Actions</div>
           </div>
           <div className="overflow-auto">
             {brands.map((brand, rowIndex) => (
@@ -43,6 +53,24 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
                     {brand[column.field]}
                   </div>
                 ))}
+                <div className="w-[33.3%] space-x-2 py-2 text-center">
+                  <Link href={props.editUrl}>
+                    <button
+                      className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                      onClick={() => props.onEditClick(brand)}
+                    >
+                      Edit
+                    </button>
+                  </Link>
+                  <Link href={props.deleteUrl}>
+                    <button
+                      className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                      onClick={() => props.onDeleteClick(brand)}
+                    >
+                      Delete
+                    </button>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

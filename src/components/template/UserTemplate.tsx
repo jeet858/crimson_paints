@@ -3,7 +3,7 @@ import { InsideNav, OuterNav, SideNav } from "@/components";
 interface IProps {
   templateParams: {
     title: string;
-    userID: string;
+    userID: string | number;
     userImage: string;
     userType: string;
   };

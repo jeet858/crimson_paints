@@ -3,12 +3,6 @@ import React, { useEffect, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
-import { Audio } from "react-loader-spinner";
-import toast from "react-hot-toast";
-const get = async () => {
-  const session = await getSession();
-  return session;
-};
 
 const BasicUnitsEdit: React.FunctionComponent = () => {
   const { data, status } = useSession();
@@ -31,6 +25,16 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     },
   });
 
+  useEffect(() => {
+    if (name && symbol) {
+      setEditData({
+        existingName: name as string,
+        newName: name as string,
+        symbol: symbol as string,
+      });
+    }
+  }, [name, symbol]);
+
   const [editData, setEditData] = useState({
     existingName: name as string,
     newName: name as string,
@@ -39,7 +43,7 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
 
   const trpc = api.useContext();
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setEditData({
       ...editData,

@@ -104,8 +104,7 @@ const masterbasicunit = () => {
         <TableComponent
           columns={columns}
           data={basicUnits}
-          onEditClick={handleEditClick}
-          onDeleteClick={handleDeleteClick}
+          idField={["name", "symbol"]}
           editUrl="edit/basic-units-edit"
           deleteUrl="delete/basic-units-delete"
         />

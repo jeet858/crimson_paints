@@ -1,7 +1,10 @@
 import { UserTemplate } from "@/components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
-
+import { useRouter } from "next/router";
+import { api } from "~/utils/api";
+import { Audio } from "react-loader-spinner";
+import toast from "react-hot-toast";
 const get = async () => {
   const session = await getSession();
   return session;
@@ -16,9 +19,36 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     userType: "admin",
   };
 
-  const editData = {
-    Symbol: "Gm",
-    Name: "Gram",
+  const router = useRouter();
+  const { name, symbol } = router.query;
+
+  const update = api.basicUnit.edit.useMutation({
+    onError: (err, newTodo, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      router.push("/basic-unit");
+    },
+  });
+
+  const [editData, setEditData] = useState({
+    existingName: name as string,
+    newName: name as string,
+    symbol: symbol as string,
+  });
+
+  const trpc = api.useContext();
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditData({
+      ...editData,
+      [name]: value,
+    });
+  };
+
+  const updateData = async () => {
+    update.mutate(editData);
   };
 
   return (
@@ -31,22 +61,29 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Symbol
             <input
+              name="symbol"
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Symbol}
+              value={editData.symbol}
+              onChange={handleInputChange}
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
             <input
+              name="newName"
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Name}
+              value={editData.newName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
             <button className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">
               Cancel
             </button>
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold">
+            <button
+              className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold"
+              onClick={updateData}
+            >
               Save
             </button>
           </div>

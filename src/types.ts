@@ -32,6 +32,18 @@ export const basicUnitsInput = z.object({
   }),
 });
 
+export const basicUnitsEditInput = z.object({
+  existingName: z.string({
+    required_error: "Describe your old basic units name",
+  }),
+  newName: z.string({
+    required_error: "Describe your new basic units name",
+  }),
+  symbol: z.string({
+    required_error: "Describe your basic units symbol",
+  }),
+});
+
 export const packagingTypeInput = z.object({
   name: z.string({
     required_error: "Describe your basic units name",

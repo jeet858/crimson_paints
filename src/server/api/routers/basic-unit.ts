@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { basicUnitsEditInput, basicUnitsInput } from "../../../types";
+import {
+  basicUnitsDeleteInput,
+  basicUnitsEditInput,
+  basicUnitsInput,
+} from "../../../types";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -11,10 +15,9 @@ const inputSchema = z.string({
 export const basicUnitsRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.basicUnits.findMany();
-    return units.map(({ name, symbol, short_code }) => ({
+    return units.map(({ name, symbol }) => ({
       name,
       symbol,
-      short_code,
     }));
   }),
   where: protectedProcedure.input(inputSchema).query(async ({ input, ctx }) => {
@@ -28,7 +31,7 @@ export const basicUnitsRouter = createTRPCRouter({
   edit: protectedProcedure
     .input(basicUnitsEditInput)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.basicUnits.update({
+      return await ctx.db.basicUnits.update({
         where: { name: input.existingName },
         data: {
           name: input.newName,
@@ -36,24 +39,18 @@ export const basicUnitsRouter = createTRPCRouter({
         },
       });
     }),
-  // create: protectedProcedure
-  //   .input(basicUnitsInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.create({
-  //       data: {
-  //         name: input.name,
-  //         symbol: input.symbol,
-  //         short_code: input.short_code,
-  //       },
-  //     });
-  //   }),
-  // delete: protectedProcedure
-  //   .input(basicUnitsInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.delete({
-  //       where: {
-  //         name: input.name,
-  //       },
-  //     });
-  //   }),
+  delete: protectedProcedure
+    .input(basicUnitsDeleteInput)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.basicUnits.delete({
+        where: { name: input.name },
+      });
+    }),
+  create: protectedProcedure
+    .input(basicUnitsInput)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.basicUnits.create({
+        data: { name: input.name, symbol: input.symbol },
+      });
+    }),
 });

@@ -1,7 +1,6 @@
 import type { inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
 import type { AppRouter } from "./server/api/root";
-import { type } from "os";
 
 type RouterOutputs = inferRouterOutputs<AppRouter>;
 type allBasicUnitOutput = RouterOutputs["basicUnit"]["all"];
@@ -27,9 +26,6 @@ export const basicUnitsInput = z.object({
   symbol: z.string({
     required_error: "Describe your basic units symbol",
   }),
-  short_code: z.string({
-    required_error: "Describe your basic units short name",
-  }),
 });
 
 export const basicUnitsEditInput = z.object({
@@ -41,6 +37,12 @@ export const basicUnitsEditInput = z.object({
   }),
   symbol: z.string({
     required_error: "Describe your basic units symbol",
+  }),
+});
+
+export const basicUnitsDeleteInput = z.object({
+  name: z.string({
+    required_error: "Describe your old basic units name",
   }),
 });
 

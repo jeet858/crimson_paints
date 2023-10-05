@@ -51,7 +51,7 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     });
   };
 
-  const updateData = async () => {
+  const updateData = () => {
     update.mutate(editData);
   };
 

@@ -18,7 +18,12 @@ const HsnCode = () => {
     { header: "Code", field: "code" },
     { header: "Description", field: "description" },
   ];
-
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   const { data: hsn, isLoading, isError } = api.hsn.all.useQuery();
   if (isLoading) {
     return (
@@ -87,7 +92,14 @@ const HsnCode = () => {
           </div>
         </div>
       </div>
-      <TableComponent columns={columns} data={hsn} />
+      <TableComponent
+        columns={columns}
+        data={hsn}
+        onDeleteClick={handleDeleteClick}
+        onEditClick={handleEditClick}
+        editUrl=""
+        deleteUrl=""
+      />
     </UserTemplate>
   );
 };

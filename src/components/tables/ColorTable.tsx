@@ -7,6 +7,7 @@ import {
   TableCell,
   TableContainer,
 } from "@mui/material";
+import Link from "next/link";
 interface Column {
   header: string;
   field: string;
@@ -16,6 +17,10 @@ interface Column {
 interface TableProps {
   columns: Column[];
   data: {}[] | any;
+  onEditClick: (rowData: { [key: string]: string }) => void;
+  onDeleteClick: (rowData: { [key: string]: string }) => void;
+  editUrl: string;
+  deleteUrl: string;
 }
 
 const tstyle: {} = {
@@ -41,6 +46,7 @@ const ColorTable: React.FunctionComponent<TableProps> = (props) => {
               {column.header}
             </div>
           ))}
+          <div className="w-[33.3%] py-2 text-center">Actions</div>
         </div>
         <div className="max-h-[40vh] overflow-y-auto">
           {props.data.map((row: any, rowIndex) => (
@@ -58,6 +64,24 @@ const ColorTable: React.FunctionComponent<TableProps> = (props) => {
                     : row[column.field]}
                 </div>
               ))}
+              <div className="w-[33.3%] space-x-2 py-2 text-center">
+                <Link href={props.editUrl}>
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                    onClick={() => props.onEditClick(row)}
+                  >
+                    Edit
+                  </button>
+                </Link>
+                <Link href={props.deleteUrl}>
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                    onClick={() => props.onDeleteClick(row)}
+                  >
+                    Delete
+                  </button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>

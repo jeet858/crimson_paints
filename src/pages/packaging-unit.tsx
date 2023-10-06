@@ -17,8 +17,14 @@ const packagingunit = () => {
   const columns = [
     { header: "Qty / Unit", field: "name" },
     { header: "Packaging", field: "packaging" },
-    { header: "Name", field: "unit" },
+    { header: "Unit", field: "unit" },
   ];
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   const {
     data: packagingUnit,
     isLoading,
@@ -91,7 +97,14 @@ const packagingunit = () => {
           </div>
         </div>
       </div>
-      <TableComponent columns={columns} data={packagingUnit} />
+      <TableComponent
+        columns={columns}
+        data={packagingUnit}
+        onDeleteClick={handleDeleteClick}
+        onEditClick={handleEditClick}
+        editUrl=""
+        deleteUrl=""
+      />
     </UserTemplate>
   );
 };

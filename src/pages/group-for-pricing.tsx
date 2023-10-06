@@ -105,6 +105,12 @@ const groupforpricing = () => {
       bodyData: [["Magenta", "#FF00FF"]],
     },
   ];
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -128,7 +134,13 @@ const groupforpricing = () => {
           {generateButtons()}
         </div>
         <div ref={tableRef}>
-          <GroupForProcingTable data={data} />
+          <GroupForProcingTable
+            data={data}
+            onDeleteClick={handleDeleteClick}
+            onEditClick={handleEditClick}
+            editUrl=""
+            deleteUrl=""
+          />
         </div>
       </div>
     </UserTemplate>

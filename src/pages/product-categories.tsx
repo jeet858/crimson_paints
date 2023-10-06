@@ -18,6 +18,12 @@ const ProductCategories = () => {
     { header: "Name", field: "name" },
     { header: "Code", field: "code" },
   ];
+  const handleEditClick = (row) => {
+    console.log("edit");
+  };
+  const handleDeleteClick = (row) => {
+    console.log("delet");
+  };
   const {
     data: categories,
     isLoading,
@@ -91,7 +97,14 @@ const ProductCategories = () => {
           </div>
         </div>
       </div>
-      <TableComponent columns={columns} data={categories} />
+      <TableComponent
+        columns={columns}
+        data={categories}
+        onDeleteClick={handleDeleteClick}
+        onEditClick={handleEditClick}
+        editUrl=""
+        deleteUrl=""
+      />
     </UserTemplate>
   );
 };

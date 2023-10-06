@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import {
   Table,
   TableHead,
@@ -7,7 +7,8 @@ import {
   TableCell,
   TableContainer,
 } from "@mui/material";
-import { UseTRPCQueryResult } from "@trpc/react-query/shared";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface TableProps {
   columns: {
@@ -16,46 +17,27 @@ interface TableProps {
   }[];
   data: {}[] | any;
   userType?: string;
-  editIcon?: JSX.Element;
-  deleteIcon?: JSX.Element;
+  editUrl: string;
+  idField: string[];
+
+  deleteUrl: string;
 }
 
 const TableComponent: React.FunctionComponent<TableProps> = (props) => {
-  const tableCellStyle = {
-    width: 64,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#e7e0ff78",
-    backgroundColor: "#e7e0ff78",
-    padding: 4,
-    fontSize: 14,
-    justifyContent: "center",
-  };
   const tstyle: {} = {
     width: "100%",
     overflowY: "auto",
     height: "50vh",
     overscrollBehaviorY: "auto",
   };
-  const headerCellStyle: {} = {
-    width: "4rem",
-    backgroundColor: "#c4b0ff",
-    padding: "4px",
-    fontSize: "15px",
-    fontWeight: 600,
-  };
-  const headerIconStyle: {} = {
-    width: "64px",
-    backgroundColor: "#c4b0ff",
-    padding: "4px",
-    fontSize: "15px",
-    fontWeight: 600,
-  };
+
   const tableRowStyle: {} = {
     borderBottomWidth: 1,
     borderStyle: "solid",
     borderColor: "black",
   };
+  const router = useRouter();
+
   return (
     <div className=" flex h-full w-full flex-col p-4">
       <TableContainer style={{ ...tstyle }}>
@@ -73,16 +55,15 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                   {column.header}
                 </TableCell>
               ))}
-              {props.userType === "admin" ? (
-                <>
-                  <TableCell style={{ backgroundColor: "#c4b0ff" }}>
-                    Edit
-                  </TableCell>
-                  <TableCell style={{ backgroundColor: "#c4b0ff" }}>
-                    Delete
-                  </TableCell>
-                </>
-              ) : null}
+              <TableCell
+                style={{
+                  backgroundColor: "#c4b0ff",
+                  textAlign: "center",
+                }}
+                className="w-[33.3%] py-2 text-center"
+              >
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -99,24 +80,51 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                     {row[column.field]}
                   </TableCell>
                 ))}
-                {props.userType === "admin" ? (
-                  <>
-                    <TableCell
-                      style={{
-                        backgroundColor: "rgba(196, 176, 255, 0.25)",
-                      }}
-                    >
-                      {props.editIcon}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        backgroundColor: "rgba(196, 176, 255, 0.25)",
-                      }}
-                    >
-                      {props.deleteIcon}
-                    </TableCell>
-                  </>
-                ) : null}
+                <TableCell
+                  style={{
+                    backgroundColor: "rgba(196, 176, 255, 0.25)",
+                    textAlign: "center",
+                  }}
+                  className="w-[33.3%] space-x-2 py-2 text-center"
+                >
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                    onClick={async () => {
+                      const queryObj = {
+                        ...router.query,
+                      };
+                      for (let i = 0; i < props.idField.length; i++) {
+                        const id = props.idField[i] as string;
+                        queryObj[id] = row[id];
+                      }
+                      router.push({
+                        pathname: props.editUrl,
+                        query: queryObj,
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                    onClick={async () => {
+                      const queryObj = {
+                        ...router.query,
+                      };
+                      for (let i = 0; i < props.idField.length; i++) {
+                        const id = props.idField[i] as string;
+                        queryObj[id] = row[id];
+                      }
+                      router.push({
+                        pathname: props.deleteUrl,
+                        query: queryObj,
+                      });
+                    }}
+                  >
+                    Delete
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

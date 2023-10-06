@@ -67,7 +67,6 @@ model VerificationToken {
 model BasicUnits {
   symbol     String @unique
   name       String @unique
-  short_code String @unique
 }
 
 model PackagingType {

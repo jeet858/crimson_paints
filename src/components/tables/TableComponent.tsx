@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import {
   Table,
   TableHead,
@@ -8,6 +8,7 @@ import {
   TableContainer,
 } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface TableProps {
   columns: {
@@ -16,9 +17,9 @@ interface TableProps {
   }[];
   data: {}[] | any;
   userType?: string;
-  onEditClick: (rowData: { [key: string]: string }) => void;
-  onDeleteClick: (rowData: { [key: string]: string }) => void;
   editUrl: string;
+  idField: string[];
+
   deleteUrl: string;
 }
 
@@ -35,6 +36,8 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
     borderStyle: "solid",
     borderColor: "black",
   };
+  const router = useRouter();
+
   return (
     <div className=" flex h-full w-full flex-col p-4">
       <TableContainer style={{ ...tstyle }}>
@@ -84,22 +87,43 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                   }}
                   className="w-[33.3%] space-x-2 py-2 text-center"
                 >
-                  <Link href={props.editUrl}>
-                    <button
-                      className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
-                      onClick={() => props.onEditClick(row)}
-                    >
-                      Edit
-                    </button>
-                  </Link>
-                  <Link href={props.deleteUrl}>
-                    <button
-                      className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                      onClick={() => props.onDeleteClick(row)}
-                    >
-                      Delete
-                    </button>
-                  </Link>
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                    onClick={async () => {
+                      const queryObj = {
+                        ...router.query,
+                      };
+                      for (let i = 0; i < props.idField.length; i++) {
+                        const id = props.idField[i] as string;
+                        queryObj[id] = row[id];
+                      }
+                      router.push({
+                        pathname: props.editUrl,
+                        query: queryObj,
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                    onClick={async () => {
+                      const queryObj = {
+                        ...router.query,
+                      };
+                      for (let i = 0; i < props.idField.length; i++) {
+                        const id = props.idField[i] as string;
+                        queryObj[id] = row[id];
+                      }
+                      router.push({
+                        pathname: props.deleteUrl,
+                        query: queryObj,
+                      });
+                    }}
+                  >
+                    Delete
+                  </button>
                 </TableCell>
               </TableRow>
             ))}

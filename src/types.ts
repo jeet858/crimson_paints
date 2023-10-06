@@ -50,11 +50,7 @@ export const packagingTypeInput = z.object({
   name: z.string({
     required_error: "Describe your basic units name",
   }),
-  short_code: z.string({
-    required_error: "Describe your basic units short name",
-  }),
 });
-
 export const packagingUnitInput = z.object({
   name: z.string({
     required_error: "This field cant be null",

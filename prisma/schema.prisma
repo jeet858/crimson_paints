@@ -71,7 +71,7 @@ model BasicUnits {
 
 model PackagingType {
   name       String @unique
-  short_code String @unique
+  
 }
 
 model Colors {

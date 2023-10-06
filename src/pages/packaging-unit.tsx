@@ -19,12 +19,7 @@ const packagingunit = () => {
     { header: "Packaging", field: "packaging" },
     { header: "Unit", field: "unit" },
   ];
-  const handleEditClick = (row) => {
-    console.log("edit");
-  };
-  const handleDeleteClick = (row) => {
-    console.log("delet");
-  };
+
   const {
     data: packagingUnit,
     isLoading,
@@ -100,8 +95,7 @@ const packagingunit = () => {
       <TableComponent
         columns={columns}
         data={packagingUnit}
-        onDeleteClick={handleDeleteClick}
-        onEditClick={handleEditClick}
+        idField={[""]}
         editUrl=""
         deleteUrl=""
       />

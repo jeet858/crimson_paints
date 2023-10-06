@@ -44,9 +44,9 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
               value={editData.Name}
             /> */}
             <select name="" id="" className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none w-4/6">
-              <option value="" className="bg-[#C4B0FF]">Kilogram</option>
-              <option value="" className="bg-[#C4B0FF]">Gram</option>
-              <option value="" className="bg-[#C4B0FF]">Mililitre</option>
+              <option value="" className="bg-[#C4B0FF] font-semibold">Kilogram</option>
+              <option value="" className="bg-[#C4B0FF] font-semibold">Gram</option>
+              <option value="" className="bg-[#C4B0FF] font-semibold">Mililitre</option>
             </select>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">

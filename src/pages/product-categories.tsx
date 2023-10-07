@@ -100,9 +100,8 @@ const ProductCategories = () => {
       <TableComponent
         columns={columns}
         data={categories}
-        onDeleteClick={handleDeleteClick}
-        onEditClick={handleEditClick}
-        editUrl=""
+        idField={["name", "code"]}
+        editUrl="edit/product-categories-edit"
         deleteUrl=""
       />
     </UserTemplate>

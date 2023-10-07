@@ -136,8 +136,7 @@ const groupforpricing = () => {
         <div ref={tableRef}>
           <GroupForProcingTable
             data={data}
-            onDeleteClick={handleDeleteClick}
-            onEditClick={handleEditClick}
+            idField={["name", "headers", "bodyData"]}
             editUrl=""
             deleteUrl=""
           />

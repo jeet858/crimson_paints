@@ -140,9 +140,8 @@ const productbrand = () => {
             <BrandTable
               columns={columns}
               category={category.name}
-              onDeleteClick={handleDeleteClick}
-              onEditClick={handleEditClick}
-              editUrl=""
+              idField={["brand_name", "hsnCode_id"]}
+              editUrl="edit/product-brand-edit"
               deleteUrl=""
             />
           </div>

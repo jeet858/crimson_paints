@@ -95,9 +95,8 @@ const HsnCode = () => {
       <TableComponent
         columns={columns}
         data={hsn}
-        onDeleteClick={handleDeleteClick}
-        onEditClick={handleEditClick}
-        editUrl=""
+        idField={["code", "description"]}
+        editUrl="edit/hsn-code-edit"
         deleteUrl=""
       />
     </UserTemplate>

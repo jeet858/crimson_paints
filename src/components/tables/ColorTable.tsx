@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  TableContainer,
-} from "@mui/material";
-import Link from "next/link";
+
+import { useRouter } from "next/router";
 interface Column {
   header: string;
   field: string;
@@ -17,8 +10,7 @@ interface Column {
 interface TableProps {
   columns: Column[];
   data: {}[] | any;
-  onEditClick: (rowData: { [key: string]: string }) => void;
-  onDeleteClick: (rowData: { [key: string]: string }) => void;
+  idField: string[];
   editUrl: string;
   deleteUrl: string;
 }
@@ -37,6 +29,7 @@ const tableRowStyle: {} = {
 };
 
 const ColorTable: React.FunctionComponent<TableProps> = (props) => {
+  const router = useRouter();
   return (
     <div className="flex w-full items-start justify-center">
       <div className="w-[90%]">
@@ -65,22 +58,43 @@ const ColorTable: React.FunctionComponent<TableProps> = (props) => {
                 </div>
               ))}
               <div className="w-[33.3%] space-x-2 py-2 text-center">
-                <Link href={props.editUrl}>
-                  <button
-                    className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
-                    onClick={() => props.onEditClick(row)}
-                  >
-                    Edit
-                  </button>
-                </Link>
-                <Link href={props.deleteUrl}>
-                  <button
-                    className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                    onClick={() => props.onDeleteClick(row)}
-                  >
-                    Delete
-                  </button>
-                </Link>
+                <button
+                  className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                  onClick={async () => {
+                    const queryObj = {
+                      ...router.query,
+                    };
+                    for (let i = 0; i < props.idField.length; i++) {
+                      const id = props.idField[i] as string;
+                      queryObj[id] = row[id];
+                    }
+                    router.push({
+                      pathname: props.editUrl,
+                      query: queryObj,
+                    });
+                  }}
+                >
+                  Edit
+                </button>
+
+                <button
+                  className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                  onClick={async () => {
+                    const queryObj = {
+                      ...router.query,
+                    };
+                    for (let i = 0; i < props.idField.length; i++) {
+                      const id = props.idField[i] as string;
+                      queryObj[id] = row[id];
+                    }
+                    router.push({
+                      pathname: props.deleteUrl,
+                      query: queryObj,
+                    });
+                  }}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

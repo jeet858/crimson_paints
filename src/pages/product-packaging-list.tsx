@@ -81,7 +81,7 @@ const productpackaginglist = () => {
         columns={columns}
         data={packagingType}
         idField={["name"]}
-        editUrl="edit/packaging-type-edit"
+        editUrl="edit/packaging-unit-edit"
         deleteUrl="delete/packaging-type-delete"
       />
     </UserTemplate>

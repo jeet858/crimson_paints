@@ -95,8 +95,8 @@ const packagingunit = () => {
       <TableComponent
         columns={columns}
         data={packagingUnit}
-        idField={[""]}
-        editUrl=""
+        idField={["name", "packaging", "unit"]}
+        editUrl="edit/packaging-unit-edit"
         deleteUrl=""
       />
     </UserTemplate>

@@ -90,9 +90,8 @@ const colors = () => {
       <ColorTable
         columns={columns}
         data={colors}
-        onEditClick={handleEditClick}
-        onDeleteClick={handleDeleteClick}
-        editUrl=""
+        idField={["color_name", "rgb_code"]}
+        editUrl="edit/color-edit"
         deleteUrl=""
       />
     </UserTemplate>

@@ -51,6 +51,19 @@ export const packagingTypeInput = z.object({
     required_error: "Describe your basic units name",
   }),
 });
+export const packagingEditTypeInput = z.object({
+  existingName: z.string({
+    required_error: "Describe your old basic units name",
+  }),
+  newName: z.string({
+    required_error: "Describe your new basic units name",
+  }),
+});
+export const packagingDeleteInput = z.object({
+  name: z.string({
+    required_error: "Describe your basic units name",
+  }),
+});
 export const packagingUnitInput = z.object({
   name: z.string({
     required_error: "This field cant be null",

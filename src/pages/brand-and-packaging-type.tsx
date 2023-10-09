@@ -180,8 +180,7 @@ function brandandpackagingtype() {
         <div ref={tableRef}>
           <BrandPackagingTable
             data={data}
-            onDeleteClick={handleDeleteClick}
-            onEditClick={handleEditClick}
+            idField={["name", "packaging"]}
             editUrl=""
             deleteUrl=""
           />

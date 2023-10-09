@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 interface GroupForProcingTableProps {
@@ -8,29 +9,18 @@ interface GroupForProcingTableProps {
     headers: string[];
     bodyData: string[][];
   }[];
-  onEditClick: (item: {
-    id: string;
-    name: string;
-    headers: string[];
-    bodyData: string[][];
-  }) => void;
-  onDeleteClick: (item: {
-    id: string;
-    name: string;
-    headers: string[];
-    bodyData: string[][];
-  }) => void;
+  idField: string[];
   editUrl: string;
   deleteUrl: string;
 }
 
 const GroupForProcingTable: React.FC<GroupForProcingTableProps> = ({
   data,
-  onDeleteClick,
-  onEditClick,
+  idField,
   editUrl,
   deleteUrl,
 }) => {
+  const router = useRouter();
   return (
     <div className="flex h-[50vh] w-full flex-col">
       <h1 className="h-fit w-full rounded-[5px] bg-[#786ADE] p-2 text-2xl font-bold">
@@ -71,22 +61,43 @@ const GroupForProcingTable: React.FC<GroupForProcingTableProps> = ({
                       </div>
                     ))}{" "}
                     <div className="w-[33.3%] space-x-2 py-2 text-center">
-                      <Link href={editUrl}>
-                        <button
-                          className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
-                          onClick={() => onEditClick(item)}
-                        >
-                          Edit
-                        </button>
-                      </Link>
-                      <Link href={deleteUrl}>
-                        <button
-                          className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                          onClick={() => onDeleteClick(item)}
-                        >
-                          Delete
-                        </button>
-                      </Link>
+                      <button
+                        className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                        onClick={async () => {
+                          const queryObj = {
+                            ...router.query,
+                          };
+                          for (let i = 0; i < idField.length; i++) {
+                            const id = idField[i] as string;
+                            queryObj[id] = item[id];
+                          }
+                          router.push({
+                            pathname: editUrl,
+                            query: queryObj,
+                          });
+                        }}
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                        onClick={async () => {
+                          const queryObj = {
+                            ...router.query,
+                          };
+                          for (let i = 0; i < idField.length; i++) {
+                            const id = idField[i] as string;
+                            queryObj[id] = item[id];
+                          }
+                          router.push({
+                            pathname: deleteUrl,
+                            query: queryObj,
+                          });
+                        }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 ))}

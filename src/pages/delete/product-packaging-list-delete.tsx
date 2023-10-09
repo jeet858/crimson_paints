@@ -27,6 +27,7 @@ const ProductPackagingListDelete: React.FunctionComponent = () => {
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-4/6 flex-col rounded-xl bg-[#C4B0FF45]">
+          Product Packaging List Delete
           <p className="h-1/6 w-full items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
             Basic Unit Details
           </p>

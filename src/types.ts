@@ -74,6 +74,22 @@ export const colorsInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const colorsEditInput = z.object({
+  newName: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingName: z.string({
+    required_error: "Describe your old colors name",
+  }),
+  rgb_code: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const colorsDeleteInput = z.object({
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
 
 export const hsnCodeInput = z.object({
   code: z.string({

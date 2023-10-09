@@ -15,6 +15,7 @@ const inputSchema = z.string({
 export const basicUnitsRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.basicUnits.findMany();
+    await ctx.db.$disconnect();
     return units.map(({ name, symbol }) => ({
       name,
       symbol,
@@ -26,6 +27,7 @@ export const basicUnitsRouter = createTRPCRouter({
         name: input,
       },
     });
+    await ctx.db.$disconnect();
     return basicUnits;
   }),
   edit: protectedProcedure

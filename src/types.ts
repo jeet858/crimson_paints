@@ -105,10 +105,24 @@ export const colorsDeleteInput = z.object({
 });
 
 export const hsnCodeInput = z.object({
-  code: z.string({
+  code: z.number({
     required_error: "This field cant be null",
   }),
   description: z.string(),
+});
+export const hsnCodeEditInput = z.object({
+  existingCode: z.number({
+    required_error: "This field cant be null",
+  }),
+  newCode: z.number({
+    required_error: "This field cant be null",
+  }),
+  description: z.string(),
+});
+export const hsnCodeDeleteInput = z.object({
+  code: z.number({
+    required_error: "This field cant be null",
+  }),
 });
 
 export const categoriesInput = z.object({

@@ -18,12 +18,6 @@ const HsnCode = () => {
     { header: "Code", field: "code" },
     { header: "Description", field: "description" },
   ];
-  const handleEditClick = (row) => {
-    console.log("edit");
-  };
-  const handleDeleteClick = (row) => {
-    console.log("delet");
-  };
   const { data: hsn, isLoading, isError } = api.hsn.all.useQuery();
   if (isLoading) {
     return (
@@ -79,14 +73,18 @@ const HsnCode = () => {
       <div className="h-fit w-full p-4">
         <div className="flex items-center justify-center">
           <div className="flex w-full items-end justify-center ">
-            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
               HSN Codes
             </div>
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
           <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+            <button
+              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+              onClick={async () => {
+                router.push("add/hsn-code-add");
+              }}
+            >
               Add
             </button>
           </div>
@@ -97,7 +95,7 @@ const HsnCode = () => {
         data={hsn}
         idField={["code", "description"]}
         editUrl="edit/hsn-code-edit"
-        deleteUrl=""
+        deleteUrl="delete/hsn-code-delete"
       />
     </UserTemplate>
   );

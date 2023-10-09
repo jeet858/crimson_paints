@@ -22,6 +22,7 @@ const PackagingTypeAdd: React.FunctionComponent = () => {
       alert(`An error occured }`);
     },
     onSuccess: () => {
+      alert("Data added successfully");
       router.push("/product-packaging-list");
     },
   });

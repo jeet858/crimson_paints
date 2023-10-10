@@ -21,6 +21,22 @@ const PriceListDelete: React.FunctionComponent = () => {
     Symbol: "Gm",
     Name: "Gram",
   };
+  const router = useRouter();
+  const { name, symbol } = router.query;
+
+  const del = api.basicUnit.delete.useMutation({
+    onError: (err, newTodo, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      router.push("/basic-unit");
+    },
+  });
+
+  const deleteData = () => {
+    del.mutate({ name: name as string });
+  };
+  
   const [confirmed, setConfirmed] = useState(false);
 
   return (

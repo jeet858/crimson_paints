@@ -15,6 +15,47 @@ const SalesRepresentativeEdit: React.FunctionComponent = () => {
     userImage: "user.jpg",
     userType: "admin",
   };
+  const router = useRouter();
+  const { name, symbol } = router.query;
+
+  const update = api.basicUnit.edit.useMutation({
+    onError: (err, newTodo, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      router.push("/basic-unit");
+    },
+  });
+
+  useEffect(() => {
+    if (name && symbol) {
+      setEditData({
+        existingName: name as string,
+        newName: name as string,
+        symbol: symbol as string,
+      });
+    }
+  }, [name, symbol]);
+
+  const [editData, setEditData] = useState({
+    existingName: name as string,
+    newName: name as string,
+    symbol: symbol as string,
+  });
+
+  const trpc = api.useContext();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setEditData({
+      ...editData,
+      [name]: value,
+    });
+  };
+
+  const updateData = () => {
+    update.mutate(editData);
+  };
 
   const editData = {
     Symbol: "Gm",

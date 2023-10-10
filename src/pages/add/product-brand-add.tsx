@@ -10,6 +10,37 @@ const ProductBrandAdd: React.FunctionComponent = () => {
     userImage: "user.jpg",
     userType: "admin",
   };
+  const [addData, setAddData] = useState({
+    name: "",
+    symbol: "",
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setAddData({
+      ...addData,
+      [name]: value,
+    });
+  };
+
+  const add = api.basicUnit.create.useMutation({
+    onError: (err, newTodo, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      router.push("/basic-unit");
+    },
+  });
+
+  const create = () => {
+    console.log(addData);
+    if (addData.name != "" || addData.symbol != "") {
+      add.mutate(addData);
+    } else {
+      alert("Be sure to fill all fields");
+    }
+  };
+
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">

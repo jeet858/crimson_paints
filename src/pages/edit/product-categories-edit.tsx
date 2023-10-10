@@ -1,6 +1,8 @@
 import { UserTemplate } from "@/components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
+import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 const get = async () => {
   const session = await getSession();
@@ -16,16 +18,51 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     userType: "admin",
   };
 
-  const editData = {
-    Symbol: "Gm",
-    Name: "Gram",
+  const router = useRouter();
+  const { name, code } = router.query;
+
+  const update = api.categories.edit.useMutation({
+    onError: (err, newColor, context) => {
+      alert(`${err}`);
+    },
+    onSuccess: () => {
+      alert("Data edited succesfully");
+      router.push("/product-categories");
+    },
+  });
+
+  useEffect(() => {
+    if (name && code) {
+      setEditData({
+        existingName: name as string,
+        newName: name as string,
+        code: code as string,
+      });
+    }
+  }, [name, code]);
+
+  const [editData, setEditData] = useState({
+    existingName: name as string,
+    newName: name as string,
+    code: code as string,
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setEditData({
+      ...editData,
+      [name]: value,
+    });
+  };
+
+  const updateData = () => {
+    update.mutate(editData);
   };
 
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
-          Product Categories Edit
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
             Product Categories Details
           </p>
@@ -33,21 +70,33 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
             Name
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Symbol}
+              value={editData.newName}
+              onChange={handleInputChange}
+              name="name"
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Code
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Name}
+              value={editData.code}
+              onChange={handleInputChange}
+              name="code"
             />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <button
+              className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              onClick={async () => {
+                await router.push("/product-categories");
+              }}
+            >
               Cancel
             </button>
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold">
+            <button
+              className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold"
+              onClick={updateData}
+            >
               Save
             </button>
           </div>

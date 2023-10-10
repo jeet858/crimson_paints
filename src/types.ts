@@ -133,6 +133,22 @@ export const categoriesInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const categoriesEditInput = z.object({
+  existingName: z.string({
+    required_error: "This field cant be null",
+  }),
+  newName: z.string({
+    required_error: "This field cant be null",
+  }),
+  code: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const categoriesDeleteInput = z.object({
+  name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
 
 export const brandInput = z.object({
   brand_name: z.string({

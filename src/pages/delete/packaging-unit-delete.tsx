@@ -2,6 +2,8 @@ import { UserTemplate } from "@/components";
 import React, { useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { FaCheck } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { api } from "~/utils/api";
 
 const get = async () => {
   const session = await getSession();
@@ -17,86 +19,56 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     userType: "admin",
   };
 
-  const editData = {
-    Symbol: "Gm",
-    Name: "Gram",
-  };
   const router = useRouter();
-  const { name, symbol } = router.query;
+  const { packaging, unit, unit_value, name } = router.query;
 
-  const del = api.basicUnit.delete.useMutation({
-    onError: (err, newTodo, context) => {
-      alert(`An error occured }`);
+  const del = api.packagingUnit.delete.useMutation({
+    onError: (err, packagingUnit, context) => {
+      alert(`${err}`);
     },
     onSuccess: () => {
-      router.push("/basic-unit");
+      router.push("/product-packaging-list");
     },
   });
 
   const deleteData = () => {
-    del.mutate({ name: name as string });
+    confirmed
+      ? del.mutate({ name: name as string })
+      : alert("Please confirm that you want to delete this hsn code");
   };
-  
+
   const [confirmed, setConfirmed] = useState(false);
 
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
-          Packaging Unit Delete
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
             Package Details
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
+            Name
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {name}
+            </div>
+          </div>
+          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Qty
-            <input
-              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Symbol}
-            />
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {unit_value}
+            </div>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Unit
-            {/* <input
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Name}
-            /> */}
-            <select
-              name=""
-              id=""
-              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-            >
-              <option value="" className="bg-[#C4B0FF] font-semibold">
-                Kilogram
-              </option>
-              <option value="" className="bg-[#C4B0FF] font-semibold">
-                Gram
-              </option>
-              <option value="" className="bg-[#C4B0FF] font-semibold">
-                Mililitre
-              </option>
-            </select>
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {unit}
+            </div>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Packaging
-            {/* <input
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Name}
-            /> */}
-            <select
-              name=""
-              id=""
-              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-            >
-              <option value="" className="bg-[#C4B0FF]">
-                Kilogram
-              </option>
-              <option value="" className="bg-[#C4B0FF]">
-                Gram
-              </option>
-              <option value="" className="bg-[#C4B0FF]">
-                Mililitre
-              </option>
-            </select>
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {packaging}
+            </div>
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
             <div className="flex h-fit items-center justify-center">
@@ -110,11 +82,19 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
               </div>
               <p>I confirm the deletion</p>
             </div>
-            <button className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <button
+              className="h-8 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              onClick={async () => {
+                await router.push("product-packaging-list");
+              }}
+            >
               Cancel
             </button>
-            <button className="h-1/2 w-1/4 self-center rounded-md border border-[#11009E] bg-[#C4B0FF] font-semibold ">
-              Save
+            <button
+              className="h-8 w-[25%] self-center rounded-md bg-[#FF6E65] font-semibold text-white"
+              onClick={deleteData}
+            >
+              Delete
             </button>
           </div>
         </div>

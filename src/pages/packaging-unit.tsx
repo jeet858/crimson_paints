@@ -19,6 +19,11 @@ const packagingunit = () => {
     { header: "Packaging", field: "packaging" },
     { header: "Unit", field: "unit" },
   ];
+  const columns2 = [
+    { header: "Qty / Unit", field: "name" },
+    { header: "Packaging", field: "packaging" },
+    { header: "Unit", field: "unit" },
+  ];
 
   const {
     data: packagingUnit,
@@ -86,7 +91,12 @@ const packagingunit = () => {
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
           <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+            <button
+              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+              onClick={async () => {
+                await router.push("/add/packaging-unit-add");
+              }}
+            >
               Add
             </button>
           </div>
@@ -95,9 +105,9 @@ const packagingunit = () => {
       <TableComponent
         columns={columns}
         data={packagingUnit}
-        idField={["name", "packaging", "unit"]}
+        idField={["name", "packaging", "unit", "unit_value"]}
         editUrl="edit/packaging-unit-edit"
-        deleteUrl=""
+        deleteUrl="delete/packaging-unit-delete"
       />
     </UserTemplate>
   );

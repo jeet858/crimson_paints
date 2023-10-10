@@ -78,6 +78,25 @@ export const packagingUnitInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const packagingUnitEditInput = z.object({
+  existingName: z.string({
+    required_error: "Describe your old basic units name",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  unit: z.string({
+    required_error: "This field cant be null",
+  }),
+  unit_value: z.number({
+    required_error: "This field cant be null",
+  }),
+});
+export const packagingUnitDeleteInput = z.object({
+  name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
 
 export const colorsInput = z.object({
   color_name: z.string({

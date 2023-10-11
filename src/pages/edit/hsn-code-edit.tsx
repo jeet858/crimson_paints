@@ -26,7 +26,7 @@ const HSNCodeEdit: React.FunctionComponent = () => {
       alert(`An error occured }`);
     },
     onSuccess: () => {
-      alert("Data added successfully");
+      alert("Data updated successfully");
       router.push("/hsn-code");
     },
   });

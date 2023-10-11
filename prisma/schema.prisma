@@ -91,11 +91,9 @@ model PackagingUnits {
 
 model ComplexPackagingUnits{
   name String @unique @id
-  packaging_name String
-  unit_id String
-  unit_value Decimal
-  packaging_qty Decimal
-  packaging_type String
+  unit_packaging String
+  unit Int
+  packaging String
   brand ComplexPUBrand[]
 }
 

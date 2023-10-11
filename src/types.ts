@@ -97,7 +97,36 @@ export const packagingUnitDeleteInput = z.object({
     required_error: "This field cant be null",
   }),
 });
-
+export const complexUnitInput = z.object({
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  unit: z.number({
+    required_error: "This field cant be null",
+  }),
+  unit_packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const complexUnitEditInput = z.object({
+  existingName: z.string({
+    required_error: "Describe your old basic units name",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  unit: z.number({
+    required_error: "This field cant be null",
+  }),
+  unit_packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const complexUnitDeleteInput = z.object({
+  name: z.string({
+    required_error: "Describe your old basic units name",
+  }),
+});
 export const colorsInput = z.object({
   color_name: z.string({
     required_error: "This field cant be null",
@@ -176,7 +205,26 @@ export const brandInput = z.object({
   categoriesName: z.string({
     required_error: "This field cant be null",
   }),
-  hsnCode_id: z.string({
+  hsnCode_id: z.number({
+    required_error: "This field cant be null",
+  }),
+});
+export const brandEditInput = z.object({
+  existingName: z.string({
+    required_error: "This field cant be null",
+  }),
+  newName: z.string({
+    required_error: "This field cant be null",
+  }),
+  categoriesName: z.string({
+    required_error: "This field cant be null",
+  }),
+  hsnCode_id: z.number({
+    required_error: "This field cant be null",
+  }),
+});
+export const brandDeleteInput = z.object({
+  brand_name: z.string({
     required_error: "This field cant be null",
   }),
 });

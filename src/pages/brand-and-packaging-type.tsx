@@ -181,8 +181,8 @@ function brandandpackagingtype() {
           <BrandPackagingTable
             data={data}
             idField={["name", "packaging"]}
-            editUrl=""
-            deleteUrl=""
+            editUrl="edit/brand-and-packaging-type-edit"
+            deleteUrl="delete/brand-and-packaging-type-delete"
           />
         </div>
       </div>

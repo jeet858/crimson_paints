@@ -19,39 +19,6 @@ const productbrand = () => {
     { header: "HSN Code", field: "hsnCode_id" },
   ];
 
-  const handleButtonClick = (categoryName: string) => {
-    const targetElement = document.getElementById(categoryName);
-    targetElement?.scrollIntoView(); // You can use "auto" for instant scrolling
-  };
-  const generateButtons = () => {
-    const buttonNames = [
-      "Putty",
-      "Cement Paints",
-      "Water Primer",
-      "Tilo Items",
-      "Exterior Finish",
-      "Interior Finish",
-      "Base",
-      "Oxide Colour",
-      "Synthetic Primer",
-      "Synthetic Enamel",
-      "Metallics",
-      "Floor Coat Emulsion",
-      "Construction Chemical",
-      "Machine Colorant",
-    ];
-
-    return buttonNames.map((buttonName) => (
-      <button
-        id={buttonName}
-        key={buttonName}
-        className="border-1 mb-4 mr-4 h-[2rem] w-fit rounded-xl bg-[#e7e0fffa] px-4 font-semibold"
-        onClick={() => handleButtonClick(buttonName)}
-      >
-        {buttonName}
-      </button>
-    ));
-  };
   const {
     data: catrgories,
     isLoading,
@@ -121,7 +88,17 @@ const productbrand = () => {
         </div>
         <h1 className="text-xl font-semibold">Quick Links</h1>
         <div className="border-1 h-fit w-full   rounded-lg bg-[#C4B0FF] p-4">
-          {generateButtons()}
+          {catrgories.map((category, index) => (
+            <button
+              onClick={() => {
+                const targetElement = document.getElementById(category.name);
+                targetElement!.scrollIntoView();
+              }}
+              className="border-1 mb-4 mr-4 h-[2rem] w-fit rounded-xl bg-[#e7e0fffa] px-4 font-semibold"
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
       </div>
       <div>

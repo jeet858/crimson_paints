@@ -34,7 +34,7 @@ const productbrand = () => {
             <div className="flex w-full items-end justify-center ">
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
               <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                HSN Codes
+                Brands
               </div>
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             </div>
@@ -58,7 +58,7 @@ const productbrand = () => {
             <div className="flex w-full items-end justify-center ">
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
               <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                HSN Codes
+                Brands
               </div>
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             </div>

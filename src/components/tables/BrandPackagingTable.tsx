@@ -57,24 +57,24 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({
               Edit
             </button>
 
-            {/* <button
-                className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                onClick={async () => {
-                  const queryObj = {
-                    ...router.query,
-                  };
-                  for (let i = 0; i < idField.length; i++) {
-                    const id = idField[i] as string;
-                    queryObj[id] = item[id];
-                  }
-                  router.push({
-                    pathname: deleteUrl,
-                    query: queryObj,
-                  });
-                }}
-              >
-                Delete
-              </button> */}
+            <button
+              className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+              onClick={async () => {
+                const queryObj = {
+                  ...router.query,
+                };
+                for (let i = 0; i < idField.length; i++) {
+                  const id = idField[i] as string;
+                  queryObj[id] = id;
+                }
+                router.push({
+                  pathname: deleteUrl,
+                  query: queryObj,
+                });
+              }}
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

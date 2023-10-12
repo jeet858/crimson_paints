@@ -10,7 +10,7 @@ const get = async () => {
   return session;
 };
 
-const ProductBrandDelete: React.FunctionComponent = () => {
+const BasicUnitsEdit: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const templateParams = {
     title: "Admin",
@@ -19,27 +19,22 @@ const ProductBrandDelete: React.FunctionComponent = () => {
     userType: "admin",
   };
 
-  const editData = {
-    Symbol: "Gm",
-    Name: "Gram",
-    Category: "Base",
-  };
   const router = useRouter();
-  const { categoriesName, brand_name, hsnCode_id } = router.query;
+  const { name, packaging, unit, unit_packaging } = router.query;
 
-  const del = api.brand.delete.useMutation({
-    onError: (err, brand, context) => {
-      alert(`An error occured }`);
+  const del = api.complex.delete.useMutation({
+    onError: (err, packagingUnit, context) => {
+      alert(`${err}`);
     },
     onSuccess: () => {
       alert("Data deleted successfully");
-      router.push("/product-brand");
+      router.push("/packaging-unit");
     },
   });
 
   const deleteData = () => {
     confirmed
-      ? del.mutate({ brand_name: brand_name as string })
+      ? del.mutate({ name: name as string })
       : alert("Please confirm that you want to delete this hsn code");
   };
 
@@ -48,32 +43,32 @@ const ProductBrandDelete: React.FunctionComponent = () => {
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
-        <div className="flex h-1/3 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
+        <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
-            Product Brand Details
+            Package Details
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Brand Name
-            <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
-              {brand_name}
+            Name
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {name}
             </div>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            HSN Code
-            <div
-              id=""
-              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-            >
-              {hsnCode_id}
+            Qty
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {unit_packaging}
             </div>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Category
-            <div
-              id=""
-              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-            >
-              {categoriesName}
+            Unit
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {unit}
+            </div>
+          </div>
+          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
+            Packaging
+            <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {packaging}
             </div>
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
@@ -89,15 +84,15 @@ const ProductBrandDelete: React.FunctionComponent = () => {
               <p>I confirm the deletion</p>
             </div>
             <button
-              className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              className="h-8 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async () => {
-                await router.push("/product-brand");
+                await router.push("product-packaging-list");
               }}
             >
               Cancel
             </button>
             <button
-              className="h-1/2 w-[25%] self-center rounded-md bg-[#FF6E65] font-semibold text-white"
+              className="h-8 w-[25%] self-center rounded-md bg-[#FF6E65] font-semibold text-white"
               onClick={deleteData}
             >
               Delete
@@ -109,4 +104,4 @@ const ProductBrandDelete: React.FunctionComponent = () => {
   );
 };
 
-export default ProductBrandDelete;
+export default BasicUnitsEdit;

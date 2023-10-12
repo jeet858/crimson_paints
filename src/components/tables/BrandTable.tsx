@@ -30,8 +30,19 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
   const router = useRouter();
   return (
     <div>
-      <div className="px-4 text-2xl font-bold">
+      <div className="flex justify-between px-4 text-2xl font-bold">
         Categories: {props.category}
+        <button
+          className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+          onClick={async () => {
+            await router.push({
+              pathname: "/add/product-brand-add",
+              query: { category: props.category },
+            });
+          }}
+        >
+          Add
+        </button>
       </div>
       <div className="flex w-full items-start justify-center">
         <div className="h-fit w-full p-4">

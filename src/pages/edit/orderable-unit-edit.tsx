@@ -35,7 +35,12 @@ const Data = [
   {
     name: "Crimson Bond SBR",
     packaging: [
-      "10 Kg Jar 20 Kg Jar Carton of (0.250 Kg X 12 Con.) Carton of (0.500 Kg X 12 Con.) Carton of (1 Kg X 12 Con.) Carton of (5 Kg X 2 Con.) ",
+      "10 Kg Jar",
+      "20 Kg Jar",
+      "Carton of (0.250 Kg X 12 Con.)",
+      "Carton of (0.500 Kg X 12 Con.)",
+      "Carton of (1 Kg X 12 Con.)",
+      "Carton of (5 Kg X 2 Con.)",
     ],
   },
   {

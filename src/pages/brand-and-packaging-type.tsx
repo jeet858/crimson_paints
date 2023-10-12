@@ -187,6 +187,7 @@ function brandandpackagingtype() {
             </button>
           ))}
         </div>
+
         <h1 className="mt-8 h-fit w-full rounded-[5px] bg-[#786ADE] p-2 text-2xl font-bold">
           Brand Name
         </h1>
@@ -196,8 +197,8 @@ function brandandpackagingtype() {
               <BrandPackagingTable
                 brandName={brand.brand_name}
                 idField={["name", "packaging"]}
-                editUrl=""
-                deleteUrl=""
+               editUrl="edit/brand-and-packaging-type-edit"
+            deleteUrl="delete/brand-and-packaging-type-delete"
               />
             </div>
           ))}

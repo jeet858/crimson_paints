@@ -89,7 +89,13 @@ const OrderableUnitDelete: React.FunctionComponent = () => {
   };
   const toggleCheckbox = (productIndex: number, optionIndex: number) => {
     const newSelectedPackaging = [...selectedPackaging];
-    newSelectedPackaging[productIndex] = optionIndex;
+
+    if (newSelectedPackaging[productIndex] === optionIndex) {
+      newSelectedPackaging[productIndex] = -1;
+    } else {
+      newSelectedPackaging[productIndex] = optionIndex;
+    }
+
     setSelectedPackaging(newSelectedPackaging);
   };
   const templateParams = {

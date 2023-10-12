@@ -29,41 +29,6 @@ function brandandpackagingtype() {
     setSelectedCategory(categoryName);
   };
 
-  const buttonData: ButtonData[] = [
-    { id: "a1oxide", name: "A-1 Oxide" },
-    { id: "adbase", name: "AD Base" },
-    { id: "arfoxide", name: "ARF Oxide" },
-    { id: "classicoxide", name: "Classic Oxide" },
-    { id: "colouruniverse", name: "Colour Universe" },
-    { id: "crimocoat", name: "Crimo Coat" },
-    { id: "crimocemsuper", name: "Crimocem Super" },
-    { id: "crimolite", name: "Crimolite" },
-    { id: "crimsonbondsbr", name: "Crimson Bond SBR" },
-    { id: "crimsoncrete", name: "Crimson CRETE" },
-    { id: "crimsonsuperiwc", name: "Crimson Super IWC" },
-    { id: "decofloor", name: "Deco Floor" },
-    { id: "doubleplus", name: "Double Plus" },
-    { id: "ekoplus", name: "Eko Plus" },
-    { id: "ezbase", name: "EZ Base" },
-    { id: "gulfoxide", name: "Gulf Oxide" },
-    { id: "metallics", name: "Metallics" },
-  ];
-
-  type ButtonData = {
-    id: string;
-    name: string;
-  };
-  const generateButtons = () => {
-    return buttonData.map((button) => (
-      <button
-        key={button.id}
-        className="border-1 mb-2 mr-2 h-[1.8rem] w-fit rounded-xl bg-[#e7e0fffa] px-4 font-semibold"
-        onClick={() => handleButtonClick(button.id)}
-      >
-        {button.name}
-      </button>
-    ));
-  };
   const { data: brands, isLoading, isError } = api.brand.all.useQuery();
 
   const data = [
@@ -222,13 +187,20 @@ function brandandpackagingtype() {
             </button>
           ))}
         </div>
-        <div ref={tableRef}>
-          <BrandPackagingTable
-            data={data}
-            idField={["name", "packaging"]}
-            editUrl=""
-            deleteUrl=""
-          />
+        <h1 className="mt-8 h-fit w-full rounded-[5px] bg-[#786ADE] p-2 text-2xl font-bold">
+          Brand Name
+        </h1>
+        <div className="w-full rounded-md bg-[#C4B0FF52]">
+          {brands.map((brand, index) => (
+            <div>
+              <BrandPackagingTable
+                brandName={brand.brand_name}
+                idField={["name", "packaging"]}
+                editUrl=""
+                deleteUrl=""
+              />
+            </div>
+          ))}
         </div>
       </div>
     </UserTemplate>

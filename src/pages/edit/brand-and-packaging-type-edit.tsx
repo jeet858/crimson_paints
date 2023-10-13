@@ -1,7 +1,7 @@
 import { UserTemplate } from "@/components";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { FaCheck, FaList } from "react-icons/fa";
 import { api } from "~/utils/api";
@@ -9,14 +9,15 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const router = useRouter();
   const { brand_name } = router.query;
+
   const templateParams = {
     title: "Admin",
     userID: data?.user.id,
     userImage: "user.jpg",
     userType: "admin",
   };
-
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [firstRender, setFirstRender] = useState(true);
   const {
     data: packagingUnits,
     isLoading,
@@ -32,6 +33,31 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
     isLoading: existingPackagingLoading,
     isError: existingPackagingError,
   } = api.brandPackaging.where_brand_name.useQuery(brand_name as string);
+  const update = api.brandPackaging.edit.useMutation({
+    onError: (err, brandPackaging, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      alert("Data updated succesfully");
+      setFirstRender(true);
+      router.push("/brand-and-packaging-type");
+    },
+  });
+
+  const updateData = () => {
+    update.mutate({
+      brand_name: brand_name as string,
+      packaging_array: selectedItems,
+    });
+  };
+  useEffect(() => {
+    if (selectedItems.length == 0 && existingPackaging && firstRender) {
+      setFirstRender(false);
+      var a: string[] = [];
+      const packagingValues = existingPackaging.map((item) => item.packaging);
+      setSelectedItems(packagingValues);
+    }
+  });
   if (isLoading || complexUnitLoading || existingPackagingLoading) {
     return (
       <UserTemplate templateParams={templateParams}>
@@ -49,18 +75,10 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
             <p className="p-2 text-lg font-semibold">{brand_name}</p>
           </div>
           <div className="flex h-fit w-full items-center justify-center gap-4 rounded-b-[10px]  bg-[#c4b0ff8d] p-2 text-xl font-semibold">
-            <button
-              className="h-10 w-28 rounded-lg bg-[#07096E] text-white"
-              onClick={cancelclick}
-            >
+            <button className="h-10 w-28 rounded-lg bg-[#07096E] text-white">
               Cancel
             </button>
-            <button
-              className="h-10 w-28 rounded-lg bg-[#C4B0FF]"
-              onClick={editclick}
-            >
-              Save
-            </button>
+            <button className="h-10 w-28 rounded-lg bg-[#C4B0FF]">Save</button>
           </div>
         </div>
       </UserTemplate>
@@ -68,9 +86,6 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
   }
   if (isError || complexUnitError || existingPackagingError) {
     return <UserTemplate templateParams={templateParams}></UserTemplate>;
-  }
-  for (const i of existingPackaging) {
-    setSelectedItems([...selectedItems, i.packaging]);
   }
 
   return (
@@ -149,11 +164,15 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
           >
             Cancel
           </button>
-          <button className="h-10 w-28 rounded-lg bg-[#C4B0FF]">Save</button>
+          <button
+            className="h-10 w-28 rounded-lg bg-[#C4B0FF]"
+            onClick={updateData}
+          >
+            Save
+          </button>
         </div>
       </div>
     </UserTemplate>
   );
 };
-
 export default BrandAndPackagingTypeEdit;

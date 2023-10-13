@@ -3,6 +3,7 @@ import {
   basicUnitsDeleteInput,
   basicUnitsEditInput,
   basicUnitsInput,
+  brandPackagingDeleteInput,
   brandPackagingInput,
 } from "../../../types";
 import {
@@ -31,7 +32,41 @@ export const brandPackagingRouter = createTRPCRouter({
           brand_name: input,
         },
       });
-      await ctx.db.$disconnect();
       return brand;
+    }),
+  edit: protectedProcedure
+    .input(brandPackagingInput)
+    .mutation(async ({ ctx, input }) => {
+      // try {
+      //   return await ctx.db.brandPackagingType.create({
+      //     data: {
+      //       brand_name: input.brand_name,
+      //       packaging: input.packaging_array,
+      //     },
+      //   });
+      // } catch (e) {}
+      const data = input.packaging_array.map((item) => {
+        return {
+          brand_name: input.brand_name,
+          packaging: item,
+        };
+      });
+      await ctx.db.brandPackagingType.deleteMany({
+        where: {
+          brand_name: input.brand_name,
+        },
+      });
+      return await ctx.db.brandPackagingType.createMany({
+        data: data,
+      });
+    }),
+  delete: protectedProcedure
+    .input(brandPackagingDeleteInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.brand.deleteMany({
+        where: {
+          brand_name: input.brand_name,
+        },
+      });
     }),
 });

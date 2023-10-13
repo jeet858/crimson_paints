@@ -242,3 +242,8 @@ export const brandPackagingWhereInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const brandPackagingDeleteInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});

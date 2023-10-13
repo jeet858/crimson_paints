@@ -197,8 +197,8 @@ function brandandpackagingtype() {
               <BrandPackagingTable
                 brandName={brand.brand_name}
                 idField={["name", "packaging"]}
-               editUrl="edit/brand-and-packaging-type-edit"
-            deleteUrl="delete/brand-and-packaging-type-delete"
+                editUrl="edit/brand-and-packaging-type-edit"
+                deleteUrl="delete/brand-and-packaging-type-delete"
               />
             </div>
           ))}

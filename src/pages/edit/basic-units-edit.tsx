@@ -41,8 +41,6 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     symbol: symbol as string,
   });
 
-  const trpc = api.useContext();
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setEditData({

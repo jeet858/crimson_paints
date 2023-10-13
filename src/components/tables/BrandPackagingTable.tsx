@@ -41,16 +41,16 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({
             <button
               className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
               onClick={async () => {
-                const queryObj = {
-                  ...router.query,
-                };
-                for (let i = 0; i < idField.length; i++) {
-                  const id = idField[i] as string;
-                  // queryObj[id] = item[id];
-                }
+                // const queryObj = {
+                //   ...router.query,
+                // };
+                // for (let i = 0; i < idField.length; i++) {
+                //   const id = idField[i] as string;
+                //   // queryObj[id] = item[id];
+                // }
                 router.push({
                   pathname: editUrl,
-                  query: queryObj,
+                  query: { brand_name: brandName },
                 });
               }}
             >

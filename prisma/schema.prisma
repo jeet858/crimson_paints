@@ -113,3 +113,9 @@ model Brand {
   categories     Categories @relation(fields: [categoriesName], references: [name])
   categoriesName String
 }
+
+model BrandPackagingType{
+  brand_name String
+  packaging String
+  @@id([brand_name, packaging])
+}

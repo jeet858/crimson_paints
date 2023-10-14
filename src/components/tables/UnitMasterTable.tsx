@@ -465,9 +465,10 @@ const UnitMasterTable: React.FunctionComponent = () => {
         <TableComponent
           columns={columns}
           data={tableData}
-          deleteIcon={<MdDeleteOutline className="h-7 w-7 text-violet-600" />}
-          editIcon={<CiEdit className="h-7 w-7 text-violet-600" />}
           userType="admin"
+          idField={[]}
+          editUrl=""
+          deleteUrl=""
         />
       </div>
     </div>

@@ -31,7 +31,7 @@ const ProductBrandAdd: React.FunctionComponent = () => {
   const { data: hsnCodes, isLoading, isError } = api.hsn.all.useQuery();
   const add = api.brand.create.useMutation({
     onError: (err, newBrand, context) => {
-      alert(`${err.data}`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       alert("Data added sucessfully");
@@ -91,8 +91,7 @@ const ProductBrandAdd: React.FunctionComponent = () => {
             <button
               className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async () => {
-                console.log(addData);
-                // await router.push("/product-brand");
+                await router.push("/product-brand");
               }}
             >
               Cancel

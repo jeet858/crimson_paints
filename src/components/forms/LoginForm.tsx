@@ -21,12 +21,11 @@ const LoginForm = () => {
     e.preventDefault();
     console.log(userInfo);
     const res = await signIn("credentials", {
-      email: userInfo.email as string,
-      password: userInfo.password as string,
+      email: userInfo.email,
+      password: userInfo.password,
       redirect: false,
       callbackUrl: "/welcome-page",
     });
-    console.log(res);
     if (res?.ok) {
       navigate();
     }
@@ -34,6 +33,7 @@ const LoginForm = () => {
       // Authentication error occurred
       alert("Incorrect username or password. Please try again.");
     }
+    return undefined;
   };
   return (
     <LoginTemplate templateParams={templateParams}>

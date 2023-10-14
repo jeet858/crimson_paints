@@ -4,7 +4,7 @@ import React from "react";
 import OrderableUnitTable from "~/components/tables/OrderableUnitTable";
 import { api } from "~/utils/api";
 
-const orderableunit = () => {
+const OrderableUnit: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -117,4 +117,4 @@ const orderableunit = () => {
   );
 };
 
-export default orderableunit;
+export default OrderableUnit;

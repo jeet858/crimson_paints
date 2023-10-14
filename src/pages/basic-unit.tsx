@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
 
-const masterbasicunit = () => {
+const MasterBasicUnit: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -124,4 +124,4 @@ const masterbasicunit = () => {
   );
 };
 
-export default masterbasicunit;
+export default MasterBasicUnit;

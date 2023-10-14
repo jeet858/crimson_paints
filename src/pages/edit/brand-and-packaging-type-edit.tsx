@@ -53,7 +53,6 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
   useEffect(() => {
     if (selectedItems.length == 0 && existingPackaging && firstRender) {
       setFirstRender(false);
-      var a: string[] = [];
       const packagingValues = existingPackaging.map((item) => item.packaging);
       setSelectedItems(packagingValues);
     }
@@ -115,7 +114,10 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
                 }
               };
               return (
-                <div className="m-4 flex w-[22%] min-w-[22%] items-center">
+                <div
+                  className="m-4 flex w-[22%] min-w-[22%] items-center"
+                  key={index}
+                >
                   <div
                     className="mr-4 flex h-4 w-4 items-center justify-center border-2 border-black"
                     onClick={handleCheckboxClick}
@@ -140,7 +142,10 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
                 }
               };
               return (
-                <div className="m-4 flex w-[22%] min-w-[22%] items-center">
+                <div
+                  className="m-4 flex w-[22%] min-w-[22%] items-center"
+                  key={index}
+                >
                   <div
                     className="mr-4 flex h-4 w-4 items-center justify-center border-2 border-black"
                     onClick={handleCheckboxClick}

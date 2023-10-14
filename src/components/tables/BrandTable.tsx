@@ -20,6 +20,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
     isLoading,
     isError,
   } = api.brand.where_categories.useQuery(props.category);
+  const router = useRouter();
   console.log(brands);
   if (isError) {
     return <div>Error</div>;
@@ -27,7 +28,6 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
   if (isLoading) {
     return <div>Loading</div>;
   }
-  const router = useRouter();
   return (
     <div>
       <div className="flex justify-between px-4 text-2xl font-bold">
@@ -76,7 +76,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
                         const id = props.idField[i] as string;
                         queryObj[id] = brand[id];
                       }
-                      router.push({
+                      await router.push({
                         pathname: props.editUrl,
                         query: queryObj,
                       });
@@ -95,7 +95,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
                         const id = props.idField[i] as string;
                         queryObj[id] = brand[id];
                       }
-                      router.push({
+                      await router.push({
                         pathname: props.deleteUrl,
                         query: queryObj,
                       });

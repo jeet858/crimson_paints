@@ -2,6 +2,8 @@ import { UserTemplate } from "@/components";
 import React, { useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { FaCheck } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { api } from "~/utils/api";
 
 const get = async () => {
   const session = await getSession();
@@ -36,7 +38,7 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
   const deleteData = () => {
     del.mutate({ name: name as string });
   };
-  
+
   const [confirmed, setConfirmed] = useState(false);
 
   return (
@@ -45,10 +47,10 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
         <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
           Product Categories Details
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
-          Product Categories Details
+            Product Categories Details
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-          Name
+            Name
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
               value={editData.Symbol}

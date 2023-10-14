@@ -71,6 +71,7 @@ const OrderableUnitTable: React.FC<OrderableUnitTableProps> = ({
         {brands.map((brand, index) => {
           return (
             <OrderableUnitList
+              key={index}
               brand_name={brand.brand_name}
               list_name={listName}
             />

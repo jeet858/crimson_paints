@@ -82,7 +82,7 @@ const HsnCode = () => {
             <button
               className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
               onClick={async () => {
-                router.push("add/hsn-code-add");
+                await router.push("add/hsn-code-add");
               }}
             >
               Add

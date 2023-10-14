@@ -2,6 +2,8 @@ import { UserTemplate } from "@/components";
 import React, { useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { FaCheck } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { api } from "~/utils/api";
 
 const get = async () => {
   const session = await getSession();
@@ -36,15 +38,15 @@ const InterCompanyDelete: React.FunctionComponent = () => {
   const deleteData = () => {
     del.mutate({ name: name as string });
   };
-  
+
   const [confirmed, setConfirmed] = useState(false);
 
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-2/4 flex-col rounded-xl bg-[#C4B0FF45]">
-            Inter Company Delete
-          <p className="h-1/4 w-full flex items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
+          Inter Company Delete
+          <p className="flex h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
             Branch Details
           </p>
           {/* <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
@@ -61,19 +63,29 @@ const InterCompanyDelete: React.FunctionComponent = () => {
               value={editData.Name}
             />
           </div> */}
-          <div className="h-1/6 flex flex-row border-y-2 border-[#11009E]">
-            <div className="w-2/6 flex items-center justify-start font-[Inter] font-semibold px-4 border-r-2 border-[#11009E]" >Branch Name</div>
-            <div className="w-4/6 border-l-2 flex items-center justify-start font-[Inter] font-semibold border-[#11009E]">Colour Coat Industries</div>
+          <div className="flex h-1/6 flex-row border-y-2 border-[#11009E]">
+            <div className="flex w-2/6 items-center justify-start border-r-2 border-[#11009E] px-4 font-[Inter] font-semibold">
+              Branch Name
+            </div>
+            <div className="flex w-4/6 items-center justify-start border-l-2 border-[#11009E] font-[Inter] font-semibold">
+              Colour Coat Industries
+            </div>
           </div>
-          <div className="h-1/6 flex flex-row border-y-2 border-[#11009E]">
-            <div className="w-2/6 flex items-center justify-start px-4 border-r-2 font-[Inter] font-semibold border-[#11009E]">Address</div>
-            <div className="w-4/6 flex items-center justify-start font-[Inter] font-semibold px-4 border-l-2 border-[#11009E]"></div>
+          <div className="flex h-1/6 flex-row border-y-2 border-[#11009E]">
+            <div className="flex w-2/6 items-center justify-start border-r-2 border-[#11009E] px-4 font-[Inter] font-semibold">
+              Address
+            </div>
+            <div className="flex w-4/6 items-center justify-start border-l-2 border-[#11009E] px-4 font-[Inter] font-semibold"></div>
           </div>
-          <div className="h-1/6 flex flex-row border-y-2 border-[#11009E]">
-            <div className="w-2/6 flex items-center justify-start font-[Inter] font-semibold px-4 border-r-2 border-[#11009E]" >Phone / GST </div>
-            <div className="w-4/6 flex items-center justify-start font-[Inter] font-semibold px-4 border-l-2 border-[#11009E]">Phone : , GST :</div>
+          <div className="flex h-1/6 flex-row border-y-2 border-[#11009E]">
+            <div className="flex w-2/6 items-center justify-start border-r-2 border-[#11009E] px-4 font-[Inter] font-semibold">
+              Phone / GST{" "}
+            </div>
+            <div className="flex w-4/6 items-center justify-start border-l-2 border-[#11009E] px-4 font-[Inter] font-semibold">
+              Phone : , GST :
+            </div>
           </div>
-          <div className="flex h-1/6 w-full border-t-2 border-[#11009E] justify-between self-end px-4">
+          <div className="flex h-1/6 w-full justify-between self-end border-t-2 border-[#11009E] px-4">
             <div className="flex h-fit items-center justify-center">
               <div
                 className="mr-2 flex h-4 w-4 items-center border-2 border-[#11009E] bg-[#C4B0FF45]"

@@ -4,7 +4,7 @@ import { InsideNav, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
 import BrandTable from "~/components/tables/BrandTable";
 
-const productbrand = () => {
+const ProductBrand: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
   const templateParams = {
@@ -90,6 +90,7 @@ const productbrand = () => {
         <div className="border-1 h-fit w-full   rounded-lg bg-[#C4B0FF] p-4">
           {catrgories.map((category, index) => (
             <button
+              key={index}
               onClick={() => {
                 const targetElement = document.getElementById(category.name);
                 targetElement!.scrollIntoView();
@@ -103,7 +104,7 @@ const productbrand = () => {
       </div>
       <div>
         {catrgories.map((category, index) => (
-          <div id={category.name}>
+          <div id={category.name} key={index}>
             <BrandTable
               columns={columns}
               category={category.name}
@@ -118,4 +119,4 @@ const productbrand = () => {
   );
 };
 
-export default productbrand;
+export default ProductBrand;

@@ -24,7 +24,7 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
 
   const del = api.complex.delete.useMutation({
     onError: (err, packagingUnit, context) => {
-      alert(`${err}`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       alert("Data deleted successfully");

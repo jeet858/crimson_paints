@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { InsideNav, UserTemplate } from "@/components";
 import GroupForProcingTable from "~/components/tables/GroupForProcingTable";
 import { date } from "zod";
-const groupforpricing = () => {
+const GroupForPricing: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -146,4 +146,4 @@ const groupforpricing = () => {
   );
 };
 
-export default groupforpricing;
+export default GroupForPricing;

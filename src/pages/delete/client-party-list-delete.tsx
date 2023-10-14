@@ -2,6 +2,8 @@ import { UserTemplate } from "@/components";
 import React, { useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { FaCheck } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { api } from "~/utils/api";
 
 const get = async () => {
   const session = await getSession();
@@ -47,51 +49,103 @@ const ClientPartyListDelete: React.FunctionComponent = () => {
           <p className="h-1/6 w-full items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
             Party Details
           </p>
-          <div className="flex flex-row h-[10%]">
-            <div className="w-2/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Name</div>
-            <div className="w-4/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">ASHIS CHATTERJEE</div>
-          </div>
-          <div className="flex flex-row h-[10%]">
-            <div className="w-2/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Alternate Name</div>
-            <div className="w-4/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">ASHIS CHATTERJEE</div>
-          </div>
-          <div className="flex flex-row h-[10%]">
-            <div className="w-2/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Type</div>
-            <div className="w-4/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Distributor</div>
-          </div>
-          <div className="flex flex-row h-[10%]">
-            <div className="w-2/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Address</div>
-            <div className="w-4/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Howrah, West Bengal</div>
-          </div>
-          <div className="flex flex-row h-[10%]">
-            <div className="w-2/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4">Phone/Email</div>
-            <div className="w-4/6 border-2 border-[#11009E] font-semibold text-xl flex justify-normal pl-4"></div>
-          </div>
-          <div className="flex flex-col w-full h-4/6 border-t-2 border-t-[#11009E]">
-            <div className="border-2  h-1/6 flex justify-center text-[#FF6E65] text-base font-semibold">Orders exist for this Client!</div>
-            <div className="border-2 border-y-[#11009E] h-1/6 flex flex-row">
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-center pl-4 font-medium text-base">2023-09/0509</div>
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">09-Sep-2023</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Raichand Brothers</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Soumen Saha</div>
+          <div className="flex h-[10%] flex-row">
+            <div className="flex w-2/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Name
             </div>
-            <div className="border-2 border-y-[#11009E] h-1/6 flex flex-row">
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-center pl-4 font-medium text-base">2023-09/0509</div>
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">09-Sep-2023</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Raichand Brothers</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Soumen Saha</div>
+            <div className="flex w-4/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              ASHIS CHATTERJEE
             </div>
-            <div className="border-2 border-y-[#11009E] h-1/6 flex flex-row">
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-center pl-4 font-medium text-base">2023-09/0509</div>
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">09-Sep-2023</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Raichand Brothers</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Soumen Saha</div>
+          </div>
+          <div className="flex h-[10%] flex-row">
+            <div className="flex w-2/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Alternate Name
             </div>
-            <div className="border-2 border-y-[#11009E] h-1/6 flex flex-row">
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-center pl-4 font-medium text-base">2023-09/0509</div>
-              <div className="w-1/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">09-Sep-2023</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Raichand Brothers</div>
-              <div className="w-2/6 border-x-2 border-x-[#11009E] flex justify-start pl-4 font-medium text-base">Soumen Saha</div>
+            <div className="flex w-4/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              ASHIS CHATTERJEE
+            </div>
+          </div>
+          <div className="flex h-[10%] flex-row">
+            <div className="flex w-2/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Type
+            </div>
+            <div className="flex w-4/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Distributor
+            </div>
+          </div>
+          <div className="flex h-[10%] flex-row">
+            <div className="flex w-2/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Address
+            </div>
+            <div className="flex w-4/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Howrah, West Bengal
+            </div>
+          </div>
+          <div className="flex h-[10%] flex-row">
+            <div className="flex w-2/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold">
+              Phone/Email
+            </div>
+            <div className="flex w-4/6 justify-normal border-2 border-[#11009E] pl-4 text-xl font-semibold"></div>
+          </div>
+          <div className="flex h-4/6 w-full flex-col border-t-2 border-t-[#11009E]">
+            <div className="flex  h-1/6 justify-center border-2 text-base font-semibold text-[#FF6E65]">
+              Orders exist for this Client!
+            </div>
+            <div className="flex h-1/6 flex-row border-2 border-y-[#11009E]">
+              <div className="flex w-1/6 justify-center border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                2023-09/0509
+              </div>
+              <div className="flex w-1/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                09-Sep-2023
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Raichand Brothers
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Soumen Saha
+              </div>
+            </div>
+            <div className="flex h-1/6 flex-row border-2 border-y-[#11009E]">
+              <div className="flex w-1/6 justify-center border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                2023-09/0509
+              </div>
+              <div className="flex w-1/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                09-Sep-2023
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Raichand Brothers
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Soumen Saha
+              </div>
+            </div>
+            <div className="flex h-1/6 flex-row border-2 border-y-[#11009E]">
+              <div className="flex w-1/6 justify-center border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                2023-09/0509
+              </div>
+              <div className="flex w-1/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                09-Sep-2023
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Raichand Brothers
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Soumen Saha
+              </div>
+            </div>
+            <div className="flex h-1/6 flex-row border-2 border-y-[#11009E]">
+              <div className="flex w-1/6 justify-center border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                2023-09/0509
+              </div>
+              <div className="flex w-1/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                09-Sep-2023
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Raichand Brothers
+              </div>
+              <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
+                Soumen Saha
+              </div>
             </div>
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">

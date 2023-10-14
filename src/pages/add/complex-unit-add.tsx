@@ -38,7 +38,7 @@ const ComplexUnitAdd: React.FunctionComponent = () => {
   };
   const add = api.complex.create.useMutation({
     onError: (err, complexUnit, context) => {
-      alert(`${err}`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       router.push("/packaging-unit");

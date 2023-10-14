@@ -3,7 +3,6 @@ import Button from "./elements/Button";
 import FileInput from "./elements/FileInput";
 import HelpText from "./elements/HelpText";
 import InputField from "./elements/InputField";
-import TextInput from "./elements/InputTextField";
 import TableComponent from "./tables/TableComponent";
 import ComplexTypeTable from "./tables/ComplexTypeTable";
 import UserTemplate from "./template/UserTemplate";
@@ -30,8 +29,6 @@ import UploadsTable from "./tables/UploadsTable";
 import UserAccessTable from "./tables/UserAccessTable";
 import LoginTemplate from "./template/LoginTemplate";
 
-
-
 export {
   LoginForm,
   SignUpForm,
@@ -39,7 +36,6 @@ export {
   FileInput,
   HelpText,
   InputField,
-  TextInput,
   UserTemplate,
   InsideNav,
   InsideNavElement,

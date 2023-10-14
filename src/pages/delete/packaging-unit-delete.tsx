@@ -24,7 +24,7 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
 
   const del = api.packagingUnit.delete.useMutation({
     onError: (err, packagingUnit, context) => {
-      alert(`${err}`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       router.push("/product-packaging-list");

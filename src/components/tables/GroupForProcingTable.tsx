@@ -71,7 +71,7 @@ const GroupForProcingTable: React.FC<GroupForProcingTableProps> = ({
                             const id = idField[i] as string;
                             queryObj[id] = item[id];
                           }
-                          router.push({
+                          await router.push({
                             pathname: editUrl,
                             query: queryObj,
                           });
@@ -90,7 +90,7 @@ const GroupForProcingTable: React.FC<GroupForProcingTableProps> = ({
                             const id = idField[i] as string;
                             queryObj[id] = item[id];
                           }
-                          router.push({
+                          await router.push({
                             pathname: deleteUrl,
                             query: queryObj,
                           });

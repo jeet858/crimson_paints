@@ -117,9 +117,9 @@ const AddUserForm: React.FunctionComponent = () => {
             )}
           </div>
           <div className="flex flex-wrap">
-            {orderableLocation.map((location) => {
+            {orderableLocation.map((location, index) => {
               return (
-                <div className="flex gap-x-2 px-4">
+                <div className="flex gap-x-2 px-4" key={index}>
                   <input type="checkbox" />
                   <p>{location}</p>
                 </div>
@@ -208,7 +208,9 @@ const AddUserForm: React.FunctionComponent = () => {
         <button
           type="button"
           className="w-[40%] rounded-full bg-indigo-700 px-4 py-2 font-semibold text-white hover:bg-indigo-800 focus:bg-indigo-800 focus:outline-none"
-          onClick={navigate}
+          onClick={() => {
+            navigate();
+          }}
         >
           Create Account
         </button>

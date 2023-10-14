@@ -144,7 +144,7 @@ const PackagingUnitEdit: React.FunctionComponent = () => {
             <button
               className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async () => {
-                router.push("/packaging-unit");
+                await router.push("/packaging-unit");
               }}
             >
               Cancel

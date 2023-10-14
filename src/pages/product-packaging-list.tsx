@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
 
-const productpackaginglist = () => {
+const ProductPackagingList: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -88,4 +88,4 @@ const productpackaginglist = () => {
   );
 };
 
-export default productpackaginglist;
+export default ProductPackagingList;

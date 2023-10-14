@@ -97,7 +97,7 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                         const id = props.idField[i] as string;
                         queryObj[id] = row[id];
                       }
-                      router.push({
+                      await router.push({
                         pathname: props.editUrl,
                         query: queryObj,
                       });
@@ -116,7 +116,7 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                         const id = props.idField[i] as string;
                         queryObj[id] = row[id];
                       }
-                      router.push({
+                      await router.push({
                         pathname: props.deleteUrl,
                         query: queryObj,
                       });

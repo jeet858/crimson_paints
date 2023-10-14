@@ -93,7 +93,11 @@ const PackagingUnitAdd: React.FunctionComponent = () => {
             >
               <option value="">--Select unit--</option>
               {basicUnit?.map((unit, index) => {
-                return <option value={unit.symbol}>{unit.name}</option>;
+                return (
+                  <option value={unit.symbol} key={index}>
+                    {unit.name}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -115,7 +119,11 @@ const PackagingUnitAdd: React.FunctionComponent = () => {
             >
               <option value="">--Select unit--</option>
               {packagingType?.map((packaging, index) => {
-                return <option value={packaging.name}>{packaging.name}</option>;
+                return (
+                  <option value={packaging.name} key={index}>
+                    {packaging.name}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -123,7 +131,7 @@ const PackagingUnitAdd: React.FunctionComponent = () => {
             <button
               className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async () => {
-                router.push("/packaging-unit");
+                await router.push("/packaging-unit");
               }}
             >
               Cancel

@@ -4,7 +4,7 @@ import { InsideNav, TableComponent, UserTemplate } from "@/components";
 import ColorTable from "~/components/tables/ColorTable";
 import { api } from "~/utils/api";
 
-const colors = () => {
+const Colors: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -106,4 +106,4 @@ const colors = () => {
   );
 };
 
-export default colors;
+export default Colors;

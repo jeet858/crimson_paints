@@ -135,9 +135,9 @@ const OrderableUnitDelete: React.FunctionComponent = () => {
                 {brandPackagings.map((brandPackaging, index) => {
                   if (brandPackaging.brand_name === brand.brand_name) {
                     const object = {
-                      brand_name: brand.brand_name as string,
-                      packaging: brandPackaging.packaging as string,
-                      list_name: list_name as string,
+                      brand_name: brand.brand_name,
+                      packaging: brandPackaging.packaging,
+                      list_name: list_name,
                     };
                     const exists = selectedItems.some(
                       (item) =>

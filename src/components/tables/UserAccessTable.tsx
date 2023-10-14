@@ -23,9 +23,12 @@ const UserAccessTable: React.FunctionComponent<UserAccessTableProps> = (
             <FaPencilAlt className="h-6 w-6 text-white" />
           </div>
         </div>
-        {props.data.map((e) => {
+        {props.data.map((e, index) => {
           return (
-            <div className="flex h-10 w-full justify-between px-8 py-8">
+            <div
+              className="flex h-10 w-full justify-between px-8 py-8"
+              key={index}
+            >
               <p className="self-center text-base font-semibold">{e.title}</p>
               <div className="flex w-1/5 items-center justify-between">
                 <CheckBox permission={e.access} key={e.title} />

@@ -22,7 +22,7 @@ const ComplexUnitEdit: React.FunctionComponent = () => {
 
   const update = api.complex.edit.useMutation({
     onError: (err, complexUnit, context) => {
-      alert(`${err}`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       alert("Data updated successfully");

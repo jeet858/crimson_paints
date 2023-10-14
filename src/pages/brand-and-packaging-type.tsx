@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { InsideNav, UserTemplate } from "@/components";
 import BrandPackagingTable from "~/components/tables/BrandPackagingTable";
 import { api } from "~/utils/api";
-
-function brandandpackagingtype() {
+const BrandandPackagingType: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -177,6 +176,7 @@ function brandandpackagingtype() {
         <div className="border-1 h-fit w-full overflow-auto rounded-lg bg-[#C4B0FF] p-2">
           {brands.map((brand, index) => (
             <button
+              key={index}
               onClick={() => {
                 const targetElement = document.getElementById(brand.brand_name);
                 targetElement?.scrollIntoView();
@@ -193,7 +193,7 @@ function brandandpackagingtype() {
         </h1>
         <div className="w-full rounded-md bg-[#C4B0FF52]">
           {brands.map((brand, index) => (
-            <div>
+            <div key={index}>
               <BrandPackagingTable
                 brandName={brand.brand_name}
                 idField={["name", "packaging"]}
@@ -206,6 +206,6 @@ function brandandpackagingtype() {
       </div>
     </UserTemplate>
   );
-}
+};
 
-export default brandandpackagingtype;
+export default BrandandPackagingType;

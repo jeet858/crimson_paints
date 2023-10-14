@@ -22,7 +22,7 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({
     data: existingPackaging,
     isLoading: existingPackagingLoading,
     isError: existingPackagingError,
-  } = api.brandPackaging.where_brand_name.useQuery(brandName as string);
+  } = api.brandPackaging.where_brand_name.useQuery(brandName);
   if (existingPackagingLoading) {
     return (
       <div className="flex w-full flex-col">
@@ -56,7 +56,7 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({
                   //   const id = idField[i] as string;
                   //   // queryObj[id] = item[id];
                   // }
-                  router.push({
+                  await router.push({
                     pathname: editUrl,
                     query: { brand_name: brandName },
                   });
@@ -103,7 +103,7 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({
                   //   const id = idField[i] as string;
                   //   // queryObj[id] = item[id];
                   // }
-                  router.push({
+                  await router.push({
                     pathname: editUrl,
                     query: { brand_name: brandName },
                   });
@@ -150,7 +150,7 @@ const BrandPackagingTable: React.FC<BrandPackagingTableProps> = ({
                 //   const id = idField[i] as string;
                 //   // queryObj[id] = item[id];
                 // }
-                router.push({
+                await router.push({
                   pathname: editUrl,
                   query: { brand_name: brandName },
                 });

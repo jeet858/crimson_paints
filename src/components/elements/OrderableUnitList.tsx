@@ -32,7 +32,11 @@ const OrderableUnitList: React.FC<OrderableUnitListProps> = ({
       <div className="flex flex-wrap whitespace-nowrap font-semibold">
         {brand_name}:
         {listDetails.map((listDetail, index) => {
-          return <div className="ml-2 font-normal">{listDetail.packaging}</div>;
+          return (
+            <div className="ml-2 font-normal" key={index}>
+              {listDetail.packaging}
+            </div>
+          );
         })}
       </div>
     </div>

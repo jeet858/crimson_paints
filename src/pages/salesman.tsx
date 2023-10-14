@@ -370,8 +370,9 @@ function Salesman({
           <Tablecomponent
             columns={columns}
             data={tableData}
-            deleteIcon={<MdDeleteOutline className="h-7 w-7 text-violet-600" />}
-            editIcon={<CiEdit className="h-7 w-7 text-violet-600" />}
+            idField={[]}
+            editUrl=""
+            deleteUrl=""
             userType="admin"
           />
         </div>

@@ -119,3 +119,13 @@ model BrandPackagingType{
   packaging String
   @@id([brand_name, packaging])
 }
+model OderableUnits{
+  list_name String @unique @id
+}
+
+model OderableUnitsDetails{
+  brand_name String
+  packaging String
+  list_name String
+  @@id([brand_name, packaging, list_name])
+}

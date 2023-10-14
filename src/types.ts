@@ -247,3 +247,39 @@ export const brandPackagingDeleteInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const orderableUnitInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const orderableUnitListDetailsInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const orderableUniBrandPackagingInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const orderableUnitListDetailsEditInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      list_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      packaging: z.string({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});

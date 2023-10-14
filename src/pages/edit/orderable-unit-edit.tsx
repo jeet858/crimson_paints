@@ -1,115 +1,144 @@
 import { UserTemplate } from "@/components";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
-import { FaList } from "react-icons/fa";
-const Data = [
-  {
-    name: "A-1 Oxide",
-    packaging: ["Carton of (0.5 Kg X 24 Con.)", "Carton of (1 Kg X 12 Con.)"],
-  },
-  {
-    name: "ARF Oxide",
-    packaging: [
-      "25 Kg Bag Carton of (0.500 Kg X 50 Pou.) Carton of (1 Kg X 25 Pou.) Jar of (0.500 Kg X 40 Pou.) Jar of (1 Kg X 20 Pou.) ",
-    ],
-  },
-  {
-    name: "Classic Oxide",
-    packaging: [
-      "25 Kg Bag Carton of (0.500 Kg X 50 Pou.) Carton of (1 Kg X 25 Pou.) Jar of (0.500 Kg X 40 Pou.) Jar of (1 Kg X 20 Pou.)",
-    ],
-  },
-  {
-    name: "Colour Universe",
-    packaging: [
-      "1 Lit Con. Crimocem Super:  10 Kg Jar 20 Kg Bag 25 Kg Bag 25 Kg Jar Bag of (5 Kg X 5 Pou.) Carton of (5 Kg X 4 Con.)",
-    ],
-  },
-  {
-    name: "Crimolite",
-    packaging: [
-      "20 Lit Jar Carton of (0.5 Lt. X 8 Con.) Carton of (1 Lt. X 6 Con.) Carton of (100 ML. X 12 Con.) Carton of (200 ML. X 12 Con.) Carton of (4 Lt. X 4 Con.)",
-    ],
-  },
-  {
-    name: "Crimson Bond SBR",
-    packaging: [
-      "10 Kg Jar",
-      "20 Kg Jar",
-      "Carton of (0.250 Kg X 12 Con.)",
-      "Carton of (0.500 Kg X 12 Con.)",
-      "Carton of (1 Kg X 12 Con.)",
-      "Carton of (5 Kg X 2 Con.)",
-    ],
-  },
-  {
-    name: "Crimson CRETE",
-    packaging: [
-      "10 Kg Jar 20 Kg Jar Carton of (0.250 Kg X 12 Con.) Carton of (0.500 Kg X 12 Con.) Carton of (1 Kg X 12 Con.) Carton of (5 Kg X 2 Con.)",
-    ],
-  },
-  {
-    name: "Crimson Super IWC",
-    packaging: [
-      "10 Kg Jar 20 Kg Jar Carton of (0.200 Kg X 12 Con.) Carton of (0.500 Kg X 12 Con.) Carton of (1 Kg X 12 Con.) Carton of (5 Kg X 2 Con.)",
-    ],
-  },
-  {
-    name: "Damp Seald",
-    packaging: [
-      "10 Lit Jar 20 Lit Jar Carton of (1 Lt. X 6 Con.) Carton of (4 Lt. X 4 Con.)Deco Floor:  20 Lit Jar Carton of (1 Lt. X 6 Con.) Carton of (4 Lt. X 4 Con.)",
-    ],
-  },
-  {
-    name: "Double Plus",
-    packaging: ["20 Kg Bag 25 Kg Bag Eko Plus:  20 Kg Bag 25 Kg Bag"],
-  },
-  {
-    name: "Eko Plus",
-    packaging: ["20 Kg Bag 25 Kg Bag"],
-  },
-  {
-    name: "EZ Base",
-    packaging: [
-      "10 Lit Jar 18 Lit Jar 20 Lit Jar 9 Lit Jar Carton of (1 Lt. X 6 Con.) Carton of (3.6 Lt. X 4 Con.) Carton of (4 Lt. X 4 Con.) Carton of (900 ML. X 6 Con.)",
-    ],
-  },
-  {
-    name: "Gulf Oxide",
-    packaging: [
-      "Bag of (1 Kg X 20 Pou.) Carton of (0.500 Kg X 40 Pou.) Carton of (0.500 Kg X 50 Pou.) Carton of (1 Kg X 20 Pou.) Carton of (1 Kg X 25 Pou.) Carton of (5 Kg X 4 Pou.) Metallics:",
-    ],
-  },
-];
+import { FaCheck, FaList } from "react-icons/fa";
+import { api } from "~/utils/api";
+
 const OrderableUnitEdit: React.FunctionComponent = () => {
   const { data, status } = useSession();
-  const [selectedPackaging, setSelectedPackaging] = useState<number[]>(() =>
-    Data.map(() => -1)
-  );
-  const toggleCheckbox = (productIndex: number, optionIndex: number) => {
-    const newSelectedPackaging = [...selectedPackaging];
+  const router = useRouter();
+  const { list_name } = router.query;
 
-    if (newSelectedPackaging[productIndex] === optionIndex) {
-      newSelectedPackaging[productIndex] = -1;
-    } else {
-      newSelectedPackaging[productIndex] = optionIndex;
-    }
-
-    setSelectedPackaging(newSelectedPackaging);
-  };
   const templateParams = {
     title: "Admin",
     userID: data?.user.id,
     userImage: "user.jpg",
     userType: "admin",
   };
-  const cancelclick = () => {
-    console.log("cancel");
+  const [selectedItems, setSelectedItems] = useState<
+    {
+      brand_name: string;
+      packaging: string;
+      list_name: string;
+    }[]
+  >([]);
+  const [firstRender, setFirstRender] = useState(true);
+  const { data: brands, isLoading, isError } = api.brand.all.useQuery();
+  const {
+    data: brandPackagings,
+    isLoading: isBrandPackagingsLoading,
+    isError: isBrandPackagingsError,
+  } = api.brandPackaging.all.useQuery();
+  // const {
+  //   data: complexUnits,
+  //   isLoading: complexUnitLoading,
+  //   isError: complexUnitError,
+  // } = api.complex.all.useQuery();
+  const {
+    data: existingPackaging,
+    isLoading: existingPackagingLoading,
+    isError: existingPackagingError,
+  } = api.orderableUnit.list_details.useQuery({
+    list_name: list_name as string,
+  });
+  const update = api.orderableUnit.update_list_details.useMutation({
+    onError: (err, brandPackaging, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: async () => {
+      alert("Data updated succesfully");
+      setFirstRender(true);
+      await router.push("/orderable-unit");
+    },
+  });
+
+  const updateData = () => {
+    update.mutate({
+      list_name: list_name as string,
+      data: selectedItems,
+    });
   };
-  const editclick = () => {
-    console.log("save");
+  useEffect(() => {
+    if (selectedItems.length == 0 && existingPackaging && firstRender) {
+      setFirstRender(false);
+      console.log(existingPackaging);
+      setSelectedItems(existingPackaging);
+    }
+  }, [existingPackaging, firstRender]);
+
+  const handleCheckboxClick = (object) => {
+    const exists = selectedItems.some(
+      (item) =>
+        item.brand_name === object.brand_name &&
+        item.packaging === object.packaging
+    );
+
+    if (exists) {
+      // Item exists, remove it
+      setSelectedItems((prevItems) =>
+        prevItems.filter(
+          (item) =>
+            item.brand_name !== object.brand_name ||
+            item.packaging !== object.packaging
+        )
+      );
+    } else {
+      // Item doesn't exist, add it
+      setSelectedItems((prevItems) => [...prevItems, object]);
+    }
   };
+  if (list_name === undefined || list_name === null) {
+  }
+  if (isError || isBrandPackagingsError) {
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <div className="flex w-full items-end justify-end p-4">
+          <button className="flex h-10 w-28 items-center justify-evenly rounded-lg bg-blue-700 text-2xl font-semibold text-white">
+            <FaList className="text-3xl font-bold text-[#E7E0FF78]" />
+            List
+          </button>
+        </div>
+        <div className="flex h-[60vh] w-full flex-col p-4">
+          <div className="flex h-fit w-full justify-between rounded-[10px]  bg-[#C4B0FF45] p-2 text-2xl font-bold">
+            <h1>Orderable Unit Details</h1>
+          </div>
+          <div className="overflow-scroll rounded-[10px] bg-[#c4b0ff70]"></div>
+          <div className="flex h-fit w-full items-center justify-center gap-4 rounded-[10px]  bg-[#C4B0FF45] p-2 text-xl font-semibold">
+            <button className="w-28 rounded-lg bg-[#07096E] text-white">
+              Cancel
+            </button>
+            <button className="w-28 rounded-lg bg-[#C4B0FF]">Save</button>
+          </div>
+        </div>
+      </UserTemplate>
+    );
+  }
+  if (isLoading || isBrandPackagingsLoading) {
+    return (
+      <UserTemplate templateParams={templateParams}>
+        <div className="flex w-full items-end justify-end p-4">
+          <button className="flex h-10 w-28 items-center justify-evenly rounded-lg bg-blue-700 text-2xl font-semibold text-white">
+            <FaList className="text-3xl font-bold text-[#E7E0FF78]" />
+            List
+          </button>
+        </div>
+        <div className="flex h-[60vh] w-full flex-col p-4">
+          <div className="flex h-fit w-full justify-between rounded-[10px]  bg-[#C4B0FF45] p-2 text-2xl font-bold">
+            <h1>Orderable Unit Details</h1>
+          </div>
+          <div className="overflow-scroll rounded-[10px] bg-[#c4b0ff70]"></div>
+          <div className="flex h-fit w-full items-center justify-center gap-4 rounded-[10px]  bg-[#C4B0FF45] p-2 text-xl font-semibold">
+            <button className="w-28 rounded-lg bg-[#07096E] text-white">
+              Cancel
+            </button>
+            <button className="w-28 rounded-lg bg-[#C4B0FF]">Save</button>
+          </div>
+        </div>
+      </UserTemplate>
+    );
+  }
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex w-full items-end justify-end p-4">
@@ -121,35 +150,47 @@ const OrderableUnitEdit: React.FunctionComponent = () => {
       <div className="flex h-[60vh] w-full flex-col p-4">
         <div className="flex h-fit w-full justify-between rounded-[10px]  bg-[#C4B0FF45] p-2 text-2xl font-bold">
           <h1>Orderable Unit Details</h1>
+          <div>{list_name}</div>
         </div>
-        <div className="overflow-scroll rounded-[10px] bg-[#c4b0ff70]">
-          {Data.map((item, productIndex) => (
-            <div key={productIndex} className="flex flex-col p-2">
-              <div className="text-md p-2 font-semibold">{item.name}:</div>
-              <div className="text-md">
-                <ul className="flex w-full flex-wrap gap-8 p-2">
-                  {item.packaging.map((packageItem, optionIndex) => (
-                    <li key={optionIndex}>
-                      <label className="flex gap-3">
+        <div className="flex w-full flex-col overflow-scroll rounded-[10px] bg-[#c4b0ff70] p-2">
+          {brands.map((brand, optionIndex) => (
+            <div key={optionIndex} className="my-4 flex w-full font-semibold">
+              <div className="flex whitespace-nowrap" key={optionIndex}>
+                {brand.brand_name}
+              </div>
+              <div className="ml-4 flex flex-wrap">
+                {brandPackagings.map((brandPackaging, index) => {
+                  if (brandPackaging.brand_name === brand.brand_name) {
+                    const object = {
+                      brand_name: brand.brand_name as string,
+                      packaging: brandPackaging.packaging as string,
+                      list_name: list_name as string,
+                    };
+                    const exists = selectedItems.some(
+                      (item) =>
+                        item.brand_name === object.brand_name &&
+                        item.packaging === object.packaging
+                    );
+                    return (
+                      <div
+                        key={index}
+                        className="mr-2 flex items-center justify-center font-normal"
+                      >
                         <div
-                          className={`custom-checkbox flex h-6 w-8 cursor-pointer items-center justify-center rounded-sm border-2 border-gray-600 bg-transparent ${
-                            selectedPackaging[productIndex] === optionIndex
-                              ? "checked"
-                              : ""
-                          }`}
-                          onClick={() =>
-                            toggleCheckbox(productIndex, optionIndex)
-                          }
+                          className="mr-4 flex h-4 w-4 items-center justify-center border-2 border-black"
+                          onClick={() => {
+                            handleCheckboxClick(object);
+                          }}
                         >
-                          {selectedPackaging[productIndex] === optionIndex ? (
-                            <BsCheckLg className="text-4xl font-bold text-blue-900" />
+                          {exists ? (
+                            <FaCheck className="h-8 w-8 text-[#07096E]" />
                           ) : null}
                         </div>
-                        {packageItem}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
+                        {brandPackaging.packaging}
+                      </div>
+                    );
+                  }
+                })}
               </div>
             </div>
           ))}
@@ -157,11 +198,14 @@ const OrderableUnitEdit: React.FunctionComponent = () => {
         <div className="flex h-fit w-full items-center justify-center gap-4 rounded-[10px]  bg-[#C4B0FF45] p-2 text-xl font-semibold">
           <button
             className="w-28 rounded-lg bg-[#07096E] text-white"
-            onClick={cancelclick}
+            onClick={async () => {
+              await router.push("/orderable-unit");
+              console.log(selectedItems);
+            }}
           >
             Cancel
           </button>
-          <button className="w-28 rounded-lg bg-[#C4B0FF]" onClick={editclick}>
+          <button className="w-28 rounded-lg bg-[#C4B0FF]" onClick={updateData}>
             Save
           </button>
         </div>

@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { basicUnitsInput } from "../../../types";
+import {
+  basicUnitsInput,
+  brandDeleteInput,
+  brandEditInput,
+  brandInput,
+} from "../../../types";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -32,24 +37,37 @@ export const brandRouter = createTRPCRouter({
         hsnCode_id,
       }));
     }),
-  // create: protectedProcedure
-  //   .input(basicUnitsInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.create({
-  //       data: {
-  //         name: input.name,
-  //         symbol: input.symbol,
-  //         short_code: input.short_code,
-  //       },
-  //     });
-  //   }),
-  // delete: protectedProcedure
-  //   .input(basicUnitsInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.delete({
-  //       where: {
-  //         name: input.name,
-  //       },
-  //     });
-  //   }),
+
+  create: protectedProcedure
+    .input(brandInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.brand.create({
+        data: {
+          brand_name: input.brand_name,
+          categoriesName: input.categoriesName,
+          hsnCode_id: input.hsnCode_id,
+        },
+      });
+    }),
+  edit: protectedProcedure
+    .input(brandEditInput)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.brand.update({
+        where: { brand_name: input.existingName },
+        data: {
+          brand_name: input.newName,
+          hsnCode_id: input.hsnCode_id,
+          categoriesName: input.categoriesName,
+        },
+      });
+    }),
+  delete: protectedProcedure
+    .input(brandDeleteInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.brand.delete({
+        where: {
+          brand_name: input.brand_name,
+        },
+      });
+    }),
 });

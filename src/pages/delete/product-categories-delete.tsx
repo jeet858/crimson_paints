@@ -21,12 +21,29 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
     Symbol: "Gm",
     Name: "Gram",
   };
+  const router = useRouter();
+  const { name, symbol } = router.query;
+
+  const del = api.basicUnit.delete.useMutation({
+    onError: (err, newTodo, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      router.push("/basic-unit");
+    },
+  });
+
+  const deleteData = () => {
+    del.mutate({ name: name as string });
+  };
+  
   const [confirmed, setConfirmed] = useState(false);
 
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
+          Product Categories Details
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
           Product Categories Details
           </p>

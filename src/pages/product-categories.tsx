@@ -91,7 +91,12 @@ const ProductCategories = () => {
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
           <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+            <button
+              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+              onClick={async () => {
+                await router.push("add/product-categories-add");
+              }}
+            >
               Add
             </button>
           </div>
@@ -100,10 +105,9 @@ const ProductCategories = () => {
       <TableComponent
         columns={columns}
         data={categories}
-        onDeleteClick={handleDeleteClick}
-        onEditClick={handleEditClick}
-        editUrl=""
-        deleteUrl=""
+        idField={["name", "code"]}
+        editUrl="edit/product-categories-edit"
+        deleteUrl="delete/product-categories-delete"
       />
     </UserTemplate>
   );

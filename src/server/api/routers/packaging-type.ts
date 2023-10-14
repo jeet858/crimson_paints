@@ -1,4 +1,4 @@
-import { packagingTypeInput } from "../../../types";
+import { packagingEditTypeInput, packagingTypeInput } from "../../../types";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -10,28 +10,37 @@ export const packagingTypeRouter = createTRPCRouter({
     const packagingType = await ctx.db.packagingType.findMany({
       orderBy: [{ name: "asc" }],
     });
-    return packagingType.map(({ name, short_code }) => ({
+    await ctx.db.$disconnect();
+    return packagingType.map(({ name }) => ({
       name,
-      short_code,
     }));
   }),
-  // create: protectedProcedure
-  //   .input(packagingTypeInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.packaging_type.create({
-  //       data: {
-  //         name: input.name,
-  //         short_code: input.short_code,
-  //       },
-  //     });
-  //   }),
-  // delete: protectedProcedure
-  //   .input(packagingTypeInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.delete({
-  //       where: {
-  //         name: input.name,
-  //       },
-  //     });
-  //   }),
+  create: protectedProcedure
+    .input(packagingTypeInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.packagingType.create({
+        data: {
+          name: input.name,
+        },
+      });
+    }),
+  edit: protectedProcedure
+    .input(packagingEditTypeInput)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.packagingType.update({
+        where: { name: input.existingName },
+        data: {
+          name: input.newName,
+        },
+      });
+    }),
+  delete: protectedProcedure
+    .input(packagingTypeInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.packagingType.delete({
+        where: {
+          name: input.name,
+        },
+      });
+    }),
 });

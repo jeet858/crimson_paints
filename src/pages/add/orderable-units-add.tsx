@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 
-const BasicUnitsAdd: React.FunctionComponent = () => {
+const OrderableUnitsAdd: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const router = useRouter();
   const templateParams = {
@@ -77,4 +77,4 @@ const BasicUnitsAdd: React.FunctionComponent = () => {
   );
 };
 
-export default BasicUnitsAdd;
+export default OrderableUnitsAdd;

@@ -129,3 +129,20 @@ model OderableUnitsDetails{
   list_name String
   @@id([brand_name, packaging, list_name])
 }
+
+model GroupInfo{
+  brand_name String
+  group_name String
+  group_code String
+  @@id([brand_name, group_name, group_code])
+
+}
+
+model GroupPricing{
+  brand_name String
+  group_name String
+  group_code String
+  color_name String
+  rgb_code String
+  @@id([brand_name, group_name, group_code, color_name])
+}

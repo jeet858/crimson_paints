@@ -10,6 +10,7 @@ import { brandRouter } from "./routers/brand";
 import { complexUnitRouter } from "./routers/complex-units";
 import { brandPackagingRouter } from "./routers/brand-packaging";
 import { orderableUnitRouter } from "./routers/orderable-unit";
+import { groupPricingTypeRouter } from "./routers/group-pricing";
 
 /**
  * This is the primary router for your server.
@@ -28,6 +29,7 @@ export const appRouter = createTRPCRouter({
   complex: complexUnitRouter,
   brandPackaging: brandPackagingRouter,
   orderableUnit: orderableUnitRouter,
+  groupPricing: groupPricingTypeRouter,
 });
 
 // export type definition of API

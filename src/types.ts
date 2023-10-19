@@ -283,3 +283,76 @@ export const orderableUnitListDetailsEditInput = z.object({
     })
   ),
 });
+export const groupInfoInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_code: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const groupPricingInput = z.object({
+  data: z.array(
+    z.object({
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      group_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      group_code: z.string({
+        required_error: "This field cant be null",
+      }),
+      color_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      rgb_code: z.string({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});
+export const groupPricingEditInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_code: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      group_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      group_code: z.string({
+        required_error: "This field cant be null",
+      }),
+      color_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      rgb_code: z.string({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});
+export const groupPricingDeleteInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_code: z.string({
+    required_error: "This field cant be null",
+  }),
+});

@@ -1,43 +1,56 @@
 import { UserTemplate } from "@/components";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 import { BsCheckLg } from "react-icons/bs";
+import { FaCheck } from "react-icons/fa";
+import { api } from "~/utils/api";
 
 const staticColors = [{ name: "Red" }, { name: "Blue" }, { name: "Green" }];
 
-interface Color {
-  name: string;
-}
 const GroupForPricingDelete = () => {
-  const [selectedColors, setSelectedColors] = useState<Color[]>([]);
+  const router = useRouter();
+  const { brand_name, group_code, group_name } = router.query;
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const getStaticValues = () => {
-    return {
-      GroupName: "Black",
-      Code_id: "B1",
-      BrandName: "A-1 Oxide",
-    };
-  };
-  const updateData = () => {
-    alert("Data updated successfully");
-  };
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
   };
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const valueAsString = value as string;
-    if (selectedColors.some((color) => color.name === valueAsString)) {
-      setSelectedColors(
-        selectedColors.filter((color) => color.name !== valueAsString)
-      );
-    } else {
-      setSelectedColors([...selectedColors, { name: valueAsString }]);
+
+  const {
+    data: existingList,
+    isLoading: existingListLoading,
+    isError: existingListError,
+  } = api.groupPricing.group_colors.useQuery(
+    {
+      brand_name: brand_name as string,
+      group_code: group_code as string,
+      group_name: group_name as string,
+    },
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
     }
+  );
+  const del = api.groupPricing.group_colors_delete.useMutation({
+    onError: (err, newGroupPricing, context) => {
+      alert(`An error occured }`);
+    },
+    onSuccess: () => {
+      alert("Data deleted succesfully");
+      router.push("/group-for-pricing");
+    },
+  });
+  const deleteData = () => {
+    isChecked
+      ? del.mutate({
+          brand_name: brand_name as string,
+          group_code: group_code as string,
+          group_name: group_name as string,
+        })
+      : alert("Please confirm that you want to delete this group");
   };
-  const staticValues = getStaticValues();
   return (
     <UserTemplate
       templateParams={{
@@ -55,39 +68,39 @@ const GroupForPricingDelete = () => {
           <div className="flex h-fit items-center justify-between border-b-2 border-[#11009E] p-4 text-lg font-semibold">
             Group Name
             <div className="h-[30px] w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4">
-              {staticValues.GroupName}
+              {group_name}
             </div>
           </div>
           <div className="flex h-fit items-center justify-between border-b-2 border-[#11009E] p-4 text-lg font-semibold">
             Code
             <div className="h-[30px] w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4">
-              {staticValues.Code_id}
+              {group_code}
             </div>
           </div>
 
           <div className="flex h-fit items-center justify-between border-b-2 border-[#11009E] p-4 text-lg font-semibold">
             Brand
             <div className="h-[30px] w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
-              {staticValues.BrandName}
+              {brand_name}
             </div>
           </div>
           <div className="flex h-fit items-center justify-between border-b-2 border-[#11009E] p-4 text-lg font-semibold">
             Colors
             <div className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
-              {staticColors.map((color, index) => (
+              {existingList?.map((color, index) => (
                 <div key={index} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="h-5 w-8 bg-[#C4B0FF45] "
-                    id={color.name}
-                    name={color.name}
-                    value={color.name}
-                    checked={selectedColors.some((c) => c.name === color.name)}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label htmlFor={color.name} className="ml-2">
-                    {color.name}
-                  </label>
+                  <div
+                    key={index}
+                    className="mr-2 flex items-center justify-center font-normal"
+                  >
+                    <div
+                      key={index}
+                      className="mr-4 flex h-4 w-4 items-center justify-center border-2 border-black"
+                    >
+                      <FaCheck className="h-8 w-8 text-[#07096E]" />
+                    </div>
+                    {color.color_name}
+                  </div>
                 </div>
               ))}
             </div>
@@ -107,12 +120,17 @@ const GroupForPricingDelete = () => {
               <span>I confirm the deletion</span>
             </div>
             <div className="flex gap-2">
-              <button className="h-[30px] w-[70px] self-center rounded-md bg-[#07096E] text-base font-semibold text-white transition-transform hover:scale-105">
+              <button
+                className="h-[30px] w-[70px] self-center rounded-md bg-[#07096E] text-base font-semibold text-white transition-transform hover:scale-105"
+                onClick={async () => {
+                  await router.push("/group-for-pricing");
+                }}
+              >
                 Cancel
               </button>
               <button
                 className="h-[30px] w-[70px] self-center rounded-md  border-[1px] border-[#07096E] bg-[#FF6E65] text-base font-semibold text-white transition-transform hover:scale-105"
-                onClick={updateData}
+                onClick={deleteData}
               >
                 Delete
               </button>

@@ -9,7 +9,7 @@ const get = async () => {
   return session;
 };
 
-const InterCompanyEdit: React.FunctionComponent = () => {
+const InterCompanyAdd: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const templateParams = {
     title: "Admin",
@@ -63,7 +63,7 @@ const InterCompanyEdit: React.FunctionComponent = () => {
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-5/6 w-5/6 flex-col rounded-xl bg-[#C4B0FF45]">
-          Inter Company Edit
+          Inter Company Add
           <p className="flex h-1/6 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
             Branch Details
           </p>
@@ -161,4 +161,4 @@ const InterCompanyEdit: React.FunctionComponent = () => {
   );
 };
 
-export default InterCompanyEdit;
+export default InterCompanyAdd;

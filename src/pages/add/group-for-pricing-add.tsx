@@ -196,7 +196,7 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
             <button
               className="h-fit w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white transition-transform hover:scale-105"
               onClick={async () => {
-                // await router.push("/group-for-pricing");
+                await router.push("/group-for-pricing");
                 console.log(colorArray);
               }}
             >

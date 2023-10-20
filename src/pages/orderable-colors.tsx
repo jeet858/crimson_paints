@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import OrderableColorTable from "~/components/tables/OrderableColorTable";
 import OrderableUnitTable from "~/components/tables/OrderableUnitTable";
+import { api } from "~/utils/api";
 
 const OrderableColors = () => {
   const router = useRouter();
@@ -147,12 +148,14 @@ const OrderableColors = () => {
       ],
     },
   ];
-  const handleEditClick = () => {
-    console.log("edit");
-  };
-  const handleDeleteClick = () => {
-    console.log("delet");
-  };
+  const {
+    data: orderableColors,
+    isError,
+    isLoading,
+  } = api.orderablrColor.all_list.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -166,20 +169,28 @@ const OrderableColors = () => {
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
           <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+            <button
+              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+              onClick={async () => {
+                await router.push("add/orderable-units-add");
+              }}
+            >
               Add
             </button>
           </div>
         </div>
       </div>
       <div className="h-fit">
-        <OrderableColorTable
-          data={data}
-          onDeleteClick={handleDeleteClick}
-          onEditClick={handleEditClick}
-          editUrl="edit/orderable-color-edit"
-          deleteUrl="delete/orderable-color-delete"
-        />
+        {orderableColors?.map((orderableColor, index) => {
+          return (
+            <OrderableColorTable
+              key={index}
+              listName={orderableColor.list_name}
+              editUrl="edit/orderable-color-edit"
+              deleteUrl="delete/orderable-color-delete"
+            />
+          );
+        })}
       </div>
     </UserTemplate>
   );

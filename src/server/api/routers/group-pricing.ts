@@ -20,6 +20,14 @@ const groupColorInput = z.object({
 });
 
 export const groupPricingTypeRouter = createTRPCRouter({
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const units = await ctx.db.groupPricing.findMany();
+    await ctx.db.$disconnect();
+    return units.map(({ brand_name, color_name }) => ({
+      brand_name,
+      color_name,
+    }));
+  }),
   create: protectedProcedure
     .input(groupPricingInput)
     .mutation(async ({ ctx, input }) => {
@@ -91,5 +99,15 @@ export const groupPricingTypeRouter = createTRPCRouter({
           group_name: input.group_name,
         },
       });
+    }),
+  brand_wise_fetch: protectedProcedure
+    .input(groupsInput)
+    .query(async ({ input, ctx }) => {
+      const groups = await ctx.db.groupPricing.findMany({
+        where: {
+          brand_name: input,
+        },
+      });
+      return groups;
     }),
 });

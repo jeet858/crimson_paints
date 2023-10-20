@@ -82,8 +82,8 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "",
     },
     {
-      name: "user Type",
-      href: "",
+      name: "Oderable Colors",
+      href: "/orderable-colors",
     },
     {
       name: "Discounts",

@@ -146,3 +146,13 @@ model GroupPricing{
   rgb_code String
   @@id([brand_name, group_name, group_code, color_name])
 }
+model OderableColors{
+  list_name String @unique @id
+}
+
+model OderableColorsDetails{
+  brand_name String
+  color_name String
+  list_name String
+  @@id([brand_name, color_name, list_name])
+}

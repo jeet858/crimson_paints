@@ -356,3 +356,44 @@ export const groupPricingDeleteInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const orderableColorInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const orderableColorListDetailsInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const orderableColorListWiseDetailsInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const orderableColorListWiseEditInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      list_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      color_name: z.string({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});
+export const orderableColorListWiseDeleteInput = z.object({
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});

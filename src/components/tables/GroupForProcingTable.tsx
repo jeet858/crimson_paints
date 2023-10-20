@@ -102,7 +102,7 @@ const GroupInfo: React.FC<GroupInfoProps> = (props) => {
                     group_name: group.group_name,
                   };
                   console.log(queryObj);
-                  router.push({
+                  await router.push({
                     pathname: props.editUrl,
                     query: queryObj,
                   });
@@ -118,7 +118,7 @@ const GroupInfo: React.FC<GroupInfoProps> = (props) => {
                     group_code: group.group_code,
                     group_name: group.group_name,
                   };
-                  router.push({
+                  await router.push({
                     pathname: props.deleteUrl,
                     query: queryObj,
                   });

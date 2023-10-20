@@ -181,8 +181,8 @@ const GroupForPricingEdit = () => {
                           brand_name: editData.brand_name as string,
                           group_name: editData.group_name as string,
                           group_code: editData.group_code as string,
-                          color_name: color.color_name as string,
-                          rgb_code: color.rgb_code as string,
+                          color_name: color.color_name,
+                          rgb_code: color.rgb_code,
                         };
                         handleCheckboxChange(object);
                       }}

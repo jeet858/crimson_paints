@@ -1,9 +1,10 @@
 import { UserTemplate } from "@/components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
+import Link from "next/link";
 
 const get = async () => {
   const session = await getSession();
@@ -24,19 +25,22 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
     Name: "Gram",
   };
   const router = useRouter();
-  const { name, symbol } = router.query;
-
-  const del = api.basicUnit.delete.useMutation({
-    onError: (err, newTodo, context) => {
+  const { name, code } = router.query;
+  useEffect(() => {}, [name, code]);
+  const del = api.categories.delete.useMutation({
+    onError: (err, newCategory, context) => {
       alert(`An error occured }`);
     },
-    onSuccess: () => {
-      router.push("/basic-unit");
+    onSuccess: async () => {
+      alert("Data deleted successfully");
+      await router.push("/product-categories");
     },
   });
 
   const deleteData = () => {
-    del.mutate({ name: name as string });
+    confirmed
+      ? del.mutate({ name: name as string })
+      : alert("Please confirm that you want to delete this category");
   };
 
   const [confirmed, setConfirmed] = useState(false);
@@ -53,14 +57,14 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
             Name
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Symbol}
+              value={name}
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Code
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={editData.Name}
+              value={code}
             />
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
@@ -75,10 +79,16 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
               </div>
               <p>I confirm the deletion</p>
             </div>
-            <button className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <Link
+              className="flex h-1/2 w-[25%] items-center justify-center self-center rounded-md bg-[#07096E] font-semibold text-white"
+              href="/product-categories"
+            >
               Cancel
-            </button>
-            <button className="h-1/2 w-[25%] self-center rounded-md bg-[#FF6E65] font-semibold text-white">
+            </Link>
+            <button
+              className="h-1/2 w-[25%] self-center rounded-md bg-[#FF6E65] font-semibold text-white"
+              onClick={deleteData}
+            >
               Delete
             </button>
           </div>

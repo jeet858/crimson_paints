@@ -90,8 +90,8 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "",
     },
     {
-      name: "Schemes",
-      href: "",
+      name: "Sales Representatives",
+      href: "/sales-representative",
     },
   ];
   return (

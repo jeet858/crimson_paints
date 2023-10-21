@@ -411,3 +411,29 @@ export const priceListNameEditInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+
+export const salesRepresentativeInput = z.object({
+  name: z.string({
+    required_error: "This field cant be null",
+  }),
+  phone: z.number({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const salesRepresentativeEditInput = z.object({
+  name: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingPhone: z.number({
+    required_error: "This field cant be null",
+  }),
+  newPhone: z.number({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+});

@@ -1,16 +1,13 @@
+import { router } from "@trpc/server";
+import { useRouter } from "next/router";
 import React from "react";
-
-interface DataItem {
-  representativename: string;
-  phone: string;
-}
 
 interface TableProps {
   columns: {
     header: string;
     field: string;
   }[];
-  data: DataItem[];
+  data: any;
   idField: string[];
   editUrl: string;
   deleteUrl: string;
@@ -19,6 +16,7 @@ interface TableProps {
 const SalesRepresentativeTable: React.FunctionComponent<TableProps> = (
   props
 ) => {
+  const router = useRouter();
   return (
     <div className="flex h-[50vh] w-full flex-col p-4">
       <div className="flex w-full rounded-md bg-[#C4B0FF] text-lg font-semibold">
@@ -35,22 +33,33 @@ const SalesRepresentativeTable: React.FunctionComponent<TableProps> = (
             key={rowIndex}
             className="flex border-b-[1px] border-white bg-[#C4B0FF52] bg-opacity-25 py-4 text-center text-base"
           >
-            <div className="flex w-1/4 flex-col">
+            {/* <div className="flex w-1/4 flex-col">
               <div>{row.representativename}</div>
             </div>
             <div className="flex w-1/4 flex-col">
               <div>{row.phone}</div>
-            </div>
+            </div> */}
+            {props.columns.map((column, index) => {
+              return (
+                <div className="flex w-1/4 flex-col" key={index}>
+                  <div>{row[column.field]}</div>
+                </div>
+              );
+            })}
             <div className="flex w-1/4 items-center justify-center gap-x-4">
               <button
                 className="h-8 w-16 rounded-lg bg-[#786ADE] text-base text-white"
-                onClick={async () => {}}
+                onClick={async () => {
+                  await router.push({ pathname: props.editUrl, query: row });
+                }}
               >
                 Edit
               </button>
               <button
                 className="h-8 w-16 rounded-lg bg-[#FF6E65] text-base text-white"
-                onClick={async () => {}}
+                onClick={async () => {
+                  await router.push({ pathname: props.deleteUrl, query: row });
+                }}
               >
                 Delete
               </button>

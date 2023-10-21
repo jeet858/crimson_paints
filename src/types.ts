@@ -397,3 +397,17 @@ export const orderableColorListWiseDeleteInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+
+export const priceListNameInput = z.object({
+  price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const priceListNameEditInput = z.object({
+  existing_price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  new_price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});

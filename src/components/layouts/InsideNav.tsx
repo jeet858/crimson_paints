@@ -74,8 +74,8 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/orderable-unit",
     },
     {
-      name: "Branch",
-      href: "",
+      name: "Naming Price List",
+      href: "/naming-price-list",
     },
     {
       name: "Customers",

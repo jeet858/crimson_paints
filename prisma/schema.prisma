@@ -161,3 +161,22 @@ model PriceListName{
   price_list_name String @unique @id
 }
 
+model locations{
+  location String @unique @id
+}
+
+model Salesman{
+  name String
+  phone String @unique @id
+  location String
+}
+
+model InterCompany{
+  name String
+  gst Int @unique @id
+  type String
+  address String
+  pin Int
+  city String
+  phone Int @unique
+}

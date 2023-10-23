@@ -1,5 +1,5 @@
 import { UserTemplate } from "@/components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from "next/router";
@@ -23,20 +23,24 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
   const router = useRouter();
   const { name, code } = router.query;
 
+  useEffect(() => {}, [name, code]);
   const del = api.categories.delete.useMutation({
-    onError: (err, newTodo, context) => {
+    onError: (err, newCategory, context) => {
       alert(`An error occured }`);
     },
-    onSuccess: () => {
-      alert("Data deleted succesfully");
-      router.push("/product-categories");
+    onSuccess: async () => {
+      alert("Data deleted successfully");
+      await router.push("/product-categories");
+
     },
   });
 
   const deleteData = () => {
     confirmed
       ? del.mutate({ name: name as string })
-      : alert("Please confirm that you want to delete this hsn code");
+
+      : alert("Please confirm that you want to delete this category");
+
   };
 
   const [confirmed, setConfirmed] = useState(false);
@@ -50,6 +54,19 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
+
+            <input
+              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+              value={name}
+            />
+          </div>
+          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
+            Code
+            <input
+              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+              value={code}
+            />
+
             <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
               {name}
             </div>
@@ -59,6 +76,7 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
             <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
               {code}
             </div>
+
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
             <div className="flex h-fit items-center justify-center">
@@ -74,7 +92,9 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
             </div>
             <Link
               className="flex h-1/2 w-[25%] items-center justify-center self-center rounded-md bg-[#07096E] font-semibold text-white"
-              href={"/product-categories"}
+
+              href="/product-categories"
+
             >
               Cancel
             </Link>

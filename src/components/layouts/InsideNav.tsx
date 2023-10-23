@@ -46,8 +46,8 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/packaging-unit",
     },
     {
-      name: "Client Companies",
-      href: "",
+      name: "Inter Company",
+      href: "/inter-company",
     },
     {
       name: "Product Categories",
@@ -74,24 +74,16 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/orderable-unit",
     },
     {
-      name: "Branch",
-      href: "",
+      name: "Naming Price List",
+      href: "/naming-price-list",
     },
     {
-      name: "Customers",
-      href: "",
+      name: "Oderable Colors",
+      href: "/orderable-colors",
     },
     {
-      name: "user Type",
-      href: "",
-    },
-    {
-      name: "Discounts",
-      href: "",
-    },
-    {
-      name: "Schemes",
-      href: "",
+      name: "Sales Representatives",
+      href: "/sales-representative",
     },
   ];
   return (

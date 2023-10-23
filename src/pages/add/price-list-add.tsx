@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-const OrderableUnitsAdd: React.FunctionComponent = () => {
+const PriceListAdd: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const router = useRouter();
   const templateParams = {
@@ -15,7 +16,7 @@ const OrderableUnitsAdd: React.FunctionComponent = () => {
   };
 
   const [addData, setAddData] = useState({
-    list_name: "",
+    price_list_name: "",
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,19 +27,18 @@ const OrderableUnitsAdd: React.FunctionComponent = () => {
     });
   };
 
-  const add = api.orderableUnit.create.useMutation({
-    onError: (err, newOrderableUnit, context) => {
+  const add = api.namingPriceList.create.useMutation({
+    onError: (err, newnPriceList, context) => {
       alert(`An error occured }`);
     },
-    onSuccess: () => {
-      alert("Data inserted succesfully");
-      router.push("/orderable-unit");
+    onSuccess: async () => {
+      await router.push("/naming-price-list");
     },
   });
 
   const create = () => {
     console.log(addData);
-    if (addData.list_name != "") {
+    if (addData.price_list_name != "") {
       add.mutate(addData);
     } else {
       alert("Be sure to fill all fields");
@@ -50,20 +50,23 @@ const OrderableUnitsAdd: React.FunctionComponent = () => {
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-1/3 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
-            Oderable Units Add
+            Price List Details
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
             <input
-              name="list_name"
+              name="price_list_name"
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
               onChange={handleInputChange}
             />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <Link
+              className="flex h-1/2 w-[40%] items-center justify-center self-center rounded-md bg-[#07096E] font-semibold text-white"
+              href="/naming-price-list"
+            >
               Cancel
-            </button>
+            </Link>
             <button
               className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold"
               onClick={create}
@@ -77,4 +80,4 @@ const OrderableUnitsAdd: React.FunctionComponent = () => {
   );
 };
 
-export default OrderableUnitsAdd;
+export default PriceListAdd;

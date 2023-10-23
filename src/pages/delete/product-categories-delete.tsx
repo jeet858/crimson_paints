@@ -15,7 +15,7 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const templateParams = {
     title: "Admin",
-    userID: data?.user.id,
+    userID: data?.user.id as string,
     userImage: "user.jpg",
     userType: "admin",
   };
@@ -31,16 +31,13 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
     onSuccess: async () => {
       alert("Data deleted successfully");
       await router.push("/product-categories");
-
     },
   });
 
   const deleteData = () => {
     confirmed
       ? del.mutate({ name: name as string })
-
       : alert("Please confirm that you want to delete this category");
-
   };
 
   const [confirmed, setConfirmed] = useState(false);
@@ -54,19 +51,6 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
-
-            <input
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={name}
-            />
-          </div>
-          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Code
-            <input
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={code}
-            />
-
             <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
               {name}
             </div>
@@ -76,7 +60,6 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
             <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
               {code}
             </div>
-
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
             <div className="flex h-fit items-center justify-center">
@@ -92,9 +75,7 @@ const ProductCategoriesDelete: React.FunctionComponent = () => {
             </div>
             <Link
               className="flex h-1/2 w-[25%] items-center justify-center self-center rounded-md bg-[#07096E] font-semibold text-white"
-
               href="/product-categories"
-
             >
               Cancel
             </Link>

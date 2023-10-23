@@ -29,6 +29,7 @@ const config = {
     "@typescript-eslint/no-unsafe-argument": "warn",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/prefer-for-of": "off",
+    "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {

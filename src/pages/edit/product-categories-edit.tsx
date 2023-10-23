@@ -28,6 +28,7 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
     onSuccess: async () => {
       alert("Data updated successfully");
       await router.push("/product-categories");
+
     },
   });
   const [editData, setEditData] = useState({
@@ -44,6 +45,15 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
       });
     }
   }, [name, code]);
+
+
+  const [editData, setEditData] = useState({
+    existingName: name as string,
+    newName: name as string,
+    code: code as string,
+  });
+
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -68,24 +78,33 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
             Name
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+
               value={editData.newName}
               onChange={handleInputChange}
               name="newName"
+
+              name="name"
+              value={editData.newName}
+              onChange={handleInputChange}
+
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Code
             <input
               className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+
               value={editData.code}
               onChange={handleInputChange}
               name="code"
+
             />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
             <Link
               className="flex h-1/2 w-[40%] items-center justify-center self-center rounded-md bg-[#07096E] font-semibold text-white"
               href="/product-categories"
+
             >
               Cancel
             </Link>

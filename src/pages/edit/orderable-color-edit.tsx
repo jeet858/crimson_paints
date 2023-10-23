@@ -121,8 +121,8 @@ const OrderableColorEdit: React.FunctionComponent = () => {
                   {colors?.map((existing, index) => {
                     if (brand.brand_name === existing.brand_name) {
                       const object = {
-                        brand_name: brand.brand_name as string,
-                        color_name: existing.color_name as string,
+                        brand_name: brand.brand_name,
+                        color_name: existing.color_name,
                         list_name: list_name as string,
                       };
                       const exists = selectedItems.some(
@@ -165,7 +165,7 @@ const OrderableColorEdit: React.FunctionComponent = () => {
           <button
             className="w-28 rounded-lg bg-[#07096E] text-white"
             onClick={async () => {
-              console.log(selectedItems);
+              await router.push("/orderable-colors");
             }}
           >
             Cancel

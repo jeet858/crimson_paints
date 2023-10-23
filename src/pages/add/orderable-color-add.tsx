@@ -28,7 +28,7 @@ const OrderableColorsAdd: React.FunctionComponent = () => {
 
   const add = api.orderablrColor.create.useMutation({
     onError: (err, newOrderableUnit, context) => {
-      alert(`An error occured }`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       alert("Data inserted succesfully");

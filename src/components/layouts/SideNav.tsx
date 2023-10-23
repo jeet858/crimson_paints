@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -18,7 +19,12 @@ const SideNav: React.FunctionComponent<SideNavProps> = (props) => {
         <p className="cursor-pointer text-lg font-bold text-white">Dashboard</p>
       </div>
 
-      <div className="mb-20 flex flex-col items-center justify-center">
+      <div
+        className="mb-20 flex flex-col items-center justify-center"
+        onClick={() => {
+          signOut();
+        }}
+      >
         <FaPowerOff className="h-10 w-10 cursor-pointer text-white" />
         <p className="cursor-pointer text-2xl font-bold">Log Out</p>
       </div>

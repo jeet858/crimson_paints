@@ -39,7 +39,7 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
   const router = useRouter();
 
   return (
-    <div className=" flex h-full w-full flex-col p-4">
+    <div className=" flex h-4/5 w-full flex-col p-4">
       <TableContainer style={{ ...tstyle }}>
         <Table stickyHeader>
           <TableHead>

@@ -50,6 +50,7 @@ model User {
   id        String    @id
   name      String
   email     String    @unique
+  phone     BigInt
   password  String
   user_type String
   accounts  Account[]
@@ -179,4 +180,25 @@ model InterCompany{
   pin Int
   city String
   phone Int @unique
+}
+
+model Stock{
+  brand_name String
+  color_name String
+  packaging String
+  current_stock String
+  location String
+  @@unique([brand_name, color_name, packaging])
+}
+
+model StockLedger{
+  id BigInt @id @default(autoincrement())
+  brand_name String
+  color_name String
+  client_name String
+  packaging String
+  notes String
+  location String
+  date DateTime
+  
 }

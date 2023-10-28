@@ -6,7 +6,7 @@ insert into BasicUnits(symbol,name) values
 
 
 
-INSERT INTO PackagingType (name, short_code) VALUES
+INSERT INTO PackagingType (name) VALUES
 ('Jar'),
 ('Bag'),
 ('Container'),

@@ -15,10 +15,16 @@ const OrderableUnitList: React.FC<OrderableUnitListProps> = ({
     data: listDetails,
     isLoading,
     isError,
-  } = api.orderableUnit.brand_packaging.useQuery({
-    brand_name: brand_name,
-    list_name: list_name,
-  });
+  } = api.orderableUnit.brand_packaging.useQuery(
+    {
+      brand_name: brand_name,
+      list_name: list_name,
+    },
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
   if (isLoading) {
     return <div className="flex w-full bg-red-400"></div>;
   }
@@ -34,7 +40,7 @@ const OrderableUnitList: React.FC<OrderableUnitListProps> = ({
         {listDetails.map((listDetail, index) => {
           return (
             <div className="ml-2 font-normal" key={index}>
-              {listDetail.packaging}
+              {listDetail.packaging},
             </div>
           );
         })}

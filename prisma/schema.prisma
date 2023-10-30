@@ -50,6 +50,7 @@ model User {
   id        String    @id
   name      String
   email     String    @unique
+  phone     BigInt
   password  String
   user_type String
   accounts  Account[]
@@ -128,4 +129,76 @@ model OderableUnitsDetails{
   packaging String
   list_name String
   @@id([brand_name, packaging, list_name])
+}
+
+model GroupInfo{
+  brand_name String
+  group_name String
+  group_code String
+  @@id([brand_name, group_name, group_code])
+
+}
+
+model GroupPricing{
+  brand_name String
+  group_name String
+  group_code String
+  color_name String
+  rgb_code String
+  @@unique([brand_name, group_name, group_code, color_name])
+}
+model OderableColors{
+  list_name String @unique @id
+}
+
+model OderableColorsDetails{
+  brand_name String
+  color_name String
+  list_name String
+  @@unique([brand_name, color_name, list_name])
+}
+
+model PriceListName{
+  price_list_name String @unique @id
+}
+
+model locations{
+  location String @unique @id
+}
+
+model Salesman{
+  name String
+  phone Int @unique @id
+  location String
+}
+
+model InterCompany{
+  name String
+  gst String @unique @id
+  type String
+  address String
+  pin Int
+  city String
+  phone BigInt @unique
+  bill String
+}
+
+model Stock{
+  brand_name String
+  color_name String
+  packaging String
+  current_stock String
+  location String
+  @@unique([brand_name, color_name, packaging])
+}
+
+model StockLedger{
+  id BigInt @id @default(autoincrement())
+  brand_name String
+  color_name String
+  client_name String
+  packaging String
+  notes String
+  location String
+  date DateTime
 }

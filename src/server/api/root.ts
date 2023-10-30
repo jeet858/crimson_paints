@@ -14,6 +14,7 @@ import { groupPricingTypeRouter } from "./routers/group-pricing";
 import { orderableColorRouter } from "./routers/orderale-colors";
 import { namingPriceListRouter } from "./routers/naming-price-list";
 import { salesRepresentativeRouter } from "./routers/sales-representative";
+import { interComapnyRouter } from "./routers/inter-company";
 
 /**
  * This is the primary router for your server.
@@ -36,6 +37,7 @@ export const appRouter = createTRPCRouter({
   orderablrColor: orderableColorRouter,
   namingPriceList: namingPriceListRouter,
   salesRepresentative: salesRepresentativeRouter,
+  interComapny: interComapnyRouter,
 });
 
 // export type definition of API

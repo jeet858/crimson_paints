@@ -174,12 +174,13 @@ model Salesman{
 
 model InterCompany{
   name String
-  gst Int @unique @id
+  gst String @unique @id
   type String
   address String
   pin Int
   city String
-  phone Int @unique
+  phone BigInt @unique
+  bill String
 }
 
 model Stock{
@@ -200,5 +201,4 @@ model StockLedger{
   notes String
   location String
   date DateTime
-  
 }

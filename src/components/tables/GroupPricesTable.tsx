@@ -6,7 +6,6 @@ interface Group {
 }
 
 interface Item {
-  priceList: string;
   brand: string;
   groups: Group[];
 }

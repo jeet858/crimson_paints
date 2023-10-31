@@ -56,6 +56,11 @@ export const groupPricingTypeRouter = createTRPCRouter({
       });
       return groups;
     }),
+  groups_all: protectedProcedure.query(async ({ ctx }) => {
+    const groups = await ctx.db.groupInfo.findMany();
+    await ctx.db.$disconnect();
+    return groups;
+  }),
   group_colors: protectedProcedure
     .input(groupColorInput)
     .query(async ({ input, ctx }) => {

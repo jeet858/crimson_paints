@@ -85,6 +85,10 @@ const InsideNav: React.FunctionComponent = (props) => {
       name: "Sales Representatives",
       href: "/sales-representative",
     },
+    {
+      name: "Pricing",
+      href: "/pricing",
+    },
   ];
   return (
     <div className="flex w-full justify-center pt-5">

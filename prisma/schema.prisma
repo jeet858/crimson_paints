@@ -202,3 +202,12 @@ model StockLedger{
   location String
   date DateTime
 }
+
+model Pricing{
+  brand_name String
+  group_name String
+  list_name String
+  packaging String
+  price Float
+  @@unique([brand_name,group_name,packaging])
+}

@@ -18,11 +18,11 @@ interface GroupPricesTableProps {
 const GroupPricesTable: React.FC<GroupPricesTableProps> = ({ data }) => {
   return (
     <div className="flex h-[50vh]  flex-col pt-6">
+      <div className="w-full border-b-2 bg-[#786ADE] p-1 text-lg font-semibold text-white">
+        Price List : Price List 1
+      </div>
       {data.map((item: Item, index: number) => (
         <div key={index}>
-          <div className="w-full border-b-2 bg-[#786ADE] p-1 text-lg font-semibold text-white">
-            Price List: {item.priceList}
-          </div>
           <div className="w-full border-b-2 bg-[#786ADE] p-1 text-lg font-semibold text-white">
             Brand: {item.brand}
           </div>

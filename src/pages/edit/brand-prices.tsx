@@ -4,7 +4,6 @@ import React from "react";
 import GroupPricesTable from "~/components/tables/GroupPricesTable";
 const data = [
   {
-    priceList: "Price List 1",
     brand: "AD Base",
     groups: [
       {

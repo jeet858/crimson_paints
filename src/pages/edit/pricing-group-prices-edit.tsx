@@ -1,7 +1,7 @@
 import { UserTemplate } from "@/components";
 import { useRouter } from "next/router";
-import React from "react";
-import GroupPricesTable from "~/components/tables/GroupPricesTable";
+import React, { useEffect } from "react";
+import GroupPricesEditTable from "~/components/tables/GroupPricesEditTable";
 const data = [
   {
     brand: "AD Base",
@@ -30,7 +30,8 @@ const GroupPrices = () => {
     userImage: "user.jpg",
     userType: userType as string,
   };
-
+  const { brand_name, group_name, list_name } = router.query;
+  useEffect(() => {}, [brand_name, group_name, list_name]);
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="h-fit w-full p-4">
@@ -43,7 +44,26 @@ const GroupPrices = () => {
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
         </div>
-        <GroupPricesTable data={data} />
+        {/* <GroupPricesEditTable
+          brand_name={brand_name as string}
+          group_name={group_name as string}
+          list_name={list_name as string}
+        /> */}
+      </div>
+      <div className="w-full border-b-2 bg-[#786ADE] p-1 text-lg font-semibold text-white">
+        Price List : {list_name}
+      </div>
+      <div className="w-full border-b-2 bg-[#786ADE] p-1 text-lg font-semibold text-white">
+        Brand: {brand_name}
+      </div>
+      <div className="flex h-[50vh] w-full justify-center overflow-y-scroll bg-[#C4B0FF45]">
+        <div className="flex w-[31%]">
+          <GroupPricesEditTable
+            brand_name={brand_name as string}
+            group_name={group_name as string}
+            list_name={list_name as string}
+          />
+        </div>
       </div>
     </UserTemplate>
   );

@@ -209,5 +209,5 @@ model Pricing{
   list_name String
   packaging String
   price Float
-  @@unique([brand_name,group_name,packaging])
+  @@unique([brand_name,group_name,packaging,list_name])
 }

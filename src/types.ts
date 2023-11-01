@@ -497,3 +497,79 @@ export const interComapnyDeleteInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+
+export const pricingSingleEditInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  price: z.number({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingSingleDeleteInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingByGroupFindInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingByGroupEditInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      packaging: z.string({
+        required_error: "This field cant be null",
+      }),
+      group_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      list_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      price: z.number({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});

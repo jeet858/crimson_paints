@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import { api } from "~/utils/api";
@@ -82,9 +83,18 @@ const PricingTable: React.FC<PricingTableProps> = ({ data, list_name }) => {
             </div>
             <div className="flex flex-row justify-evenly gap-6">
               <div className="h-fit w-fit rounded-lg bg-[#C4B0FF8C] p-1 text-lg text-white">
-                <button className="flex w-28 items-center justify-center font-semibold">
+                <Link
+                  className="flex w-28 items-center justify-center font-semibold"
+                  href={{
+                    pathname: "/edit/pricing-brand-prices-edit",
+                    query: {
+                      brand_name: item.brand_name,
+                      list_name: list_name,
+                    },
+                  }}
+                >
                   Brand Prices
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -151,10 +161,11 @@ const PricingGroupTable: React.FunctionComponent<PricingGroupTableProps> = (
                   <Link
                     className="flex w-28 items-center justify-center"
                     href={{
-                      pathname: "/edit/group-for-pricing-edit",
+                      pathname: "/edit/pricing-group-prices-edit",
                       query: {
                         brand_name: props.brand_name,
                         group_name: group.group_name,
+                        list_name: props.list_name,
                       },
                     }}
                   >
@@ -171,6 +182,7 @@ const PricingGroupTable: React.FunctionComponent<PricingGroupTableProps> = (
                       brand_name={props.brand_name}
                       group_name={group.group_name}
                       pricing_data={props.pricing_data}
+                      list_name={props.list_name}
                     />
                   );
                 })}
@@ -187,6 +199,7 @@ interface PackagingPricingTileProps {
   packaging: string;
   brand_name: string;
   group_name: string;
+  list_name: string;
   pricing_data: {
     brand_name: string;
     group_name: string;
@@ -202,9 +215,19 @@ const PackagingPricingTile: React.FunctionComponent<
     return (
       item.brand_name === props.brand_name &&
       item.group_name === props.group_name &&
+      item.list_name === props.list_name &&
       item.packaging === props.packaging
     );
   });
+  const del = api.pricing.single_delete.useMutation({
+    onError: (err, newPricing, context) => {
+      alert(`${err.message}`);
+    },
+    onSuccess: () => {
+      alert("Deactivated sucessfully");
+    },
+  });
+  const router = useRouter();
   return (
     <div className="flex h-40 w-[12.5%]  flex-row flex-wrap">
       <div className="flex h-full w-full">
@@ -232,8 +255,11 @@ const PackagingPricingTile: React.FunctionComponent<
             <div className="flex w-full flex-row self-end">
               <button
                 className="m-2 w-5/12 rounded bg-[#786ADE] py-2 text-white"
-                onClick={() => {
-                  console.log(obj);
+                onClick={async () => {
+                  await router.push({
+                    pathname: "/edit/pricing-edit",
+                    query: obj,
+                  });
                 }}
               >
                 Edit
@@ -241,29 +267,35 @@ const PackagingPricingTile: React.FunctionComponent<
               <button
                 className="m-2 w-5/12 rounded bg-[#FF6E65] py-2 text-white"
                 onClick={() => {
-                  console.log(obj);
+                  del.mutate({
+                    brand_name: props.brand_name,
+                    group_name: props.group_name,
+                    list_name: props.list_name,
+                    packaging: obj.packaging,
+                  });
                 }}
               >
                 Deactivate
               </button>
             </div>
           ) : (
-            <div className="flex w-full flex-row self-end">
+            <div className="flex w-full flex-row justify-center self-end">
               <button
                 className="m-2 w-5/12 rounded bg-[#786ADE] py-2 text-white"
-                onClick={() => {
-                  console.log(obj);
+                onClick={async () => {
+                  const queryObj = {
+                    packaging: props.packaging,
+                    brand_name: props.brand_name,
+                    group_name: props.group_name,
+                    list_name: props.list_name,
+                  };
+                  await router.push({
+                    pathname: "/edit/pricing-edit",
+                    query: queryObj,
+                  });
                 }}
               >
                 Set Price
-              </button>
-              <button
-                className="m-2 w-5/12 rounded bg-[#FF6E65] py-2 text-white"
-                onClick={() => {
-                  console.log(obj);
-                }}
-              >
-                Activate
               </button>
             </div>
           )}

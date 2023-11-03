@@ -17,10 +17,6 @@ const PricingTable: React.FC<PricingTableProps> = ({ data, list_name }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const handleButtonClick = (id: string) => {
-    setSelectedCategory(id === selectedCategory ? "" : id);
-  };
-
   useEffect(() => {
     if (tableRef.current && selectedCategory) {
       const section = document.getElementById(selectedCategory);
@@ -49,7 +45,7 @@ const PricingTable: React.FC<PricingTableProps> = ({ data, list_name }) => {
     data: orderableUnits,
     isLoading: isOrderableUnitsLoading,
     isError: isOrderableUnitsError,
-  } = api.orderableUnit.brand_packaging_all.useQuery(undefined, {
+  } = api.brandPackaging.all.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -131,7 +127,6 @@ interface PricingGroupTableProps {
   orderableUnits: {
     brand_name: string;
     packaging: string;
-    list_name: string;
   }[];
 }
 const PricingGroupTable: React.FunctionComponent<PricingGroupTableProps> = (
@@ -141,9 +136,7 @@ const PricingGroupTable: React.FunctionComponent<PricingGroupTableProps> = (
     (group) => group.brand_name === props.brand_name
   );
   const matchingOrderableUnits = props.orderableUnits.filter(
-    (orderableUnit) =>
-      orderableUnit.brand_name === props.brand_name &&
-      orderableUnit.list_name === props.list_name
+    (orderableUnit) => orderableUnit.brand_name === props.brand_name
   );
 
   return (

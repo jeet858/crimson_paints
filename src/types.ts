@@ -573,3 +573,46 @@ export const pricingByGroupEditInput = z.object({
     })
   ),
 });
+
+export const StockFilterInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const StockInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      packaging: z.string({
+        required_error: "This field cant be null",
+      }),
+      location: z.string({
+        required_error: "This field cant be null",
+      }),
+      color_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      current_stock: z.number({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});

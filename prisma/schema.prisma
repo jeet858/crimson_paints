@@ -162,10 +162,6 @@ model PriceListName{
   price_list_name String @unique @id
 }
 
-model locations{
-  location String @unique @id
-}
-
 model Salesman{
   name String
   phone Int @unique @id
@@ -187,7 +183,7 @@ model Stock{
   brand_name String
   color_name String
   packaging String
-  current_stock String
+  current_stock Int
   location String
   @@unique([brand_name, color_name, packaging])
 }
@@ -210,4 +206,8 @@ model Pricing{
   packaging String
   price Float
   @@unique([brand_name,group_name,packaging,list_name])
+}
+
+model Location{
+  location String @id
 }

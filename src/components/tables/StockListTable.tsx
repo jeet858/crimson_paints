@@ -6,11 +6,10 @@ import {
   TableRow,
   TableCell,
   TableContainer,
-  Select,
-  MenuItem,
 } from "@mui/material";
 
 import { useRouter } from "next/router";
+import { api } from "~/utils/api";
 
 interface TableProps {
   columns: {
@@ -19,15 +18,12 @@ interface TableProps {
   }[];
   data: { id: string }[] | any;
   userType?: string;
-  editUrl: string;
-  idField: string[];
-  dropdownItems: { id: string; name: string }[];
-  deleteUrl: string;
+  location: string;
+  brand_name: string;
 }
 
 const StockListTable: React.FunctionComponent<TableProps> = (props) => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const [filteredData, setFilteredData] = useState(props.data);
+  // const [filteredData, setFilteredData] = useState(props.data);
   const tstyle: {} = {
     width: "100%",
     overflowY: "auto",
@@ -41,43 +37,28 @@ const StockListTable: React.FunctionComponent<TableProps> = (props) => {
     borderStyle: "solid",
     borderColor: "black",
   };
-  const router = useRouter();
 
-  const handleDropdownChange = (id: string) => {
-    if (id === "") {
-      setSelectedValue(id);
-      setFilteredData(props.data);
-    } else {
-      setSelectedValue(id);
-      const newData = props.data.filter(
-        (item: { id: string }) => item.id === id
-      );
-      setFilteredData(newData);
-    }
-  };
+  const {
+    data: stocks,
+    isLoading: isStocksLoading,
+    isError: isStocksError,
+  } = api.stock.all.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  if (isStocksLoading) {
+    return <div></div>;
+  }
+  if (isStocksError) {
+    return <div></div>;
+  }
+  const filteredData = stocks.filter((stock) => {
+    return (
+      stock.brand_name === props.brand_name && stock.location === props.location
+    );
+  });
   return (
-    <div className="flex h-full w-full flex-col p-4">
-      <div>
-        <Select
-          id="dropdown-select"
-          value={selectedValue}
-          onChange={(e) => handleDropdownChange(e.target.value as string)}
-          style={{
-            marginRight: "20px",
-            width: "fit-contain",
-            height: "2rem",
-            backgroundColor: "#11009E",
-            color: "white",
-          }}
-        >
-          <MenuItem value="">All</MenuItem>
-          {props.dropdownItems.map((item) => (
-            <MenuItem key={item.id} value={item.id}>
-              {item.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </div>
+    <div className="flex h-full w-full flex-col px-4">
       <TableContainer style={{ ...tstyle }}>
         <Table stickyHeader>
           <TableHead>
@@ -93,15 +74,6 @@ const StockListTable: React.FunctionComponent<TableProps> = (props) => {
                   {column.header}
                 </TableCell>
               ))}
-              <TableCell
-                style={{
-                  backgroundColor: "#c4b0ff",
-                  textAlign: "center",
-                }}
-                className="w-[33.3%] py-2 text-center"
-              >
-                Actions
-              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -122,51 +94,6 @@ const StockListTable: React.FunctionComponent<TableProps> = (props) => {
                     {row[column.field]}
                   </TableCell>
                 ))}
-                <TableCell
-                  style={{
-                    backgroundColor: "rgba(196, 176, 255, 0.25)",
-                    textAlign: "center",
-                  }}
-                  className="w-[33.3%] space-x-2 py-2 text-center"
-                >
-                  <button
-                    className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
-                    onClick={async () => {
-                      const queryObj = {
-                        ...router.query,
-                      };
-                      for (let i = 0; i < props.idField.length; i++) {
-                        const id = props.idField[i] as string;
-                        queryObj[id] = row[id];
-                      }
-                      router.push({
-                        pathname: props.editUrl,
-                        query: queryObj,
-                      });
-                    }}
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                    onClick={async () => {
-                      const queryObj = {
-                        ...router.query,
-                      };
-                      for (let i = 0; i < props.idField.length; i++) {
-                        const id = props.idField[i] as string;
-                        queryObj[id] = row[id];
-                      }
-                      router.push({
-                        pathname: props.deleteUrl,
-                        query: queryObj,
-                      });
-                    }}
-                  >
-                    Delete
-                  </button>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -18,7 +18,11 @@ const groupColorInput = z.object({
     required_error: "This field cant be null",
   }),
 });
-
+const groupColorByBrandInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
 export const groupPricingTypeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.groupPricing.findMany();
@@ -114,5 +118,15 @@ export const groupPricingTypeRouter = createTRPCRouter({
         },
       });
       return groups;
+    }),
+  group_colors_by_brand: protectedProcedure
+    .input(groupColorByBrandInput)
+    .query(async ({ input, ctx }) => {
+      const colors = await ctx.db.groupPricing.findMany({
+        where: {
+          brand_name: input.brand_name,
+        },
+      });
+      return colors;
     }),
 });

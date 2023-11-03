@@ -97,7 +97,7 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "Stock Ledger",
-      href: "#",
+      href: "/stock-ledger",
     },
   ];
   return (

@@ -185,7 +185,7 @@ model Stock{
   packaging String
   current_stock Int
   location String
-  @@unique([brand_name, color_name, packaging])
+  @@unique([brand_name, color_name, packaging,location])
 }
 
 model StockLedger{
@@ -196,7 +196,11 @@ model StockLedger{
   packaging String
   notes String
   location String
-  date DateTime
+  date String
+  open_stock Int
+  added Int
+  closing Int
+  executed Int
 }
 
 model Pricing{

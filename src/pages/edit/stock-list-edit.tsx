@@ -212,6 +212,14 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
       refetchOnWindowFocus: false,
     }
   );
+  const updateStockLedger = api.stock.stock_ledger_create.useMutation({
+    onError: (err) => {
+      alert(`${err.message}`);
+    },
+    onSuccess: async () => {
+      alert("Ledger updated succesfully");
+    },
+  });
   const update = api.stock.stock_edit.useMutation({
     onError: (err) => {
       alert(`${err.message}`);
@@ -248,6 +256,7 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
     {
       packaging: "",
       updated_value: 0,
+      notes: "",
     },
   ]);
   useEffect(() => {});
@@ -262,6 +271,7 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
       removeInitialValue.splice(initialValueCheck, 1);
       setEditData(removeInitialValue);
     }
+
     const array = editData;
     const index = array.findIndex((item) => item.packaging === name);
     if (index !== -1) {
@@ -269,26 +279,94 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
       array[index] = {
         packaging: name,
         updated_value: parseInt(value),
+        notes: array[index]?.notes ? (array[index]?.notes as string) : "",
       };
     } else {
       // If it doesn't exist, add a new object to the array
-      array.push({ packaging: name, updated_value: parseInt(value) });
+      array.push({
+        packaging: name,
+        updated_value: parseInt(value),
+        notes: array[index]?.notes ? (array[index]?.notes as string) : "",
+      });
+    }
+    setEditData(array);
+  };
+  const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const initialValueCheck = editData.findIndex(
+      (item) => item.packaging === ""
+    );
+    if (initialValueCheck !== -1) {
+      const removeInitialValue = editData;
+      removeInitialValue.splice(initialValueCheck, 1);
+      setEditData(removeInitialValue);
+    }
+
+    const array = editData;
+    const index = array.findIndex((item) => item.packaging === name);
+    if (index !== -1) {
+      // If it exists, update its value
+      array[index] = {
+        packaging: name,
+        updated_value: array[index]?.updated_value
+          ? (array[index]?.updated_value as number)
+          : 0,
+        notes: value,
+      };
+    } else {
+      // If it doesn't exist, add a new object to the array
+      array.push({
+        packaging: name,
+        updated_value: array[index]?.updated_value
+          ? (array[index]?.updated_value as number)
+          : 0,
+        notes: value,
+      });
     }
     setEditData(array);
   };
   const onUpdate = () => {
+    var currentDate = new Date();
+    const StockLedgerArray: {
+      brand_name: string;
+      color_name: string;
+      client_name: string;
+      packaging: string;
+      notes: string;
+      location: string;
+      date: string;
+      open_stock: number;
+      added: number;
+      closing: number;
+      executed: number;
+    }[] = [];
     editData.forEach((editItem) => {
       // Find the corresponding listData item by packaging
       const listDataItem = listData?.find(
         (listItem) => listItem.packaging === editItem.packaging
       );
-
       if (listDataItem) {
         // Update the current_stock value
+        const obj = {
+          brand_name: brand,
+          color_name: color,
+          packaging: editItem.packaging,
+          notes: editItem.notes,
+          location: location,
+          date: currentDate.toDateString(),
+          added: editItem.updated_value,
+          open_stock: listDataItem?.current_stock,
+          closing: listDataItem.current_stock + editItem.updated_value,
+          client_name: "",
+          executed: 0,
+        };
         listDataItem.current_stock += editItem.updated_value;
+        StockLedgerArray.push(obj);
       }
     });
-    console.log(listData);
+    console.log(StockLedgerArray);
+    console.log(editData);
     if (listData) {
       update.mutate({
         brand_name: brand,
@@ -296,6 +374,7 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
         location: location,
         data: listData,
       });
+      updateStockLedger.mutate(StockLedgerArray);
     } else {
       alert("Data is empty");
     }
@@ -314,7 +393,6 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
         </div>
         <div className="h-[45vh] overflow-x-auto rounded-b-lg bg-[#C4B0FF45]">
           {listData?.map((row, rowIndex) => {
-            const inputFieldKey = `${row.brand_name}, ${color}, ${row.packaging}`;
             return (
               <div key={rowIndex} className="flex flex-row  p-1">
                 {columns.map((column, colIndex) => (
@@ -324,7 +402,7 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
                 ))}
                 <div className="flex-1 p-2 text-center" key={rowIndex}>
                   <input
-                    key={inputFieldKey}
+                    key={`${row.brand_name}, ${color}, ${row.packaging}`}
                     className="h-10 w-28 rounded-md border border-[#786ADE] bg-[#c4b0ff4f] px-2 outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                     type="number"
                     name={row.packaging}
@@ -333,8 +411,12 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
                 </div>
                 <div className="flex-1 p-2 text-center">
                   <input
+                    key={`${row.brand_name}, ${color}, ${row.packaging} notes`}
                     className="h-10 w-full rounded-md border border-[#786ADE] bg-[#c4b0ff4f] px-2 outline-none"
                     type="text"
+                    id="notes"
+                    name={row.packaging}
+                    onChange={handleNoteChange}
                   />
                 </div>
               </div>

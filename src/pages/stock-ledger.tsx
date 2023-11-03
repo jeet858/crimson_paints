@@ -3,12 +3,27 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import StockListTable from "~/components/tables/StockListTable";
+import StockLedger from "~/components/tables/StockLedger";
 import { api } from "~/utils/api";
 
-const StockList = () => {
+const Stock_Ledger = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedPackaging, setSelectedPackaging] = useState("");
+  const [packagingArray, setPackagingArray] = useState([
+    {
+      brand_name: "",
+      packaging: "",
+    },
+  ]);
+
+  const [colorArray, setColorArray] = useState([
+    {
+      brand_name: "",
+      color_name: "",
+    },
+  ]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const handleLocationChange = (location: string) => {
     setSelectedLocation(location);
@@ -16,9 +31,16 @@ const StockList = () => {
   const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setSelectedBrand(value);
-    console.log(value);
-    console.log(name);
-    console.log(selectedBrand);
+  };
+  const handleColorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setSelectedColor(value);
+  };
+  const handlePackagingChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setSelectedPackaging(value);
   };
   const router = useRouter();
   const { userType } = router.query;
@@ -30,11 +52,14 @@ const StockList = () => {
     userType: userType as string,
   };
   const columns = [
-    { header: "Color Name", field: "color_name" },
-    { header: "Packaging", field: "packaging" },
-    { header: "Current Stock", field: "current_stock" },
-    { header: "Pending", field: "pending" },
-    { header: "Production Shortage", field: "production_shortage" },
+    { header: "Opening Date", field: "date" },
+    { header: "open_stock", field: "open_stock" },
+    { header: "Added", field: "added" },
+    { header: "Executed", field: "executed" },
+    { header: "Closing", field: "closing" },
+    { header: "Ord#", field: "id" },
+    { header: "Notes", field: "notes" },
+    { header: "Client Name", field: "client_name" },
   ];
   const {
     data: brands,
@@ -51,6 +76,34 @@ const StockList = () => {
   } = api.location.all.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
+  });
+  const {
+    data: groupColors,
+    isLoading,
+    isError,
+  } = api.groupPricing.brand_wise_fetch.useQuery(selectedBrand, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+    onSuccess(data) {
+      if (data) {
+        setColorArray(data);
+        setSelectedColor(data[0]?.color_name as string);
+      }
+    },
+  });
+  const {
+    data: packaging,
+    isLoading: isPackagingLoading,
+    isError: isPackagingError,
+  } = api.brandPackaging.where_brand_name.useQuery(selectedBrand, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+    onSuccess(data) {
+      if (data) {
+        setPackagingArray(data);
+        setSelectedPackaging(data[0]?.packaging as string);
+      }
+    },
   });
   useEffect(() => {
     if (locations) {
@@ -107,7 +160,7 @@ const StockList = () => {
             ) : null}
           </div>
         </div>
-        <div className="flex h-fit w-full items-center justify-between px-4">
+        <div className="flex h-fit w-full items-center justify-between">
           <div className="flex h-14 w-full items-center">
             <select
               className="overflow-scroll rounded-md bg-[#11009E] p-4 text-white outline-none"
@@ -126,6 +179,40 @@ const StockList = () => {
                 );
               })}
             </select>
+            <select
+              className="ml-4 overflow-scroll rounded-md bg-[#11009E] p-4 text-white outline-none"
+              name="colors"
+              onChange={handleColorChange}
+            >
+              {colorArray?.map((color, index) => {
+                return (
+                  <option
+                    key={index}
+                    value={color.color_name}
+                    className="bg-[#EBE6FB]"
+                  >
+                    {color.color_name}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              className="ml-4 overflow-scroll rounded-md bg-[#11009E] p-4 text-white outline-none"
+              name="packaging"
+              onChange={handlePackagingChange}
+            >
+              {packagingArray?.map((packaging, index) => {
+                return (
+                  <option
+                    key={index}
+                    value={packaging.packaging}
+                    className="bg-[#EBE6FB]"
+                  >
+                    {packaging.packaging}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <Link
             href={{
@@ -140,14 +227,16 @@ const StockList = () => {
             Update Stock
           </Link>
         </div>
-        <StockListTable
+        <StockLedger
           columns={columns}
-          location={selectedLocation}
           brand_name={selectedBrand}
+          color={selectedColor}
+          location={selectedLocation}
+          packaging={selectedPackaging}
         />
       </div>
     </UserTemplate>
   );
 };
 
-export default StockList;
+export default Stock_Ledger;

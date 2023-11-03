@@ -616,3 +616,48 @@ export const StockInput = z.object({
     })
   ),
 });
+export const StockLedgerInput = z.array(
+  z.object({
+    brand_name: z.string({
+      required_error: "This field cant be null",
+    }),
+    color_name: z.string({
+      required_error: "This field cant be null",
+    }),
+    client_name: z.string(),
+    packaging: z.string({
+      required_error: "This field cant be null",
+    }),
+    notes: z.string(),
+    location: z.string({
+      required_error: "This field cant be null",
+    }),
+    date: z.string({
+      required_error: "This field cant be null",
+    }),
+    open_stock: z.number(),
+    added: z.number(),
+    closing: z.number(),
+    executed: z.number(),
+  })
+);
+export const StockLedgerDeleteInput = z.object({
+  id: z.bigint({
+    required_error: "This field cant be null",
+  }),
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  added: z.number({
+    required_error: "This field cant be null",
+  }),
+});

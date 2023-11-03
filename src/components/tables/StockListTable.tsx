@@ -16,7 +16,6 @@ interface TableProps {
     header: string;
     field: string;
   }[];
-  data: { id: string }[] | any;
   userType?: string;
   location: string;
   brand_name: string;

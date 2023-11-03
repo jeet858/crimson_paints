@@ -85,11 +85,25 @@ const InsideNav: React.FunctionComponent = (props) => {
       name: "Sales Representatives",
       href: "/sales-representative",
     },
+    {
+      name: "Pricing",
+      href: "/pricing",
+    },
+  ];
+  const StockElements = [
+    {
+      name: "Current Stock",
+      href: "/stock-list",
+    },
+    {
+      name: "Stock Ledger",
+      href: "/stock-ledger",
+    },
   ];
   return (
     <div className="flex w-full justify-center pt-5">
       <InsideNavElement elementHeader="Order" element={OrderElements} />
-      <InsideNavElement elementHeader="Stock" />
+      <InsideNavElement elementHeader="Stock" element={StockElements} />
       <InsideNavElement elementHeader="Reports" />
       <InsideNavElement elementHeader="Uploads" />
       <InsideNavElement elementHeader="Master" element={masterElement} />

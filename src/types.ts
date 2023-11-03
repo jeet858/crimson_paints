@@ -437,3 +437,227 @@ export const salesRepresentativeEditInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const interComapnyInput = z.object({
+  name: z.string({
+    required_error: "This field cant be null",
+  }),
+  address: z.string({
+    required_error: "This field cant be null",
+  }),
+  bill: z.string({
+    required_error: "This field cant be null",
+  }),
+  city: z.string({
+    required_error: "This field cant be null",
+  }),
+  gst: z.string({
+    required_error: "This field cant be null",
+  }),
+  phone: z.number({
+    required_error: "This field cant be null",
+  }),
+  pin: z.number({
+    required_error: "This field cant be null",
+  }),
+  type: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const interComapnyEditInput = z.object({
+  newGst: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingGst: z.string({
+    required_error: "This field cant be null",
+  }),
+  name: z.string({
+    required_error: "This field cant be null",
+  }),
+  address: z.string({
+    required_error: "This field cant be null",
+  }),
+  bill: z.string({
+    required_error: "This field cant be null",
+  }),
+  city: z.string({
+    required_error: "This field cant be null",
+  }),
+  phone: z.number({
+    required_error: "This field cant be null",
+  }),
+  pin: z.number({
+    required_error: "This field cant be null",
+  }),
+  type: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const interComapnyDeleteInput = z.object({
+  gst: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingSingleEditInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  price: z.number({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingSingleDeleteInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingByGroupFindInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const pricingByGroupEditInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  group_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      packaging: z.string({
+        required_error: "This field cant be null",
+      }),
+      group_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      list_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      price: z.number({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});
+
+export const StockFilterInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+
+export const StockInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  data: z.array(
+    z.object({
+      brand_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      packaging: z.string({
+        required_error: "This field cant be null",
+      }),
+      location: z.string({
+        required_error: "This field cant be null",
+      }),
+      color_name: z.string({
+        required_error: "This field cant be null",
+      }),
+      current_stock: z.number({
+        required_error: "This field cant be null",
+      }),
+    })
+  ),
+});
+export const StockLedgerInput = z.array(
+  z.object({
+    brand_name: z.string({
+      required_error: "This field cant be null",
+    }),
+    color_name: z.string({
+      required_error: "This field cant be null",
+    }),
+    client_name: z.string(),
+    packaging: z.string({
+      required_error: "This field cant be null",
+    }),
+    notes: z.string(),
+    location: z.string({
+      required_error: "This field cant be null",
+    }),
+    date: z.string({
+      required_error: "This field cant be null",
+    }),
+    open_stock: z.number(),
+    added: z.number(),
+    closing: z.number(),
+    executed: z.number(),
+  })
+);
+export const StockLedgerDeleteInput = z.object({
+  id: z.bigint({
+    required_error: "This field cant be null",
+  }),
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  added: z.number({
+    required_error: "This field cant be null",
+  }),
+});

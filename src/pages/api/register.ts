@@ -8,6 +8,7 @@ const registerUserSchema = z.object({
   email: z.string(),
   password: z.string(),
   user_type: z.string(),
+  phone: z.number(),
 });
 
 const prisma = new PrismaClient();
@@ -16,9 +17,8 @@ export default async function registerUser(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, name, email, password, user_type } = registerUserSchema.parse(
-    req.body
-  );
+  const { id, name, email, password, user_type, phone } =
+    registerUserSchema.parse(req.body);
   const user = await prisma.user.findUnique({
     where: { id },
   });
@@ -30,6 +30,7 @@ export default async function registerUser(
   const newUser = await prisma.user.create({
     data: {
       id: id,
+      phone: phone,
       name: name,
       email: email,
       password: hashedPassword,

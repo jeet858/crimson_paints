@@ -4,11 +4,6 @@ import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 
-const get = async () => {
-  const session = await getSession();
-  return session;
-};
-
 const InterCompanyEdit: React.FunctionComponent = () => {
   const { data, status } = useSession();
   const templateParams = {
@@ -18,140 +13,194 @@ const InterCompanyEdit: React.FunctionComponent = () => {
     userType: "admin",
   };
   const router = useRouter();
-  const { name, symbol } = router.query;
+  const { name, address, bill, city, gst, phone, pin, type } = router.query;
 
-  const update = api.basicUnit.edit.useMutation({
+  const update = api.interComapny.edit.useMutation({
     onError: (err, newTodo, context) => {
-      alert(`An error occured }`);
+      alert(`${err.message}`);
     },
-    onSuccess: () => {
-      router.push("/basic-unit");
+    onSuccess: async () => {
+      alert("Data updated succesfully");
+      await router.push("/inter-company");
     },
   });
-
+  const [editData, setEditData] = useState({
+    existingGst: gst as string,
+    newGst: gst as string,
+    name: name as string,
+    type: type as string,
+    address: address as string,
+    pin: parseInt(pin as string),
+    city: city as string,
+    phone: parseInt(phone as string),
+    bill: bill as string,
+  });
   useEffect(() => {
-    if (name && symbol) {
+    if (name && address && bill && city && gst && phone && pin && type) {
       setEditData({
-        existingName: name as string,
-        newName: name as string,
-        symbol: symbol as string,
+        existingGst: gst as string,
+        newGst: gst as string,
+        name: name as string,
+        type: type as string,
+        address: address as string,
+        pin: parseInt(pin as string),
+        city: city as string,
+        phone: parseInt(phone as string),
+        bill: bill as string,
       });
     }
-  }, [name, symbol]);
+  }, [name, address, bill, city, gst, phone, pin, type]);
 
-  const [editData, setEditData] = useState({
-    existingName: name as string,
-    newName: name as string,
-    symbol: symbol as string,
-  });
-
-  const trpc = api.useContext();
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setEditData({
       ...editData,
-      [name]: value,
+      [name]: name === "pin" || name === "phone" ? parseInt(value) : value,
     });
   };
-
   const updateData = () => {
-    update.mutate(editData);
+    if (
+      editData.name === "" ||
+      editData.address === "" ||
+      editData.bill === "" ||
+      editData.city === "" ||
+      editData.newGst === "" ||
+      editData.phone === 0 ||
+      editData.pin === 0 ||
+      type === ""
+    ) {
+      alert("Be sure to fill all fields");
+    } else {
+      update.mutate(editData);
+    }
   };
-
   return (
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-5/6 w-5/6 flex-col rounded-xl bg-[#C4B0FF45]">
-          Inter Company Edit
           <p className="flex h-1/6 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
             Branch Details
           </p>
           <div className="flex h-1/6 w-full flex-row items-center justify-center space-x-4 border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             <p className="flex w-1/6 justify-normal">Company Name</p>
-            <div className="grow w-2/6">
-              <input className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
+            <div className="w-2/6 grow">
+              <input
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.name}
+                name="name"
+                onChange={handleInputChange}
+              />
             </div>
             <p className="flex w-1/6 justify-normal">Type</p>
-            <div className="grow w-2/6">
-              {/* <input
-                className="rounded-md border grow border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                value={editData.Symbol}
-              /> */}
+            <div className="w-2/6 grow">
               <select
-                name=""
+                name="type"
                 id=""
                 className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.type}
+                onChange={handleInputChange}
               >
-                <option value="" className="bg-[#C4B0FF] font-semibold">
-                  Kilogram
+                <option
+                  value="Head Office"
+                  className="bg-[#C4B0FF] font-semibold"
+                >
+                  Head Office
                 </option>
-                <option value="" className="bg-[#C4B0FF] font-semibold">
-                  Gram
-                </option>
-                <option value="" className="bg-[#C4B0FF] font-semibold">
-                  Mililitre
+                <option value="Branch" className="bg-[#C4B0FF] font-semibold">
+                  Branch
                 </option>
               </select>
             </div>
           </div>
           <div className="flex h-1/6 w-full flex-row  items-center border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             <p className="flex w-1/6 justify-normal">Address</p>
-            <div className="grow w-5/6 pl-2">
-              <input className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
+            <div className="w-5/6 grow pl-2">
+              <input
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.address}
+                name="address"
+                onChange={handleInputChange}
+              />
             </div>
           </div>
           <div className="flex h-1/6 w-full flex-row items-center justify-center space-x-4 border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             <p className="flex w-1/6 justify-normal">PIN Code</p>
-            <div className="grow w-2/6">
-              <input className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
+            <div className="w-2/6 grow">
+              <input
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.pin}
+                name="pin"
+                onChange={handleInputChange}
+              />
             </div>
             <p className="flex w-1/6 justify-normal">City</p>
-            <div className="grow w-2/6">
-              <input className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
+            <div className="w-2/6 grow">
+              <input
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.city}
+                name="city"
+                onChange={handleInputChange}
+              />
             </div>
           </div>
           <div className="flex h-1/6 w-full flex-row items-center justify-center space-x-4 border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             <p className="flex w-1/6 justify-normal">GST #</p>
-            <div className="grow w-2/6">
-              <input className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
+            <div className="w-2/6 grow">
+              <input
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.newGst}
+                name="newGst"
+                onChange={handleInputChange}
+              />
             </div>
             <p className="flex w-1/6 justify-normal">Phone</p>
-            <div className="grow w-2/6">
-              <input className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none" />
+            <div className="w-2/6 grow">
+              <input
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.phone}
+                name="phone"
+                onChange={handleInputChange}
+              />
             </div>
           </div>
           <div className="flex h-1/6 w-full items-center justify-normal border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             <div className="flex w-3/6 flex-row">
               <p className="flex w-1/3 justify-normal">Bill</p>
-              <div className="grow w-2/3 px-2">
-                {/* <input
-                  className="rounded-md border w-full border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                  value={editData.Symbol}
-                /> */}
+              <div className="w-2/3 grow px-2">
                 <select
-                  name=""
-                  id=""
+                  name="bill"
                   className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none "
+                  value={editData.bill}
+                  onChange={handleInputChange}
                 >
-                  <option value="" className="bg-[#C4B0FF] font-semibold">
-                    Kilogram
+                  <option value="Bill" className="bg-[#C4B0FF] font-semibold">
+                    Bill
                   </option>
-                  <option value="" className="bg-[#C4B0FF] font-semibold">
-                    Gram
-                  </option>
-                  <option value="" className="bg-[#C4B0FF] font-semibold">
-                    Mililitre
+                  <option
+                    value="No Bill"
+                    className="bg-[#C4B0FF] font-semibold"
+                  >
+                    No Bill
                   </option>
                 </select>
               </div>
             </div>
           </div>
           <div className="flex h-1/6 w-1/2 justify-center space-x-4 self-center px-4">
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <button
+              className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              onClick={() => {
+                console.log(editData);
+              }}
+            >
               Cancel
             </button>
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold">
+            <button
+              className="h-1/2 w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold"
+              onClick={updateData}
+            >
               Save
             </button>
           </div>

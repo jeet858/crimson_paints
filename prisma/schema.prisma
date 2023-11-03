@@ -50,6 +50,7 @@ model User {
   id        String    @id
   name      String
   email     String    @unique
+  phone     BigInt
   password  String
   user_type String
   accounts  Account[]
@@ -161,10 +162,6 @@ model PriceListName{
   price_list_name String @unique @id
 }
 
-model locations{
-  location String @unique @id
-}
-
 model Salesman{
   name String
   phone Int @unique @id
@@ -173,10 +170,48 @@ model Salesman{
 
 model InterCompany{
   name String
-  gst Int @unique @id
+  gst String @unique @id
   type String
   address String
   pin Int
   city String
-  phone Int @unique
+  phone BigInt @unique
+  bill String
+}
+
+model Stock{
+  brand_name String
+  color_name String
+  packaging String
+  current_stock Int
+  location String
+  @@unique([brand_name, color_name, packaging,location])
+}
+
+model StockLedger{
+  id BigInt @id @default(autoincrement())
+  brand_name String
+  color_name String
+  client_name String
+  packaging String
+  notes String
+  location String
+  date String
+  open_stock Int
+  added Int
+  closing Int
+  executed Int
+}
+
+model Pricing{
+  brand_name String
+  group_name String
+  list_name String
+  packaging String
+  price Float
+  @@unique([brand_name,group_name,packaging,list_name])
+}
+
+model Location{
+  location String @id
 }

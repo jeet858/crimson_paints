@@ -176,7 +176,11 @@ const Pricing = () => {
               onChange={handleInputChange}
             >
               {price_list?.map((list, index) => {
-                return <option value={list.list_name}>{list.list_name}</option>;
+                return (
+                  <option value={list.list_name} key={index}>
+                    {list.list_name}
+                  </option>
+                );
               })}
             </select>
           </div>

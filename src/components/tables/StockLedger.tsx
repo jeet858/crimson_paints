@@ -161,7 +161,7 @@ const StockLedger: React.FunctionComponent<TableProps> = ({
                   >
                     <button
                       className="text-4xl  text-[#11009E]"
-                      onClick={async () => {
+                      onClick={() => {
                         deleteData({
                           added: row.added,
                           brand_name: row.brand_name,

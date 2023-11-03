@@ -124,7 +124,7 @@ const BrandPrices = () => {
             console.log(list_name);
             console.log(group.group_name);
             return (
-              <div className="flex w-[31%]">
+              <div className="flex w-[31%]" key={index}>
                 <GroupPricesEditTable
                   brand_name={brand_name as string}
                   list_name={list_name as string}

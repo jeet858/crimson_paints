@@ -144,7 +144,7 @@ const PricingGroupTable: React.FunctionComponent<PricingGroupTableProps> = (
       <div className="flex w-full flex-col justify-between bg-[#C4B0FF42]">
         {matchingGroups.map((group, index) => {
           return (
-            <div className="flex h-fit w-full flex-col">
+            <div className="flex h-fit w-full flex-col" key={index}>
               <div
                 className="flex h-fit w-full items-center justify-between border-b-[1px] border-[#E7E0FF78] bg-[#786ADE] p-1 px-6 font-semibold text-white"
                 key={index}

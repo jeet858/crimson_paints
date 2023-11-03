@@ -216,7 +216,7 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
     onError: (err) => {
       alert(`${err.message}`);
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       alert("Ledger updated succesfully");
     },
   });
@@ -224,9 +224,9 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
     onError: (err) => {
       alert(`${err.message}`);
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       alert("Stock updated succesfully");
-      await router.reload();
+      router.reload();
     },
   });
   const listData = existingPackaging?.map((existingItem) => {
@@ -327,7 +327,7 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
     setEditData(array);
   };
   const onUpdate = () => {
-    var currentDate = new Date();
+    const currentDate = new Date();
     const StockLedgerArray: {
       brand_name: string;
       color_name: string;

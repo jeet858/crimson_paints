@@ -162,10 +162,6 @@ model PriceListName{
   price_list_name String @unique @id
 }
 
-model locations{
-  location String @unique @id
-}
-
 model Salesman{
   name String
   phone Int @unique @id
@@ -187,9 +183,9 @@ model Stock{
   brand_name String
   color_name String
   packaging String
-  current_stock String
+  current_stock Int
   location String
-  @@unique([brand_name, color_name, packaging])
+  @@unique([brand_name, color_name, packaging,location])
 }
 
 model StockLedger{
@@ -200,5 +196,22 @@ model StockLedger{
   packaging String
   notes String
   location String
-  date DateTime
+  date String
+  open_stock Int
+  added Int
+  closing Int
+  executed Int
+}
+
+model Pricing{
+  brand_name String
+  group_name String
+  list_name String
+  packaging String
+  price Float
+  @@unique([brand_name,group_name,packaging,list_name])
+}
+
+model Location{
+  location String @id
 }

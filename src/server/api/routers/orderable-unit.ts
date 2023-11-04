@@ -57,6 +57,15 @@ export const orderableUnitRouter = createTRPCRouter({
         list_name,
       }));
     }),
+  brand_packaging_all: protectedProcedure.query(async ({ ctx }) => {
+    const details = await ctx.db.oderableUnitsDetails.findMany();
+    await ctx.db.$disconnect();
+    return details.map(({ brand_name, packaging, list_name }) => ({
+      brand_name,
+      packaging,
+      list_name,
+    }));
+  }),
   edit: protectedProcedure
     .input(basicUnitsEditInput)
     .mutation(async ({ ctx, input }) => {

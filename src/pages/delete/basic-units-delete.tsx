@@ -26,12 +26,15 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
       alert(`An error occured }`);
     },
     onSuccess: () => {
+      alert("Data deleted successfully");
       router.push("/basic-unit");
     },
   });
 
   const deleteData = () => {
-    del.mutate({ name: name as string });
+    confirmed
+      ? del.mutate({ name: name as string })
+      : alert("Please confirm that you want to delete this unit");
   };
 
   const [confirmed, setConfirmed] = useState(false);
@@ -67,7 +70,12 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
               </div>
               <p>I confirm the deletion</p>
             </div>
-            <button className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <button 
+              className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              onClick={async ()=>{
+                await router.push("/basic-unit")
+              }}
+            >
               Cancel
             </button>
             <button

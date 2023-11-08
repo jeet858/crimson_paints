@@ -28,6 +28,7 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
       alert(`An error occured }`);
     },
     onSuccess: () => {
+      alert("Data deleted successfully")
       router.push("/colors");
     },
   });

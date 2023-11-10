@@ -1,0 +1,51 @@
+import React from "react";
+
+interface TableProps {
+  columns: {
+    header: string;
+    field: string;
+  }[];
+  data: {}[] | any;
+  userType?: string;
+}
+
+const SalesmanTable: React.FunctionComponent<TableProps> = (props) => {
+  return (
+    <div className="flex w-full flex-col rounded-b-xl bg-[#C4B0FF45]">
+      <div className="p-4 text-xl font-semibold text-[#11009E]">Notes</div>
+      <div className="min-w-full rounded-b-xl">
+        <div className="flex bg-[#C4B0FF] p-2 ">
+          {props.columns.map((column, index) => (
+            <div
+              key={index}
+              className="flex-1 p-2 text-center text-lg font-semibold"
+            >
+              {column.header}
+            </div>
+          ))}
+        </div>
+        <div className="h-[50vh] overflow-scroll ">
+          {props.data.map((row: any, rowIndex) => (
+            <div
+              key={rowIndex}
+              className={`flex  ${
+                rowIndex % 2 === 0 ? "bg-[#c4b0ff42]" : "bg-[#c4b0ff6f]"
+              }`}
+            >
+              {props.columns.map((column, colIndex) => (
+                <div
+                  key={colIndex}
+                  className="flex flex-1 items-center justify-center border-r-2 border-[#C4B0FF]  p-2 text-center text-lg"
+                >
+                  {row[column.field]}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SalesmanTable;

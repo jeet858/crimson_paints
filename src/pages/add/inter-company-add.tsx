@@ -176,7 +176,8 @@ const InterCompanyAdd: React.FunctionComponent = () => {
           <div className="flex h-1/6 w-1/2 justify-center space-x-4 self-center px-4">
             <button
               className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
-              onClick={() => {
+              onClick={async () => {
+                await router.push("/inter-company");
                 console.log(addData);
               }}
             >

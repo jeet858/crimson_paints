@@ -69,7 +69,7 @@ const ProductPackagingListDelete: React.FunctionComponent = () => {
             <button
               className="h-8 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async () => {
-                await router.push("product-packaging-list");
+                await router.push("/product-packaging-list");
               }}
             >
               Cancel

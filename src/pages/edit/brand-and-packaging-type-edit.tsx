@@ -163,7 +163,8 @@ const BrandAndPackagingTypeEdit: React.FunctionComponent = () => {
         <div className="flex h-fit w-full items-center justify-center gap-4 rounded-b-[10px]  bg-[#c4b0ff8d] p-2 text-xl font-semibold">
           <button
             className="h-10 w-28 rounded-lg bg-[#07096E] text-white"
-            onClick={() => {
+            onClick={async () => {
+              await router.push("/brand-and-packaging-type")
               console.log(selectedItems);
             }}
           >

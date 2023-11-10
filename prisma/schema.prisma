@@ -164,7 +164,7 @@ model PriceListName{
 
 model Salesman{
   name String
-  phone Int @unique @id
+  phone BigInt @unique @id
   location String
 }
 

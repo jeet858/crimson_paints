@@ -21,6 +21,7 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
       alert(`An error occured }`);
     },
     onSuccess: () => {
+      alert("Data added successfully");
       router.push("/basic-unit");
     },
   });
@@ -79,7 +80,12 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
             />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
-            <button className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <button 
+              className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              onClick={async ()=>{
+                await router.push("/basic-unit")
+              }}
+            >
               Cancel
             </button>
             <button

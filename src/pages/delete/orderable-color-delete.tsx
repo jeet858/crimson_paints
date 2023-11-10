@@ -120,12 +120,17 @@ const OrderableColorDelete: React.FunctionComponent = () => {
           </div>
           <button
             className="w-28 rounded-lg bg-[#07096E] text-white"
-            onClick={async () => {}}
+            onClick={async () => {
+              await router.push("/orderable-colors");
+            }}
           >
             Cancel
           </button>
-          <button className="w-28 rounded-lg bg-[#C4B0FF]" onClick={updateData}>
-            Save
+          <button 
+              className="w-28 rounded-lg bg-[#FF6E65] text-white" 
+              onClick={updateData}
+            >
+            Delete
           </button>
         </div>
       </div>

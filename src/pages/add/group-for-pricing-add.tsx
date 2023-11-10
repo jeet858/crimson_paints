@@ -194,7 +194,7 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
           </div>
           <div className="flex h-fit w-1/2 justify-between self-end p-4">
             <button
-              className="h-fit w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white transition-transform hover:scale-105"
+              className="h-fit w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async () => {
                 await router.push("/group-for-pricing");
                 console.log(colorArray);
@@ -203,7 +203,7 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
               Cancel
             </button>
             <button
-              className="h-fit w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold transition-transform hover:scale-105"
+              className="h-fit w-[40%] self-center rounded-md bg-[#C4B0FF] font-semibold"
               onClick={create}
             >
               Save

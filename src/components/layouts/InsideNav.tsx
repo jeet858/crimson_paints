@@ -70,7 +70,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/group-for-pricing",
     },
     {
-      name: "Oderable Units",
+      name: "Orderable Units",
       href: "/orderable-unit",
     },
     {
@@ -78,7 +78,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/naming-price-list",
     },
     {
-      name: "Oderable Colors",
+      name: "Orderable Colors",
       href: "/orderable-colors",
     },
     {

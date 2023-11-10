@@ -186,10 +186,10 @@ const OrderableUnitDelete: React.FunctionComponent = () => {
               Cancel
             </button>
             <button
-              className="w-28 rounded-lg bg-[#C4B0FF]"
+              className="w-28 rounded-lg bg-[#FF6E65] text-white"
               onClick={deleteData}
             >
-              Save
+              Delete
             </button>
           </div>
         </div>

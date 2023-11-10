@@ -70,7 +70,12 @@ const ProductPackagingListEdit: React.FunctionComponent = () => {
             />
           </div>
           <div className="flex h-fit w-1/2 justify-between self-end px-4 pt-8">
-            <button className="h-8 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white">
+            <button 
+              className="h-8 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
+              onClick={async ()=>{
+                await router.push("/product-packaging-list")
+              }}
+            >
               Cancel
             </button>
             <button

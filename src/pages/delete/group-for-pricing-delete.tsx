@@ -121,7 +121,7 @@ const GroupForPricingDelete = () => {
             </div>
             <div className="flex gap-2">
               <button
-                className="h-[30px] w-[70px] self-center rounded-md bg-[#07096E] text-base font-semibold text-white transition-transform hover:scale-105"
+                className="h-[30px] w-[70px] self-center rounded-md bg-[#07096E] text-base font-semibold text-white"
                 onClick={async () => {
                   await router.push("/group-for-pricing");
                 }}
@@ -129,7 +129,7 @@ const GroupForPricingDelete = () => {
                 Cancel
               </button>
               <button
-                className="h-[30px] w-[70px] self-center rounded-md  border-[1px] border-[#07096E] bg-[#FF6E65] text-base font-semibold text-white transition-transform hover:scale-105"
+                className="h-[30px] w-[70px] self-center rounded-md  border-[1px] border-[#07096E] bg-[#FF6E65] text-base font-semibold text-white"
                 onClick={deleteData}
               >
                 Delete

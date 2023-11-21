@@ -70,7 +70,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/group-for-pricing",
     },
     {
-      name: "Oderable Units",
+      name: "Orderable Units",
       href: "/orderable-unit",
     },
     {
@@ -78,7 +78,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/naming-price-list",
     },
     {
-      name: "Oderable Colors",
+      name: "Orderable Colors",
       href: "/orderable-colors",
     },
     {
@@ -88,6 +88,10 @@ const InsideNav: React.FunctionComponent = (props) => {
     {
       name: "Pricing",
       href: "/pricing",
+    },
+    {
+      name: "Client Party List",
+      href: "/client-party-list",
     },
   ];
   const StockElements = [
@@ -105,7 +109,7 @@ const InsideNav: React.FunctionComponent = (props) => {
       <InsideNavElement elementHeader="Order" element={OrderElements} />
       <InsideNavElement elementHeader="Stock" element={StockElements} />
       <InsideNavElement elementHeader="Reports" />
-      <InsideNavElement elementHeader="Uploads" />
+      <InsideNavElement elementHeader="Costing" />
       <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>
   );

@@ -31,7 +31,7 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
 
   const add = api.salesRepresentative.create.useMutation({
     onError: (err, newSalesman, context) => {
-      alert(`An error occured }`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       router.push("/sales-representative");

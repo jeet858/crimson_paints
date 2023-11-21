@@ -21,7 +21,7 @@ export const salesRepresentativeRouter = createTRPCRouter({
         data: {
           name: input.name,
           location: input.location,
-          phone: input.phone,
+          phone: input.phone as unknown as string,
         },
       });
     }),
@@ -29,11 +29,11 @@ export const salesRepresentativeRouter = createTRPCRouter({
     .input(salesRepresentativeEditInput)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.salesman.update({
-        where: { phone: input.existingPhone },
+        where: { phone: input.existingPhone as unknown as string },
         data: {
           name: input.name,
           location: input.location,
-          phone: input.newPhone,
+          phone: input.newPhone as unknown as string,
         },
       });
     }),
@@ -42,7 +42,7 @@ export const salesRepresentativeRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.salesman.delete({
         where: {
-          phone: input.phone,
+          phone: input.phone as unknown as string,
           location: input.location,
           name: input.name,
         },

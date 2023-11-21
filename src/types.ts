@@ -661,3 +661,119 @@ export const StockLedgerDeleteInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+
+export const ClientInput = z.object({
+  type: z.string({
+    required_error: "This field cant be null",
+  }),
+  legal_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  unique_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  distributor: z.string(),
+  sales_representative: z.string({
+    required_error: "This field cant be null",
+  }),
+  code: z.string({
+    required_error: "This field cant be null",
+  }),
+  pin_code: z.number({
+    required_error: "This field cant be null",
+  }),
+  gst: z.string({
+    required_error: "This field cant be null",
+  }),
+  trade_license: z.string({
+    required_error: "This field cant be null",
+  }),
+  address: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  state: z.string({
+    required_error: "This field cant be null",
+  }),
+  district: z.string({
+    required_error: "This field cant be null",
+  }),
+  phone_primary: z.number({
+    required_error: "This field cant be null",
+  }),
+  phone_secondary: z.number(),
+  email: z.string({
+    required_error: "This field cant be null",
+  }),
+  is_cheque: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  account: z.string(),
+  ifsc: z.string(),
+  bank_branch: z.string(),
+});
+export const ClientEditInput = z.object({
+  type: z.string({
+    required_error: "This field cant be null",
+  }),
+  existing_type: z.string({
+    required_error: "This field cant be null",
+  }),
+  legal_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  unique_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  existing_unique_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  distributor: z.string(),
+  sales_representative: z.string({
+    required_error: "This field cant be null",
+  }),
+  code: z.string({
+    required_error: "This field cant be null",
+  }),
+  pin_code: z.number({
+    required_error: "This field cant be null",
+  }),
+  gst: z.string({
+    required_error: "This field cant be null",
+  }),
+  trade_license: z.string({
+    required_error: "This field cant be null",
+  }),
+  address: z.string({
+    required_error: "This field cant be null",
+  }),
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+  state: z.string({
+    required_error: "This field cant be null",
+  }),
+  district: z.string({
+    required_error: "This field cant be null",
+  }),
+  phone_primary: z.number({
+    required_error: "This field cant be null",
+  }),
+  phone_secondary: z.number(),
+  email: z.string({
+    required_error: "This field cant be null",
+  }),
+  is_cheque: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  account: z.string(),
+  ifsc: z.string(),
+  bank_branch: z.string(),
+});
+export const ClientDeleteInput = z.object({
+  unique_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});

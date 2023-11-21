@@ -164,7 +164,7 @@ model PriceListName{
 
 model Salesman{
   name String
-  phone BigInt @unique @id
+  phone String @unique @id
   location String
 }
 
@@ -214,4 +214,27 @@ model Pricing{
 
 model Location{
   location String @id
+}
+
+model Client{
+  type String
+  legal_name String
+  unique_name String @id
+  distributor String
+  sales_representative String
+  code String
+  gst String
+  trade_license String
+  address String
+  location String
+  state String
+  district String
+  phone_primary String
+  phone_secondary String
+  email String
+  is_cheque Boolean
+  account String
+  ifsc String 
+  bank_branch String
+  pin_code String
 }

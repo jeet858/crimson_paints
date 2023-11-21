@@ -71,10 +71,6 @@ const AddUserForm: React.FunctionComponent = () => {
           placeholder="Enter Email Id"
           className="m-1 block h-fit w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-[#23b196] focus:outline-none focus:ring-[#23b196] sm:text-sm"
         />
-        <div className="flex items-center justify-center gap-x-2 self-start">
-          <input type="checkbox" />
-          <p>Self Data Access</p>
-        </div>
         <div className="my-2 flex h-fit w-full flex-col gap-y-2 rounded-md bg-[#F5F5F5] pb-4 text-[#787878]">
           <div className="flex">
             {locationType ? (

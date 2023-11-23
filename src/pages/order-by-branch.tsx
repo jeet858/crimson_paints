@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import OrderByTable from "~/components/tables/OrderByTable";
 
-const OrderBySalesman = () => {
-  const [selectedUser, setSelectedUser] = useState("Uday");
+const OrderByBranch = () => {
+  const [selectedUser, setSelectedUser] = useState("Color Coat Industries");
   const [selectedOrder, setSelectedOrder] = useState("2023-01/0027");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenOrder, setIsDropdownOpenOrder] = useState(false);
@@ -126,7 +126,7 @@ const OrderBySalesman = () => {
           <div className="flex w-full items-end justify-center ">
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-              Orders By Salesman
+              Orders By Branch
             </div>
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
@@ -134,12 +134,10 @@ const OrderBySalesman = () => {
         <div className="mt-8 flex justify-between">
           <div className=" flex gap-4">
             <div className="flex gap-x-4">
-              <div className="w-fit text-lg font-semibold">
-                Select Salesman :
-              </div>
+              <div className="w-fit text-lg font-semibold">Select Branch :</div>
               <div className="relative inline-block">
                 <div
-                  className="flex  w-36 cursor-pointer items-center justify-center rounded-md border border-violet-500 bg-violet-100 p-1 text-[#787878]"
+                  className="flex  w-fit cursor-pointer items-center justify-center rounded-md border border-violet-500 bg-violet-100 p-1 text-[#787878]"
                   onClick={() => {
                     setIsDropdownOpen(!isDropdownOpen);
                   }}
@@ -213,13 +211,13 @@ const OrderBySalesman = () => {
             </div>
             <div
               className={`cursor-pointer border-r-4 border-[#786ADE] pr-4 text-lg font-semibold text-black ${
-                selectedSection === "pending"
+                selectedSection === "submitted"
                   ? "border-b-4 border-[#786ADE] text-blue-900 "
                   : ""
               }`}
               onClick={() => handleSectionChange("pending")}
             >
-              Pending
+              Submitted
             </div>
             <div
               className={`cursor-pointer border-r-4 border-[#786ADE] pr-4 text-lg font-semibold text-black ${
@@ -233,11 +231,11 @@ const OrderBySalesman = () => {
             </div>
             <div
               className={`cursor-pointer pr-4 text-lg font-semibold text-black${
-                selectedSection === "executed"
+                selectedSection === "executed "
                   ? " border-b-4 border-[#786ADE] text-blue-900 "
                   : ""
               }`}
-              onClick={() => handleSectionChange("executed")}
+              onClick={() => handleSectionChange("executed ")}
             >
               Executed
             </div>
@@ -285,4 +283,4 @@ const OrderBySalesman = () => {
   );
 };
 
-export default OrderBySalesman;
+export default OrderByBranch;

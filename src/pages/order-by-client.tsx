@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import OrderByTable from "~/components/tables/OrderByTable";
 
-const OrderBySalesman = () => {
-  const [selectedUser, setSelectedUser] = useState("Uday");
+const OrderByClient = () => {
+  const [selectedUser, setSelectedUser] = useState("A K Hardware");
   const [selectedOrder, setSelectedOrder] = useState("2023-01/0027");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenOrder, setIsDropdownOpenOrder] = useState(false);
 
-  const [selectedSection, setSelectedSection] = useState("all");
+  const [selectedSection, setSelectedSection] = useState("All");
   const handleSectionChange = (section: any) => {
     setSelectedSection(section);
   };
@@ -33,6 +33,7 @@ const OrderBySalesman = () => {
       orderLocation: "Kolkata",
       client: "Siliguri Branch",
       clientType: "Dealer",
+      representative: "Rajdip Sarkar",
     },
   ];
   const columns = [
@@ -126,7 +127,7 @@ const OrderBySalesman = () => {
           <div className="flex w-full items-end justify-center ">
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-              Orders By Salesman
+              Orders By Client
             </div>
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
@@ -134,9 +135,7 @@ const OrderBySalesman = () => {
         <div className="mt-8 flex justify-between">
           <div className=" flex gap-4">
             <div className="flex gap-x-4">
-              <div className="w-fit text-lg font-semibold">
-                Select Salesman :
-              </div>
+              <div className="w-fit text-lg font-semibold">Select Client :</div>
               <div className="relative inline-block">
                 <div
                   className="flex  w-36 cursor-pointer items-center justify-center rounded-md border border-violet-500 bg-violet-100 p-1 text-[#787878]"
@@ -255,6 +254,9 @@ const OrderBySalesman = () => {
             <div className="flex-1 border border-[#11009E82] p-2">
               Client Type
             </div>
+            <div className="flex-1 border border-[#11009E82] p-2">
+              Representative
+            </div>
           </div>
           {orders.map((order) => (
             <div
@@ -276,13 +278,20 @@ const OrderBySalesman = () => {
               <div className="flex-1 border border-[#11009E82] p-2">
                 {order.clientType}
               </div>
+              <div className="flex-1 border border-[#11009E82] p-2">
+                {order.representative}
+              </div>
             </div>
           ))}
         </div>
-        <OrderByTable columns={columns} data={data} />
+        <OrderByTable
+          columns={columns}
+          data={data}
+          clientname="Biswas Roadways"
+        />
       </div>
     </UserTemplate>
   );
 };
 
-export default OrderBySalesman;
+export default OrderByClient;

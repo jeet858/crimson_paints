@@ -165,17 +165,24 @@ model PriceListName{
 model Salesman{
   name String
   phone String @unique @id
+  company String 
+}
+
+model SalesmanLocation{
+  name String
+  phone String
   location String
+  @@id([phone, location])
 }
 
 model InterCompany{
-  name String
-  gst String @unique @id
+  name String  @unique @id
+  gst String
   type String
   address String
   pin Int
   city String
-  phone BigInt @unique
+  phone BigInt
   bill String
 }
 
@@ -237,4 +244,30 @@ model Client{
   ifsc String 
   bank_branch String
   pin_code String
+  list_name String 
+}
+
+model Order{
+  id String @id
+  client_name String 
+  salesman_name String
+  company String 
+}
+
+model OrderDetails{
+  id String @db.VarChar(100)
+  brand_name String @db.VarChar(50)
+  color_name String @db.VarChar(50)
+  packaging_type String @db.VarChar(50)
+  amount Decimal
+  total_qty Decimal
+  executed_qty Decimal
+  cancelled_qty Decimal
+  client_name String @db.VarChar(50)
+  salesman_name String @db.VarChar(50)
+  company String
+  location String
+  date String @db.VarChar(50)
+  status String
+  @@id([id, salesman_name, client_name, date,location,brand_name, color_name, packaging_type])
 }

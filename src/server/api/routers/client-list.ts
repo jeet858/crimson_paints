@@ -41,6 +41,7 @@ export const clientListRouter = createTRPCRouter({
         type,
         unique_name,
         is_cheque,
+        list_name,
       }) => ({
         address,
         bank_branch,
@@ -62,6 +63,7 @@ export const clientListRouter = createTRPCRouter({
         type,
         unique_name,
         is_cheque,
+        list_name,
       })
     );
   }),
@@ -106,6 +108,7 @@ export const clientListRouter = createTRPCRouter({
           trade_license,
           type,
           unique_name,
+          list_name,
           is_cheque,
         }) => ({
           address,
@@ -128,6 +131,7 @@ export const clientListRouter = createTRPCRouter({
           type,
           unique_name,
           is_cheque,
+          list_name,
         })
       );
     }),
@@ -156,6 +160,7 @@ export const clientListRouter = createTRPCRouter({
           type: input.type,
           unique_name: input.unique_name,
           is_cheque: input.is_cheque,
+          list_name: input.list_name,
         },
       });
     }),
@@ -187,6 +192,7 @@ export const clientListRouter = createTRPCRouter({
           type: input.type,
           unique_name: input.unique_name,
           is_cheque: input.is_cheque,
+          list_name: input.list_name,
         },
       });
     }),

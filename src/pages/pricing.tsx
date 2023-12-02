@@ -32,7 +32,7 @@ const Pricing = () => {
     data: price_list,
     isError,
     isLoading,
-  } = api.orderableUnit.all.useQuery(undefined, {
+  } = api.pricing.all_list_name.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -177,8 +177,8 @@ const Pricing = () => {
             >
               {price_list?.map((list, index) => {
                 return (
-                  <option value={list.list_name} key={index}>
-                    {list.list_name}
+                  <option value={list.price_list_name} key={index}>
+                    {list.price_list_name}
                   </option>
                 );
               })}

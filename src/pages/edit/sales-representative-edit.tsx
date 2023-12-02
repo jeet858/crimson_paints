@@ -19,8 +19,19 @@ const SalesRepresentativeEdit: React.FunctionComponent = () => {
     userType: "admin",
   };
   const router = useRouter();
-  const { name, location, phone } = router.query;
-
+  const { name, phone, company } = router.query;
+  const {
+    data: orderableColors,
+    isError,
+    isLoading,
+  } = api.orderablrColor.all_list.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: interCompany } = api.interComapny.all.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
   const update = api.salesRepresentative.edit.useMutation({
     onError: (err, newSalesman, context) => {
       alert(`An error occured }`);
@@ -31,27 +42,29 @@ const SalesRepresentativeEdit: React.FunctionComponent = () => {
     },
   });
   const [editData, setEditData] = useState({
-    existingPhone: parseInt(phone as string),
-    newPhone: parseInt(phone as string),
-    location: location as string,
+    existingPhone: phone as string,
+    newPhone: phone as string,
     name: name as string,
+    company: company as string,
   });
   useEffect(() => {
-    if (name && phone && location) {
+    if (name && phone && company) {
       setEditData({
-        existingPhone: parseInt(phone as string),
-        newPhone: parseInt(phone as string),
-        location: location as string,
+        existingPhone: phone as string,
+        newPhone: phone as string,
         name: name as string,
+        company: company as string,
       });
     }
-  }, [name, location, phone]);
+  }, [name, phone, company]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setEditData({
       ...editData,
-      [name]: name === "newPhone" ? parseInt(value) : value,
+      [name]: value,
     });
   };
 
@@ -85,13 +98,22 @@ const SalesRepresentativeEdit: React.FunctionComponent = () => {
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Location
-            <input
-              name="location"
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+            Company
+            <select
+              name="company"
+              id=""
+              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
               onChange={handleInputChange}
-              value={editData.location}
-            />
+              value={editData.company}
+            >
+              {interCompany?.map((data, index) => {
+                return (
+                  <option value={data.name} key={index}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
             <Link

@@ -39,7 +39,7 @@ const InterCompanyDelete: React.FunctionComponent = () => {
 
   const deleteData = () => {
     confirmed
-      ? del.mutate({ gst: gst as string })
+      ? del.mutate({ name: name as string })
       : alert("Please confirm that you want to delete this hsn code");
   };
 

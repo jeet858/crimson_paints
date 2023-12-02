@@ -25,8 +25,8 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
     Name: "Gram",
   };
   const router = useRouter();
-  const { name, location, phone } = router.query;
-  useEffect(() => {}, [name, location, phone]);
+  const { name, phone, company } = router.query;
+  useEffect(() => {}, [name, phone, company]);
   const del = api.salesRepresentative.delete.useMutation({
     onError: (err, newSalesman, context) => {
       alert(`An error occured }`);
@@ -42,7 +42,7 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
       ? del.mutate({
           phone: parseInt(phone as string),
           name: name as string,
-          location: location as string,
+          company: company as string,
         })
       : alert(
           "Please confirm that you want to delete this sales representative"
@@ -60,27 +60,21 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
-            <input
-              name="name"
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={name}
-            />
+            <div className="w-2/3 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {name}
+            </div>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Phone
-            <input
-              name="newPhone"
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={phone}
-            />
+            <div className="w-2/3 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {phone}
+            </div>
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Location
-            <input
-              name="location"
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-              value={location}
-            />
+            Company
+            <div className="w-2/3 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
+              {company}
+            </div>
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
             <div className="flex h-fit items-center justify-center">

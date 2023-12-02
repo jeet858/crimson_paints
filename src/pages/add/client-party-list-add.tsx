@@ -45,6 +45,13 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  const { data: price_list_name } = api.pricing.all_list_name.useQuery(
+    undefined,
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
   const [isCheque, setIsCheque] = useState(false);
   const [isGst, setIsGst] = useState(true);
   const [addData, setAddData] = useState({
@@ -68,6 +75,7 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
     type: "",
     unique_name: "",
     is_cheque: false,
+    list_name: "",
   });
 
   const trpc = api.useContext();
@@ -261,6 +269,28 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
               >
                 {isGst ? <FaCheck className="h-8 w-8 text-[#07096E]" /> : null}
               </div>
+            </div>
+            <p className="flex w-1/4 justify-normal">List Name</p>
+            <div className="w-1/4 flex-1">
+              {/* <input
+                className="rounded-md border flex-1 border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.Symbol}
+              /> */}
+              <select
+                name="list_name"
+                id=""
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none "
+                onChange={handleInputChange}
+              >
+                <option value="">--Select Client Type--</option>
+                {price_list_name?.map((list_name, index) => {
+                  return (
+                    <option value={list_name.price_list_name} key={index}>
+                      {list_name.price_list_name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
           <div className="flex h-[10%] w-full flex-row items-center justify-center space-x-4 border-b-2 border-[#11009E] px-4 text-lg font-semibold">

@@ -56,6 +56,7 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
     unique_name: string;
     existing_unique_name: string;
     is_cheque: boolean;
+    list_name: string;
   }>();
   const {
     data: client,
@@ -107,6 +108,13 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  const { data: price_list_name } = api.pricing.all_list_name.useQuery(
+    undefined,
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
   useEffect(() => {
     if (unique_name) {
       setQueryInput(unique_name as string);
@@ -305,6 +313,29 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
               >
                 {isGst ? <FaCheck className="h-8 w-8 text-[#07096E]" /> : null}
               </div>
+            </div>
+            <p className="flex w-1/4 justify-normal">List Name</p>
+            <div className="w-1/4 flex-1">
+              {/* <input
+                className="rounded-md border flex-1 border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+                value={editData.Symbol}
+              /> */}
+              <select
+                name="list_name"
+                id=""
+                className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none "
+                onChange={handleInputChange}
+                value={editData?.list_name}
+              >
+                <option value="">--Select Client Type--</option>
+                {price_list_name?.map((list_name, index) => {
+                  return (
+                    <option value={list_name.price_list_name} key={index}>
+                      {list_name.price_list_name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
           <div className="flex h-[10%] w-full flex-row items-center justify-center space-x-4 border-b-2 border-[#11009E] px-4 text-lg font-semibold">

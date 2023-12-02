@@ -36,6 +36,15 @@ export const orderableColorRouter = createTRPCRouter({
       list_name,
     }));
   }),
+  all_list_details: protectedProcedure.query(async ({ ctx }) => {
+    const units = await ctx.db.oderableColorsDetails.findMany();
+    await ctx.db.$disconnect();
+    return units.map(({ brand_name, color_name, list_name }) => ({
+      brand_name,
+      color_name,
+      list_name,
+    }));
+  }),
   list_details: protectedProcedure
     .input(orderableColorListDetailsInput)
     .query(async ({ ctx, input }) => {

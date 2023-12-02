@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa";
 import LoginTemplate from "../template/LoginTemplate";
 import { BiDownArrow } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { api } from "~/utils/api";
 const AddUserForm: React.FunctionComponent = () => {
   const templateParams = { title: "Add User" };
   const [userTypeDropdown, setUserTypeDropdown] = useState(false);
@@ -17,6 +18,28 @@ const AddUserForm: React.FunctionComponent = () => {
       query: { userType: "admin" },
     });
   };
+  const {
+    data: locations,
+    isLoading: isLocationLoading,
+    isError: isLocationError,
+  } = api.location.all.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: orderablrColorsList } = api.orderablrColor.all_list.useQuery(
+    undefined,
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+  const { data: orderablrUnitList } = api.orderableUnit.all.useQuery(
+    undefined,
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
   return (
     <LoginTemplate templateParams={templateParams}>
       <div className="flex w-[500px] flex-col items-center justify-center gap-y-1">
@@ -73,67 +96,40 @@ const AddUserForm: React.FunctionComponent = () => {
         />
         <div className="my-2 flex h-fit w-full flex-col gap-y-2 rounded-md bg-[#F5F5F5] pb-4 text-[#787878]">
           <div className="flex">
-            {locationType ? (
-              <div
-                className="h-fit cursor-pointer border-r-4 border-[#787878] px-2"
-                onClick={() => {
-                  setLocationType(!locationType);
-                }}
-              >
-                Orderable Locations
+            <div className="flex h-fit cursor-pointer flex-col  px-2">
+              <p className="border-b-4 border-[#787878]">Orderable Locations</p>
+              <div className="flex">
+                {locations?.map((location, index) => {
+                  return (
+                    <div
+                      className="flex items-center justify-center"
+                      key={index}
+                    >
+                      <p className="mr-2">{location.location}</p>
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        value={location.location}
+                      />
+                    </div>
+                  );
+                })}
               </div>
-            ) : (
-              <div
-                className="h-fit cursor-pointer border-b-4 border-r-4 border-[#787878] px-2"
-                onClick={() => {
-                  setLocationType(!locationType);
-                }}
-              >
-                Orderable Locations
-              </div>
-            )}
-            {locationType ? (
-              <div
-                className="h-fit cursor-pointer border-b-4 border-[#787878] px-2"
-                onClick={() => {
-                  setLocationType(!locationType);
-                }}
-              >
-                Access Location
-              </div>
-            ) : (
-              <div
-                className="h-fit cursor-pointer border-[#787878] px-2"
-                onClick={() => {
-                  setLocationType(!locationType);
-                }}
-              >
-                Access Location
-              </div>
-            )}
-          </div>
-          <div className="flex flex-wrap">
-            {orderableLocation.map((location, index) => {
-              return (
-                <div className="flex gap-x-2 px-4" key={index}>
-                  <input type="checkbox" />
-                  <p>{location}</p>
-                </div>
-              );
-            })}
+            </div>
           </div>
         </div>
         <div className="flex w-full gap-x-4">
           <div className="group relative w-1/2 cursor-pointer">
-            <div
-              // onClick={() => {
-              //   setUserTypeDropdown(!userTypeDropdown);
-              // }}
-              className=" flex w-full items-center justify-between rounded-md border border-gray-300 px-3 py-2 shadow-sm hover:bg-[#F5F5F5] focus:border-[#23b196] focus:outline-none focus:ring-[#23b196] sm:text-sm"
-            >
-              Assign Oderable Unit
-              <BiDownArrow />
-            </div>
+            <select className=" flex w-full items-center justify-between rounded-md border border-gray-300 px-3 py-2 shadow-sm hover:bg-[#F5F5F5] focus:border-[#23b196] focus:outline-none focus:ring-[#23b196] sm:text-sm">
+              <option>---Select Orderable color list---</option>
+              {orderablrColorsList?.map((orderablrColor, index) => {
+                return (
+                  <option value={orderablrColor.list_name} key={index}>
+                    {orderablrColor.list_name}
+                  </option>
+                );
+              })}
+            </select>
             {/* {userTypeDropdown ? (
               <div className="m-1 h-fit w-full rounded-md shadow-lg absolute">
                 {userTypeList.map((type) => {
@@ -154,15 +150,16 @@ const AddUserForm: React.FunctionComponent = () => {
             ) : null} */}
           </div>
           <div className="group relative w-1/2 cursor-pointer">
-            <div
-              // onClick={() => {
-              //   setUserTypeDropdown(!userTypeDropdown);
-              // }}
-              className=" flex w-full items-center justify-between rounded-md border border-gray-300 px-3 py-2 shadow-sm hover:bg-[#F5F5F5] focus:border-[#23b196] focus:outline-none focus:ring-[#23b196] sm:text-sm"
-            >
-              Assign Oderable Color
-              <BiDownArrow />
-            </div>
+            <select className=" flex w-full items-center justify-between rounded-md border border-gray-300 px-3 py-2 shadow-sm hover:bg-[#F5F5F5] focus:border-[#23b196] focus:outline-none focus:ring-[#23b196] sm:text-sm">
+              <option>---Select Orderable unit list---</option>
+              {orderablrUnitList?.map((orderablrUnit, index) => {
+                return (
+                  <option value={orderablrUnit.list_name} key={index}>
+                    {orderablrUnit.list_name}
+                  </option>
+                );
+              })}
+            </select>
             {/* {userTypeDropdown ? (
               <div className="m-1 h-fit w-full rounded-md shadow-lg absolute">
                 {userTypeList.map((type) => {
@@ -195,7 +192,7 @@ const AddUserForm: React.FunctionComponent = () => {
         <div className="m-1 flex w-full justify-between rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-[#23b196] sm:text-sm">
           <input
             className="w-[90%] focus:outline-none"
-            placeholder="Password"
+            placeholder="Confirm Password"
           />
           <button type="button" className="">
             <FaEye />

@@ -6,9 +6,8 @@ import { api } from "~/utils/api";
 const columns = [
   { header: "Name", field: "name" },
   { header: "Phone", field: "phone" },
-  { header: "Location", field: "location" },
+  { header: "Company", field: "company" },
 ];
-const tableData = [{ name: "Ajit", phone: "123456789", location: "Kolkata" }];
 const SalesRepresentative = () => {
   const router = useRouter();
   const { userType } = router.query;
@@ -109,7 +108,7 @@ const SalesRepresentative = () => {
       <SalesRepresentativeTable
         columns={columns}
         data={salesRepresentative}
-        idField={["name", "phone", "location"]}
+        idField={["name", "phone", "company"]}
         editUrl="/edit/sales-representative-edit"
         deleteUrl="/delete/sales-representative-delete"
       />

@@ -139,3 +139,12 @@ INSERT INTO PackagingUnits (name,unit_value,unit,packaging) VALUES
 ('30 Kg Jar', 30.00, 'Kg', 'Jar'),
 ('0.5 Kg Pou.', 0.50, 'Kg', 'Pou');
 
+INSERT INTO `inter_company` (`name`, `type`, `address`, `pin`, `city`, `gst`, `phone`, `billing`) VALUES
+( 'Colour Coat Industries', 'HOFC', NULL, NULL, NULL, NULL, NULL, 'BL'),
+( 'Crimson Paints', 'HOFC', NULL, NULL, NULL, NULL, NULL, 'BL'),
+( 'Crimson Paints Pvt Ltd. Agartala', 'BRNCH', NULL, NULL, 'Agartala', NULL, NULL, 'BL'),
+( 'Crimson Paints Pvt Ltd. Orrisa', 'BRNCH', NULL, NULL, NULL, NULL, NULL, 'BL'),
+( 'Crimson Paints Pvt Ltd. Patna', 'BRNCH', NULL, NULL, NULL, NULL, NULL, 'BL'),
+( 'Crimson Paints Pvt Ltd. Siliguri', 'BRNCH', NULL, NULL, NULL, NULL, NULL, 'BL'),
+( 'Crimson Paints Pvt Ltd. Jharkhand', 'BRNCH', NULL, NULL, NULL, NULL, NULL, 'BL'),
+( 'Crimson Paints Pvt Ltd. Kolkata', 'HOFC', NULL, NULL, NULL, NULL, NULL, 'BL');

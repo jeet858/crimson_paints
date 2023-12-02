@@ -14,6 +14,13 @@ const inputSchema = z.string({
   required_error: "This is a required field",
 });
 export const pricingRouter = createTRPCRouter({
+  all_list_name: protectedProcedure.query(async ({ ctx }) => {
+    const units = await ctx.db.priceListName.findMany();
+    await ctx.db.$disconnect();
+    return units.map(({ price_list_name }) => ({
+      price_list_name,
+    }));
+  }),
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.pricing.findMany();
     await ctx.db.$disconnect();

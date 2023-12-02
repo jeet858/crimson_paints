@@ -36,13 +36,13 @@ export const interComapnyRouter = createTRPCRouter({
     .input(interComapnyEditInput)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.interCompany.update({
-        where: { gst: input.existingGst },
+        where: { name: input.existingName },
         data: {
-          name: input.name,
+          name: input.newName,
           address: input.address,
           bill: input.bill,
           city: input.city,
-          gst: input.newGst,
+          gst: input.gst,
           phone: input.phone,
           pin: input.pin,
           type: input.type,
@@ -53,7 +53,7 @@ export const interComapnyRouter = createTRPCRouter({
     .input(interComapnyDeleteInput)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.interCompany.delete({
-        where: { gst: input.gst },
+        where: { name: input.name },
       });
     }),
   create: protectedProcedure

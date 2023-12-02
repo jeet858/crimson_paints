@@ -25,9 +25,9 @@ const InterCompanyEdit: React.FunctionComponent = () => {
     },
   });
   const [editData, setEditData] = useState({
-    existingGst: gst as string,
-    newGst: gst as string,
-    name: name as string,
+    existingName: name as string,
+    newName: name as string,
+    gst: gst as string,
     type: type as string,
     address: address as string,
     pin: parseInt(pin as string),
@@ -38,9 +38,9 @@ const InterCompanyEdit: React.FunctionComponent = () => {
   useEffect(() => {
     if (name && address && bill && city && gst && phone && pin && type) {
       setEditData({
-        existingGst: gst as string,
-        newGst: gst as string,
-        name: name as string,
+        existingName: name as string,
+        newName: name as string,
+        gst: gst as string,
         type: type as string,
         address: address as string,
         pin: parseInt(pin as string),
@@ -62,11 +62,11 @@ const InterCompanyEdit: React.FunctionComponent = () => {
   };
   const updateData = () => {
     if (
-      editData.name === "" ||
+      editData.newName === "" ||
       editData.address === "" ||
       editData.bill === "" ||
       editData.city === "" ||
-      editData.newGst === "" ||
+      editData.gst === "" ||
       editData.phone === 0 ||
       editData.pin === 0 ||
       type === ""
@@ -88,8 +88,8 @@ const InterCompanyEdit: React.FunctionComponent = () => {
             <div className="w-2/6 grow">
               <input
                 className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                value={editData.name}
-                name="name"
+                value={editData.newName}
+                name="newName"
                 onChange={handleInputChange}
               />
             </div>
@@ -150,8 +150,8 @@ const InterCompanyEdit: React.FunctionComponent = () => {
             <div className="w-2/6 grow">
               <input
                 className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                value={editData.newGst}
-                name="newGst"
+                value={editData.gst}
+                name="gst"
                 onChange={handleInputChange}
               />
             </div>

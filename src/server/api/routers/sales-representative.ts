@@ -8,11 +8,15 @@ export const salesRepresentativeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const representatives = await ctx.db.salesman.findMany();
     await ctx.db.$disconnect();
-    return representatives.map(({ name, phone, company }) => ({
-      name,
-      phone,
-      company,
-    }));
+    return representatives.map(
+      ({ name, phone, company, orderable_color, orderable_unit }) => ({
+        name,
+        phone,
+        company,
+        orderable_color,
+        orderable_unit,
+      })
+    );
   }),
   create: protectedProcedure
     .input(salesRepresentativeInput)
@@ -22,6 +26,8 @@ export const salesRepresentativeRouter = createTRPCRouter({
           name: input.name,
           phone: input.phone.toString(),
           company: input.company,
+          orderable_color: input.orderable_color,
+          orderable_unit: input.orderable_unit,
         },
       });
     }),
@@ -34,6 +40,8 @@ export const salesRepresentativeRouter = createTRPCRouter({
           name: input.name,
           phone: input.newPhone.toString(),
           company: input.company,
+          orderable_color: input.orderable_color,
+          orderable_unit: input.orderable_unit,
         },
       });
     }),

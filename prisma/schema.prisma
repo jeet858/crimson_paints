@@ -165,10 +165,19 @@ model PriceListName{
 model Salesman{
   name String
   phone String @unique @id
-  company String 
+  company String
+  orderable_unit String 
+  orderable_color String 
 }
 
-model SalesmanLocation{
+model UserOrderableLocation{
+  name String
+  phone String
+  location String
+  @@id([phone, location])
+}
+
+model UserAcessLocation{
   name String
   phone String
   location String

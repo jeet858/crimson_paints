@@ -422,6 +422,12 @@ export const salesRepresentativeInput = z.object({
   company: z.string({
     required_error: "This field cant be null",
   }),
+  orderable_unit: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderable_color: z.string({
+    required_error: "This field cant be null",
+  }),
 });
 export const salesRepresentativeEditInput = z.object({
   name: z.string({
@@ -434,6 +440,12 @@ export const salesRepresentativeEditInput = z.object({
     required_error: "This field cant be null",
   }),
   company: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderable_unit: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderable_color: z.string({
     required_error: "This field cant be null",
   }),
 });
@@ -837,7 +849,11 @@ export const userInput = z.object({
   password: z.string({
     required_error: "This field cant be null",
   }),
-  location: z.array(z.string()),
+  confirm_password: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderableLocation: z.array(z.string()),
+  acessLocation: z.array(z.string()),
   company: z.string({
     required_error: "This field cant be null",
   }),

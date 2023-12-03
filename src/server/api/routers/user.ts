@@ -19,14 +19,31 @@ export const userRouter = createTRPCRouter({
   create: protectedProcedure
     .input(userInput)
     .mutation(async ({ ctx, input }) => {
-      const objArray: { name: string; phone: string; location: string }[] = [];
-      input.location.forEach((element) => {
+      const orderableLocation: {
+        name: string;
+        phone: string;
+        location: string;
+      }[] = [];
+      const acessLocationArray: {
+        name: string;
+        phone: string;
+        location: string;
+      }[] = [];
+      input.orderableLocation.forEach((element) => {
         const obj = {
           name: input.name,
           phone: input.phone.toString(),
           location: element,
         };
-        objArray.push(obj);
+        orderableLocation.push(obj);
+      });
+      input.acessLocation.forEach((element) => {
+        const obj = {
+          name: input.name,
+          phone: input.phone.toString(),
+          location: element,
+        };
+        acessLocationArray.push(obj);
       });
       if (input.type === "Salesman") {
         await ctx.db.salesman.create({
@@ -34,11 +51,16 @@ export const userRouter = createTRPCRouter({
             name: input.name,
             phone: input.phone.toString(),
             company: input.company,
+            orderable_color: input.orderable_color_list,
+            orderable_unit: input.orderable_unit_list,
           },
         });
       }
-      await ctx.db.salesmanLocation.createMany({
-        data: objArray,
+      await ctx.db.userOrderableLocation.createMany({
+        data: orderableLocation,
+      });
+      await ctx.db.userAcessLocation.createMany({
+        data: acessLocationArray,
       });
       return await ctx.db.user.create({
         data: {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEye } from "react-icons/fa";
+import { FaCheck, FaEye } from "react-icons/fa";
 import LoginTemplate from "../template/LoginTemplate";
 import { BiDownArrow } from "react-icons/bi";
 import { useRouter } from "next/router";
@@ -95,18 +95,18 @@ const AddUserForm: React.FunctionComponent = () => {
   const create = () => {
     console.log(addData);
     if (
-      (addData.id != "" ||
-        addData.type != "" ||
-        addData.name != "" ||
-        addData.phone != 0 ||
-        addData.email != "" ||
-        addData.password != "" ||
-        addData.confirm_password != "" ||
-        addData.company != "" ||
-        addData.orderable_color_list != "" ||
-        addData.orderable_unit_list != "" ||
-        addData.acessLocation.length === 0 ||
-        addData.orderableLocation.length === 0) &&
+      addData.id != "" ||
+      addData.type != "" ||
+      addData.name != "" ||
+      addData.phone != 0 ||
+      addData.email != "" ||
+      addData.password != "" ||
+      addData.confirm_password != "" ||
+      addData.company != "" ||
+      addData.orderable_color_list != "" ||
+      addData.orderable_unit_list != "" ||
+      addData.acessLocation.length === 0 ||
+      addData.orderableLocation.length === 0 ||
       addData.password === addData.confirm_password
     ) {
       add.mutate(addData);
@@ -180,7 +180,20 @@ const AddUserForm: React.FunctionComponent = () => {
           name="email"
           onChange={handleInputChange}
         />
-
+        <div className="flex w-full items-center">
+          <p>Self Data Acess?</p>{" "}
+          <div
+            className="ml-2 flex h-4 w-4 cursor-pointer items-center justify-center border-2"
+            onClick={() => {
+              setAddData({
+                ...addData,
+                ["self_data"]: !addData.self_data,
+              });
+            }}
+          >
+            {addData.self_data ? <FaCheck /> : null}
+          </div>
+        </div>
         <div className="my-2 flex h-fit w-full flex-col gap-y-2 rounded-md bg-[#F5F5F5] pb-4 text-[#787878]">
           <div className="flex">
             <div className="flex h-fit cursor-pointer flex-col  px-2">
@@ -233,7 +246,6 @@ const AddUserForm: React.FunctionComponent = () => {
             </div>
           </div>
         </div>
-
         <div className="my-2 flex h-fit w-full flex-col gap-y-2 rounded-md bg-[#F5F5F5] pb-4 text-[#787878]">
           <div className="flex">
             <div className="flex h-fit cursor-pointer flex-col  px-2">
@@ -282,7 +294,6 @@ const AddUserForm: React.FunctionComponent = () => {
             </div>
           </div>
         </div>
-
         <div className="flex w-full gap-x-4">
           <div className="group relative w-1/2 cursor-pointer">
             <select

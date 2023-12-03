@@ -54,3 +54,12 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+.signUpBackground {
+  background-image: url("../../public/images/back.jpg");
+}
+.mainPagesBackground {
+  background-image: url("../../public/images/mainback.jpg");
+}
+.dashBoardTileBackGround {
+  background-image: url("../../public/images/dashboard-back.png");
+}

@@ -4,10 +4,9 @@ import { InsideNav, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
 import BrandTable from "~/components/tables/BrandTable";
 
-const productbrand = () => {
+const ProductBrand: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
-  const [selectedCategory, setSelectedCategory] = useState("");
   const templateParams = {
     title: "User Profile",
     userID: 123,
@@ -20,48 +19,11 @@ const productbrand = () => {
     { header: "HSN Code", field: "hsnCode_id" },
   ];
 
-  const handleButtonClick = (categoryName: string) => {
-    setSelectedCategory(categoryName);
-  };
-  const generateButtons = () => {
-    const buttonNames = [
-      "base",
-      "Cement Paints",
-      "Construction Chemical",
-      "Exterior Finish",
-      "Floor Coat Emulsion",
-      "Interior Finish",
-      "Machine Colorant",
-      "Metallics",
-      "Oxide Colour",
-      "Putty",
-      "Synthetic Enamel",
-      "Synthetic Primer",
-      "Tilo Items",
-      "Water Primer",
-    ];
-
-    return buttonNames.map((buttonName) => (
-      <button
-        key={buttonName}
-        className="border-1 mb-4 mr-4 h-[2rem] w-fit rounded-xl bg-[#e7e0fffa] px-4 font-semibold"
-        onClick={() => handleButtonClick(buttonName)}
-      >
-        {buttonName}
-      </button>
-    ));
-  };
-  const handleEditClick = (row) => {
-    console.log("edit");
-  };
-  const handleDeleteClick = (row) => {
-    console.log("delet");
-  };
   const {
     data: catrgories,
     isLoading,
     isError,
-  } = api.categories.with_brand.useQuery();
+  } = api.categories.all.useQuery();
   console.log(catrgories);
   if (isLoading) {
     return (
@@ -72,7 +34,7 @@ const productbrand = () => {
             <div className="flex w-full items-end justify-center ">
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
               <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                HSN Codes
+                Brands
               </div>
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             </div>
@@ -96,7 +58,7 @@ const productbrand = () => {
             <div className="flex w-full items-end justify-center ">
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
               <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                HSN Codes
+                Brands
               </div>
               <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             </div>
@@ -123,27 +85,32 @@ const productbrand = () => {
             </div>
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
-          <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
-              Add
-            </button>
-          </div>{" "}
         </div>
         <h1 className="text-xl font-semibold">Quick Links</h1>
         <div className="border-1 h-fit w-full   rounded-lg bg-[#C4B0FF] p-4">
-          {generateButtons()}
+          {catrgories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                const targetElement = document.getElementById(category.name);
+                targetElement!.scrollIntoView();
+              }}
+              className="border-1 mb-4 mr-4 h-[2rem] w-fit rounded-xl bg-[#e7e0fffa] px-4 font-semibold"
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
       </div>
       <div>
         {catrgories.map((category, index) => (
-          <div>
+          <div id={category.name} key={index}>
             <BrandTable
               columns={columns}
               category={category.name}
-              onDeleteClick={handleDeleteClick}
-              onEditClick={handleEditClick}
-              editUrl=""
-              deleteUrl=""
+              idField={["brand_name", "hsnCode_id", "categoriesName"]}
+              editUrl="edit/product-brand-edit"
+              deleteUrl="delete/product-brand-delete"
             />
           </div>
         ))}
@@ -152,4 +119,4 @@ const productbrand = () => {
   );
 };
 
-export default productbrand;
+export default ProductBrand;

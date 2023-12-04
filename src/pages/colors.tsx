@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
 import ColorTable from "~/components/tables/ColorTable";
 import { api } from "~/utils/api";
 
-const colors = () => {
+const Colors: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -27,13 +27,16 @@ const colors = () => {
       ),
     },
   ];
-  const handleEditClick = (row) => {
-    console.log("edit");
-  };
-  const handleDeleteClick = (row) => {
-    console.log("delet");
-  };
   const { data: colors, isLoading, isError } = api.colors.all.useQuery();
+  const [data, setData] = useState<
+    { color_name: string; rgb_code: string }[] | undefined
+  >([]);
+
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setData(colors);
+    }
+  }, [colors]);
   if (isLoading) {
     return (
       <UserTemplate templateParams={templateParams}>
@@ -81,7 +84,12 @@ const colors = () => {
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
           <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+            <button
+              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+              onClick={async () => {
+                await router.push("add/color-add");
+              }}
+            >
               Add
             </button>
           </div>
@@ -90,13 +98,12 @@ const colors = () => {
       <ColorTable
         columns={columns}
         data={colors}
-        onEditClick={handleEditClick}
-        onDeleteClick={handleDeleteClick}
-        editUrl=""
-        deleteUrl=""
+        idField={["color_name", "rgb_code"]}
+        editUrl="edit/color-edit"
+        deleteUrl="delete/color-delete"
       />
     </UserTemplate>
   );
 };
 
-export default colors;
+export default Colors;

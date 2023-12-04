@@ -1,5 +1,8 @@
 import Link from "next/link";
 import React from "react";
+import { api } from "~/utils/api";
+import OrderableUnitList from "../elements/OrderableUnitList";
+import { useRouter } from "next/router";
 
 interface OrderableUnitData {
   name: string;
@@ -7,51 +10,75 @@ interface OrderableUnitData {
 }
 
 interface OrderableUnitTableProps {
-  data: OrderableUnitData[];
-  onEditClick: () => void;
-  onDeleteClick: () => void;
   editUrl: string;
   deleteUrl: string;
+  listName: string;
 }
 
 const OrderableUnitTable: React.FC<OrderableUnitTableProps> = ({
-  data,
-  onDeleteClick,
-  onEditClick,
   editUrl,
   deleteUrl,
+  listName,
 }) => {
-  return (
-    <div className="flex h-[50vh] w-full flex-col p-4">
-      <div className="flex h-fit w-full justify-between rounded-[5px] bg-[#C4B0FF] p-2 text-2xl font-bold">
-        <h1>Name & Packaging Units</h1>
-        <h1>Action</h1>
+  const { data: brands, isLoading, isError } = api.brand.all.useQuery();
+  const router = useRouter();
+  if (isLoading) {
+    return (
+      <div className="flex w-full flex-col p-4">
+        <div className="flex h-fit w-full justify-between rounded-[5px] bg-[#C4B0FF] p-2 text-2xl font-bold">
+          <div className="w-4/5 ">Name & Packaging Units</div>
+          <div className="flex w-1/5 justify-center">Action</div>
+        </div>
       </div>
-      <div className="overflow-scroll  rounded-[5px] bg-[#C4B0FF52] ">
+    );
+  }
+  if (isError) {
+    return (
+      <div className="flex w-full flex-col p-4">
+        <div className="flex h-fit w-full justify-between rounded-[5px] bg-[#C4B0FF] p-2 text-2xl font-bold">
+          <div className="w-4/5 ">Name & Packaging Units</div>
+          <div className="flex w-1/5 justify-center">Action</div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="flex w-full flex-col p-4">
+      <div className="flex h-fit w-full justify-between rounded-[5px] bg-[#C4B0FF] p-2 text-2xl font-bold">
+        <div className="w-4/5 ">Name & Packaging Units</div>
+        <div className="flex w-1/5 justify-center">Action</div>
+      </div>
+      <div className="rounded-[5px] bg-[#C4B0FF52] ">
         <div className=" flex justify-between ">
-          <h1 className="p-2 text-xl font-bold text-[#0D369F]">Factory</h1>
-          <div className=" space-x-2 py-2 text-center">
-            <Link href={editUrl}>
-              <button
-                className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
-                onClick={() => onEditClick()}
-              >
+          <h1 className="w-4/5 border-r-2 border-black p-2 text-xl  font-bold text-[#0D369F]">
+            {listName}
+          </h1>
+          <div className=" flex w-1/5 justify-center space-x-2 py-2 text-center ">
+            <Link href={{ pathname: editUrl, query: { list_name: listName } }}>
+              <button className="h-8 w-16 rounded-lg bg-[#786ADE] text-white">
                 Edit
               </button>
             </Link>
-            <Link href={deleteUrl}>
-              <button
-                className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                onClick={() => onDeleteClick()}
-              >
+            <Link
+              href={{ pathname: deleteUrl, query: { list_name: listName } }}
+            >
+              <button className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white">
                 Delete
               </button>
             </Link>
           </div>
         </div>
-
-        {data.map((item, index) => (
-          <div key={index} className="flex  p-1 ">
+        {brands.map((brand, index) => {
+          return (
+            <OrderableUnitList
+              key={index}
+              brand_name={brand.brand_name}
+              list_name={listName}
+            />
+          );
+        })}
+        {/* {data.map((item, index) => (
+          <div key={index} className="flex  w-4/5 border-r-2 border-black p-1">
             <div className="text-md  font-semibold">{item.name}:</div>
             <div className="text-md">
               <ul className="flex flex-wrap">
@@ -61,7 +88,7 @@ const OrderableUnitTable: React.FC<OrderableUnitTableProps> = ({
               </ul>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

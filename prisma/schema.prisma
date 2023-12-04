@@ -50,6 +50,7 @@ model User {
   id        String    @id
   name      String
   email     String    @unique
+  phone     BigInt
   password  String
   user_type String
   accounts  Account[]
@@ -71,13 +72,12 @@ model BasicUnits {
 
 model PackagingType {
   name       String @unique
-  short_code String @unique
+  
 }
 
 model Colors {
   color_name String @unique @id
   rgb_code   String
-  brand Brand[]
 }
 
 model PackagingUnits {
@@ -85,18 +85,14 @@ model PackagingUnits {
   packaging  String
   unit       String
   unit_value Decimal
-  brand PuBrand[]
   @@id([name, packaging])
 }
 
 model ComplexPackagingUnits{
   name String @unique @id
-  packaging_name String
-  unit_id String
-  unit_value Decimal
-  packaging_qty Decimal
-  packaging_type String
-  brand ComplexPUBrand[]
+  unit_packaging String
+  unit Int
+  packaging String
 }
 
 model HsnCode {
@@ -117,23 +113,171 @@ model Brand {
   hsnCode_id     Int
   categories     Categories @relation(fields: [categoriesName], references: [name])
   categoriesName String
-  color Colors[]
-  complex_packaging ComplexPUBrand[]
-  simple_packaging PuBrand[]
 }
 
-model ComplexPUBrand{
-  brandId String 
-  brand Brand @relation(fields: [brandId], references: [brand_name])
-  complexPuId String
-  complex ComplexPackagingUnits @relation(fields: [complexPuId], references: [name])
-  @@id([brandId,complexPuId])
+model BrandPackagingType{
+  brand_name String
+  packaging String
+  @@id([brand_name, packaging])
+}
+model OderableUnits{
+  list_name String @unique @id
 }
 
-model PuBrand{
-  brandId String 
-  brand Brand @relation(fields: [brandId], references: [brand_name])
-  packagint_unit_id String
-  packaging_unit PackagingUnits @relation(fields: [packagint_unit_id], references: [name])
-  @@id([brandId,packagint_unit_id])
+model OderableUnitsDetails{
+  brand_name String
+  packaging String
+  list_name String
+  @@id([brand_name, packaging, list_name])
+}
+
+model GroupInfo{
+  brand_name String
+  group_name String
+  group_code String
+  @@id([brand_name, group_name, group_code])
+
+}
+
+model GroupPricing{
+  brand_name String
+  group_name String
+  group_code String
+  color_name String
+  rgb_code String
+  @@unique([brand_name, group_name, group_code, color_name])
+}
+model OderableColors{
+  list_name String @unique @id
+}
+
+model OderableColorsDetails{
+  brand_name String
+  color_name String
+  list_name String
+  @@unique([brand_name, color_name, list_name])
+}
+
+model PriceListName{
+  price_list_name String @unique @id
+}
+
+model Salesman{
+  name String
+  phone String @unique @id
+  company String
+  orderable_unit String 
+  orderable_color String 
+}
+
+model UserOrderableLocation{
+  name String
+  phone String
+  location String
+  @@id([phone, location])
+}
+
+model UserAcessLocation{
+  name String
+  phone String
+  location String
+  @@id([phone, location])
+}
+
+model InterCompany{
+  name String  @unique @id
+  gst String
+  type String
+  address String
+  pin Int
+  city String
+  phone BigInt
+  bill String
+  price_list_name String
+}
+
+model Stock{
+  brand_name String
+  color_name String
+  packaging String
+  current_stock Int
+  location String
+  @@unique([brand_name, color_name, packaging,location])
+}
+
+model StockLedger{
+  id BigInt @id @default(autoincrement())
+  brand_name String
+  color_name String
+  client_name String
+  packaging String
+  notes String
+  location String
+  date String
+  open_stock Int
+  added Int
+  closing Int
+  executed Int
+}
+
+model Pricing{
+  brand_name String
+  group_name String
+  list_name String
+  packaging String
+  price Float
+  @@unique([brand_name,group_name,packaging,list_name])
+}
+
+model Location{
+  location String @id
+}
+
+model Client{
+  type String
+  legal_name String
+  unique_name String @id
+  distributor String
+  sales_representative String
+  code String
+  gst String
+  trade_license String
+  address String
+  location String
+  state String
+  district String
+  phone_primary String
+  phone_secondary String
+  email String
+  is_cheque Boolean
+  account String
+  ifsc String 
+  bank_branch String
+  pin_code String
+  list_name String 
+}
+
+model Order{
+  id String @id
+  client_name String 
+  salesman_name String
+  company String 
+}
+
+model OrderDetails{
+  id String @db.VarChar(100)
+  brand_name String @db.VarChar(50)
+  color_name String @db.VarChar(50)
+  packaging_type String @db.VarChar(50)
+  amount Decimal
+  total_qty Decimal
+  executed_qty Decimal
+  cancelled_qty Decimal
+  client_name String @db.VarChar(50)
+  salesman_name String @db.VarChar(50)
+  company String
+  location String
+  date String @db.VarChar(50)
+  status String
+  @@id([id, salesman_name, client_name, date,location,brand_name, color_name, packaging_type])
 }

@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { basicUnitsInput } from "../../../types";
+import {
+  basicUnitsInput,
+  packagingUnitDeleteInput,
+  packagingUnitEditInput,
+  packagingUnitInput,
+} from "../../../types";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -18,24 +23,38 @@ export const packagingUnitRouter = createTRPCRouter({
       unit_value,
     }));
   }),
-  // create: protectedProcedure
-  //   .input(basicUnitsInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.create({
-  //       data: {
-  //         name: input.name,
-  //         symbol: input.symbol,
-  //         short_code: input.short_code,
-  //       },
-  //     });
-  //   }),
-  // delete: protectedProcedure
-  //   .input(basicUnitsInput)
-  //   .mutation(async ({ ctx, input }) => {
-  //     return ctx.db.basic_units.delete({
-  //       where: {
-  //         name: input.name,
-  //       },
-  //     });
-  //   }),
+  create: protectedProcedure
+    .input(packagingUnitInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.packagingUnits.create({
+        data: {
+          name: input.name,
+          packaging: input.packaging,
+          unit: input.unit,
+          unit_value: input.unit_value,
+        },
+      });
+    }),
+  edit: protectedProcedure
+    .input(packagingUnitEditInput)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.packagingUnits.update({
+        where: { name: input.existingName },
+        data: {
+          name: `${input.unit_value} ${input.unit} ${input.packaging}`,
+          packaging: input.packaging,
+          unit: input.unit,
+          unit_value: input.unit_value,
+        },
+      });
+    }),
+  delete: protectedProcedure
+    .input(packagingUnitDeleteInput)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.packagingUnits.delete({
+        where: {
+          name: input.name,
+        },
+      });
+    }),
 });

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { api } from "~/utils/api";
 interface BrandItem {
@@ -9,8 +10,7 @@ interface BrandItem {
 interface BrandTableProps {
   category: string;
   columns: { header: string; field: string }[];
-  onEditClick: (rowData: BrandItem) => void;
-  onDeleteClick: (rowData: BrandItem) => void;
+  idField: string[];
   editUrl: string;
   deleteUrl: string;
 }
@@ -20,6 +20,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
     isLoading,
     isError,
   } = api.brand.where_categories.useQuery(props.category);
+  const router = useRouter();
   console.log(brands);
   if (isError) {
     return <div>Error</div>;
@@ -29,8 +30,19 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
   }
   return (
     <div>
-      <div className="px-4 text-2xl font-bold">
+      <div className="flex justify-between px-4 text-2xl font-bold">
         Categories: {props.category}
+        <button
+          className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+          onClick={async () => {
+            await router.push({
+              pathname: "/add/product-brand-add",
+              query: { category: props.category },
+            });
+          }}
+        >
+          Add
+        </button>
       </div>
       <div className="flex w-full items-start justify-center">
         <div className="h-fit w-full p-4">
@@ -54,22 +66,43 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
                   </div>
                 ))}
                 <div className="w-[33.3%] space-x-2 py-2 text-center">
-                  <Link href={props.editUrl}>
-                    <button
-                      className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
-                      onClick={() => props.onEditClick(brand)}
-                    >
-                      Edit
-                    </button>
-                  </Link>
-                  <Link href={props.deleteUrl}>
-                    <button
-                      className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
-                      onClick={() => props.onDeleteClick(brand)}
-                    >
-                      Delete
-                    </button>
-                  </Link>
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#786ADE] text-white"
+                    onClick={async () => {
+                      const queryObj = {
+                        ...router.query,
+                      };
+                      for (let i = 0; i < props.idField.length; i++) {
+                        const id = props.idField[i] as string;
+                        queryObj[id] = brand[id];
+                      }
+                      await router.push({
+                        pathname: props.editUrl,
+                        query: queryObj,
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="h-8 w-16 rounded-lg bg-[#FF6E65] text-white"
+                    onClick={async () => {
+                      const queryObj = {
+                        ...router.query,
+                      };
+                      for (let i = 0; i < props.idField.length; i++) {
+                        const id = props.idField[i] as string;
+                        queryObj[id] = brand[id];
+                      }
+                      await router.push({
+                        pathname: props.deleteUrl,
+                        query: queryObj,
+                      });
+                    }}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}

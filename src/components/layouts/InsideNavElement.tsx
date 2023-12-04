@@ -60,6 +60,7 @@ const InsideNavElement: React.FunctionComponent<SideNavElementProps> = (
             <div>
               {props.element.map((item, index) => (
                 <Link
+                  key={index}
                   href={item.href}
                   className="text-stretch text-l block rounded px-3 py-2 text-gray-800 hover:bg-violet-400 hover:bg-opacity-30"
                 >

@@ -39,7 +39,7 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
   const router = useRouter();
 
   return (
-    <div className=" flex h-full w-full flex-col p-4">
+    <div className=" flex h-4/5 w-full flex-col p-4">
       <TableContainer style={{ ...tstyle }}>
         <Table stickyHeader>
           <TableHead>
@@ -97,7 +97,7 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                         const id = props.idField[i] as string;
                         queryObj[id] = row[id];
                       }
-                      router.push({
+                      await router.push({
                         pathname: props.editUrl,
                         query: queryObj,
                       });
@@ -116,7 +116,7 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
                         const id = props.idField[i] as string;
                         queryObj[id] = row[id];
                       }
-                      router.push({
+                      await router.push({
                         pathname: props.deleteUrl,
                         query: queryObj,
                       });

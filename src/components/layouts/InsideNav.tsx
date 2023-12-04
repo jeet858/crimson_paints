@@ -4,28 +4,24 @@ import { InsideNavElement } from "@/components";
 const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
     {
-      name: "By Salesman",
-      href: "/salesman",
+      name: "Order By Salesman",
+      href: "/order-by-salesman",
     },
     {
-      name: "By Client",
-      href: "#",
+      name: "Order By Client",
+      href: "/order-by-client",
     },
     {
-      name: "By Order Number",
-      href: "#",
+      name: "Order By Branch",
+      href: "/order-by-branch",
     },
     {
       name: "My Order",
       href: "#",
     },
     {
-      name: "New Order (Mobile)",
-      href: "#",
-    },
-    {
-      name: "New Order (Web)",
-      href: "#",
+      name: "New Order",
+      href: "/new-order",
     },
   ];
   const masterElement = [
@@ -46,8 +42,8 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/packaging-unit",
     },
     {
-      name: "Client Companies",
-      href: "",
+      name: "Inter Company",
+      href: "/inter-company",
     },
     {
       name: "Product Categories",
@@ -70,36 +66,46 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/group-for-pricing",
     },
     {
-      name: "Oderable Units",
+      name: "Orderable Units",
       href: "/orderable-unit",
     },
     {
-      name: "Branch",
-      href: "",
+      name: "Naming Price List",
+      href: "/naming-price-list",
     },
     {
-      name: "Customers",
-      href: "",
+      name: "Orderable Colors",
+      href: "/orderable-colors",
     },
     {
-      name: "user Type",
-      href: "",
+      name: "Sales Representatives",
+      href: "/sales-representative",
     },
     {
-      name: "Discounts",
-      href: "",
+      name: "Pricing",
+      href: "/pricing",
     },
     {
-      name: "Schemes",
-      href: "",
+      name: "Client Party List",
+      href: "/client-party-list",
+    },
+  ];
+  const StockElements = [
+    {
+      name: "Current Stock",
+      href: "/stock-list",
+    },
+    {
+      name: "Stock Ledger",
+      href: "/stock-ledger",
     },
   ];
   return (
     <div className="flex w-full justify-center pt-5">
       <InsideNavElement elementHeader="Order" element={OrderElements} />
-      <InsideNavElement elementHeader="Stock" />
+      <InsideNavElement elementHeader="Stock" element={StockElements} />
       <InsideNavElement elementHeader="Reports" />
-      <InsideNavElement elementHeader="Uploads" />
+      <InsideNavElement elementHeader="Costing" />
       <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>
   );

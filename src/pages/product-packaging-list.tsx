@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { InsideNav, TableComponent, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
 
-const productpackaginglist = () => {
+const ProductPackagingList: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -14,38 +14,8 @@ const productpackaginglist = () => {
     userType: userType as string,
   };
 
-  const columns = [
-    { header: "Name", field: "name" },
-    { header: "Short Code", field: "short_code" },
-  ];
-  const data = [
-    {
-      symbol: "Gm",
-      name: "Gram",
-      shortcode: "Gram",
-    },
-    {
-      symbol: "Kg",
-      name: "Kilogram",
-      shortcode: "Kg",
-    },
-    {
-      symbol: "Lit",
-      name: "Liter",
-      shortcode: "Lit",
-    },
-    {
-      symbol: "ML.",
-      name: "Milliliter",
-      shortcode: "ML.",
-    },
-  ];
-  const handleEditClick = (row) => {
-    console.log("edit");
-  };
-  const handleDeleteClick = (row) => {
-    console.log("delet");
-  };
+  const columns = [{ header: "Name", field: "name" }];
+
   const {
     data: packagingType,
     isLoading,
@@ -96,7 +66,12 @@ const productpackaginglist = () => {
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
           <div className="flex items-end justify-end">
-            <button className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]">
+            <button
+              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+              onClick={async () => {
+                await router.push("add/packaging-type-add");
+              }}
+            >
               Add
             </button>
           </div>
@@ -105,13 +80,12 @@ const productpackaginglist = () => {
       <TableComponent
         columns={columns}
         data={packagingType}
-        onDeleteClick={handleDeleteClick}
-        onEditClick={handleEditClick}
-        editUrl=""
-        deleteUrl=""
+        idField={["name"]}
+        editUrl="edit/packaging-type-edit"
+        deleteUrl="delete/packaging-type-delete"
       />
     </UserTemplate>
   );
 };
 
-export default productpackaginglist;
+export default ProductPackagingList;

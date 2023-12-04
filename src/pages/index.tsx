@@ -3,10 +3,12 @@ import Head from "next/head";
 import { api } from "~/utils/api";
 
 import { LoginForm } from "@/components";
+import React from "react";
+import WelcomePage from "./welcome-page";
 
-export default function Home() {
+const Home: React.FunctionComponent = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
+  const { data, status } = useSession();
   return (
     <>
       <Head>
@@ -15,8 +17,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <LoginForm />
+        {status === "authenticated" ? <WelcomePage /> : <LoginForm />}
       </main>
     </>
   );
-}
+};
+export default Home;

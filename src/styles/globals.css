@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 3.78px;
+  width: 10px;
   height: 26.84px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 106, 222, 1);
+  background-color: rgba(1196, 176, 255, 1);
   border-radius: 5px;
 }
 
@@ -42,4 +42,24 @@
 
 .dark-table-scrollbar::-webkit-scrollbar-corner {
   background-color: transparent;
+}
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+.signUpBackground {
+  background-image: url("../../public/images/back.jpg");
+}
+.mainPagesBackground {
+  background-image: url("../../public/images/mainback.jpg");
+}
+.dashBoardTileBackGround {
+  background-image: url("../../public/images/dashboard-back.png");
 }

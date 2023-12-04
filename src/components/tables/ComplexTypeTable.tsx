@@ -7,8 +7,7 @@ const columns = [
   { header: "Name", field: "name" },
   { header: "Unit & Packaging", field: "unit" },
 ];
-///////
-/////
+
 const data = [
   { s: 1, name: "Bag of (1 Kg X 20 Pou.)", unit: "20 x (1 Kg Pou.)" },
   { s: 2, name: "Bag of (1 Kg X 20 Pou.)", unit: "20 x (1 Kg Pou.)" },
@@ -17,7 +16,13 @@ const data = [
 const ComplexTypeTable: React.FunctionComponent = () => {
   return (
     <div>
-      <Tablecomponent columns={columns} data={data} />
+      <Tablecomponent
+        columns={columns}
+        data={data}
+        idField={[]}
+        editUrl=""
+        deleteUrl=""
+      />
     </div>
   );
 };

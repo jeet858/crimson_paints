@@ -474,6 +474,9 @@ export const interComapnyInput = z.object({
   type: z.string({
     required_error: "This field cant be null",
   }),
+  price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
 });
 export const interComapnyEditInput = z.object({
   newName: z.string({
@@ -501,6 +504,9 @@ export const interComapnyEditInput = z.object({
     required_error: "This field cant be null",
   }),
   type: z.string({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
     required_error: "This field cant be null",
   }),
 });

@@ -193,6 +193,7 @@ model InterCompany{
   city String
   phone BigInt
   bill String
+  price_list_name String
 }
 
 model Stock{

@@ -40,8 +40,14 @@ export const clientListRouter = createTRPCRouter({
         trade_license,
         type,
         unique_name,
+        price_list_name,
         is_cheque,
-        list_name,
+        gst_validity,
+        in_india,
+        is_active,
+        max_credit_amount,
+        max_credit_days,
+        primary_company,
       }) => ({
         address,
         bank_branch,
@@ -49,8 +55,8 @@ export const clientListRouter = createTRPCRouter({
         code,
         distributor,
         district,
-        email,
         pin_code,
+        email,
         gst,
         ifsc,
         legal_name,
@@ -62,8 +68,14 @@ export const clientListRouter = createTRPCRouter({
         trade_license,
         type,
         unique_name,
+        price_list_name,
         is_cheque,
-        list_name,
+        gst_validity,
+        in_india,
+        is_active,
+        max_credit_amount,
+        max_credit_days,
+        primary_company,
       })
     );
   }),
@@ -108,8 +120,14 @@ export const clientListRouter = createTRPCRouter({
           trade_license,
           type,
           unique_name,
-          list_name,
+          price_list_name,
           is_cheque,
+          gst_validity,
+          in_india,
+          is_active,
+          max_credit_amount,
+          max_credit_days,
+          primary_company,
         }) => ({
           address,
           bank_branch,
@@ -117,8 +135,8 @@ export const clientListRouter = createTRPCRouter({
           code,
           distributor,
           district,
-          email,
           pin_code,
+          email,
           gst,
           ifsc,
           legal_name,
@@ -130,14 +148,48 @@ export const clientListRouter = createTRPCRouter({
           trade_license,
           type,
           unique_name,
+          price_list_name,
           is_cheque,
-          list_name,
+          gst_validity,
+          in_india,
+          is_active,
+          max_credit_amount,
+          max_credit_days,
+          primary_company,
         })
       );
     }),
   create: protectedProcedure
     .input(ClientInput)
     .mutation(async ({ ctx, input }) => {
+      const salesSupervisorArray: {
+        uniqe_name: string;
+        sales_supervisor: string;
+      }[] = [];
+      input.sales_supervisor.forEach((element) => {
+        const obj = {
+          uniqe_name: input.unique_name,
+          sales_supervisor: element,
+        };
+        salesSupervisorArray.push(obj);
+      });
+      const clientSecondaryCompanyArray: {
+        unique_name: string;
+        company: string;
+      }[] = [];
+      input.secondary_company.forEach((element) => {
+        const obj = {
+          unique_name: input.unique_name,
+          company: element,
+        };
+        clientSecondaryCompanyArray.push(obj);
+      });
+      await ctx.db.clientSupervisors.createMany({
+        data: salesSupervisorArray,
+      });
+      await ctx.db.clientSecondaryCompany.createMany({
+        data: clientSecondaryCompanyArray,
+      });
       return await ctx.db.client.create({
         data: {
           address: input.address,
@@ -160,7 +212,13 @@ export const clientListRouter = createTRPCRouter({
           type: input.type,
           unique_name: input.unique_name,
           is_cheque: input.is_cheque,
-          list_name: input.list_name,
+          price_list_name: input.price_list_name,
+          gst_validity: input.gst_validity,
+          in_india: input.in_india,
+          is_active: input.is_active,
+          max_credit_amount: parseInt(input.max_credit_amount),
+          max_credit_days: parseInt(input.max_credit_days),
+          primary_company: input.primary_company,
         },
       });
     }),
@@ -192,7 +250,13 @@ export const clientListRouter = createTRPCRouter({
           type: input.type,
           unique_name: input.unique_name,
           is_cheque: input.is_cheque,
-          list_name: input.list_name,
+          price_list_name: input.price_list_name,
+          gst_validity: input.gst_validity,
+          in_india: input.in_india,
+          is_active: input.is_active,
+          max_credit_amount: parseInt(input.max_credit_amount),
+          max_credit_days: parseInt(input.max_credit_days),
+          primary_company: input.primary_company,
         },
       });
     }),

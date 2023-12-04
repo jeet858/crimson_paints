@@ -448,6 +448,13 @@ export const salesRepresentativeEditInput = z.object({
   orderable_color: z.string({
     required_error: "This field cant be null",
   }),
+  orderableLocation: z.array(z.string()),
+  acessLocation: z.array(z.string()),
+});
+export const salesRepresentativeDeleteInput = z.object({
+  phone: z.string({
+    required_error: "This field cant be null",
+  }),
 });
 export const interComapnyInput = z.object({
   name: z.string({
@@ -694,6 +701,8 @@ export const ClientInput = z.object({
   sales_representative: z.string({
     required_error: "This field cant be null",
   }),
+  sales_supervisor: z.array(z.string()),
+  secondary_company: z.array(z.string()),
   code: z.string({
     required_error: "This field cant be null",
   }),
@@ -728,7 +737,25 @@ export const ClientInput = z.object({
   is_cheque: z.boolean({
     required_error: "This field cant be null",
   }),
-  list_name: z.string({
+  in_india: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  is_active: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  primary_company: z.string({
+    required_error: "This field cant be null",
+  }),
+  gst_validity: z.date({
+    required_error: "This field cant be null",
+  }),
+  max_credit_days: z.string({
+    required_error: "This field cant be null",
+  }),
+  max_credit_amount: z.string({
     required_error: "This field cant be null",
   }),
   account: z.string(),
@@ -795,6 +822,29 @@ export const ClientEditInput = z.object({
   account: z.string(),
   ifsc: z.string(),
   bank_branch: z.string(),
+  in_india: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  is_active: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  primary_company: z.string({
+    required_error: "This field cant be null",
+  }),
+  gst_validity: z.date({
+    required_error: "This field cant be null",
+  }),
+  max_credit_days: z.string({
+    required_error: "This field cant be null",
+  }),
+  max_credit_amount: z.string({
+    required_error: "This field cant be null",
+  }),
+  sales_supervisor: z.array(z.string()),
+  secondary_company: z.array(z.string()),
 });
 export const ClientDeleteInput = z.object({
   unique_name: z.string({

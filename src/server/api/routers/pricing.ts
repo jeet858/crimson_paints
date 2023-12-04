@@ -98,6 +98,23 @@ export const pricingRouter = createTRPCRouter({
   update_by_group: protectedProcedure
     .input(pricingByGroupEditInput)
     .mutation(async ({ ctx, input }) => {
+      input.data.forEach((firstData) => {
+        if (!firstData.packaging.includes("X")) {
+          input.data.forEach((secondtData) => {
+            if (
+              secondtData.packaging.includes(firstData.packaging) &&
+              secondtData.packaging.includes("X") &&
+              secondtData.price === 0
+            ) {
+              const str = secondtData.packaging.split("X ");
+              let modifiedString = str[1]?.replace(/\)/g, "");
+              secondtData.price =
+                firstData.price * parseInt(modifiedString as string);
+            }
+          });
+        }
+      });
+      const arr = input.data.filter((obj) => obj.price !== 0);
       await ctx.db.pricing.deleteMany({
         where: {
           AND: {
@@ -108,7 +125,7 @@ export const pricingRouter = createTRPCRouter({
         },
       });
       return await ctx.db.pricing.createMany({
-        data: input.data,
+        data: arr,
       });
     }),
 });

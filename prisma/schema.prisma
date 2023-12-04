@@ -50,7 +50,7 @@ model User {
   id        String    @id
   name      String
   email     String    @unique
-  phone     BigInt
+  phone     BigInt    @unique
   password  String
   user_type String
   accounts  Account[]
@@ -163,7 +163,7 @@ model PriceListName{
 }
 
 model Salesman{
-  name String
+  name String 
   phone String @unique @id
   company String
   orderable_unit String 
@@ -242,6 +242,7 @@ model Client{
   code String
   gst String
   trade_license String
+  in_india Boolean 
   address String
   location String
   state String
@@ -254,7 +255,24 @@ model Client{
   ifsc String 
   bank_branch String
   pin_code String
-  list_name String 
+  price_list_name String 
+  primary_company String 
+  is_active Boolean 
+  gst_validity DateTime 
+  max_credit_days Int 
+  max_credit_amount Int  
+}
+
+model ClientSupervisors{
+  uniqe_name String
+  sales_supervisor String
+  @@id([uniqe_name,sales_supervisor])
+}
+
+model ClientSecondaryCompany{
+  unique_name String
+  company String
+  @@id([unique_name, company])
 }
 
 model Order{

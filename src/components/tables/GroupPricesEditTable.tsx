@@ -12,13 +12,10 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
     data: orderableUnits,
     isLoading: isOrderableUnitsLoading,
     isError: isOrderableUnitsError,
-  } = api.orderableUnit.brand_packaging.useQuery(
-    { brand_name: props.brand_name, list_name: props.list_name },
-    {
-      refetchInterval: false,
-      refetchOnWindowFocus: false,
-    }
-  );
+  } = api.brandPackaging.where_brand_name.useQuery(props.brand_name, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
   const {
     data: pricingData,
     isLoading,
@@ -32,15 +29,16 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
     const obj = pricingData?.find(
       (data) =>
         data.brand_name === orderableUnit.brand_name &&
-        data.list_name === orderableUnit.list_name &&
+        data.list_name === props.list_name &&
         data.group_name === props.group_name &&
         data.packaging === orderableUnit.packaging
     );
 
     const group_name = props.group_name;
     const price = obj ? obj.price : 0;
+    const list_name = props.list_name;
 
-    return { ...orderableUnit, group_name, price };
+    return { ...orderableUnit, group_name, price, list_name };
   });
   const [editData, setEditData] = useState(
     updatedOrderableUnits ? updatedOrderableUnits : []
@@ -51,15 +49,16 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
         const obj = pricingData.find(
           (data) =>
             data.brand_name === orderableUnit.brand_name &&
-            data.list_name === orderableUnit.list_name &&
+            data.list_name === props.list_name &&
             data.group_name === props.group_name &&
             data.packaging === orderableUnit.packaging
         );
 
         const group_name = props.group_name;
         const price = obj ? obj.price : 0;
+        const list_name = props.list_name;
 
-        return { ...orderableUnit, group_name, price };
+        return { ...orderableUnit, group_name, price, list_name };
       });
       setEditData(updatedOrderableUnits);
     }

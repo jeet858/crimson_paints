@@ -20,7 +20,7 @@ export const interComapnyRouter = createTRPCRouter({
     const units = await ctx.db.interCompany.findMany();
     await ctx.db.$disconnect();
     return units.map(
-      ({ name, address, bill, city, gst, phone, pin, type }) => ({
+      ({
         name,
         address,
         bill,
@@ -29,6 +29,17 @@ export const interComapnyRouter = createTRPCRouter({
         phone,
         pin,
         type,
+        price_list_name,
+      }) => ({
+        name,
+        address,
+        bill,
+        city,
+        gst,
+        phone,
+        pin,
+        type,
+        price_list_name,
       })
     );
   }),
@@ -36,16 +47,17 @@ export const interComapnyRouter = createTRPCRouter({
     .input(interComapnyEditInput)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.interCompany.update({
-        where: { gst: input.existingGst },
+        where: { name: input.existingName },
         data: {
-          name: input.name,
+          name: input.newName,
           address: input.address,
           bill: input.bill,
           city: input.city,
-          gst: input.newGst,
+          gst: input.gst,
           phone: input.phone,
           pin: input.pin,
           type: input.type,
+          price_list_name: input.price_list_name,
         },
       });
     }),
@@ -53,7 +65,7 @@ export const interComapnyRouter = createTRPCRouter({
     .input(interComapnyDeleteInput)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.interCompany.delete({
-        where: { gst: input.gst },
+        where: { name: input.name },
       });
     }),
   create: protectedProcedure
@@ -69,6 +81,7 @@ export const interComapnyRouter = createTRPCRouter({
           phone: input.phone,
           pin: input.pin,
           type: input.type,
+          price_list_name: input.price_list_name,
         },
       });
     }),

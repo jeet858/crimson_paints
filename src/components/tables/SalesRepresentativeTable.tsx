@@ -65,7 +65,9 @@ const SalesRepresentativeTable: React.FunctionComponent<TableProps> = (
               </button>
               <button
                 className="h-8 w-16 rounded-lg bg-[#39952A] text-base text-white"
-                onClick={async () => {}}
+                onClick={() => {
+                  console.log(row);
+                }}
               >
                 Parties
               </button>

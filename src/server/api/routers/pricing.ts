@@ -14,6 +14,13 @@ const inputSchema = z.string({
   required_error: "This is a required field",
 });
 export const pricingRouter = createTRPCRouter({
+  all_list_name: protectedProcedure.query(async ({ ctx }) => {
+    const units = await ctx.db.priceListName.findMany();
+    await ctx.db.$disconnect();
+    return units.map(({ price_list_name }) => ({
+      price_list_name,
+    }));
+  }),
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.pricing.findMany();
     await ctx.db.$disconnect();
@@ -91,6 +98,23 @@ export const pricingRouter = createTRPCRouter({
   update_by_group: protectedProcedure
     .input(pricingByGroupEditInput)
     .mutation(async ({ ctx, input }) => {
+      input.data.forEach((firstData) => {
+        if (!firstData.packaging.includes("X")) {
+          input.data.forEach((secondtData) => {
+            if (
+              secondtData.packaging.includes(firstData.packaging) &&
+              secondtData.packaging.includes("X") &&
+              secondtData.price === 0 //if the price is 0 only then it calculates the complex price
+            ) {
+              const str = secondtData.packaging.split("X ");
+              let modifiedString = str[1]?.replace(/\)/g, "");
+              secondtData.price =
+                firstData.price * parseInt(modifiedString as string);
+            }
+          });
+        }
+      });
+      const arr = input.data.filter((obj) => obj.price !== 0);
       await ctx.db.pricing.deleteMany({
         where: {
           AND: {
@@ -101,7 +125,7 @@ export const pricingRouter = createTRPCRouter({
         },
       });
       return await ctx.db.pricing.createMany({
-        data: input.data,
+        data: arr,
       });
     }),
 });

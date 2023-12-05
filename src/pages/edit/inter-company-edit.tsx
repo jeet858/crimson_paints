@@ -13,7 +13,8 @@ const InterCompanyEdit: React.FunctionComponent = () => {
     userType: "admin",
   };
   const router = useRouter();
-  const { name, address, bill, city, gst, phone, pin, type } = router.query;
+  const { name, address, bill, city, gst, phone, pin, type, price_list_name } =
+    router.query;
 
   const update = api.interComapny.edit.useMutation({
     onError: (err, newTodo, context) => {
@@ -24,29 +25,49 @@ const InterCompanyEdit: React.FunctionComponent = () => {
       await router.push("/inter-company");
     },
   });
+  const {
+    data: names,
+    isError,
+    isLoading,
+  } = api.namingPriceList.all.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
   const [editData, setEditData] = useState({
-    existingGst: gst as string,
-    newGst: gst as string,
-    name: name as string,
+    existingName: name as string,
+    newName: name as string,
+    gst: gst as string,
     type: type as string,
     address: address as string,
     pin: parseInt(pin as string),
     city: city as string,
     phone: parseInt(phone as string),
     bill: bill as string,
+    price_list_name: price_list_name as string,
   });
   useEffect(() => {
-    if (name && address && bill && city && gst && phone && pin && type) {
+    if (
+      name &&
+      address &&
+      bill &&
+      city &&
+      gst &&
+      phone &&
+      pin &&
+      type &&
+      price_list_name
+    ) {
       setEditData({
-        existingGst: gst as string,
-        newGst: gst as string,
-        name: name as string,
+        existingName: name as string,
+        newName: name as string,
+        gst: gst as string,
         type: type as string,
         address: address as string,
         pin: parseInt(pin as string),
         city: city as string,
         phone: parseInt(phone as string),
         bill: bill as string,
+        price_list_name: price_list_name as string,
       });
     }
   }, [name, address, bill, city, gst, phone, pin, type]);
@@ -62,11 +83,11 @@ const InterCompanyEdit: React.FunctionComponent = () => {
   };
   const updateData = () => {
     if (
-      editData.name === "" ||
+      editData.newName === "" ||
       editData.address === "" ||
       editData.bill === "" ||
       editData.city === "" ||
-      editData.newGst === "" ||
+      editData.gst === "" ||
       editData.phone === 0 ||
       editData.pin === 0 ||
       type === ""
@@ -88,8 +109,8 @@ const InterCompanyEdit: React.FunctionComponent = () => {
             <div className="w-2/6 grow">
               <input
                 className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                value={editData.name}
-                name="name"
+                value={editData.newName}
+                name="newName"
                 onChange={handleInputChange}
               />
             </div>
@@ -150,8 +171,8 @@ const InterCompanyEdit: React.FunctionComponent = () => {
             <div className="w-2/6 grow">
               <input
                 className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                value={editData.newGst}
-                name="newGst"
+                value={editData.gst}
+                name="gst"
                 onChange={handleInputChange}
               />
             </div>
@@ -187,6 +208,28 @@ const InterCompanyEdit: React.FunctionComponent = () => {
                 </select>
               </div>
             </div>
+          </div>
+          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
+            Price List
+            <select
+              name="price_list_name"
+              id=""
+              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+              onChange={handleInputChange}
+              value={editData.price_list_name}
+            >
+              {names?.map((name, index) => {
+                return (
+                  <option
+                    value={name.price_list_name}
+                    key={index}
+                    onClick={() => {}}
+                  >
+                    {name.price_list_name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="flex h-1/6 w-1/2 justify-center space-x-4 self-center px-4">
             <button

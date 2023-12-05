@@ -18,10 +18,23 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
   const [addData, setAddData] = useState({
     name: "",
     phone: 0,
-    location: "",
+    company: "",
   });
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const {
+    data: orderableColors,
+    isError,
+    isLoading,
+  } = api.orderablrColor.all_list.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: interCompany } = api.interComapny.all.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setAddData({
       ...addData,
@@ -31,7 +44,7 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
 
   const add = api.salesRepresentative.create.useMutation({
     onError: (err, newSalesman, context) => {
-      alert(`An error occured }`);
+      alert(`${err.message}`);
     },
     onSuccess: () => {
       router.push("/sales-representative");
@@ -40,7 +53,7 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
 
   const create = () => {
     console.log(addData);
-    if (addData.name != "" || addData.location != "" || addData.phone != 0) {
+    if (addData.name != "" || addData.company != "" || addData.phone != 0) {
       add.mutate(addData);
     } else {
       alert("Be sure to fill all fields or enter valid data");
@@ -71,12 +84,22 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
             />
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Location
-            <input
-              name="location"
-              className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+            Company
+            <select
+              name="company"
+              id=""
+              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
               onChange={handleInputChange}
-            />
+            >
+              <option value="">--Select Company--</option>
+              {interCompany?.map((data, index) => {
+                return (
+                  <option value={data.name} key={index}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
             <Link

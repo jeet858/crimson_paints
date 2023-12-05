@@ -6,9 +6,10 @@ import { api } from "~/utils/api";
 const columns = [
   { header: "Name", field: "name" },
   { header: "Phone", field: "phone" },
-  { header: "Location", field: "location" },
+  { header: "Company", field: "company" },
+  { header: "Orderable Unit", field: "orderable_unit" },
+  { header: "Orderable Color", field: "orderable_color" },
 ];
-const tableData = [{ name: "Ajit", phone: "123456789", location: "Kolkata" }];
 const SalesRepresentative = () => {
   const router = useRouter();
   const { userType } = router.query;
@@ -94,7 +95,7 @@ const SalesRepresentative = () => {
             </div>
             <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
           </div>
-          <div className="flex items-end justify-end">
+          {/* <div className="flex items-end justify-end">
             <button
               className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
               onClick={async () => {
@@ -103,13 +104,19 @@ const SalesRepresentative = () => {
             >
               Add
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <SalesRepresentativeTable
         columns={columns}
         data={salesRepresentative}
-        idField={["name", "phone", "location"]}
+        idField={[
+          "name",
+          "phone",
+          "company",
+          "orderable_color",
+          "orderable_unit",
+        ]}
         editUrl="/edit/sales-representative-edit"
         deleteUrl="/delete/sales-representative-delete"
       />

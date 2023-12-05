@@ -18,7 +18,14 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
 
   const update = api.basicUnit.edit.useMutation({
     onError: (err, newTodo, context) => {
-      alert(`An error occured }`);
+      if (
+        err.message.split("\n")[4] ===
+        "Unique constraint failed on the constraint: `BasicUnits_symbol_key`"
+      ) {
+        alert("This data already exist");
+      } else {
+        alert(`${err.message}`);
+      }
     },
     onSuccess: () => {
       alert("Data added successfully");
@@ -51,7 +58,11 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
   };
 
   const updateData = () => {
-    update.mutate(editData);
+    if (editData.newName != "" || editData.symbol != "") {
+      update.mutate(editData);
+    } else {
+      alert("Be sure to fill all fields");
+    }
   };
 
   return (
@@ -80,10 +91,10 @@ const BasicUnitsEdit: React.FunctionComponent = () => {
             />
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
-            <button 
+            <button
               className="h-1/2 w-[40%] self-center rounded-md bg-[#07096E] font-semibold text-white"
-              onClick={async ()=>{
-                await router.push("/basic-unit")
+              onClick={async () => {
+                await router.push("/basic-unit");
               }}
             >
               Cancel

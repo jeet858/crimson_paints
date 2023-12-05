@@ -97,6 +97,14 @@ const InsideNav: React.FunctionComponent = (props) => {
       name: "District",
       href: "/district",
     },
+    {
+      name: "Discount",
+      href: "/",
+    },
+    {
+      name: "Schemes",
+      href: "/",
+    },
   ];
   const StockElements = [
     {

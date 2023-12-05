@@ -168,7 +168,8 @@ model Salesman{
   company String
   orderable_unit String 
   orderable_color String 
-}
+  self_data Boolean 
+  }
 
 model UserOrderableLocation{
   name String
@@ -229,8 +230,13 @@ model Pricing{
   @@unique([brand_name,group_name,packaging,list_name])
 }
 
-model Location{
+model State{
   location String @id
+}
+model District{
+  state String 
+  district String
+  @@id([state,district])
 }
 
 model Client{
@@ -258,15 +264,16 @@ model Client{
   price_list_name String 
   primary_company String 
   is_active Boolean 
-  gst_validity DateTime 
+  gst_validity DateTime?
   max_credit_days Int 
   max_credit_amount Int  
 }
 
 model ClientSupervisors{
-  uniqe_name String
+  name String
+  phone String
   sales_supervisor String
-  @@id([uniqe_name,sales_supervisor])
+  @@id([name,phone,sales_supervisor])
 }
 
 model ClientSecondaryCompany{

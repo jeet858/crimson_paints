@@ -88,7 +88,7 @@ const AddUserForm: React.FunctionComponent = () => {
     },
     onSuccess: () => {
       alert("Data added successfully");
-      router.push("/");
+      // router.push("/");
     },
   });
 

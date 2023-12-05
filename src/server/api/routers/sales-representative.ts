@@ -64,6 +64,7 @@ export const salesRepresentativeRouter = createTRPCRouter({
           company: input.company,
           orderable_color: input.orderable_color,
           orderable_unit: input.orderable_unit,
+          self_data: false,
         },
       });
     }),

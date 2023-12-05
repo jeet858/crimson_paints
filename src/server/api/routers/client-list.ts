@@ -12,6 +12,7 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 const inputSchema = z.string({
   required_error: "This is a required field",
 });
@@ -163,13 +164,15 @@ export const clientListRouter = createTRPCRouter({
     .input(ClientInput)
     .mutation(async ({ ctx, input }) => {
       const salesSupervisorArray: {
-        uniqe_name: string;
+        name: string;
         sales_supervisor: string;
+        phone: string;
       }[] = [];
       input.sales_supervisor.forEach((element) => {
         const obj = {
-          uniqe_name: input.unique_name,
-          sales_supervisor: element,
+          name: input.unique_name,
+          sales_supervisor: element.name,
+          phone: element.phone,
         };
         salesSupervisorArray.push(obj);
       });
@@ -184,42 +187,55 @@ export const clientListRouter = createTRPCRouter({
         };
         clientSecondaryCompanyArray.push(obj);
       });
+      try {
+        await ctx.db.client.create({
+          data: {
+            address: input.address,
+            bank_branch: input.bank_branch,
+            account: input.account,
+            code: input.code,
+            distributor: input.distributor,
+            district: input.district,
+            email: input.email,
+            pin_code: input.pin_code.toString(),
+            gst: input.gst,
+            ifsc: input.ifsc,
+            legal_name: input.legal_name,
+            location: input.location,
+            phone_primary: input.phone_primary.toString(),
+            phone_secondary: input.phone_secondary.toString(),
+            sales_representative: input.sales_representative,
+            state: input.state,
+            trade_license: input.trade_license,
+            type: input.type,
+            unique_name: input.unique_name,
+            is_cheque: input.is_cheque,
+            price_list_name: input.price_list_name,
+            gst_validity:
+              input.gst_validity.length > 0
+                ? new Date(input.gst_validity)
+                : null,
+            in_india: input.in_india,
+            is_active: input.is_active,
+            max_credit_amount: parseInt(input.max_credit_amount),
+            max_credit_days: parseInt(input.max_credit_days),
+            primary_company: input.primary_company,
+          },
+        });
+      } catch (e) {
+        if (e instanceof PrismaClientKnownRequestError) {
+          throw new Error(
+            `An user with similar userid or phone number or email already exists `
+          );
+        } else {
+          throw new Error(`${e}`);
+        }
+      }
       await ctx.db.clientSupervisors.createMany({
         data: salesSupervisorArray,
       });
       await ctx.db.clientSecondaryCompany.createMany({
         data: clientSecondaryCompanyArray,
-      });
-      return await ctx.db.client.create({
-        data: {
-          address: input.address,
-          bank_branch: input.bank_branch,
-          account: input.account,
-          code: input.code,
-          distributor: input.distributor,
-          district: input.district,
-          email: input.email,
-          pin_code: input.pin_code.toString(),
-          gst: input.gst,
-          ifsc: input.ifsc,
-          legal_name: input.legal_name,
-          location: input.location,
-          phone_primary: input.phone_primary.toString(),
-          phone_secondary: input.phone_secondary.toString(),
-          sales_representative: input.sales_representative,
-          state: input.state,
-          trade_license: input.trade_license,
-          type: input.type,
-          unique_name: input.unique_name,
-          is_cheque: input.is_cheque,
-          price_list_name: input.price_list_name,
-          gst_validity: input.gst_validity,
-          in_india: input.in_india,
-          is_active: input.is_active,
-          max_credit_amount: parseInt(input.max_credit_amount),
-          max_credit_days: parseInt(input.max_credit_days),
-          primary_company: input.primary_company,
-        },
       });
     }),
   edit: protectedProcedure

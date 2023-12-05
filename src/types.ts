@@ -701,7 +701,12 @@ export const ClientInput = z.object({
   sales_representative: z.string({
     required_error: "This field cant be null",
   }),
-  sales_supervisor: z.array(z.string()),
+  sales_supervisor: z.array(
+    z.object({
+      name: z.string(),
+      phone: z.string(),
+    })
+  ),
   secondary_company: z.array(z.string()),
   code: z.string({
     required_error: "This field cant be null",
@@ -749,7 +754,7 @@ export const ClientInput = z.object({
   primary_company: z.string({
     required_error: "This field cant be null",
   }),
-  gst_validity: z.date({
+  gst_validity: z.string({
     required_error: "This field cant be null",
   }),
   max_credit_days: z.string({
@@ -834,9 +839,7 @@ export const ClientEditInput = z.object({
   primary_company: z.string({
     required_error: "This field cant be null",
   }),
-  gst_validity: z.date({
-    required_error: "This field cant be null",
-  }),
+  gst_validity: z.string(),
   max_credit_days: z.string({
     required_error: "This field cant be null",
   }),

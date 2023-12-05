@@ -14,22 +14,13 @@ const MasterState: React.FunctionComponent = () => {
     userType: userType as string,
   };
 
-  const columns = [
-    { header: "Symbol", field: "symbol" },
-    { header: "Name", field: "name" },
-  ];
+  const columns = [{ header: "Name", field: "location" }];
 
-  const [data, setData] = useState<
-    { name: string; symbol: string }[] | undefined
-  >([]);
-
-  const { data: basicUnits, isLoading, isError } = api.basicUnit.all.useQuery();
-
-  useEffect(() => {
-    if (!isLoading && !isError) {
-      setData(basicUnits);
-    }
-  }, [basicUnits]);
+  const {
+    data: states,
+    isLoading,
+    isError,
+  } = api.location.all_state.useQuery();
 
   if (isLoading)
     return (
@@ -114,8 +105,8 @@ const MasterState: React.FunctionComponent = () => {
         </div>
         <TableComponent
           columns={columns}
-          data={basicUnits}
-          idField={["name", "symbol"]}
+          data={states}
+          idField={["location"]}
           editUrl="edit/state-edit"
           deleteUrl="delete/state-delete"
         />

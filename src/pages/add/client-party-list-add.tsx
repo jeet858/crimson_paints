@@ -30,10 +30,14 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
     refetchOnWindowFocus: false,
   });
   const {
-    data: locations,
+    data: states,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all.useQuery(undefined, {
+  } = api.location.all_state.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: districts } = api.location.all_district.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -89,6 +93,7 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
     gst_validity: "",
     max_credit_days: "",
     max_credit_amount: "",
+    sales_representative_phone: "",
     sales_supervisor: [] as { name: string; phone: string }[],
     secondary_company: [] as string[],
   });
@@ -117,6 +122,7 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
       setAddData({
         ...addData,
         sales_representative: str[0] as string,
+        sales_representative_phone: str[1] as string,
         sales_supervisor: updatedSupervisors,
       });
     } else if (name === "primary_company") {
@@ -513,7 +519,7 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
                   onChange={handleInputChange}
                 >
                   <option value="">--Select State--</option>
-                  {locations?.map((loc, index) => {
+                  {states?.map((loc, index) => {
                     return (
                       <option
                         value={loc.location}
@@ -539,15 +545,17 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
                   onChange={handleInputChange}
                 >
                   <option value="">--Select District--</option>
-                  <option value="Kg" className="bg-[#C4B0FF] font-semibold">
-                    Kilogram
-                  </option>
-                  <option value="G" className="bg-[#C4B0FF] font-semibold">
-                    Gram
-                  </option>
-                  <option value="ML" className="bg-[#C4B0FF] font-semibold">
-                    Mililitre
-                  </option>
+                  {districts?.map((loc, index) => {
+                    return (
+                      <option
+                        value={loc.district}
+                        className="bg-[#C4B0FF] font-semibold"
+                        key={index}
+                      >
+                        {loc.district}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

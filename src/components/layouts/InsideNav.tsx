@@ -89,6 +89,14 @@ const InsideNav: React.FunctionComponent = (props) => {
       name: "Client Party List",
       href: "/client-party-list",
     },
+    {
+      name: "State",
+      href: "/state",
+    },
+    {
+      name: "District",
+      href: "/district",
+    },
   ];
   const StockElements = [
     {

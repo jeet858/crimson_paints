@@ -245,6 +245,7 @@ model Client{
   unique_name String @id
   distributor String
   sales_representative String
+  sales_representative_phone String
   code String
   gst String
   trade_license String

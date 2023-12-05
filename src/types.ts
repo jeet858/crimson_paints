@@ -766,6 +766,9 @@ export const ClientInput = z.object({
   account: z.string(),
   ifsc: z.string(),
   bank_branch: z.string(),
+  sales_representative_phone: z.string({
+    required_error: "This field cant be null",
+  }),
 });
 export const ClientEditInput = z.object({
   type: z.string({
@@ -785,6 +788,9 @@ export const ClientEditInput = z.object({
   }),
   distributor: z.string(),
   sales_representative: z.string({
+    required_error: "This field cant be null",
+  }),
+  sales_representative_phone: z.string({
     required_error: "This field cant be null",
   }),
   code: z.string({
@@ -821,9 +827,6 @@ export const ClientEditInput = z.object({
   is_cheque: z.boolean({
     required_error: "This field cant be null",
   }),
-  list_name: z.string({
-    required_error: "This field cant be null",
-  }),
   account: z.string(),
   ifsc: z.string(),
   bank_branch: z.string(),
@@ -846,7 +849,12 @@ export const ClientEditInput = z.object({
   max_credit_amount: z.string({
     required_error: "This field cant be null",
   }),
-  sales_supervisor: z.array(z.string()),
+  sales_supervisor: z.array(
+    z.object({
+      name: z.string(),
+      phone: z.string(),
+    })
+  ),
   secondary_company: z.array(z.string()),
 });
 export const ClientDeleteInput = z.object({
@@ -920,6 +928,41 @@ export const userInput = z.object({
     required_error: "This field cant be null",
   }),
   orderable_unit_list: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const stateInput = z.object({
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const stateEditInput = z.object({
+  newLocation: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingLocation: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const districtInput = z.object({
+  state: z.string({
+    required_error: "This field cant be null",
+  }),
+  district: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const districtEditInput = z.object({
+  newState: z.string({
+    required_error: "This field cant be null",
+  }),
+  newDistrict: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingState: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingDistrict: z.string({
     required_error: "This field cant be null",
   }),
 });

@@ -723,7 +723,7 @@ export const ClientInput = z.object({
   address: z.string({
     required_error: "This field cant be null",
   }),
-  location: z.string({
+  legal_address: z.string({
     required_error: "This field cant be null",
   }),
   state: z.string({
@@ -808,7 +808,7 @@ export const ClientEditInput = z.object({
   address: z.string({
     required_error: "This field cant be null",
   }),
-  location: z.string({
+  legal_address: z.string({
     required_error: "This field cant be null",
   }),
   state: z.string({

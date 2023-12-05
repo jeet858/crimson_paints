@@ -77,7 +77,7 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
     gst: "",
     ifsc: "",
     legal_name: "",
-    location: "",
+    legal_address: "",
     phone_primary: 0,
     phone_secondary: 0,
     sales_representative: "",
@@ -565,7 +565,7 @@ const ClientPartyListAdd: React.FunctionComponent = () => {
               <div className="w-3/4 flex-1 pl-4">
                 <input
                   className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                  name="location"
+                  name="legal_address"
                   onChange={handleInputChange}
                 />
               </div>

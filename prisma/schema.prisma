@@ -251,7 +251,7 @@ model Client{
   trade_license String
   in_india Boolean 
   address String
-  location String
+  legal_address String
   state String
   district String
   phone_primary String

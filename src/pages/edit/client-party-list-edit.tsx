@@ -48,7 +48,7 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
     gst: string;
     ifsc: string;
     legal_name: string;
-    location: string;
+    legal_address: string;
     phone_primary: number;
     phone_secondary: number;
     sales_representative: string;
@@ -93,7 +93,7 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
           gst: data.gst as string,
           ifsc: data.ifsc as string,
           legal_name: data.legal_name as string,
-          location: data.location as string,
+          legal_address: data.legal_address as string,
           sales_representative: data.sales_representative as string,
           sales_supervisor: data.sales_supervisor as {
             name: string;
@@ -672,9 +672,9 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
               <div className="w-3/4 flex-1 pl-4">
                 <input
                   className="w-full rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
-                  name="location"
+                  name="legal_address"
                   onChange={handleInputChange}
-                  value={editData?.location}
+                  value={editData?.legal_address}
                 />
               </div>
             </div>

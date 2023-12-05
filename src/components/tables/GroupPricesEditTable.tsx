@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaCheck } from "react-icons/fa";
 import { api } from "~/utils/api";
 
 interface GroupPricesTableEditProps {
@@ -16,6 +17,8 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  const [edit, setEdit] = useState(false);
+
   const {
     data: pricingData,
     isLoading,
@@ -93,8 +96,19 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
   return (
     <div className="mx-12 flex h-fit w-full min-w-full flex-col flex-wrap px-8 pt-6">
       <div className="mt-4 flex h-4/5 w-full flex-col border-2 border-[#11009E]">
-        <div className="bg-[#786ADE] p-1 text-lg font-semibold text-white">
+        <div className="flex justify-between bg-[#786ADE] p-1 text-lg font-semibold text-white">
           Group: {props.group_name}
+          <div className="flex items-center justify-center">
+            Edit?
+            <div
+              className="ml-2 flex h-6 w-6 items-center justify-center border-2 border-black"
+              onClick={() => {
+                setEdit(!edit);
+              }}
+            >
+              {edit ? <FaCheck /> : null}
+            </div>
+          </div>
         </div>
         {editData?.map((data, index) => {
           return (
@@ -112,15 +126,17 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
             </div>
           );
         })}
-        <button
-          className="mx-4 my-4 h-12 w-24 self-end rounded-md bg-[#786ADE] text-white"
-          onClick={() => {
-            console.log(editData);
-            updateData();
-          }}
-        >
-          Update
-        </button>
+        {edit ? (
+          <button
+            className="mx-4 my-4 h-12 w-24 self-end rounded-md bg-[#786ADE] text-white"
+            onClick={() => {
+              console.log(editData);
+              updateData();
+            }}
+          >
+            Update
+          </button>
+        ) : null}
       </div>
     </div>
   );

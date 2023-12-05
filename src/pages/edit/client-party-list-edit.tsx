@@ -76,11 +76,7 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
     isError,
   } = api.client.by_unique_name.useQuery(unique_name as string, {
     onSuccess(data) {
-      if (
-        data !== null &&
-        data.sales_supervisor !== null &&
-        data.secondary_company !== null
-      ) {
+      if (data?.sales_supervisor !== null && data?.secondary_company !== null) {
         setEditData({
           existing_type: data.type as string,
           existing_unique_name: data.unique_name as string,
@@ -148,7 +144,7 @@ const ClientPartyListEdit: React.FunctionComponent = () => {
     data: locations,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all.useQuery(undefined, {
+  } = api.location.all_state.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

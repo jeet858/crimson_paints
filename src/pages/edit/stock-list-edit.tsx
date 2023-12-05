@@ -50,7 +50,7 @@ const StockListEdit: React.FunctionComponent = () => {
     data: locations,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all.useQuery(undefined, {
+  } = api.location.all_state.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

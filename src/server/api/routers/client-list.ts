@@ -254,7 +254,7 @@ export const clientListRouter = createTRPCRouter({
             `An user with similar userid or phone number or email already exists `
           );
         } else {
-          throw new Error(`${e}`);
+          throw new Error(`Error occured`);
         }
       }
       await ctx.db.clientSupervisors.createMany({

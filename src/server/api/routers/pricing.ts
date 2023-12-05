@@ -107,7 +107,7 @@ export const pricingRouter = createTRPCRouter({
               secondtData.price === 0 //if the price is 0 only then it calculates the complex price
             ) {
               const str = secondtData.packaging.split("X ");
-              let modifiedString = str[1]?.replace(/\)/g, "");
+              const modifiedString = str[1]?.replace(/\)/g, "");
               secondtData.price =
                 firstData.price * parseInt(modifiedString as string);
             }

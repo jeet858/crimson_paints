@@ -27,7 +27,7 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
     },
     onSuccess: () => {
       alert("Data deleted successfully");
-      router.push("/basic-unit");
+      router.push("/state");
     },
   });
 
@@ -44,7 +44,7 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
           <p className="h-1/4 w-full flex items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
-            Basic Unit Details
+            State
           </p>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Symbol
@@ -73,7 +73,7 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
             <button 
               className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
               onClick={async ()=>{
-                await router.push("/basic-unit")
+                await router.push("/state")
               }}
             >
               Cancel

@@ -135,7 +135,7 @@ model GroupInfo{
   brand_name String
   group_name String
   group_code String
-  @@id([brand_name, group_name, group_code])
+  @@unique([brand_name, group_name])
 
 }
 
@@ -144,8 +144,8 @@ model GroupPricing{
   group_name String
   group_code String
   color_name String
-  rgb_code String
-  @@unique([brand_name, group_name, group_code, color_name])
+  @@id([brand_name,group_name,color_name])
+  @@unique([brand_name,color_name])
 }
 model OderableColors{
   list_name String @unique @id
@@ -285,8 +285,11 @@ model ClientSecondaryCompany{
 
 model Order{
   id String @id
-  client_name String 
-  salesman_name String
+  client_unique_name String 
+  salesman_name String 
+  salesman_phone String 
+  client_type String 
+  state String 
   company String 
 }
 
@@ -299,11 +302,11 @@ model OrderDetails{
   total_qty Decimal
   executed_qty Decimal
   cancelled_qty Decimal
-  client_name String @db.VarChar(50)
+  client_unique_name String @db.VarChar(50)
   salesman_name String @db.VarChar(50)
   company String
   location String
   date String @db.VarChar(50)
   status String
-  @@id([id, salesman_name, client_name, date,location,brand_name, color_name, packaging_type])
+  @@id([id, salesman_name, client_unique_name, date,location,brand_name, color_name, packaging_type])
 }

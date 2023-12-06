@@ -17,6 +17,17 @@ export const userRouter = createTRPCRouter({
     await ctx.db.$disconnect();
     return user;
   }),
+  by_email: protectedProcedure
+    .input(inputSchema)
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: {
+          email: input.id,
+        },
+      });
+      await ctx.db.$disconnect();
+      return user;
+    }),
   create: protectedProcedure
     .input(userInput)
     .mutation(async ({ ctx, input }) => {

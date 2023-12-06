@@ -309,9 +309,6 @@ export const groupPricingInput = z.object({
       color_name: z.string({
         required_error: "This field cant be null",
       }),
-      rgb_code: z.string({
-        required_error: "This field cant be null",
-      }),
     })
   ),
 });
@@ -337,9 +334,6 @@ export const groupPricingEditInput = z.object({
         required_error: "This field cant be null",
       }),
       color_name: z.string({
-        required_error: "This field cant be null",
-      }),
-      rgb_code: z.string({
         required_error: "This field cant be null",
       }),
     })
@@ -869,7 +863,13 @@ export const OrderInput = z.object({
   client_name: z.string({
     required_error: "This field cant be null",
   }),
+  client_type: z.string({
+    required_error: "This field cant be null",
+  }),
   salesman_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  salesman_phone: z.string({
     required_error: "This field cant be null",
   }),
   location: z.string({
@@ -890,6 +890,7 @@ export const OrderInput = z.object({
   total_qty: z.string({
     required_error: "This field cant be null",
   }),
+  amount: z.number(),
   notes: z.string(),
   company: z.string({ required_error: "This field cant be null" }),
 });

@@ -155,13 +155,9 @@ const GroupColors: React.FC<GroupColorProps> = (props) => {
   return (
     <div className="flex w-full flex-wrap items-center justify-center">
       {colors?.map((color, index) => {
-        const colorStyle = {
-          backgroundColor: color.rgb_code,
-        };
         return (
           <div
             className="mx-2 my-2 flex h-12 w-32 items-center justify-center text-white"
-            style={colorStyle}
             key={index}
           >
             {color.color_name}

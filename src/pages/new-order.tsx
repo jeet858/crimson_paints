@@ -115,6 +115,13 @@ const NewOrder: React.FunctionComponent = () => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  const { data: clientSupervisor } = api.client.client_supervisors_all.useQuery(
+    undefined,
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
   const { data: orderableUnit } = api.orderableUnit.all_list_details.useQuery(
     undefined,
     {
@@ -214,13 +221,21 @@ const NewOrder: React.FunctionComponent = () => {
                 >
                   <option value="">---Select Client---</option>
                   {clients?.map((client, index) => {
-                    if (client.sales_representative_phone === salesman?.phone) {
+                    const matchingSupervisor = clientSupervisor?.find(
+                      (supervisor) =>
+                        supervisor.phone === salesman?.phone &&
+                        supervisor.name === client.unique_name
+                    );
+                    if (
+                      client.sales_representative_phone === salesman?.phone ||
+                      matchingSupervisor
+                    ) {
                       return (
                         <option
                           key={index}
                           value={`${client.legal_name}X${client.price_list_name}X${client.state}X${client.primary_company}X${client.type}`}
                         >
-                          {client.legal_name}
+                          {client.legal_name}/{client.unique_name}
                         </option>
                       );
                     }

@@ -82,6 +82,11 @@ export const clientListRouter = createTRPCRouter({
       })
     );
   }),
+  client_supervisors_all: protectedProcedure.query(async ({ ctx }) => {
+    const units = await ctx.db.clientSupervisors.findMany();
+    await ctx.db.$disconnect();
+    return units;
+  }),
   by_unique_name: protectedProcedure
     .input(inputSchema)
     .query(async ({ ctx, input }) => {

@@ -291,6 +291,8 @@ model Order{
   client_type String 
   state String 
   company String 
+  status String
+  client_legal_name String 
 }
 
 model OrderDetails{
@@ -307,6 +309,5 @@ model OrderDetails{
   company String
   location String
   date String @db.VarChar(50)
-  status String
   @@id([id, salesman_name, client_unique_name, date,location,brand_name, color_name, packaging_type])
 }

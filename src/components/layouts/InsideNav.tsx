@@ -17,7 +17,7 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "My Order",
-      href: "#",
+      href: "/my-order",
     },
     {
       name: "New Order",

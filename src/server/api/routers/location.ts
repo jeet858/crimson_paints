@@ -8,9 +8,9 @@ import {
 
 export const locationRouter = createTRPCRouter({
   all_state: protectedProcedure.query(async ({ ctx }) => {
-    const units = await ctx.db.state.findMany();
+    const locations = await ctx.db.state.findMany();
     await ctx.db.$disconnect();
-    return units.map(({ location }) => ({
+    return locations.map(({ location }) => ({
       location,
     }));
   }),
@@ -79,4 +79,9 @@ export const locationRouter = createTRPCRouter({
         },
       });
     }),
+  user_accessable_location: protectedProcedure.query(async ({ ctx }) => {
+    const locations = await ctx.db.userAcessLocation.findMany();
+    await ctx.db.$disconnect();
+    return locations;
+  }),
 });

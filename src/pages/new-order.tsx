@@ -46,6 +46,7 @@ const NewOrder: React.FunctionComponent = () => {
     company: "",
     amount: 0,
     client_type: "",
+    client_unique_name: "",
   });
   const [colorGroup, setColorGroup] = useState("");
   const [priceListName, setPriceListName] = useState("");
@@ -203,7 +204,11 @@ const NewOrder: React.FunctionComponent = () => {
                     const { name, value } = e.target;
                     const str = value.split("X");
                     str[1] ? setPriceListName(str[1]) : null;
-                    str[2] && str[3] && str[4]
+                    if (!str[0] || !str[1] || !str[2] || !str[3] || !str[4]) {
+                      console.log(str);
+                      alert("id error");
+                    }
+                    str[2] && str[3] && str[4] && str[5]
                       ? setOrderDetails({
                           ...orderDetails,
                           [name]: str[0],
@@ -211,6 +216,7 @@ const NewOrder: React.FunctionComponent = () => {
                           ["location"]: str[2],
                           ["company"]: str[3],
                           ["client_type"]: str[4],
+                          ["client_unique_name"]: str[5],
                         })
                       : setOrderDetails({
                           ...orderDetails,
@@ -233,7 +239,7 @@ const NewOrder: React.FunctionComponent = () => {
                       return (
                         <option
                           key={index}
-                          value={`${client.legal_name}X${client.price_list_name}X${client.state}X${client.primary_company}X${client.type}`}
+                          value={`${client.legal_name}X${client.price_list_name}X${client.state}X${client.primary_company}X${client.type}X${client.unique_name}`}
                         >
                           {client.legal_name}/{client.unique_name}
                         </option>

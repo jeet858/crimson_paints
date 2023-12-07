@@ -148,7 +148,10 @@ const MyOrder: React.FunctionComponent = () => {
           const str = data.id.split("/");
 
           return (
-            <div className="mt-4 flex flex-col rounded-t-xl bg-[#C4B0FF45]">
+            <div
+              className="mt-4 flex flex-col rounded-t-xl bg-[#C4B0FF45]"
+              key={index}
+            >
               <div className=" p-2 text-xl font-semibold">Order Details</div>
               <div className="flex w-full items-center justify-between  text-start text-lg font-semibold">
                 <div className="flex-1 border border-[#11009E82] p-2">
@@ -270,7 +273,10 @@ const MyOrder: React.FunctionComponent = () => {
             (data.status === selectedSection || selectedSection === "all")
           ) {
             return (
-              <div className="mt-4 flex flex-col rounded-t-xl bg-[#C4B0FF45]">
+              <div
+                className="mt-4 flex flex-col rounded-t-xl bg-[#C4B0FF45]"
+                key={index}
+              >
                 <div className=" p-2 text-xl font-semibold">Order Details</div>
                 <div className="flex w-full items-center justify-between  text-start text-lg font-semibold">
                   <div className="flex-1 border border-[#11009E82] p-2">

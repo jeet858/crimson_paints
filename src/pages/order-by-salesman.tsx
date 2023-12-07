@@ -272,7 +272,10 @@ const OrderBySalesman: React.FunctionComponent = () => {
               (data.status === selectedSection || selectedSection === "all")
             ) {
               return (
-                <div className="mt-4 flex flex-col rounded-t-xl bg-[#C4B0FF45]">
+                <div
+                  className="mt-4 flex flex-col rounded-t-xl bg-[#C4B0FF45]"
+                  key={index}
+                >
                   <div className=" p-2 text-xl font-semibold">
                     Order Details
                   </div>

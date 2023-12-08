@@ -260,11 +260,8 @@ const MyOrder: React.FunctionComponent = () => {
           </div>
         </div>
         {orderData?.map((data, index) => {
-          const matchingOrderDetails = orderDataDetails?.filter(
-            (orderDetail) => {
-              // Assuming id is the common property
-              return orderData.some((order) => order.id === orderDetail.id);
-            }
+          const matchingOrderDetails = orderDataDetails.filter(
+            (detail) => detail.id === data.id
           );
           const str = data.id.split("/");
 

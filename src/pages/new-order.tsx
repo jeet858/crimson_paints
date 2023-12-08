@@ -35,7 +35,9 @@ const NewOrder: React.FunctionComponent = () => {
     client_name: "",
     salesman_name: "",
     location: "",
-    date: `${currentDate.getDate()}-${currentDate.getMonth()}-${currentDate.getFullYear()}`,
+    date: `${currentDate.getDate()}-${
+      currentDate.getMonth() + 1
+    }-${currentDate.getFullYear()}`,
     id: "",
     brand_name: "",
     salesman_phone: "",
@@ -180,12 +182,12 @@ const NewOrder: React.FunctionComponent = () => {
   });
 
   const create = () => {
-    console.log(orderDetails);
     add.mutate(orderDetails);
+
+    console.log(orderDetails);
     console.log(salesman?.orderable_color);
     console.log(salesman?.orderable_unit);
     console.log(priceListName);
-    console.log(orderDetails);
   };
   return (
     <UserTemplate templateParams={templateParams}>

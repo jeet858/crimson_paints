@@ -286,6 +286,7 @@ model ClientSecondaryCompany{
 model Order{
   id String @id
   client_unique_name String 
+  date String 
   salesman_name String 
   salesman_phone String 
   client_type String 

@@ -61,6 +61,7 @@ export const orderRouter = createTRPCRouter({
             client_type: input.client_type,
             status: "Pending",
             client_legal_name: input.client_name,
+            date: input.date,
           },
         });
       } catch (e) {

@@ -19,21 +19,21 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
   };
 
   const router = useRouter();
-  const { name, symbol } = router.query;
+  const { location } = router.query;
 
-  const del = api.basicUnit.delete.useMutation({
+  const del = api.location.delete_state.useMutation({
     onError: (err, newTodo, context) => {
       alert(`An error occured }`);
     },
     onSuccess: () => {
       alert("Data deleted successfully");
-      router.push("/basic-unit");
+      router.push("/state");
     },
   });
 
   const deleteData = () => {
     confirmed
-      ? del.mutate({ name: name as string })
+      ? del.mutate({ location: location as string })
       : alert("Please confirm that you want to delete this unit");
   };
 
@@ -43,19 +43,14 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
     <UserTemplate templateParams={templateParams}>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-4/6 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
-          <p className="h-1/4 w-full flex items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
-            Basic Unit Details
+          <p className="flex h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 pt-2 text-lg font-semibold">
+            State
           </p>
-          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
-            Symbol
-            <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
-              {symbol}
-            </div>
-          </div>
+
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Name
             <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
-              {name}
+              {location}
             </div>
           </div>
           <div className="flex h-1/4 w-full justify-between self-end px-4">
@@ -70,10 +65,10 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
               </div>
               <p>I confirm the deletion</p>
             </div>
-            <button 
+            <button
               className="h-1/2 w-[25%] self-center rounded-md bg-[#07096E] font-semibold text-white"
-              onClick={async ()=>{
-                await router.push("/basic-unit")
+              onClick={async () => {
+                await router.push("/state");
               }}
             >
               Cancel

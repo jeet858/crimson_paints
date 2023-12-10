@@ -40,9 +40,7 @@ const BasicUnitsDelete: React.FunctionComponent = () => {
   const deleteData = () => {
     confirmed
       ? del.mutate({
-          phone: parseInt(phone as string),
-          name: name as string,
-          company: company as string,
+          phone: phone as string,
         })
       : alert(
           "Please confirm that you want to delete this sales representative"

@@ -48,7 +48,6 @@ const GroupForPricingEdit = () => {
     group_name: string;
     group_code: string;
     color_name: string;
-    rgb_code: string;
   }) => {
     const updatedColorArray = [...colorArray];
     const foundIndex = updatedColorArray.findIndex(
@@ -86,7 +85,6 @@ const GroupForPricingEdit = () => {
       group_name: string;
       group_code: string;
       color_name: string;
-      rgb_code: string;
     }[]
   >([]);
   useEffect(() => {

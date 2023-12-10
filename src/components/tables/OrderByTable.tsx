@@ -33,7 +33,7 @@ const OrderByTable: React.FunctionComponent<TableProps> = (props) => {
             </div>
           ))}
         </div>
-        <div className="h-[50vh] overflow-scroll ">
+        <div className="h-[fit] overflow-scroll ">
           {props.data.map((row: any, rowIndex) => (
             <div
               key={rowIndex}

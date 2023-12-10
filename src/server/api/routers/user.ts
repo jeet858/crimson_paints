@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { userInput } from "~/types";
@@ -16,39 +17,81 @@ export const userRouter = createTRPCRouter({
     await ctx.db.$disconnect();
     return user;
   }),
+  by_email: protectedProcedure
+    .input(inputSchema)
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: {
+          email: input.id,
+        },
+      });
+      await ctx.db.$disconnect();
+      return user;
+    }),
   create: protectedProcedure
     .input(userInput)
     .mutation(async ({ ctx, input }) => {
-      const objArray: { name: string; phone: string; location: string }[] = [];
-      input.location.forEach((element) => {
+      const orderableLocation: {
+        name: string;
+        phone: string;
+        location: string;
+      }[] = [];
+      const acessLocationArray: {
+        name: string;
+        phone: string;
+        location: string;
+      }[] = [];
+      input.orderableLocation.forEach((element) => {
         const obj = {
           name: input.name,
           phone: input.phone.toString(),
           location: element,
         };
-        objArray.push(obj);
+        orderableLocation.push(obj);
       });
+      input.acessLocation.forEach((element) => {
+        const obj = {
+          name: input.name,
+          phone: input.phone.toString(),
+          location: element,
+        };
+        acessLocationArray.push(obj);
+      });
+      try {
+        await ctx.db.user.create({
+          data: {
+            email: input.email,
+            id: input.id,
+            name: input.name,
+            password: input.password,
+            phone: input.phone,
+            user_type: input.type,
+          },
+        });
+      } catch (e) {
+        if (e instanceof PrismaClientKnownRequestError) {
+          throw new Error(
+            `An user with similar userid or phone number or email already exists `
+          );
+        }
+      }
       if (input.type === "Salesman") {
         await ctx.db.salesman.create({
           data: {
             name: input.name,
             phone: input.phone.toString(),
             company: input.company,
+            orderable_color: input.orderable_color_list,
+            orderable_unit: input.orderable_unit_list,
+            self_data: input.self_data,
           },
         });
       }
-      await ctx.db.salesmanLocation.createMany({
-        data: objArray,
+      await ctx.db.userOrderableLocation.createMany({
+        data: orderableLocation,
       });
-      return await ctx.db.user.create({
-        data: {
-          id: input.id,
-          name: input.name,
-          email: input.email,
-          phone: input.phone,
-          password: input.password,
-          user_type: input.type,
-        },
+      await ctx.db.userAcessLocation.createMany({
+        data: acessLocationArray,
       });
     }),
 });

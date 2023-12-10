@@ -28,7 +28,8 @@ const ProductBrandAdd: React.FunctionComponent = () => {
       [name]: name === "hsnCode_id" ? parseInt(value, 10) : value,
     });
   };
-  const { data: hsnCodes, isLoading, isError } = api.hsn.all.useQuery();
+  const { data: hsnCodes } = api.hsn.all.useQuery();
+  const { data: categories } = api.categories.all.useQuery();
   const add = api.brand.create.useMutation({
     onError: (err, newBrand, context) => {
       alert(`${err.message}`);
@@ -83,9 +84,21 @@ const ProductBrandAdd: React.FunctionComponent = () => {
           </div>
           <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
             Category
-            <div className="rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none">
-              {category}
-            </div>
+            <select
+              name="categoriesName"
+              id=""
+              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+              onChange={handleInputChange}
+              value={addData.categoriesName}
+            >
+              {categories?.map((data, index) => {
+                return (
+                  <option value={data.name} key={index}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="flex h-1/4 w-1/2 justify-between self-end px-4">
             <button

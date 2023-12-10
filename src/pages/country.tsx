@@ -1,16 +1,9 @@
-import { InsideNav, UserTemplate } from "@/components";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import React from "react";
-import SalesRepresentativeTable from "~/components/tables/SalesRepresentativeTable";
+import { InsideNav, TableComponent, UserTemplate } from "@/components";
 import { api } from "~/utils/api";
-const columns = [
-  { header: "Name", field: "name" },
-  { header: "Phone", field: "phone" },
-  { header: "Company", field: "company" },
-  { header: "Orderable Unit", field: "orderable_unit" },
-  { header: "Orderable Color", field: "orderable_color" },
-];
-const SalesRepresentative = () => {
+
+const MasterCountry: React.FunctionComponent = () => {
   const router = useRouter();
   const { userType } = router.query;
 
@@ -20,14 +13,24 @@ const SalesRepresentative = () => {
     userImage: "user.jpg",
     userType: userType as string,
   };
-  const {
-    data: salesRepresentative,
-    isLoading,
-    isError,
-  } = api.salesRepresentative.all.useQuery(undefined, {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+
+  const columns = [
+    { header: "Symbol", field: "symbol" },
+    { header: "Name", field: "name" },
+  ];
+
+  const [data, setData] = useState<
+    { name: string; symbol: string }[] | undefined
+  >([]);
+
+  const { data: basicUnits, isLoading, isError } = api.basicUnit.all.useQuery();
+
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setData(basicUnits);
+    }
+  }, [basicUnits]);
+
   if (isLoading)
     return (
       <UserTemplate templateParams={templateParams}>
@@ -38,7 +41,7 @@ const SalesRepresentative = () => {
               <div className="flex w-full items-end justify-center ">
                 <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
                 <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                  Sales Representatives
+                  Country
                 </div>
                 <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
               </div>
@@ -49,7 +52,7 @@ const SalesRepresentative = () => {
               </div>
             </div>
           </div>
-          <p>Loading Basic Units</p>
+          <p>Loading Country</p>
         </div>
       </UserTemplate>
     );
@@ -63,7 +66,7 @@ const SalesRepresentative = () => {
               <div className="flex w-full items-end justify-center ">
                 <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
                 <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-                  Sales Representatives
+                  Basic Unit
                 </div>
                 <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
               </div>
@@ -71,7 +74,7 @@ const SalesRepresentative = () => {
                 <button
                   className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
                   onClick={async () => {
-                    await router.push("/add/basic-units-add");
+                    await router.push("/add/country-add");
                   }}
                 >
                   Add
@@ -79,49 +82,46 @@ const SalesRepresentative = () => {
               </div>
             </div>
           </div>
-          <p>Error fetching Basic Units ❌</p>
+          <p>Error fetching Country ❌</p>
         </div>
       </UserTemplate>
     );
+
   return (
     <UserTemplate templateParams={templateParams}>
-      <InsideNav />
-      <div className="h-fit w-full p-4">
-        <div className="flex items-center justify-center">
-          <div className="flex w-full items-end justify-center ">
-            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
-            <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
-              Sales Representatives
+      <div className="w-full">
+        <InsideNav />
+        <div className="h-fit w-full p-4">
+          <div className="flex items-center justify-center">
+            <div className="flex w-full items-end justify-center ">
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+              <div className="border-b-4 border-[#C4B0FF] text-center text-xl font-semibold text-[#11009E]">
+                Country
+              </div>
+              <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
             </div>
-            <div className="relative top-[3px] h-3 w-3 rounded-full bg-[#C4B0FF]"></div>
+            <div className="flex items-end justify-end">
+              <button
+                className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
+                onClick={async () => {
+                  await router.push("/add/country-add");
+                }}
+              >
+                Add
+              </button>
+            </div>
           </div>
-          {/* <div className="flex items-end justify-end">
-            <button
-              className="h-8 w-28 rounded-lg bg-[#c4b0ff] text-lg font-semibold text-black hover:bg-[#9072ea]"
-              onClick={async () => {
-                await router.push("add/sales-representative-add");
-              }}
-            >
-              Add
-            </button>
-          </div> */}
         </div>
+        <TableComponent
+          columns={columns}
+          data={basicUnits}
+          idField={["name", "symbol"]}
+          editUrl="edit/country-edit"
+          deleteUrl="delete/country-delete"
+        />
       </div>
-      <SalesRepresentativeTable
-        columns={columns}
-        data={salesRepresentative}
-        idField={[
-          "name",
-          "phone",
-          "company",
-          "orderable_color",
-          "orderable_unit",
-        ]}
-        editUrl="/edit/sales-representative-edit"
-        deleteUrl="/delete/sales-representative-delete"
-      />
     </UserTemplate>
   );
 };
 
-export default SalesRepresentative;
+export default MasterCountry;

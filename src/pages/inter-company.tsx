@@ -97,6 +97,7 @@ const InterCompany = () => {
           "city",
           "phone",
           "bill",
+          "price_list_name",
         ]}
         editUrl="/edit/inter-company-edit"
         deleteUrl="/delete/inter-company-delete"

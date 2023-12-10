@@ -17,7 +17,7 @@ const InsideNav: React.FunctionComponent = (props) => {
     },
     {
       name: "My Order",
-      href: "#",
+      href: "/my-order",
     },
     {
       name: "New Order",
@@ -88,6 +88,22 @@ const InsideNav: React.FunctionComponent = (props) => {
     {
       name: "Client Party List",
       href: "/client-party-list",
+    },
+    {
+      name: "State",
+      href: "/state",
+    },
+    {
+      name: "District",
+      href: "/district",
+    },
+    {
+      name: "Discount",
+      href: "/",
+    },
+    {
+      name: "Schemes",
+      href: "/",
     },
   ];
   const StockElements = [

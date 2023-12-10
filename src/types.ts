@@ -309,9 +309,6 @@ export const groupPricingInput = z.object({
       color_name: z.string({
         required_error: "This field cant be null",
       }),
-      rgb_code: z.string({
-        required_error: "This field cant be null",
-      }),
     })
   ),
 });
@@ -337,9 +334,6 @@ export const groupPricingEditInput = z.object({
         required_error: "This field cant be null",
       }),
       color_name: z.string({
-        required_error: "This field cant be null",
-      }),
-      rgb_code: z.string({
         required_error: "This field cant be null",
       }),
     })
@@ -422,6 +416,12 @@ export const salesRepresentativeInput = z.object({
   company: z.string({
     required_error: "This field cant be null",
   }),
+  orderable_unit: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderable_color: z.string({
+    required_error: "This field cant be null",
+  }),
 });
 export const salesRepresentativeEditInput = z.object({
   name: z.string({
@@ -434,6 +434,19 @@ export const salesRepresentativeEditInput = z.object({
     required_error: "This field cant be null",
   }),
   company: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderable_unit: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderable_color: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderableLocation: z.array(z.string()),
+  acessLocation: z.array(z.string()),
+});
+export const salesRepresentativeDeleteInput = z.object({
+  phone: z.string({
     required_error: "This field cant be null",
   }),
 });
@@ -460,6 +473,9 @@ export const interComapnyInput = z.object({
     required_error: "This field cant be null",
   }),
   type: z.string({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
     required_error: "This field cant be null",
   }),
 });
@@ -489,6 +505,9 @@ export const interComapnyEditInput = z.object({
     required_error: "This field cant be null",
   }),
   type: z.string({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
     required_error: "This field cant be null",
   }),
 });
@@ -676,6 +695,13 @@ export const ClientInput = z.object({
   sales_representative: z.string({
     required_error: "This field cant be null",
   }),
+  sales_supervisor: z.array(
+    z.object({
+      name: z.string(),
+      phone: z.string(),
+    })
+  ),
+  secondary_company: z.array(z.string()),
   code: z.string({
     required_error: "This field cant be null",
   }),
@@ -691,7 +717,7 @@ export const ClientInput = z.object({
   address: z.string({
     required_error: "This field cant be null",
   }),
-  location: z.string({
+  legal_address: z.string({
     required_error: "This field cant be null",
   }),
   state: z.string({
@@ -710,12 +736,33 @@ export const ClientInput = z.object({
   is_cheque: z.boolean({
     required_error: "This field cant be null",
   }),
-  list_name: z.string({
+  in_india: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  is_active: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  primary_company: z.string({
+    required_error: "This field cant be null",
+  }),
+  gst_validity: z.string({
+    required_error: "This field cant be null",
+  }),
+  max_credit_days: z.string({
+    required_error: "This field cant be null",
+  }),
+  max_credit_amount: z.string({
     required_error: "This field cant be null",
   }),
   account: z.string(),
   ifsc: z.string(),
   bank_branch: z.string(),
+  sales_representative_phone: z.string({
+    required_error: "This field cant be null",
+  }),
 });
 export const ClientEditInput = z.object({
   type: z.string({
@@ -737,6 +784,9 @@ export const ClientEditInput = z.object({
   sales_representative: z.string({
     required_error: "This field cant be null",
   }),
+  sales_representative_phone: z.string({
+    required_error: "This field cant be null",
+  }),
   code: z.string({
     required_error: "This field cant be null",
   }),
@@ -752,7 +802,7 @@ export const ClientEditInput = z.object({
   address: z.string({
     required_error: "This field cant be null",
   }),
-  location: z.string({
+  legal_address: z.string({
     required_error: "This field cant be null",
   }),
   state: z.string({
@@ -771,12 +821,35 @@ export const ClientEditInput = z.object({
   is_cheque: z.boolean({
     required_error: "This field cant be null",
   }),
-  list_name: z.string({
-    required_error: "This field cant be null",
-  }),
   account: z.string(),
   ifsc: z.string(),
   bank_branch: z.string(),
+  in_india: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  is_active: z.boolean({
+    required_error: "This field cant be null",
+  }),
+  price_list_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  primary_company: z.string({
+    required_error: "This field cant be null",
+  }),
+  gst_validity: z.string(),
+  max_credit_days: z.string({
+    required_error: "This field cant be null",
+  }),
+  max_credit_amount: z.string({
+    required_error: "This field cant be null",
+  }),
+  sales_supervisor: z.array(
+    z.object({
+      name: z.string(),
+      phone: z.string(),
+    })
+  ),
+  secondary_company: z.array(z.string()),
 });
 export const ClientDeleteInput = z.object({
   unique_name: z.string({
@@ -790,7 +863,13 @@ export const OrderInput = z.object({
   client_name: z.string({
     required_error: "This field cant be null",
   }),
+  client_type: z.string({
+    required_error: "This field cant be null",
+  }),
   salesman_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  salesman_phone: z.string({
     required_error: "This field cant be null",
   }),
   location: z.string({
@@ -811,6 +890,10 @@ export const OrderInput = z.object({
   total_qty: z.string({
     required_error: "This field cant be null",
   }),
+  client_unique_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  amount: z.number(),
   notes: z.string(),
   company: z.string({ required_error: "This field cant be null" }),
 });
@@ -837,7 +920,11 @@ export const userInput = z.object({
   password: z.string({
     required_error: "This field cant be null",
   }),
-  location: z.array(z.string()),
+  confirm_password: z.string({
+    required_error: "This field cant be null",
+  }),
+  orderableLocation: z.array(z.string()),
+  acessLocation: z.array(z.string()),
   company: z.string({
     required_error: "This field cant be null",
   }),
@@ -845,6 +932,41 @@ export const userInput = z.object({
     required_error: "This field cant be null",
   }),
   orderable_unit_list: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const stateInput = z.object({
+  location: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const stateEditInput = z.object({
+  newLocation: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingLocation: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const districtInput = z.object({
+  state: z.string({
+    required_error: "This field cant be null",
+  }),
+  district: z.string({
+    required_error: "This field cant be null",
+  }),
+});
+export const districtEditInput = z.object({
+  newState: z.string({
+    required_error: "This field cant be null",
+  }),
+  newDistrict: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingState: z.string({
+    required_error: "This field cant be null",
+  }),
+  existingDistrict: z.string({
     required_error: "This field cant be null",
   }),
 });

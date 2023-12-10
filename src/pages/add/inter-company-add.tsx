@@ -29,6 +29,14 @@ const InterCompanyAdd: React.FunctionComponent = () => {
       await router.push("/inter-company");
     },
   });
+  const {
+    data: names,
+    isError,
+    isLoading,
+  } = api.namingPriceList.all.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
   const [addData, setEditData] = useState({
     gst: "",
     name: "",
@@ -38,6 +46,7 @@ const InterCompanyAdd: React.FunctionComponent = () => {
     city: "",
     phone: 0,
     bill: "",
+    price_list_name: "",
   });
 
   const handleInputChange = (
@@ -59,6 +68,7 @@ const InterCompanyAdd: React.FunctionComponent = () => {
       addData.gst === "" ||
       addData.phone === 0 ||
       addData.pin === 0 ||
+      addData.price_list_name === "" ||
       type === ""
     ) {
       alert("Be sure to fill all fields");
@@ -172,6 +182,28 @@ const InterCompanyAdd: React.FunctionComponent = () => {
                 </select>
               </div>
             </div>
+          </div>
+          <div className="flex h-1/4 items-center justify-between border-b-2 border-[#11009E] px-4 text-lg font-semibold">
+            Price List
+            <select
+              name="price_list_name"
+              id=""
+              className="w-4/6 rounded-md border border-[#11009E] bg-[#C4B0FF45] px-4 outline-none"
+              onChange={handleInputChange}
+            >
+              <option value="">--Select Price List--</option>
+              {names?.map((name, index) => {
+                return (
+                  <option
+                    value={name.price_list_name}
+                    key={index}
+                    onClick={() => {}}
+                  >
+                    {name.price_list_name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="flex h-1/6 w-1/2 justify-center space-x-4 self-center px-4">
             <button

@@ -15,7 +15,7 @@ interface DataItem {
   gst: string;
   ifsc: string;
   legal_name: string;
-  location: string;
+  legal_address: string;
   phone_primary: string;
   phone_secondary: string;
   sales_representative: string;

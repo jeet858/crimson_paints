@@ -9,6 +9,7 @@ interface DataItem {
   city: string;
   phone: bigint;
   bill: string;
+  price_list_name: string;
 }
 interface TableProps {
   columns: {
@@ -59,6 +60,7 @@ const InterCompanyTable: React.FunctionComponent<TableProps> = (props) => {
                       city: row.city,
                       phone: row.phone.toString(),
                       bill: row.bill,
+                      price_list_name: row.price_list_name,
                     };
                     await router.push({
                       pathname: props.editUrl,
@@ -80,6 +82,7 @@ const InterCompanyTable: React.FunctionComponent<TableProps> = (props) => {
                       city: row.city,
                       phone: row.phone.toString(),
                       bill: row.bill,
+                      price_list_name: row.price_list_name,
                     };
                     await router.push({
                       pathname: props.deleteUrl,

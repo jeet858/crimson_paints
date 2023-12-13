@@ -3,26 +3,26 @@ import * as React from "react";
 import { InsideNavElement } from "@/components";
 const InsideNav: React.FunctionComponent = (props) => {
   const OrderElements = [
-    // {
-    //   name: "Order By Salesman",
-    //   href: "/order-by-salesman",
-    // },
-    // {
-    //   name: "Order By Client",
-    //   href: "/order-by-client",
-    // },
-    // {
-    //   name: "Order By Branch",
-    //   href: "/order-by-branch",
-    // },
-    // {
-    //   name: "My Order",
-    //   href: "/my-order",
-    // },
-    // {
-    //   name: "New Order",
-    //   href: "/new-order",
-    // },
+    {
+      name: "Order By Salesman",
+      href: "/order-by-salesman",
+    },
+    {
+      name: "Order By Client",
+      href: "/order-by-client",
+    },
+    {
+      name: "Order By Branch",
+      href: "/order-by-branch",
+    },
+    {
+      name: "My Order",
+      href: "/my-order",
+    },
+    {
+      name: "New Order",
+      href: "/new-order",
+    },
   ];
   const masterElement = [
     {

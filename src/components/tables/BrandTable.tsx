@@ -47,6 +47,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
       <div className="flex w-full items-start justify-center">
         <div className="h-fit w-full p-4">
           <div className="flex items-center justify-between border-b-[3px] border-white bg-[#C4B0FF] p-2 font-semibold">
+          <div className="w-[33.3%] py-2 text-center">Serial No</div>
             {props.columns.map((column, index) => (
               <div key={index} className="w-[33.3%] py-2 text-center">
                 {column.header}
@@ -60,6 +61,7 @@ const BrandTable: React.FunctionComponent<BrandTableProps> = (props) => {
                 key={rowIndex}
                 className="flex  items-center justify-between border-b-[2px] border-solid border-b-[#e7e0ff78] bg-[#e7e0ff78] p-2 text-[14px]"
               >
+                <div className="w-[33.3%] py-2 text-center">{rowIndex + 1}</div>
                 {props.columns.map((column, colIndex) => (
                   <div key={colIndex} className="w-[33.3%] py-2 text-center">
                     {brand[column.field]}

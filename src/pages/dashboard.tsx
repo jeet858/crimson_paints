@@ -36,7 +36,7 @@ function Dashboard({
         />
         <DashboardTile
           name="Branch"
-          href="#"
+          href="/inter-company"
           icon={<PiBridgeDuotone className="h-8 w-8" />}
         />
         <DashboardTile

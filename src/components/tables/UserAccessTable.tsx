@@ -17,6 +17,7 @@ const UserAccessTable: React.FunctionComponent<UserAccessTableProps> = (
     <div className="flex h-fit w-[90%] flex-col">
       <div className="flex h-fit w-full flex-col overflow-y-auto bg-[#C4B0FF45]">
         <div className="flex h-10 w-full justify-between bg-[#C4B0FF] px-8">
+        <p className="self-center text-base font-semibold">Serial No</p>
           <p className="self-center text-base font-semibold"> {props.title}</p>
           <div className="flex w-1/5 items-center justify-between">
             <p className="text-base font-semibold">Access</p>
@@ -29,6 +30,7 @@ const UserAccessTable: React.FunctionComponent<UserAccessTableProps> = (
               className="flex h-10 w-full justify-between px-8 py-8"
               key={index}
             >
+              <p className="self-center text-base font-semibold">{index + 1}</p>
               <p className="self-center text-base font-semibold">{e.title}</p>
               <div className="flex w-1/5 items-center justify-between">
                 <CheckBox permission={e.access} key={e.title} />

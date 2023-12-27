@@ -1,5 +1,6 @@
 import { InsideNav, UserTemplate } from "@/components";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -276,10 +277,75 @@ const MyOrder: React.FunctionComponent = () => {
               >
                 <div className=" p-2 text-xl font-semibold">Order Details</div>
                 <div className="flex w-full items-center justify-between  text-start text-lg font-semibold">
-                  <div className="flex-1 border border-[#11009E82] p-2">
-                    Order #
+                  <div className="flex-1 border border-[#11009E82] py-2">
+                    <div className="flex h-1/2 w-full border-b-2 border-[#11009E82]">
+                      Order #
+                    </div>
+                    <div className="flex h-1/2 w-full whitespace-nowrap border-[#11009E82]">
+                      {data.id}
+                    </div>
                   </div>
-                  <div className="flex-1 border border-[#11009E82] p-2">
+                  <div className="flex-1 border border-[#11009E82] py-2">
+                    <div className="flex h-1/2 w-full border-b-2 border-[#11009E82]">
+                      Date
+                    </div>
+                    <div className="flex h-1/2 w-full whitespace-nowrap border-[#11009E82]">
+                      {str[0]}
+                    </div>
+                  </div>
+                  <div className="flex-1 border border-[#11009E82] py-2">
+                    <div className="flex h-1/2 w-full border-b-2 border-[#11009E82]">
+                      Order Location
+                    </div>
+                    <div className="flex h-1/2 w-full whitespace-nowrap border-[#11009E82]">
+                      {data.state}
+                    </div>
+                  </div>
+                  <div className="flex-1 border border-[#11009E82] py-2">
+                    <div className="flex h-1/2 w-full border-b-2 border-[#11009E82]">
+                      Client
+                    </div>
+                    <div className="flex h-1/2 w-full whitespace-nowrap border-[#11009E82]">
+                      {data.client_unique_name}
+                    </div>
+                  </div>
+                  <div className="flex-1 border border-[#11009E82] py-2">
+                    <div className="flex h-1/2 w-full border-b-2 border-[#11009E82]">
+                      Client Type
+                    </div>
+                    <div className="flex h-1/2 w-full whitespace-nowrap border-[#11009E82]">
+                      {data.client_type}
+                    </div>
+                  </div>
+                  <div className="flex-1 border border-[#11009E82] py-2">
+                    <div className="flex h-1/2 w-full border-b-2 border-[#11009E82]">
+                      Branch
+                    </div>
+                    <div className="flex h-1/2 w-full whitespace-nowrap border-[#11009E82]">
+                      {data.company}
+                    </div>
+                  </div>
+                  <div className="flex-1 items-center justify-center border border-[#11009E82] pt-2">
+                    <div className="flex h-1/2 w-full items-center justify-center border-b-2 border-[#11009E82] text-center">
+                      Actions
+                    </div>
+                    {data.status !== "Executed" ? (
+                      <div className="flex h-1/2 w-full items-center justify-center whitespace-nowrap border-[#11009E82]">
+                        <Link
+                          className="my-1 flex h-fit w-fit bg-[#11009E82]"
+                          href={{
+                            pathname: "/execute-order",
+                            query: { order_id: data.id },
+                          }}
+                        >
+                          Execute
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="flex h-1/2 w-full items-center justify-center whitespace-nowrap border-[#11009E82]"></div>
+                    )}
+                  </div>
+                  {/* <div className="flex-1 border border-[#11009E82] p-2">
                     Date
                   </div>
                   <div className="flex-1 border border-[#11009E82] p-2">
@@ -293,14 +359,14 @@ const MyOrder: React.FunctionComponent = () => {
                   </div>
                   <div className="flex-1 border border-[#11009E82] p-2">
                     Branch
-                  </div>
+                  </div> */}
                 </div>
 
-                <div
+                {/* <div
                   key={index}
                   className="flex items-center justify-between text-start  text-lg"
                 >
-                  <div className="flex-1 border border-[#11009E82] p-2">
+                  <div className="flex-1 whitespace-nowrap border border-[#11009E82] p-2">
                     {data.id}
                   </div>
                   <div className="flex-1 border border-[#11009E82] p-2">
@@ -318,7 +384,7 @@ const MyOrder: React.FunctionComponent = () => {
                   <div className="flex-1 border border-[#11009E82] p-2">
                     {data.company}
                   </div>
-                </div>
+                </div> */}
                 <OrderByTable columns={columns} data={matchingOrderDetails} />
               </div>
             );

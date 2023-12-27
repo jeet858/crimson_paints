@@ -84,4 +84,9 @@ export const locationRouter = createTRPCRouter({
     await ctx.db.$disconnect();
     return locations;
   }),
+  user_orderable_location: protectedProcedure.query(async ({ ctx }) => {
+    const locations = await ctx.db.userOrderableLocation.findMany();
+    await ctx.db.$disconnect();
+    return locations;
+  }),
 });

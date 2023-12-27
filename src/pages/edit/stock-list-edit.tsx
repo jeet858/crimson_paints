@@ -238,17 +238,19 @@ const StockListEditTable: React.FunctionComponent<StockListEditTableProps> = ({
       return {
         brand_name: existingItem.brand_name,
         packaging: existingItem.packaging,
-        location: location,
+        branch: location,
         color_name: color,
         current_stock: list.current_stock,
+        pending: 0,
       };
     } else {
       return {
         brand_name: existingItem.brand_name,
         packaging: existingItem.packaging,
-        location: location,
+        branch: location,
         color_name: color,
         current_stock: 0,
+        pending: 0,
       };
     }
   });

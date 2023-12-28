@@ -3,7 +3,7 @@ import UserAccessTable from "./UserAccessTable";
 
 const OrderTable: React.FC = () => {
   const orderData = [
-    {
+    { 
       title: "By Salesman",
       access: false,
       edit: false,

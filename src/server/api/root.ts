@@ -51,7 +51,7 @@ export const appRouter = createTRPCRouter({
   client: clientListRouter,
   user: userRouter,
   order: orderRouter,
-  userAcess: userAcessRouter,
+  userAccess: userAcessRouter,
 });
 
 // export type definition of API

@@ -15,6 +15,7 @@ const NewOrder: React.FunctionComponent = () => {
   };
   const router = useRouter();
   const currentDate = new Date();
+  const [price, setPrice] = useState("");
   const [user, setUser] = useState<{
     id: string;
     name: string;
@@ -94,6 +95,13 @@ const NewOrder: React.FunctionComponent = () => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  const { data: branchs } = api.location.user_orderable_location.useQuery(
+    undefined,
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
   // const {
   //   data: locations,
   //   isLoading: isLocationLoading,
@@ -177,7 +185,6 @@ const NewOrder: React.FunctionComponent = () => {
     },
     onSuccess: () => {
       alert("Data inserted succesfully");
-      router.push("/new-order");
     },
   });
 
@@ -244,6 +251,25 @@ const NewOrder: React.FunctionComponent = () => {
                           value={`${client.legal_name}X${client.price_list_name}X${client.state}X${client.primary_company}X${client.type}X${client.unique_name}`}
                         >
                           {client.legal_name}/{client.unique_name}
+                        </option>
+                      );
+                    }
+                  })}
+                </select>
+              </div>
+              <div className="flex h-1/6 w-full flex-col space-y-2 font-semibold">
+                <div className="font-semibold text-white">Branch:</div>
+                <select
+                  className="h-8 rounded-md bg-[#C4B0FF]"
+                  name="branch"
+                  onChange={handleInputChange}
+                >
+                  <option value="">---Select Branch---</option>
+                  {branchs?.map((branch, index) => {
+                    if (branch.phone === user?.phone.toString()) {
+                      return (
+                        <option key={index} value={branch.location}>
+                          {branch.location}
                         </option>
                       );
                     }
@@ -336,18 +362,12 @@ const NewOrder: React.FunctionComponent = () => {
                     const str = value.split("X");
                     console.log(str[1]);
 
-                    str[1]
-                      ? setOrderDetails({
-                          ...orderDetails,
-                          [name]: str[0],
-                          ["id"]: `${orderDetails.date}/${orderDetails.salesman_name}/${orderDetails.client_name}`,
-                          amount: parseInt(str[1]),
-                        })
-                      : setOrderDetails({
-                          ...orderDetails,
-                          [name]: str[0],
-                          ["id"]: `${orderDetails.date}/${orderDetails.salesman_name}/${orderDetails.client_name}`,
-                        });
+                    setOrderDetails({
+                      ...orderDetails,
+                      [name]: str[0],
+                      ["id"]: `${orderDetails.date}/${orderDetails.salesman_name}/${orderDetails.client_name}`,
+                    });
+                    str[1] ? setPrice(str[1]) : null;
                   }}
                 >
                   <option value="">---Select Packaging---</option>
@@ -401,9 +421,7 @@ const NewOrder: React.FunctionComponent = () => {
                     setOrderDetails({
                       ...orderDetails,
                       total_qty: value,
-                      amount:
-                        parseInt(orderDetails.amount.toString()) *
-                        parseInt(value),
+                      amount: parseInt(price) * parseInt(value),
                     });
                   }}
                 />

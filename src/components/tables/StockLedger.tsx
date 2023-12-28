@@ -16,7 +16,7 @@ interface TableProps {
     field: string;
   }[];
   userType?: string;
-  location: string;
+  branch: string;
   brand_name: string;
   color: string;
   packaging: string;
@@ -24,7 +24,7 @@ interface TableProps {
 const StockLedger: React.FunctionComponent<TableProps> = ({
   color,
   columns,
-  location,
+  branch,
   brand_name,
   userType,
   packaging,
@@ -131,7 +131,7 @@ const StockLedger: React.FunctionComponent<TableProps> = ({
             if (
               row.brand_name === brand_name &&
               row.color_name === color &&
-              row.location === location &&
+              row.location === branch &&
               row.packaging === packaging
             ) {
               return (

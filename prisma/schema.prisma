@@ -202,8 +202,9 @@ model Stock{
   color_name String
   packaging String
   current_stock Int
-  location String
-  @@unique([brand_name, color_name, packaging,location])
+  branch String
+  pending Int
+  @@unique([brand_name, color_name, packaging,branch])
 }
 
 model StockLedger{
@@ -308,7 +309,6 @@ model OrderDetails{
   client_unique_name String @db.VarChar(50)
   salesman_name String @db.VarChar(50)
   company String
-  location String
   date String @db.VarChar(50)
-  @@id([id, salesman_name, client_unique_name, date,location,brand_name, color_name, packaging_type])
+  @@id([id, salesman_name, client_unique_name, date, company,brand_name, color_name, packaging_type])
 }

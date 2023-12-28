@@ -11,12 +11,12 @@ export const stockRouter = createTRPCRouter({
     const units = await ctx.db.stock.findMany();
     await ctx.db.$disconnect();
     return units.map(
-      ({ brand_name, color_name, current_stock, packaging, location }) => ({
+      ({ brand_name, color_name, current_stock, packaging, branch }) => ({
         brand_name,
         color_name,
         current_stock,
         packaging,
-        location,
+        branch,
       })
     );
   }),
@@ -61,13 +61,13 @@ export const stockRouter = createTRPCRouter({
           AND: {
             brand_name: input.brand_name,
             color_name: input.color_name,
-            location: input.location,
+            branch: input.location,
           },
         },
       });
       await ctx.db.$disconnect();
       return units.map(
-        ({ brand_name, color_name, current_stock, packaging, location }) => ({
+        ({ brand_name, color_name, current_stock, packaging, branch }) => ({
           brand_name,
           color_name,
           current_stock,
@@ -84,7 +84,7 @@ export const stockRouter = createTRPCRouter({
           AND: {
             brand_name: input.brand_name,
             color_name: input.color_name,
-            location: input.location,
+            branch: input.location,
           },
         },
       });
@@ -104,27 +104,27 @@ export const stockRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const stockData = await ctx.db.stock.findUnique({
         where: {
-          brand_name_color_name_packaging_location: {
+          brand_name_color_name_packaging_branch: {
             brand_name: input.brand_name,
             color_name: input.color_name,
-            location: input.location,
+            branch: input.location,
             packaging: input.packaging,
           },
         },
       });
       await ctx.db.stock.update({
         where: {
-          brand_name_color_name_packaging_location: {
+          brand_name_color_name_packaging_branch: {
             brand_name: input.brand_name,
             color_name: input.color_name,
-            location: input.location,
+            branch: input.location,
             packaging: input.packaging,
           },
         },
         data: {
           brand_name: input.brand_name,
           color_name: input.color_name,
-          location: input.location,
+          branch: input.location,
           packaging: input.packaging,
           current_stock: stockData ? stockData.current_stock - input.added : 0,
         },

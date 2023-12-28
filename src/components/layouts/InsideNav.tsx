@@ -120,7 +120,7 @@ const InsideNav: React.FunctionComponent = (props) => {
     <div className="flex w-full justify-center pt-5">
       <InsideNavElement elementHeader="Order" element={OrderElements} />
       <InsideNavElement elementHeader="Stock" element={StockElements} />
-      <InsideNavElement elementHeader="Reports" />
+      {/* <InsideNavElement elementHeader="Reports" /> */}
       <InsideNavElement elementHeader="Costing" />
       <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>

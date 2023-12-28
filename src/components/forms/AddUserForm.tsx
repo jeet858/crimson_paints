@@ -26,10 +26,10 @@ const AddUserForm: React.FunctionComponent = () => {
     });
   };
   const {
-    data: locations,
+    data: branchs,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all_state.useQuery(undefined, {
+  } = api.interComapny.all.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -202,28 +202,24 @@ const AddUserForm: React.FunctionComponent = () => {
                   Orderable Locations
                 </p>
               </div>
-              <div className="flex">
-                {locations?.map((location, index) => {
+              <div className="flex h-fit w-full flex-wrap">
+                {branchs?.map((branch, index) => {
                   return (
                     <div
                       className="flex items-center justify-center"
                       key={index}
                     >
-                      <p className="mr-2">{location.location}</p>
+                      <p className="mr-2">{branch.name}</p>
                       <input
                         type="checkbox"
                         className="mr-2"
-                        value={location.location}
+                        value={branch.name}
                         key={index * index}
-                        name={`${location.location}${index}`}
+                        name={`${branch.name}${index}`}
                         onChange={() => {
-                          if (
-                            addData.orderableLocation.includes(
-                              location.location
-                            )
-                          ) {
+                          if (addData.orderableLocation.includes(branch.name)) {
                             const arr = addData.orderableLocation.filter(
-                              (item) => item !== location.location
+                              (item) => item !== branch.name
                             );
                             setAddData({
                               ...addData,
@@ -231,7 +227,7 @@ const AddUserForm: React.FunctionComponent = () => {
                             });
                           } else {
                             const arr = addData.orderableLocation;
-                            arr.push(location.location);
+                            arr.push(branch.name);
                             setAddData({
                               ...addData,
                               ["orderableLocation"]: arr,
@@ -247,31 +243,31 @@ const AddUserForm: React.FunctionComponent = () => {
           </div>
         </div>
         <div className="my-2 flex h-fit w-full flex-col gap-y-2 rounded-md bg-[#F5F5F5] pb-4 text-[#787878]">
-          <div className="flex">
+          <div className="flex w-full">
             <div className="flex h-fit cursor-pointer flex-col  px-2">
               <div className="flex">
                 <p className="border-b-4 border-[#787878]">Access Locations</p>
               </div>
-              <div className="flex">
-                {locations?.map((location, index) => {
+              <div className="flex h-fit w-full flex-wrap">
+                {branchs?.map((branch, index) => {
                   return (
                     <div
                       className="flex items-center justify-center"
                       key={index}
                     >
-                      <p className="mr-2">{location.location}</p>
+                      <p className="mr-2 flex whitespace-nowrap">
+                        {branch.name}
+                      </p>
                       <input
                         type="checkbox"
                         className="mr-2"
-                        value={location.location}
+                        value={branch.name}
                         key={index}
-                        name={`${location.location}${index}${index}`}
+                        name={`${branch.name}${index}${index}`}
                         onChange={() => {
-                          if (
-                            addData.acessLocation.includes(location.location)
-                          ) {
+                          if (addData.acessLocation.includes(branch.name)) {
                             const arr = addData.acessLocation.filter(
-                              (item) => item !== location.location
+                              (item) => item !== branch.name
                             );
                             setAddData({
                               ...addData,
@@ -279,7 +275,7 @@ const AddUserForm: React.FunctionComponent = () => {
                             });
                           } else {
                             const arr = addData.acessLocation;
-                            arr.push(location.location);
+                            arr.push(branch.name);
                             setAddData({
                               ...addData,
                               ["acessLocation"]: arr,

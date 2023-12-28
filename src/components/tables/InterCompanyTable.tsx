@@ -23,9 +23,11 @@ interface TableProps {
 }
 const InterCompanyTable: React.FunctionComponent<TableProps> = (props) => {
   const router = useRouter();
+  let serialNumber = 1;
   return (
     <div className="flex max-h-[50vh] w-full flex-col p-4">
       <div className="flex w-full rounded-md bg-[#C4B0FF] text-lg font-semibold">
+      <div className="w-1/3 py-4 text-center">Serial No</div>
         {props.columns.map((column, index) => (
           <div key={index} className="w-1/3 py-4 text-center">
             {column.header}
@@ -40,6 +42,9 @@ const InterCompanyTable: React.FunctionComponent<TableProps> = (props) => {
               key={rowIndex}
               className="flex border-b-[1px] border-white bg-[#C4B0FF9C] bg-opacity-25 py-4 text-center text-base font-semibold "
             >
+              <div className="w-1/3 flex items-center justify-center">
+                {serialNumber++}
+              </div>
               <div className="flex w-1/3 flex-col">
                 <div>{row.name}</div>
               </div>
@@ -92,12 +97,12 @@ const InterCompanyTable: React.FunctionComponent<TableProps> = (props) => {
                 >
                   Delete
                 </button>
-                <button
+                {/* <button
                   className="h-8 w-20 rounded-lg bg-[#39952A] text-base text-white"
                   onClick={async () => {}}
                 >
                   Salesman
-                </button>
+                </button> */}
               </div>
             </div>
           </React.Fragment>

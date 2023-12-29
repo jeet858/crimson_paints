@@ -20,6 +20,7 @@ const TableComponentProxyAccess: React.FC<TableComponentProps> = ({
     <div className="flex  h-full items-center justify-center">
       <div className="mt-8  w-[90%] ">
         <div className=" flex justify-between border-b-[3px] border-white bg-[#C4B0FF] font-semibold">
+        <div className="w-1/12 p-3">Serial No</div>
           <div className="w-1/6 p-3">User name</div>
           <div className="w-1/6 p-3">Type</div>
           <div className="w-1/6 p-3">Status</div>
@@ -32,6 +33,7 @@ const TableComponentProxyAccess: React.FC<TableComponentProps> = ({
               key={index}
               className="flex items-center justify-between border-b-2 border-violet-50 bg-[#C4B0FF45]"
             >
+              <div className="w-1/12 p-3">{index + 1}</div>
               <div className="w-1/6 p-3">{row.username}</div>
               <div className="w-1/6 p-3">{row.type}</div>
               <div className="flex w-1/6 items-center p-3">

@@ -30,10 +30,12 @@ const tableRowStyle: {} = {
 
 const ColorTable: React.FunctionComponent<TableProps> = (props) => {
   const router = useRouter();
+  let serialNumber = 1;
   return (
     <div className="flex w-full items-start justify-center">
       <div className="w-[90%]">
         <div className="flex items-center justify-between border-b-[3px] border-white bg-[#C4B0FF] p-2 font-semibold">
+        <div className="w-1/3 py-4 text-center">Serial No</div>
           {props.columns.map((column, index) => (
             <div key={index} className="w-[33.3%] py-2 text-center">
               {column.header}
@@ -47,6 +49,9 @@ const ColorTable: React.FunctionComponent<TableProps> = (props) => {
               key={rowIndex}
               className="flex w-full items-center justify-between border-b-[2px] border-solid border-b-[#e7e0ff78] bg-[#e7e0ff78] p-2 text-[14px]"
             >
+              <div className="w-1/3 flex items-center justify-center">
+                {serialNumber++}
+              </div>
               {props.columns.map((column, colIndex) => (
                 <div
                   key={colIndex}

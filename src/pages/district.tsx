@@ -15,21 +15,18 @@ const MasterDistrict: React.FunctionComponent = () => {
   };
 
   const columns = [
-    { header: "Symbol", field: "symbol" },
-    { header: "Name", field: "name" },
+    { header: "State", field: "state" },
+    { header: "District", field: "district" },
   ];
 
-  const [data, setData] = useState<
-    { name: string; symbol: string }[] | undefined
-  >([]);
-
-  const { data: basicUnits, isLoading, isError } = api.basicUnit.all.useQuery();
-
-  useEffect(() => {
-    if (!isLoading && !isError) {
-      setData(basicUnits);
-    }
-  }, [basicUnits]);
+  const {
+    data: districts,
+    isLoading,
+    isError,
+  } = api.location.all_district.useQuery(undefined, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading)
     return (
@@ -114,8 +111,8 @@ const MasterDistrict: React.FunctionComponent = () => {
         </div>
         <TableComponent
           columns={columns}
-          data={basicUnits}
-          idField={["name", "symbol"]}
+          data={districts}
+          idField={["state", "district"]}
           editUrl="edit/district-edit"
           deleteUrl="delete/district-delete"
         />

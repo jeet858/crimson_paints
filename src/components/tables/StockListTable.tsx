@@ -53,7 +53,7 @@ const StockListTable: React.FunctionComponent<TableProps> = (props) => {
   }
   const filteredData = stocks.filter((stock) => {
     return (
-      stock.brand_name === props.brand_name && stock.location === props.location
+      stock.brand_name === props.brand_name && stock.branch === props.location
     );
   });
   return (

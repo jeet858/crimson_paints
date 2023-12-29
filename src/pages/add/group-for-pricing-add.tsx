@@ -17,7 +17,6 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
       group_name: string;
       group_code: string;
       color_name: string;
-      rgb_code: string;
     }[]
   >([]);
   const { data: brands, isLoading, isError } = api.brand.all.useQuery();
@@ -42,7 +41,6 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
     group_name: string;
     group_code: string;
     color_name: string;
-    rgb_code: string;
   }) => {
     const updatedColorArray = [...colorArray];
     const foundIndex = updatedColorArray.findIndex(
@@ -68,14 +66,12 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
       router.push("/group-for-pricing");
     },
   });
-  const addGroupInfo = api.groupPricing.create_groupInfo.useMutation();
 
   const create = () => {
     if (colorArray.length === 0) {
       alert("Be sure to select atleast one color");
     } else {
       add.mutate({ data: colorArray });
-      addGroupInfo.mutate(addData);
     }
   };
   if (isError || isColorsError) {

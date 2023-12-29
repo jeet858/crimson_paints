@@ -49,7 +49,7 @@ const LoginForm = () => {
         </span>
         <input
           className="m-1 block w-5/6 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-[#23b196] focus:outline-none focus:ring-[#23b196] sm:text-sm"
-          placeholder="User-Id"
+          placeholder="User-Email"
           value={userInfo.email}
           onChange={({ target }) =>
             setUserInfo({ ...userInfo, email: target.value })

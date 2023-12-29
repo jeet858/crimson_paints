@@ -38,7 +38,7 @@ const SalesRepresentativeEdit: React.FunctionComponent = () => {
     data: locations,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all.useQuery(undefined, {
+  } = api.location.all_state.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -222,13 +222,13 @@ const SalesRepresentativeEdit: React.FunctionComponent = () => {
                     return (
                       <div
                         className="flex items-center justify-center"
-                        key={`${location}${index}`}
+                        key={`${location.location}${index}`}
                       >
                         <p className="mr-2">{location.location}</p>
 
                         <div
                           className="ml-2 flex h-4 w-4 cursor-pointer items-center justify-center border-2"
-                          key={`${location}${index}${index}`}
+                          key={`${location.location}${index}${index}`}
                           onClick={() => {
                             if (
                               orderableLocationData.includes(location.location)

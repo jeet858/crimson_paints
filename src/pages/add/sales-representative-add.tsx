@@ -15,54 +15,54 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
     userType: "admin",
   };
 
-  const [addData, setAddData] = useState({
-    name: "",
-    phone: 0,
-    company: "",
-  });
-  const {
-    data: orderableColors,
-    isError,
-    isLoading,
-  } = api.orderablrColor.all_list.useQuery(undefined, {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-  const { data: interCompany } = api.interComapny.all.useQuery(undefined, {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setAddData({
-      ...addData,
-      [name]: name === "phone" ? parseInt(value) : value,
-    });
-  };
+  // const [addData, setAddData] = useState({
+  //   name: "",
+  //   phone: 0,
+  //   company: "",
+  // });
+  // const {
+  //   data: orderableColors,
+  //   isError,
+  //   isLoading,
+  // } = api.orderablrColor.all_list.useQuery(undefined, {
+  //   refetchInterval: false,
+  //   refetchOnWindowFocus: false,
+  // });
+  // const { data: interCompany } = api.interComapny.all.useQuery(undefined, {
+  //   refetchInterval: false,
+  //   refetchOnWindowFocus: false,
+  // });
+  // const handleInputChange = (
+  //   event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  // ) => {
+  //   const { name, value } = event.target;
+  //   setAddData({
+  //     ...addData,
+  //     [name]: name === "phone" ? parseInt(value) : value,
+  //   });
+  // };
 
-  const add = api.salesRepresentative.create.useMutation({
-    onError: (err, newSalesman, context) => {
-      alert(`${err.message}`);
-    },
-    onSuccess: () => {
-      router.push("/sales-representative");
-    },
-  });
+  // const add = api.salesRepresentative.create.useMutation({
+  //   onError: (err, newSalesman, context) => {
+  //     alert(`${err.message}`);
+  //   },
+  //   onSuccess: () => {
+  //     router.push("/sales-representative");
+  //   },
+  // });
 
-  const create = () => {
-    console.log(addData);
-    if (addData.name != "" || addData.company != "" || addData.phone != 0) {
-      add.mutate(addData);
-    } else {
-      alert("Be sure to fill all fields or enter valid data");
-    }
-  };
+  // const create = () => {
+  //   console.log(addData);
+  //   if (addData.name != "" || addData.company != "" || addData.phone != 0) {
+  //     add.mutate(addData);
+  //   } else {
+  //     alert("Be sure to fill all fields or enter valid data");
+  //   }
+  // };
 
   return (
     <UserTemplate templateParams={templateParams}>
-      <div className="flex h-full w-full items-center justify-center">
+      {/* <div className="flex h-full w-full items-center justify-center">
         <div className="flex h-1/3 w-1/3 flex-col rounded-xl bg-[#C4B0FF45]">
           <p className="h-1/4 w-full items-center border-b-2 border-[#11009E] pl-4 text-lg font-semibold">
             Sales Representative Add
@@ -116,7 +116,7 @@ const SalesRepresentativeAdd: React.FunctionComponent = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </UserTemplate>
   );
 };

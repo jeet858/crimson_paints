@@ -30,6 +30,7 @@ const config = {
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/prefer-for-of": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/prefer-optional-chain": "warn",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {

@@ -44,6 +44,14 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
         <Table stickyHeader>
           <TableHead>
             <TableRow>
+            <TableCell
+                style={{
+                  backgroundColor: "#c4b0ff",
+                  textAlign: "center",
+                }}
+              >
+                Serial No
+              </TableCell>
               {props.columns.map((column, index) => (
                 <TableCell
                   key={index}
@@ -69,6 +77,14 @@ const TableComponent: React.FunctionComponent<TableProps> = (props) => {
           <TableBody>
             {props.data.map((row: any, rowIndex) => (
               <TableRow key={rowIndex} style={{ ...tableRowStyle }}>
+                <TableCell
+                  style={{
+                    backgroundColor: "rgba(196, 176, 255, 0.25)",
+                    textAlign: "center",
+                  }}
+                >
+                  {rowIndex + 1}
+                </TableCell>
                 {props.columns.map((column, colIndex) => (
                   <TableCell
                     key={colIndex}

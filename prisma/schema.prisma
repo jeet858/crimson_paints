@@ -135,7 +135,7 @@ model GroupInfo{
   brand_name String
   group_name String
   group_code String
-  @@id([brand_name, group_name, group_code])
+  @@unique([brand_name, group_name])
 
 }
 
@@ -144,8 +144,8 @@ model GroupPricing{
   group_name String
   group_code String
   color_name String
-  rgb_code String
-  @@unique([brand_name, group_name, group_code, color_name])
+  @@id([brand_name,group_name,color_name])
+  @@unique([brand_name,color_name])
 }
 model OderableColors{
   list_name String @unique @id
@@ -202,8 +202,9 @@ model Stock{
   color_name String
   packaging String
   current_stock Int
-  location String
-  @@unique([brand_name, color_name, packaging,location])
+  branch String
+  pending Int
+  @@unique([brand_name, color_name, packaging,branch])
 }
 
 model StockLedger{
@@ -245,12 +246,13 @@ model Client{
   unique_name String @id
   distributor String
   sales_representative String
+  sales_representative_phone String
   code String
   gst String
   trade_license String
   in_india Boolean 
   address String
-  location String
+  legal_address String
   state String
   district String
   phone_primary String
@@ -284,9 +286,15 @@ model ClientSecondaryCompany{
 
 model Order{
   id String @id
-  client_name String 
-  salesman_name String
+  client_unique_name String 
+  date String 
+  salesman_name String 
+  salesman_phone String 
+  client_type String 
+  state String 
   company String 
+  status String
+  client_legal_name String 
 }
 
 model OrderDetails{
@@ -298,11 +306,18 @@ model OrderDetails{
   total_qty Decimal
   executed_qty Decimal
   cancelled_qty Decimal
-  client_name String @db.VarChar(50)
+  client_unique_name String @db.VarChar(50)
   salesman_name String @db.VarChar(50)
   company String
-  location String
   date String @db.VarChar(50)
-  status String
-  @@id([id, salesman_name, client_name, date,location,brand_name, color_name, packaging_type])
+  @@id([id, salesman_name, client_unique_name, date, company,brand_name, color_name, packaging_type])
+}
+
+model userAccess{
+  menu_name String
+  user_type String
+  page_name String
+  access Boolean
+  edit Boolean
+  @@id([user_type,page_name])
 }

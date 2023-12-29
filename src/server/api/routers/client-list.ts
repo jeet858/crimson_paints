@@ -33,7 +33,7 @@ export const clientListRouter = createTRPCRouter({
         gst,
         ifsc,
         legal_name,
-        location,
+        legal_address,
         phone_primary,
         phone_secondary,
         sales_representative,
@@ -49,6 +49,7 @@ export const clientListRouter = createTRPCRouter({
         max_credit_amount,
         max_credit_days,
         primary_company,
+        sales_representative_phone,
       }) => ({
         address,
         bank_branch,
@@ -61,7 +62,7 @@ export const clientListRouter = createTRPCRouter({
         gst,
         ifsc,
         legal_name,
-        location,
+        legal_address,
         phone_primary,
         phone_secondary,
         sales_representative,
@@ -77,8 +78,14 @@ export const clientListRouter = createTRPCRouter({
         max_credit_amount,
         max_credit_days,
         primary_company,
+        sales_representative_phone,
       })
     );
+  }),
+  client_supervisors_all: protectedProcedure.query(async ({ ctx }) => {
+    const units = await ctx.db.clientSupervisors.findMany();
+    await ctx.db.$disconnect();
+    return units;
   }),
   by_unique_name: protectedProcedure
     .input(inputSchema)
@@ -89,7 +96,28 @@ export const clientListRouter = createTRPCRouter({
         },
       });
       await ctx.db.$disconnect();
-      return unit;
+      const supervisors = await ctx.db.clientSupervisors.findMany({
+        where: {
+          name: input,
+        },
+      });
+      const secondary_company = await ctx.db.clientSecondaryCompany.findMany({
+        where: {
+          unique_name: input,
+        },
+      });
+      const arr: { name: string; phone: string }[] = [];
+      supervisors.forEach((ele) => {
+        arr.push({
+          phone: ele.phone,
+          name: ele.sales_supervisor,
+        });
+      });
+      return {
+        ...unit,
+        sales_supervisor: arr,
+        secondary_company: secondary_company,
+      };
     }),
   by_distributor_name: protectedProcedure
     .input(inputSchema)
@@ -113,7 +141,7 @@ export const clientListRouter = createTRPCRouter({
           gst,
           ifsc,
           legal_name,
-          location,
+          legal_address,
           phone_primary,
           phone_secondary,
           sales_representative,
@@ -129,6 +157,7 @@ export const clientListRouter = createTRPCRouter({
           max_credit_amount,
           max_credit_days,
           primary_company,
+          sales_representative_phone,
         }) => ({
           address,
           bank_branch,
@@ -141,7 +170,7 @@ export const clientListRouter = createTRPCRouter({
           gst,
           ifsc,
           legal_name,
-          location,
+          legal_address,
           phone_primary,
           phone_secondary,
           sales_representative,
@@ -156,6 +185,7 @@ export const clientListRouter = createTRPCRouter({
           is_active,
           max_credit_amount,
           max_credit_days,
+          sales_representative_phone,
           primary_company,
         })
       );
@@ -201,7 +231,7 @@ export const clientListRouter = createTRPCRouter({
             gst: input.gst,
             ifsc: input.ifsc,
             legal_name: input.legal_name,
-            location: input.location,
+            legal_address: input.legal_address,
             phone_primary: input.phone_primary.toString(),
             phone_secondary: input.phone_secondary.toString(),
             sales_representative: input.sales_representative,
@@ -220,6 +250,7 @@ export const clientListRouter = createTRPCRouter({
             max_credit_amount: parseInt(input.max_credit_amount),
             max_credit_days: parseInt(input.max_credit_days),
             primary_company: input.primary_company,
+            sales_representative_phone: input.sales_representative_phone,
           },
         });
       } catch (e) {
@@ -228,7 +259,7 @@ export const clientListRouter = createTRPCRouter({
             `An user with similar userid or phone number or email already exists `
           );
         } else {
-          throw new Error(`${e}`);
+          throw new Error(`Error occured`);
         }
       }
       await ctx.db.clientSupervisors.createMany({
@@ -241,7 +272,31 @@ export const clientListRouter = createTRPCRouter({
   edit: protectedProcedure
     .input(ClientEditInput)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.db.client.update({
+      const salesSupervisorArray: {
+        name: string;
+        sales_supervisor: string;
+        phone: string;
+      }[] = [];
+      input.sales_supervisor.forEach((element) => {
+        const obj = {
+          name: input.unique_name,
+          sales_supervisor: element.name,
+          phone: element.phone,
+        };
+        salesSupervisorArray.push(obj);
+      });
+      const clientSecondaryCompanyArray: {
+        unique_name: string;
+        company: string;
+      }[] = [];
+      input.secondary_company.forEach((element) => {
+        const obj = {
+          unique_name: input.unique_name,
+          company: element,
+        };
+        clientSecondaryCompanyArray.push(obj);
+      });
+      await ctx.db.client.update({
         where: {
           unique_name: input.existing_unique_name,
         },
@@ -257,7 +312,7 @@ export const clientListRouter = createTRPCRouter({
           gst: input.gst,
           ifsc: input.ifsc,
           legal_name: input.legal_name,
-          location: input.location,
+          legal_address: input.legal_address,
           phone_primary: input.phone_primary.toString(),
           phone_secondary: input.phone_secondary.toString(),
           sales_representative: input.sales_representative,
@@ -267,21 +322,50 @@ export const clientListRouter = createTRPCRouter({
           unique_name: input.unique_name,
           is_cheque: input.is_cheque,
           price_list_name: input.price_list_name,
-          gst_validity: input.gst_validity,
+          gst_validity:
+            input.gst_validity.length > 0 ? new Date(input.gst_validity) : null,
           in_india: input.in_india,
           is_active: input.is_active,
           max_credit_amount: parseInt(input.max_credit_amount),
           max_credit_days: parseInt(input.max_credit_days),
           primary_company: input.primary_company,
+          sales_representative_phone: input.sales_representative_phone,
         },
+      });
+      await ctx.db.clientSupervisors.deleteMany({
+        where: {
+          name: input.existing_unique_name,
+        },
+      });
+
+      await ctx.db.clientSecondaryCompany.deleteMany({
+        where: {
+          unique_name: input.existing_unique_name,
+        },
+      });
+      await ctx.db.clientSupervisors.createMany({
+        data: salesSupervisorArray,
+      });
+      return await ctx.db.clientSecondaryCompany.createMany({
+        data: clientSecondaryCompanyArray,
       });
     }),
   delete: protectedProcedure
     .input(ClientDeleteInput)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.client.deleteMany({
+      // await ctx.db.client.deleteMany({
+      //   where: {
+      //     distributor: input.unique_name,
+      //   },
+      // });
+      await ctx.db.clientSecondaryCompany.deleteMany({
         where: {
-          distributor: input.unique_name,
+          unique_name: input.unique_name,
+        },
+      });
+      await ctx.db.clientSupervisors.deleteMany({
+        where: {
+          name: input.unique_name,
         },
       });
       return await ctx.db.client.delete({

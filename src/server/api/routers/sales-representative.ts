@@ -10,6 +10,7 @@ const inputSchema = z.object({
     required_error: "This is a required field",
   }),
 });
+
 export const salesRepresentativeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const representatives = await ctx.db.salesman.findMany();
@@ -24,6 +25,17 @@ export const salesRepresentativeRouter = createTRPCRouter({
       })
     );
   }),
+  where_by_phone: protectedProcedure
+    .input(inputSchema)
+    .query(async ({ ctx, input }) => {
+      const representative = await ctx.db.salesman.findUnique({
+        where: {
+          phone: input.phone,
+        },
+      });
+      await ctx.db.$disconnect();
+      return representative;
+    }),
   salesman_orderable_location: protectedProcedure
     .input(inputSchema)
     .query(async ({ ctx, input }) => {

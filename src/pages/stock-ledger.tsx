@@ -70,10 +70,10 @@ const Stock_Ledger = () => {
     refetchOnWindowFocus: false,
   });
   const {
-    data: locations,
+    data: branchs,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all.useQuery(undefined, {
+  } = api.interComapny.all.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -106,13 +106,13 @@ const Stock_Ledger = () => {
     },
   });
   useEffect(() => {
-    if (locations) {
-      setSelectedLocation(locations[0]?.location as string);
+    if (branchs) {
+      setSelectedLocation(branchs[0]?.name as string);
     }
     if (brands) {
       setSelectedBrand(brands[0]?.brand_name as string);
     }
-  }, [locations]);
+  }, [branchs]);
   return (
     <UserTemplate templateParams={templateParams}>
       <InsideNav />
@@ -133,7 +133,7 @@ const Stock_Ledger = () => {
               className="flex  w-36 cursor-pointer items-center justify-center rounded-md border border-violet-500 bg-violet-100 p-1 text-[#787878]"
               onClick={() => {
                 setIsDropdownOpen(!isDropdownOpen);
-                console.log(locations);
+                console.log(branchs);
               }}
             >
               {selectedLocation}
@@ -141,18 +141,18 @@ const Stock_Ledger = () => {
             </div>
             {isDropdownOpen ? (
               <div className="absolute left-0 top-full z-10 mt-1 w-full rounded-md border  border-violet-500 bg-violet-100 shadow-md">
-                {locations?.map((location, index) => {
+                {branchs?.map((branch, index) => {
                   return (
                     <div
                       key={index}
                       className="border-b-1 cursor-pointer border-violet-500 px-4 py-2 hover:bg-gray-100"
                       onClick={() => {
-                        handleLocationChange(location.location);
+                        handleLocationChange(branch.name);
                         setIsDropdownOpen(!isDropdownOpen);
                         console.log(isDropdownOpen);
                       }}
                     >
-                      {location.location}
+                      {branch.name}
                     </div>
                   );
                 })}
@@ -231,7 +231,7 @@ const Stock_Ledger = () => {
           columns={columns}
           brand_name={selectedBrand}
           color={selectedColor}
-          location={selectedLocation}
+          branch={selectedLocation}
           packaging={selectedPackaging}
         />
       </div>

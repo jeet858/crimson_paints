@@ -313,11 +313,12 @@ model OrderDetails{
   @@id([id, salesman_name, client_unique_name, date, company,brand_name, color_name, packaging_type])
 }
 
-model userAccess{
-  menu_name String
+model UserAccess{
+  menu_type String
   user_type String
   page_name String
   access Boolean
   edit Boolean
+  del Boolean
   @@id([user_type,page_name])
 }

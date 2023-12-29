@@ -2,6 +2,7 @@ import type { inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
 import type { AppRouter } from "./server/api/root";
 import { Pending } from "@mui/icons-material";
+import { access } from "fs";
 
 type RouterOutputs = inferRouterOutputs<AppRouter>;
 type allBasicUnitOutput = RouterOutputs["basicUnit"]["all"];
@@ -974,3 +975,25 @@ export const districtEditInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+export const userAccessInput = z.array(
+  z.object({
+    menu_type: z.string({
+      required_error: "This field cant be null",
+    }),
+    page_name: z.string({
+      required_error: "This field cant be null",
+    }),
+    user_type: z.string({
+      required_error: "This field cant be null",
+    }),
+    access: z.boolean({
+      required_error: "This field cant be null",
+    }),
+    edit: z.boolean({
+      required_error: "This field cant be null",
+    }),
+    del: z.boolean({
+      required_error: "This field cant be null",
+    }),
+  })
+);

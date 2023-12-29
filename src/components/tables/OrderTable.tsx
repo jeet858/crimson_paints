@@ -3,7 +3,7 @@ import UserAccessTable from "./UserAccessTable";
 
 const OrderTable: React.FC = () => {
   const orderData = [
-    { 
+    {
       title: "By Salesman",
       access: false,
       edit: false,
@@ -34,7 +34,7 @@ const OrderTable: React.FC = () => {
       edit: false,
     },
   ];
-  return <UserAccessTable data={orderData} title="Order" />;
+  return <UserAccessTable user_type="Salesman" title="Order" />;
 };
 
 export default OrderTable;

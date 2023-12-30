@@ -322,3 +322,9 @@ model UserAccess{
   del Boolean
   @@id([user_type,page_name])
 }
+
+model ProxyAccess{
+  user_id String
+  proxy_user_id String
+  @@id([user_id,proxy_user_id])
+}

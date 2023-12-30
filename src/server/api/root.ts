@@ -22,6 +22,7 @@ import { clientListRouter } from "./routers/client-list";
 import { userRouter } from "./routers/user";
 import { orderRouter } from "./routers/order";
 import { userAcessRouter } from "./routers/user-access";
+import { proxyAccessRouter } from "./routers/proxy-access";
 
 /**
  * This is the primary router for your server.
@@ -52,6 +53,7 @@ export const appRouter = createTRPCRouter({
   user: userRouter,
   order: orderRouter,
   userAccess: userAcessRouter,
+  proxyAccess: proxyAccessRouter,
 });
 
 // export type definition of API

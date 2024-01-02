@@ -70,6 +70,12 @@ const GroupForPricingAdd: React.FunctionComponent = () => {
   const create = () => {
     if (colorArray.length === 0) {
       alert("Be sure to select atleast one color");
+    } else if (
+      addData.brand_name === "" ||
+      addData.group_code === "" ||
+      addData.group_name === ""
+    ) {
+      alert("Be sure too fill all fields");
     } else {
       add.mutate({ data: colorArray });
     }

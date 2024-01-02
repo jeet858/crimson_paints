@@ -1,9 +1,9 @@
 import { InsideNav, UserTemplate } from "@/components";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import PriceList from "~/components/tables/PriceList";
+import PriceListTable from "~/components/tables/PriceListTable";
 
-const pricelist = () => {
+const PriceList: React.FunctionComponent = () => {
   const [selectedPriceList, setSelectedPriceList] = useState("priceList1");
   const router = useRouter();
   const { userType } = router.query;
@@ -115,10 +115,10 @@ const pricelist = () => {
         </div>
 
         <h1 className="text-xl font-semibold">Quick Links</h1>
-        <PriceList data={yourData} />
+        <PriceListTable data={yourData} />
       </div>
     </UserTemplate>
   );
 };
 
-export default pricelist;
+export default PriceList;

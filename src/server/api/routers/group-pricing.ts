@@ -35,11 +35,7 @@ export const groupPricingTypeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.groupPricing.findMany();
     await ctx.db.$disconnect();
-    return units.map(({ brand_name, color_name, group_name }) => ({
-      brand_name,
-      color_name,
-      group_name,
-    }));
+    return units;
   }),
   create: protectedProcedure
     .input(groupPricingInput)

@@ -30,17 +30,14 @@ const GroupForProcingTable: React.FC<GroupForProcingTableProps> = ({
             <div className="table">
               <div className="flex  w-full flex-col items-center justify-between rounded-lg border-[1px] border-[#786ADE] bg-[#ECE5FF99] p-2 text-xl font-semibold">
                 <div className="flex w-full border-b-2 border-[#786ADE]">
-                <div className="flex w-1/4 items-center justify-center">
+                  <div className="flex w-1/4 items-center justify-center">
                     Serial No
                   </div>
-                <div className="flex w-1/4 items-center justify-center">
-                    Group Name
-                  </div>
                   <div className="flex w-1/4 items-center justify-center">
                     Group Name
                   </div>
                   <div className="flex w-1/4 items-center justify-center">
-                    Code
+                    Group Code
                   </div>
                   <div className="flex w-1/4 items-center justify-center">
                     Colors
@@ -86,7 +83,7 @@ const GroupInfo: React.FC<GroupInfoProps> = (props) => {
         return (
           <div className="flex w-full border-b-2 border-[#786ADE]" key={index}>
             <div className="flex w-1/4 justify-center border-r-2 border-[#786ADE] pt-4">
-              {index+1}
+              {index + 1}
             </div>
             <div className="flex w-1/4 justify-center border-r-2 border-[#786ADE] pt-4">
               {group.group_name}

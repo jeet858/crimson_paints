@@ -19,13 +19,8 @@ import BrandPackagingTable from "./tables/BrandPackagingTable";
 import BrandTable from "./tables/BrandTable";
 import ColorTable from "./tables/ColorTable";
 import GroupForProcingTable from "./tables/GroupForProcingTable";
-import MasterTable from "./tables/MasterTable";
 import OrderableUnitTable from "./tables/OrderableUnitTable";
-import OrderTable from "./tables/OrderTable";
-import ReportsTable from "./tables/ReportsTable";
-import StockTable from "./tables/StockTable";
 import TableComponentProxyAccess from "./tables/TableComponentProxyAccess";
-import UploadsTable from "./tables/UploadsTable";
 import UserAccessTable from "./tables/UserAccessTable";
 import LoginTemplate from "./template/LoginTemplate";
 
@@ -51,13 +46,8 @@ export {
   ColorTable,
   BrandTable,
   GroupForProcingTable,
-  MasterTable,
   OrderableUnitTable,
-  OrderTable,
-  ReportsTable,
-  StockTable,
   TableComponentProxyAccess,
-  UploadsTable,
   UserAccessTable,
   LoginTemplate,
 };

@@ -114,7 +114,7 @@ const PriceListTable: React.FC<PriceListTableProps> = ({ data }) => {
             (data) => data.brand_name === brand.brand_name
           );
           return (
-            <div className="h-fit w-full flex-col">
+            <div className="h-fit w-full flex-col" key={index}>
               {/* <div className="flex h-fit w-full border-y-2 border-white">
                 <div className="flex w-1/5 flex-col">
                   <div className="flex h-12 w-full items-center justify-center border-b-4 border-r-4 border-[#b39df5] bg-[#786ADE] text-2xl text-white">
@@ -171,7 +171,10 @@ const PriceListTable: React.FC<PriceListTableProps> = ({ data }) => {
                     </div>
                     {arr.map((item, index) => {
                       return (
-                        <div className="flex w-[80px] flex-wrap items-center justify-center border-x-2 border-[#b39df5] p-2 text-center text-base">
+                        <div
+                          className="flex w-[80px] flex-wrap items-center justify-center border-x-2 border-[#b39df5] p-2 text-center text-base"
+                          key={index}
+                        >
                           {item.packaging}
                         </div>
                       );
@@ -180,7 +183,10 @@ const PriceListTable: React.FC<PriceListTableProps> = ({ data }) => {
                   {groups.map((group, index) => {
                     if (group.brand_name === brand.brand_name) {
                       return (
-                        <div className="flex h-fit min-h-[3rem]  w-full items-center border-b-2 border-[#786ADE] bg-[#d5c9fc] text-base text-black">
+                        <div
+                          className="flex h-fit min-h-[3rem]  w-full items-center border-b-2 border-[#786ADE] bg-[#d5c9fc] text-base text-black"
+                          key={index}
+                        >
                           <div className=" flex h-fit min-h-[3rem] w-[12.5%] min-w-[12.5%] flex-wrap  items-center border-r-2 border-[#786ADE]">
                             <div className="">{group.group_name}:</div>
                             {groupPricings.map((groupPricing, index) => {
@@ -189,7 +195,7 @@ const PriceListTable: React.FC<PriceListTableProps> = ({ data }) => {
                                 groupPricing.group_name === group.group_name
                               ) {
                                 return (
-                                  <span className="">
+                                  <span className="" key={index}>
                                     {`${groupPricing.color_name}, `}
                                   </span>
                                 );
@@ -205,7 +211,10 @@ const PriceListTable: React.FC<PriceListTableProps> = ({ data }) => {
                                 data.group_name === group.group_name
                             );
                             return (
-                              <div className="flex w-[80px] max-w-[80px] flex-grow items-center justify-center border-x-2 border-[#b39df5] text-center text-base">
+                              <div
+                                className="flex w-[80px] max-w-[80px] flex-grow items-center justify-center border-x-2 border-[#b39df5] text-center text-base"
+                                key={index}
+                              >
                                 {price ? price.price : "x"}
                               </div>
                             );

@@ -325,11 +325,12 @@ const MyOrder: React.FunctionComponent = () => {
                       {data.company}
                     </div>
                   </div>
-                  <div className="flex-1 items-center justify-center border border-[#11009E82] pt-2">
-                    <div className="flex h-1/2 w-full items-center justify-center border-b-2 border-[#11009E82] text-center">
-                      Actions
-                    </div>
-                    {data.status !== "Executed" ? (
+                  {data.status !== "Executed" ? (
+                    <div className="flex-1 items-center justify-center border border-[#11009E82] pt-2">
+                      <div className="flex h-1/2 w-full items-center justify-center border-b-2 border-[#11009E82] text-center">
+                        Actions
+                      </div>
+
                       <div className="flex h-1/2 w-full items-center justify-center whitespace-nowrap border-[#11009E82]">
                         <Link
                           className="my-1 flex h-fit w-fit bg-[#11009E82]"
@@ -341,10 +342,8 @@ const MyOrder: React.FunctionComponent = () => {
                           Execute
                         </Link>
                       </div>
-                    ) : (
-                      <div className="flex h-1/2 w-full items-center justify-center whitespace-nowrap border-[#11009E82]"></div>
-                    )}
-                  </div>
+                    </div>
+                  ) : null}
                   {/* <div className="flex-1 border border-[#11009E82] p-2">
                     Date
                   </div>

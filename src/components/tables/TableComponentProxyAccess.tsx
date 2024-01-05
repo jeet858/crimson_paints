@@ -45,7 +45,10 @@ const TableComponentProxyAccess: React.FC<TableComponentProps> = ({
           {usersData?.map((user, index) => {
             if (user.user_type !== "admin") {
               return (
-                <div className=" flex justify-between border-b-[3px] border-white bg-[#C4B0FF45] font-semibold">
+                <div
+                  className=" flex justify-between border-b-[3px] border-white bg-[#C4B0FF45] font-semibold"
+                  key={index}
+                >
                   <div className="flex w-1/12 items-center justify-center p-3">
                     {index}
                   </div>
@@ -62,7 +65,10 @@ const TableComponentProxyAccess: React.FC<TableComponentProps> = ({
                     {proxyAccess?.map((proxy, index) => {
                       if (proxy.user_id === user.id) {
                         return (
-                          <div className="rounded border-[1px] bg-[#D7D7D7] px-2 py-1 text-center text-xs text-[#787878]">
+                          <div
+                            className="rounded border-[1px] bg-[#D7D7D7] px-2 py-1 text-center text-xs text-[#787878]"
+                            key={index}
+                          >
                             blah
                           </div>
                         );

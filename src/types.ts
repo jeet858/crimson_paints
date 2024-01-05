@@ -997,3 +997,31 @@ export const userAccessInput = z.array(
     }),
   })
 );
+export const InterBracnhOrderInput = z.object({
+  id: z.string({
+    required_error: "This field cant be null",
+  }),
+  order_by: z.string({
+    required_error: "This field cant be null",
+  }),
+  order_to: z.string({
+    required_error: "This field cant be null",
+  }),
+  date: z.string({
+    required_error: "This field cant be null",
+  }),
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging_type: z.string({
+    required_error: "This field cant be null",
+  }),
+  total_qty: z.string({
+    required_error: "This field cant be null",
+  }),
+  amount: z.number(),
+  notes: z.string(),
+});

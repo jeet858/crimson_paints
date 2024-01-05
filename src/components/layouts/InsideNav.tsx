@@ -16,12 +16,20 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/order-by-branch",
     },
     {
+      name: "View Inter Bracnh Order",
+      href: "/view-inter-branch-order",
+    },
+    {
       name: "My Order",
       href: "/my-order",
     },
     {
       name: "New Order",
       href: "/new-order",
+    },
+    {
+      name: "New Inter Branch Order",
+      href: "/inter-branch-order",
     },
   ];
   const masterElement = [

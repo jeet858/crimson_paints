@@ -23,6 +23,7 @@ import { userRouter } from "./routers/user";
 import { orderRouter } from "./routers/order";
 import { userAcessRouter } from "./routers/user-access";
 import { proxyAccessRouter } from "./routers/proxy-access";
+import { interBracnhOrderRouter } from "./routers/inter-branch-order";
 
 /**
  * This is the primary router for your server.
@@ -54,6 +55,7 @@ export const appRouter = createTRPCRouter({
   order: orderRouter,
   userAccess: userAcessRouter,
   proxyAccess: proxyAccessRouter,
+  interBracnhTransaction: interBracnhOrderRouter,
 });
 
 // export type definition of API

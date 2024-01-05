@@ -328,3 +328,24 @@ model ProxyAccess{
   proxy_user_id String
   @@id([user_id,proxy_user_id])
 }
+
+model InterBranchOrder{
+  id String @id
+  order_by String 
+  order_to String
+  date String 
+  status String 
+}
+
+model InterBranchOrderDetails{
+  id String @db.VarChar(100)
+  brand_name String @db.VarChar(50)
+  color_name String @db.VarChar(50)
+  packaging_type String @db.VarChar(50)
+  amount Decimal
+  total_qty Decimal
+  executed_qty Decimal
+  cancelled_qty Decimal
+  date String @db.VarChar(50)
+  @@id([id, date,brand_name, color_name, packaging_type])
+}

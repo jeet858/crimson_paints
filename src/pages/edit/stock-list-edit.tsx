@@ -50,7 +50,7 @@ const StockListEdit: React.FunctionComponent = () => {
     data: locations,
     isLoading: isLocationLoading,
     isError: isLocationError,
-  } = api.location.all_state.useQuery(undefined, {
+  } = api.interComapny.all.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -112,18 +112,18 @@ const StockListEdit: React.FunctionComponent = () => {
             </div>
             {isDropdownOpen ? (
               <div className="absolute left-0 top-full z-10 mt-1 w-full rounded-md border  border-violet-500 bg-violet-100 shadow-md">
-                {locations?.map((location) => {
+                {locations?.map((interComapny) => {
                   return (
                     <div
-                      key={location.location}
+                      key={interComapny.name}
                       className="border-b-1 cursor-pointer border-violet-500 px-4 py-2 hover:bg-gray-100"
                       onClick={() => {
-                        handleLocationChange(location.location);
+                        handleLocationChange(interComapny.name);
                         setIsDropdownOpen(!isDropdownOpen);
                         console.log(isDropdownOpen);
                       }}
                     >
-                      {location.location}
+                      {interComapny.name}
                     </div>
                   );
                 })}

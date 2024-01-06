@@ -312,3 +312,40 @@ model OrderDetails{
   date String @db.VarChar(50)
   @@id([id, salesman_name, client_unique_name, date, company,brand_name, color_name, packaging_type])
 }
+
+model UserAccess{
+  menu_type String
+  user_type String
+  page_name String
+  access Boolean
+  edit Boolean
+  del Boolean
+  @@id([user_type,page_name])
+}
+
+model ProxyAccess{
+  user_id String
+  proxy_user_id String
+  @@id([user_id,proxy_user_id])
+}
+
+model InterBranchOrder{
+  id String @id
+  order_by String 
+  order_to String
+  date String 
+  status String 
+}
+
+model InterBranchOrderDetails{
+  id String @db.VarChar(100)
+  brand_name String @db.VarChar(50)
+  color_name String @db.VarChar(50)
+  packaging_type String @db.VarChar(50)
+  amount Decimal
+  total_qty Decimal
+  executed_qty Decimal
+  cancelled_qty Decimal
+  date String @db.VarChar(50)
+  @@id([id, date,brand_name, color_name, packaging_type])
+}

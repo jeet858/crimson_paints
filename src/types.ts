@@ -2,6 +2,7 @@ import type { inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
 import type { AppRouter } from "./server/api/root";
 import { Pending } from "@mui/icons-material";
+import { access } from "fs";
 
 type RouterOutputs = inferRouterOutputs<AppRouter>;
 type allBasicUnitOutput = RouterOutputs["basicUnit"]["all"];
@@ -973,4 +974,54 @@ export const districtEditInput = z.object({
   existingDistrict: z.string({
     required_error: "This field cant be null",
   }),
+});
+export const userAccessInput = z.array(
+  z.object({
+    menu_type: z.string({
+      required_error: "This field cant be null",
+    }),
+    page_name: z.string({
+      required_error: "This field cant be null",
+    }),
+    user_type: z.string({
+      required_error: "This field cant be null",
+    }),
+    access: z.boolean({
+      required_error: "This field cant be null",
+    }),
+    edit: z.boolean({
+      required_error: "This field cant be null",
+    }),
+    del: z.boolean({
+      required_error: "This field cant be null",
+    }),
+  })
+);
+export const InterBracnhOrderInput = z.object({
+  id: z.string({
+    required_error: "This field cant be null",
+  }),
+  order_by: z.string({
+    required_error: "This field cant be null",
+  }),
+  order_to: z.string({
+    required_error: "This field cant be null",
+  }),
+  date: z.string({
+    required_error: "This field cant be null",
+  }),
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  packaging_type: z.string({
+    required_error: "This field cant be null",
+  }),
+  total_qty: z.string({
+    required_error: "This field cant be null",
+  }),
+  amount: z.number(),
+  notes: z.string(),
 });

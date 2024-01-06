@@ -20,6 +20,7 @@ const SalesRepresentativeTable: React.FunctionComponent<TableProps> = (
   return (
     <div className="flex h-[50vh] w-full flex-col p-4">
       <div className="flex w-full rounded-md bg-[#C4B0FF] text-lg font-semibold">
+      <div className="w-1/4 py-4 text-center">Serial No</div>
         {props.columns.map((column, index) => (
           <div key={index} className="w-1/4 py-4 text-center">
             {column.header}
@@ -39,6 +40,9 @@ const SalesRepresentativeTable: React.FunctionComponent<TableProps> = (
             <div className="flex w-1/4 flex-col">
               <div>{row.phone}</div>
             </div> */}
+            <div className="flex w-1/4 flex-col">
+            <div>{rowIndex + 1}</div>
+          </div>
             {props.columns.map((column, index) => {
               return (
                 <div className="flex w-1/4 flex-col" key={index}>

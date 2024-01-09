@@ -10,7 +10,7 @@ const OuterNav: React.FunctionComponent<OuterNavProps> = (props) => {
         Hi, {props.userName}
       </p>
       <h1 className="text-center text-4xl font-bold text-[#11009E]">
-        Crimson Paints Private Ltd.
+        Mindstar Technologies Private Ltd.
       </h1>
       <div className="flex flex-row items-center justify-center gap-x-2">
         <FaUserCircle className="h-12 w-12 cursor-pointer rounded-full text-white" />

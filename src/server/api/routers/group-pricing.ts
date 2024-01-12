@@ -23,18 +23,34 @@ const groupColorByBrandInput = z.object({
     required_error: "This field cant be null",
   }),
 });
+const groupColorByBrandColorInput = z.object({
+  brand_name: z.string({
+    required_error: "This field cant be null",
+  }),
+  color_name: z.string({
+    required_error: "This field cant be null",
+  }),
+});
 export const groupPricingTypeRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const units = await ctx.db.groupPricing.findMany();
     await ctx.db.$disconnect();
-    return units.map(({ brand_name, color_name }) => ({
-      brand_name,
-      color_name,
-    }));
+    return units;
   }),
   create: protectedProcedure
     .input(groupPricingInput)
     .mutation(async ({ ctx, input }) => {
+      if (input.data[0]) {
+        await ctx.db.groupInfo.create({
+          data: {
+            brand_name: input.data[0].brand_name,
+            group_code: input.data[0].group_code,
+            group_name: input.data[0].group_name,
+          },
+        });
+      } else {
+        throw Error("Empty input");
+      }
       return await ctx.db.groupPricing.createMany({
         data: input.data,
       });
@@ -128,5 +144,18 @@ export const groupPricingTypeRouter = createTRPCRouter({
         },
       });
       return colors;
+    }),
+  where_by_group_brande: protectedProcedure
+    .input(groupColorByBrandColorInput)
+    .query(async ({ input, ctx }) => {
+      const group = await ctx.db.groupPricing.findUnique({
+        where: {
+          brand_name_color_name: {
+            brand_name: input.brand_name,
+            color_name: input.color_name,
+          },
+        },
+      });
+      return group;
     }),
 });

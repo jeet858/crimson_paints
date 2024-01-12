@@ -189,7 +189,7 @@ const ClientPartyListDelete: React.FunctionComponent = () => {
                       {data.email}
                     </div>
                     <div className="flex w-2/6 justify-start border-x-2 border-x-[#11009E] pl-4 text-base font-medium">
-                      {data.location},{data.address}
+                      {data.legal_address},{data.address}
                     </div>
                   </div>
                 );

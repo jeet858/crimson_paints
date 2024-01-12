@@ -50,7 +50,7 @@ model User {
   id        String    @id
   name      String
   email     String    @unique
-  phone     BigInt
+  phone     BigInt    @unique
   password  String
   user_type String
   accounts  Account[]
@@ -135,7 +135,7 @@ model GroupInfo{
   brand_name String
   group_name String
   group_code String
-  @@id([brand_name, group_name, group_code])
+  @@unique([brand_name, group_name])
 
 }
 
@@ -144,8 +144,8 @@ model GroupPricing{
   group_name String
   group_code String
   color_name String
-  rgb_code String
-  @@unique([brand_name, group_name, group_code, color_name])
+  @@id([brand_name,group_name,color_name])
+  @@unique([brand_name,color_name])
 }
 model OderableColors{
   list_name String @unique @id
@@ -163,12 +163,13 @@ model PriceListName{
 }
 
 model Salesman{
-  name String
+  name String 
   phone String @unique @id
   company String
   orderable_unit String 
   orderable_color String 
-}
+  self_data Boolean 
+  }
 
 model UserOrderableLocation{
   name String
@@ -201,8 +202,9 @@ model Stock{
   color_name String
   packaging String
   current_stock Int
-  location String
-  @@unique([brand_name, color_name, packaging,location])
+  branch String
+  pending Int
+  @@unique([brand_name, color_name, packaging,branch])
 }
 
 model StockLedger{
@@ -229,8 +231,13 @@ model Pricing{
   @@unique([brand_name,group_name,packaging,list_name])
 }
 
-model Location{
+model State{
   location String @id
+}
+model District{
+  state String 
+  district String
+  @@id([state,district])
 }
 
 model Client{
@@ -239,11 +246,13 @@ model Client{
   unique_name String @id
   distributor String
   sales_representative String
+  sales_representative_phone String
   code String
   gst String
   trade_license String
+  in_india Boolean 
   address String
-  location String
+  legal_address String
   state String
   district String
   phone_primary String
@@ -254,14 +263,38 @@ model Client{
   ifsc String 
   bank_branch String
   pin_code String
-  list_name String 
+  price_list_name String 
+  primary_company String 
+  is_active Boolean 
+  gst_validity DateTime?
+  max_credit_days Int 
+  max_credit_amount Int  
+}
+
+model ClientSupervisors{
+  name String
+  phone String
+  sales_supervisor String
+  @@id([name,phone,sales_supervisor])
+}
+
+model ClientSecondaryCompany{
+  unique_name String
+  company String
+  @@id([unique_name, company])
 }
 
 model Order{
   id String @id
-  client_name String 
-  salesman_name String
+  client_unique_name String 
+  date String 
+  salesman_name String 
+  salesman_phone String 
+  client_type String 
+  state String 
   company String 
+  status String
+  client_legal_name String 
 }
 
 model OrderDetails{
@@ -273,11 +306,46 @@ model OrderDetails{
   total_qty Decimal
   executed_qty Decimal
   cancelled_qty Decimal
-  client_name String @db.VarChar(50)
+  client_unique_name String @db.VarChar(50)
   salesman_name String @db.VarChar(50)
   company String
-  location String
   date String @db.VarChar(50)
-  status String
-  @@id([id, salesman_name, client_name, date,location,brand_name, color_name, packaging_type])
+  @@id([id, salesman_name, client_unique_name, date, company,brand_name, color_name, packaging_type])
+}
+
+model UserAccess{
+  menu_type String
+  user_type String
+  page_name String
+  access Boolean
+  edit Boolean
+  del Boolean
+  @@id([user_type,page_name])
+}
+
+model ProxyAccess{
+  user_id String
+  proxy_user_id String
+  @@id([user_id,proxy_user_id])
+}
+
+model InterBranchOrder{
+  id String @id
+  order_by String 
+  order_to String
+  date String 
+  status String 
+}
+
+model InterBranchOrderDetails{
+  id String @db.VarChar(100)
+  brand_name String @db.VarChar(50)
+  color_name String @db.VarChar(50)
+  packaging_type String @db.VarChar(50)
+  amount Decimal
+  total_qty Decimal
+  executed_qty Decimal
+  cancelled_qty Decimal
+  date String @db.VarChar(50)
+  @@id([id, date,brand_name, color_name, packaging_type])
 }

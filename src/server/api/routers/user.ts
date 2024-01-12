@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { userInput } from "~/types";
@@ -7,6 +8,11 @@ const inputSchema = z.object({
   }),
 });
 export const userRouter = createTRPCRouter({
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const users = await ctx.db.user.findMany();
+    await ctx.db.$disconnect();
+    return users;
+  }),
   by_id: protectedProcedure.input(inputSchema).query(async ({ ctx, input }) => {
     const user = await ctx.db.user.findUnique({
       where: {
@@ -16,6 +22,17 @@ export const userRouter = createTRPCRouter({
     await ctx.db.$disconnect();
     return user;
   }),
+  by_email: protectedProcedure
+    .input(inputSchema)
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: {
+          email: input.id,
+        },
+      });
+      await ctx.db.$disconnect();
+      return user;
+    }),
   create: protectedProcedure
     .input(userInput)
     .mutation(async ({ ctx, input }) => {
@@ -45,6 +62,24 @@ export const userRouter = createTRPCRouter({
         };
         acessLocationArray.push(obj);
       });
+      try {
+        await ctx.db.user.create({
+          data: {
+            email: input.email,
+            id: input.id,
+            name: input.name,
+            password: input.password,
+            phone: input.phone,
+            user_type: input.type,
+          },
+        });
+      } catch (e) {
+        if (e instanceof PrismaClientKnownRequestError) {
+          throw new Error(
+            `An user with similar userid or phone number or email already exists `
+          );
+        }
+      }
       if (input.type === "Salesman") {
         await ctx.db.salesman.create({
           data: {
@@ -53,6 +88,7 @@ export const userRouter = createTRPCRouter({
             company: input.company,
             orderable_color: input.orderable_color_list,
             orderable_unit: input.orderable_unit_list,
+            self_data: input.self_data,
           },
         });
       }
@@ -61,16 +97,6 @@ export const userRouter = createTRPCRouter({
       });
       await ctx.db.userAcessLocation.createMany({
         data: acessLocationArray,
-      });
-      return await ctx.db.user.create({
-        data: {
-          id: input.id,
-          name: input.name,
-          email: input.email,
-          phone: input.phone,
-          password: input.password,
-          user_type: input.type,
-        },
       });
     }),
 });

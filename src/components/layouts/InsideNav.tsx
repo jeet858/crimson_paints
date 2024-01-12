@@ -16,12 +16,20 @@ const InsideNav: React.FunctionComponent = (props) => {
       href: "/order-by-branch",
     },
     {
+      name: "View Inter Bracnh Order",
+      href: "/view-inter-branch-order",
+    },
+    {
       name: "My Order",
-      href: "#",
+      href: "/my-order",
     },
     {
       name: "New Order",
       href: "/new-order",
+    },
+    {
+      name: "New Inter Branch Order",
+      href: "/inter-branch-order",
     },
   ];
   const masterElement = [
@@ -89,6 +97,26 @@ const InsideNav: React.FunctionComponent = (props) => {
       name: "Client Party List",
       href: "/client-party-list",
     },
+    {
+      name: "State",
+      href: "/state",
+    },
+    {
+      name: "District",
+      href: "/district",
+    },
+    {
+      name: "View Price List",
+      href: "/price-list",
+    },
+    {
+      name: "Discount",
+      href: "/",
+    },
+    {
+      name: "Schemes",
+      href: "/",
+    },
   ];
   const StockElements = [
     {
@@ -104,7 +132,7 @@ const InsideNav: React.FunctionComponent = (props) => {
     <div className="flex w-full justify-center pt-5">
       <InsideNavElement elementHeader="Order" element={OrderElements} />
       <InsideNavElement elementHeader="Stock" element={StockElements} />
-      <InsideNavElement elementHeader="Reports" />
+      {/* <InsideNavElement elementHeader="Reports" /> */}
       <InsideNavElement elementHeader="Costing" />
       <InsideNavElement elementHeader="Master" element={masterElement} />
     </div>

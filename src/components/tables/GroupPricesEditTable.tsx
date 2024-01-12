@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaCheck } from "react-icons/fa";
 import { api } from "~/utils/api";
 
 interface GroupPricesTableEditProps {
@@ -12,13 +13,12 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
     data: orderableUnits,
     isLoading: isOrderableUnitsLoading,
     isError: isOrderableUnitsError,
-  } = api.orderableUnit.brand_packaging.useQuery(
-    { brand_name: props.brand_name, list_name: props.list_name },
-    {
-      refetchInterval: false,
-      refetchOnWindowFocus: false,
-    }
-  );
+  } = api.brandPackaging.where_brand_name.useQuery(props.brand_name, {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  const [edit, setEdit] = useState(false);
+
   const {
     data: pricingData,
     isLoading,
@@ -32,15 +32,16 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
     const obj = pricingData?.find(
       (data) =>
         data.brand_name === orderableUnit.brand_name &&
-        data.list_name === orderableUnit.list_name &&
+        data.list_name === props.list_name &&
         data.group_name === props.group_name &&
         data.packaging === orderableUnit.packaging
     );
 
     const group_name = props.group_name;
     const price = obj ? obj.price : 0;
+    const list_name = props.list_name;
 
-    return { ...orderableUnit, group_name, price };
+    return { ...orderableUnit, group_name, price, list_name };
   });
   const [editData, setEditData] = useState(
     updatedOrderableUnits ? updatedOrderableUnits : []
@@ -51,15 +52,16 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
         const obj = pricingData.find(
           (data) =>
             data.brand_name === orderableUnit.brand_name &&
-            data.list_name === orderableUnit.list_name &&
+            data.list_name === props.list_name &&
             data.group_name === props.group_name &&
             data.packaging === orderableUnit.packaging
         );
 
         const group_name = props.group_name;
         const price = obj ? obj.price : 0;
+        const list_name = props.list_name;
 
-        return { ...orderableUnit, group_name, price };
+        return { ...orderableUnit, group_name, price, list_name };
       });
       setEditData(updatedOrderableUnits);
     }
@@ -94,8 +96,19 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
   return (
     <div className="mx-12 flex h-fit w-full min-w-full flex-col flex-wrap px-8 pt-6">
       <div className="mt-4 flex h-4/5 w-full flex-col border-2 border-[#11009E]">
-        <div className="bg-[#786ADE] p-1 text-lg font-semibold text-white">
+        <div className="flex justify-between bg-[#786ADE] p-1 text-lg font-semibold text-white">
           Group: {props.group_name}
+          <div className="flex items-center justify-center">
+            Edit?
+            <div
+              className="ml-2 flex h-6 w-6 items-center justify-center border-2 border-black"
+              onClick={() => {
+                setEdit(!edit);
+              }}
+            >
+              {edit ? <FaCheck /> : null}
+            </div>
+          </div>
         </div>
         {editData?.map((data, index) => {
           return (
@@ -113,15 +126,17 @@ const GroupPricesEditTable: React.FC<GroupPricesTableEditProps> = (props) => {
             </div>
           );
         })}
-        <button
-          className="mx-4 my-4 h-12 w-24 self-end rounded-md bg-[#786ADE] text-white"
-          onClick={() => {
-            console.log(editData);
-            updateData();
-          }}
-        >
-          Update
-        </button>
+        {edit ? (
+          <button
+            className="mx-4 my-4 h-12 w-24 self-end rounded-md bg-[#786ADE] text-white"
+            onClick={() => {
+              console.log(editData);
+              updateData();
+            }}
+          >
+            Update
+          </button>
+        ) : null}
       </div>
     </div>
   );

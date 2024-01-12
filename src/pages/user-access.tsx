@@ -3,11 +3,6 @@ import { useRouter } from "next/router";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { InsideNav, UserTemplate } from "@/components";
 import UserAccessTable from "~/components/tables/UserAccessTable";
-import OrderTable from "~/components/tables/OrderTable";
-import StockTable from "~/components/tables/StockTable";
-import ReportsTable from "~/components/tables/ReportsTable";
-import UploadsTable from "~/components/tables/UploadsTable";
-import MasterTable from "~/components/tables/MasterTable";
 
 const Useraccess = () => {
   const router = useRouter();
@@ -20,7 +15,7 @@ const Useraccess = () => {
     userType: userType as string,
   };
 
-  const [selectedUser, setSelectedUser] = useState("Select User");
+  const [selectedUser, setSelectedUser] = useState("Salesman");
   const [selectedSection, setSelectedSection] = useState("Order");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -36,14 +31,12 @@ const Useraccess = () => {
   };
 
   const sectionToComponent = {
-    Order: <OrderTable />,
-    Stock: <StockTable />,
-    Reports: <ReportsTable />,
-    Uploads: <UploadsTable />,
-    Master: <MasterTable />,
+    Order: <UserAccessTable title="Order" user_type={selectedUser} />,
+    Stock: <UserAccessTable title="Stock" user_type={selectedUser} />,
+    Master: <UserAccessTable title="Master" user_type={selectedUser} />,
   };
 
-  const userOptions = ["User 1", "User 2", "User 3"];
+  const userOptions = ["Salesman", "GNRL", "Backoffice", "Production"];
 
   return (
     <UserTemplate templateParams={templateParams}>
@@ -52,18 +45,6 @@ const Useraccess = () => {
         <div className="flex items-center justify-center">
           <div className="text-center text-xl font-semibold text-[#11009E]">
             User Right Management
-            <svg
-              width="250"
-              height="18"
-              viewBox="0 0 426 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 8C3.86258e-07 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 -3.86258e-07 8 0C3.58172 3.86258e-07 -3.86258e-07 3.58172 0 8ZM410 7.99996C410 12.4182 413.582 16 418 16C422.418 16 426 12.4182 426 7.99996C426 3.58169 422.418 -3.62296e-05 418 -3.58433e-05C413.582 -3.54571e-05 410 3.58169 410 7.99996ZM8 9.5L418 9.49996L418 6.49996L8 6.5L8 9.5Z"
-                fill="#C4B0FF"
-              />
-            </svg>
           </div>
         </div>
         <div className="flex justify-between">

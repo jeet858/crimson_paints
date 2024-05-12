@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import PricingTable from "~/components/tables/PricingTable";
 import { api } from "~/utils/api";
 
-const Pricing = () => {
-  const [selectedPriceList, setSelectedPriceList] = useState("Factory");
+const Pricing: React.FC = () => {
+  const [selectedPriceList, setSelectedPriceList] = useState("");
   const router = useRouter();
   const { userType } = router.query;
   const { list_name } = router.query;
@@ -35,6 +35,9 @@ const Pricing = () => {
   } = api.pricing.all_list_name.useQuery(undefined, {
     refetchInterval: false,
     refetchOnWindowFocus: false,
+    onSuccess(data) {
+      setSelectedPriceList(data[0]?.price_list_name as string);
+    },
   });
   if (isBrandsLoading || isLoading) {
     return (

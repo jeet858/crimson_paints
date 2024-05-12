@@ -43,6 +43,7 @@ const NewOrder: React.FunctionComponent = () => {
     brand_name: "",
     salesman_phone: "",
     color_name: "",
+    branch: "",
     packaging_type: "",
     total_qty: "",
     notes: "",
@@ -442,7 +443,8 @@ const NewOrder: React.FunctionComponent = () => {
           className="mt-4 h-7 w-24 self-end rounded-md bg-[#786ADE] text-white"
           onClick={(e) => {
             e.preventDefault();
-            create();
+            // create();
+            console.log(orderDetails);
           }}
         >
           Submit

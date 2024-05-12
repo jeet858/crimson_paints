@@ -14,7 +14,7 @@ interface PricingTableProps {
 }
 
 const PricingTable: React.FC<PricingTableProps> = ({ data, list_name }) => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(list_name);
   const tableRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

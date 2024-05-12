@@ -871,6 +871,9 @@ export const OrderInput = z.object({
   client_type: z.string({
     required_error: "This field cant be null",
   }),
+  branch: z.string({
+    required_error: "This field cant be null",
+  }),
   salesman_name: z.string({
     required_error: "This field cant be null",
   }),

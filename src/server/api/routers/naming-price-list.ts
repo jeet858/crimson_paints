@@ -25,12 +25,22 @@ export const namingPriceListRouter = createTRPCRouter({
   edit: protectedProcedure
     .input(priceListNameEditInput)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.db.priceListName.update({
+      const b = ctx.db.priceListName.update({
         where: { price_list_name: input.existing_price_list_name },
         data: {
           price_list_name: input.new_price_list_name,
         },
       });
+
+      const a = ctx.db.pricing.updateMany({
+        where: {
+          list_name: input.existing_price_list_name,
+        },
+        data: {
+          list_name: input.new_price_list_name,
+        },
+      });
+      return await ctx.db.$transaction([a, b]);
     }),
   delete: protectedProcedure
     .input(priceListNameInput)
